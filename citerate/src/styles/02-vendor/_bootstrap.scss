@@ -1,0 +1,40 @@
+// ---------------------------------------------------------------------------
+// Bootstrap 5.3, partials only. Everything commented out is deliberately not
+// shipped — carousel, toasts, tooltips, popovers, badges, spinners, pagination,
+// progress, list-group, breadcrumb, nav-tabs, placeholders.
+// Marketing CSS stays ~30 kB before compression because of this list.
+// ---------------------------------------------------------------------------
+@use "../01-settings/bootstrap-map" as *;
+
+// Required
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+
+// Layout + reset
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/tables";
+
+// Forms
+@import "bootstrap/scss/forms";
+
+// Components we actually use
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/accordion";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/offcanvas";
+@import "bootstrap/scss/close";
+
+// Helpers + utilities API (needed for the utilities we generate)
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/utilities/api";

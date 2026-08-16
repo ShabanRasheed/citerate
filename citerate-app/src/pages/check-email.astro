@@ -1,0 +1,64 @@
+---
+/**
+ * "Check your email" — and the code entry, on the same screen. Splitting them
+ * costs a step and gains nothing; people who cannot click a link in their client
+ * can type six digits here.
+ */
+import Auth from "../layouts/Auth.astro";
+
+const email = Astro.url.searchParams.get("email") ?? "";
+const next = Astro.url.searchParams.get("next") ?? "/overview";
+const dev = Astro.url.searchParams.get("dev");
+---
+
+<Auth title="Check your email">
+  <h1 class="auth__title">Check your email</h1>
+  <p class="auth__sub">
+    We sent a link and a code to <strong>{email || "your inbox"}</strong>. Both expire in 15 minutes.
+  </p>
+
+  <form class="stack stack--4" method="post" action="/api/auth/verify-code" data-lock>
+    <input type="hidden" name="email" value={email} />
+    <input type="hidden" name="next" value={next} />
+
+    <fieldset style="border:0;padding:0;margin:0">
+      <legend class="t-label">Six-digit code</legend>
+      <div class="otp" data-otp style="margin-top:8px">
+        {[0, 1, 2, 3, 4, 5].map((i) => (
+          <input
+            type="text"
+            inputmode="numeric"
+            autocomplete={i === 0 ? "one-time-code" : "off"}
+            maxlength="1"
+            name={`d${i}`}
+            aria-label={`Digit ${i + 1}`}
+            required
+          />
+        ))}
+      </div>
+    </fieldset>
+
+    <button class="btn-primary-c btn-primary-c--lg" type="submit" data-busy="Checking…">Continue</button>
+  </form>
+
+  {
+    dev && (
+      <div class="c-card" style="border-left:3px solid var(--tech);padding:12px 14px">
+        <span class="t-label" style="color:var(--tech-ink)">dev only</span>
+        <span class="t-data-sm" style="display:block;margin-top:4px">
+          RESEND_API_KEY is unset, so the code is printed to the server console instead of emailed.
+        </span>
+      </div>
+    )
+  }
+
+  <form method="post" action="/api/auth/request-link">
+    <input type="hidden" name="email" value={email} />
+    <input type="hidden" name="next" value={next} />
+    <button class="btn-quiet" type="submit" data-resend>Resend the email</button>
+  </form>
+
+  <p class="auth__foot">
+    Wrong address? <a href="/sign-in">Start again</a>
+  </p>
+</Auth>

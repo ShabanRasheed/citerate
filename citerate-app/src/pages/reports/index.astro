@@ -1,0 +1,114 @@
+---
+/**
+ * Reports. A report is an immutable snapshot — the numbers as they read that
+ * month plus the method version that produced them. Regenerating history is
+ * exactly what the method promise forbids, so nothing here recomputes.
+ */
+import App from "../../layouts/App.astro";
+import Locked from "../../components/Locked.astro";
+import { reports, usage, latestScan, activeDomain } from "../../lib/data";
+import { PLANS, type PlanId } from "../../lib/plans";
+import { can } from "../../lib/rbac";
+import { day } from "../../lib/format";
+
+const env = Astro.locals.runtime.env;
+const workspace = Astro.locals.workspace!;
+const limits = PLANS[workspace.plan as PlanId];
+
+const [list, counters, domain] = await Promise.all([
+  reports(env, workspace.workspaceId),
+  usage(env, workspace.workspaceId),
+  activeDomain(env, workspace.workspaceId, null)
+]);
+const scan = domain ? await latestScan(env, domain.id) : null;
+
+Astro.locals.usage = counters;
+Astro.locals.lastScanAt = scan?.completed_at ?? null;
+
+const whiteLabel = limits.pdfReports === "white_label";
+const canExport = can(workspace.role, "export");
+---
+
+<App title="Reports" current="reports" crumb={`${list.length} snapshots`}>
+  {
+    !limits.pdfReports ? (
+      <Locked
+        badge="Growth"
+        headline="Monthly PDF reports, snapshotted the day they are generated"
+        detail="Standard on Growth; white-labelled with your logo and accent on Scale and Agency."
+      >
+        <div class="stack stack--4">
+          {["2026-07", "2026-06", "2026-05"].map((p) => (
+            <div class="row-between" style="padding:14px 16px;background:var(--paper);border-radius:var(--r-sm)">
+              <span>Monthly readout · {p}</span><span class="t-data">PDF</span>
+            </div>
+          ))}
+        </div>
+      </Locked>
+    ) : (
+      <>
+        <section class="c-card">
+          <div class="pane-head">
+            <div class="stack stack--2">
+              <h2 class="chart__title">Generate a report</h2>
+              <span class="chart__note">
+                {whiteLabel
+                  ? "White label: your logo, your accent colour. The methodology note stays — it is what makes the number defensible in your client's board meeting."
+                  : "Standard branding. White-label reports come with Scale."}
+              </span>
+            </div>
+            {canExport && (
+              <form method="post" action="/api/reports" style="display:flex;gap:12px;flex-wrap:wrap">
+                <input type="hidden" name="domainId" value={domain?.id} />
+                <label class="visually-hidden" for="period">Period</label>
+                <input class="form-field__input" id="period" name="period" type="month" value={new Date().toISOString().slice(0, 7)} />
+                <button class="btn-primary-c" type="submit">Generate PDF</button>
+              </form>
+            )}
+          </div>
+        </section>
+
+        {list.length === 0 ? (
+          <div class="empty">
+            <span class="t-d4">No reports yet</span>
+            <span class="chart__note">
+              The first monthly report generates automatically on the 1st, once there are two scans to compare. Before
+              that a report would be a single reading with nothing to say.
+            </span>
+          </div>
+        ) : (
+          <section class="dt">
+            <div class="dt__head">
+              <span class="t-label t-label--ink">Snapshots</span>
+              <span class="chart__note">Immutable — a method change never rewrites an issued report</span>
+            </div>
+            <div class="dt__scroll">
+              <table>
+                <thead>
+                  <tr><th>Period</th><th>Domain</th><th>Kind</th><th>Generated</th><th></th></tr>
+                </thead>
+                <tbody>
+                  {list.map((r) => (
+                    <tr data-row>
+                      <td data-label="Period"><a href={`/reports/${r.id}`}>{r.period}</a></td>
+                      <td data-label="Domain">{r.hostname}</td>
+                      <td data-label="Kind"><span class="pill">{r.kind.replace("_", " ")}</span></td>
+                      <td data-label="Generated" class="dt__num">{day(r.created_at)}</td>
+                      <td>
+                        {r.artifact_key ? (
+                          <a class="btn-quiet" href={`/api/reports/${r.id}/pdf`}>Download PDF</a>
+                        ) : (
+                          <span class="chart__note">generating…</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        )}
+      </>
+    )
+  }
+</App>

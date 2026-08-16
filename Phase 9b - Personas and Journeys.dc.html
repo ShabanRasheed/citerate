@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#F4F5F7;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="max-width:1180px;margin:0 auto;padding:48px 40px 120px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:20px;border-bottom:2px solid #141B26">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Phase 9b · UX package 2 of 8 · 2026-07-29</div>
+      <h1 style="font:600 34px/1.15 'Source Serif 4',serif;letter-spacing:-.015em;margin:10px 0 0">Personas, scenarios &amp; journey maps</h1>
+      <p style="font:400 14px/1.55 inherit;color:#5B6472;max-width:80ch;margin:8px 0 0;text-wrap:pretty">Three primary personas the v1 product is designed for, one secondary that shapes the v2 roadmap, and one anti-persona we deliberately do not serve. Each carries a dated scenario and — for the primaries — a stage-by-stage journey map with the emotional curve plotted, because the design decisions that matter most sit at the emotional low points.</p>
+    </div>
+    <div style="flex:none;text-align:right;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+      <div>primary &nbsp;&nbsp;&nbsp;3</div>
+      <div>secondary &nbsp;1</div>
+      <div>anti &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</div>
+      <div style="color:#8A93A1">journey maps 3</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0">
+    <a href="#matrix" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">00 at a glance</a>
+    <a href="#p1" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">P1 Dana · in-house SEO</a>
+    <a href="#p2" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">P2 Marco · founder</a>
+    <a href="#p3" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">P3 Priya · agency</a>
+    <a href="#p4" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">P4 Elena · enterprise</a>
+    <a href="#anti" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">✕ anti-persona</a>
+  </div>
+
+  <section id="matrix" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">00 · At a glance</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Who they are and what they need the product to be</h2>
+    <div style="overflow-x:auto;margin-top:18px">
+      <div style="min-width:960px;display:flex;flex-direction:column;gap:2px">
+        <div style="display:grid;grid-template-columns:170px 1fr 1fr 1fr 1fr;gap:14px;padding:11px 18px;background:#141B26;border-radius:10px 10px 2px 2px;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1">
+          <div></div><div style="color:#35B394">P1 Dana</div><div style="color:#35B394">P2 Marco</div><div style="color:#35B394">P3 Priya</div><div>P4 Elena · v2</div>
+        </div>
+        <div style="display:grid;grid-template-columns:170px 1fr 1fr 1fr 1fr;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">role</div>
+          <div>Senior SEO Manager, in-house B2B SaaS (450 staff)</div>
+          <div>Founder / CEO, 6-person SaaS. Also the marketing team.</div>
+          <div>Owner, 12-person SEO agency, 14 retained clients</div>
+          <div>Director of Organic Growth, regulated enterprise (2 800 staff)</div>
+        </div>
+        <div style="display:grid;grid-template-columns:170px 1fr 1fr 1fr 1fr;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">buys because</div>
+          <div>Needs to explain a 22% traffic drop that rankings don't explain</div>
+          <div>Suspects he's invisible in ChatGPT and wants a yes/no</div>
+          <div>Clients are asking about AI and she has no instrument</div>
+          <div>Board asked for AI-channel visibility as a reported metric</div>
+        </div>
+        <div style="display:grid;grid-template-columns:170px 1fr 1fr 1fr 1fr;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">plan fit</div>
+          <div style="font:500 12px 'JetBrains Mono',monospace;color:#0B6151">Growth $199</div>
+          <div style="font:500 12px 'JetBrains Mono',monospace;color:#0B6151">Free → Starter $49</div>
+          <div style="font:500 12px 'JetBrains Mono',monospace;color:#0B6151">Agency $799</div>
+          <div style="font:500 12px 'JetBrains Mono',monospace;color:#5B6472">Enterprise</div>
+        </div>
+        <div style="display:grid;grid-template-columns:170px 1fr 1fr 1fr 1fr;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">lives in</div>
+          <div style="font:400 11.5px 'JetBrains Mono',monospace;color:#3E5C8A">/queries · /fixes</div>
+          <div style="font:400 11.5px 'JetBrains Mono',monospace;color:#3E5C8A">the weekly digest email</div>
+          <div style="font:400 11.5px 'JetBrains Mono',monospace;color:#3E5C8A">/settings/workspaces · /reports</div>
+          <div style="font:400 11.5px 'JetBrains Mono',monospace;color:#3E5C8A">/reports · exported API</div>
+        </div>
+        <div style="display:grid;grid-template-columns:170px 1fr 1fr 1fr 1fr;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">session length</div>
+          <div>25–40 min, twice a week</div>
+          <div>90 seconds, monthly</div>
+          <div>2 hours, last week of the month</div>
+          <div>Never — a delegate pulls the number</div>
+        </div>
+        <div style="display:grid;grid-template-columns:170px 1fr 1fr 1fr 1fr;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">kills the deal</div>
+          <div>A number she can't defend in a review</div>
+          <div>Anything that needs a 20-minute setup</div>
+          <div>Our logo on a client-facing PDF</div>
+          <div>No DPA, no SSO, no sub-processor list</div>
+        </div>
+        <div style="display:grid;grid-template-columns:170px 1fr 1fr 1fr 1fr;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:2px 2px 10px 10px;font:400 12.5px/1.5 inherit">
+          <div style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">design consequence</div>
+          <div>Bands and run counts on every figure; evidence one click from the row</div>
+          <div>Verdict sentence first; email is a real surface, not a notification</div>
+          <div>Workspace switcher in the shell; brand settings before first report</div>
+          <div>/security is a sales asset; read API and audit trail</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="p1" style="scroll-margin-top:16px;margin-top:64px">
+    <div style="display:flex;gap:20px;align-items:flex-start">
+      <div style="flex:none;width:96px;height:96px;border-radius:14px;background:#141B26;color:#F4F5F7;display:flex;align-items:center;justify-content:center;font:500 30px 'JetBrains Mono',monospace">DO</div>
+      <div style="flex:1">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">P1 · Primary · the diagnostician</div>
+        <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Dana Okafor — 34, Senior SEO Manager, Northline (B2B SaaS)</h2>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;max-width:86ch;margin:8px 0 0">Eight years in organic search, four of them in-house. Owns a 4 000-page content library and reports to a VP who reads one slide. Technically fluent: writes her own regex in GSC, can read a JSON-LD blob, will not accept a metric she cannot explain the derivation of.</p>
+      </div>
+    </div>
+    <div style="background:#EDEFF2;border-left:3px solid #141B26;border-radius:0 10px 10px 0;padding:18px 22px;margin-top:18px">
+      <div style="font:600 20px/1.45 'Source Serif 4',serif;max-width:72ch">"Rankings are flat, impressions are flat, and sessions are down 22%. I have been asked three times what happened and I have said 'AI answers, probably' three times. Probably is not a finding."</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">GOALS</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0;padding-left:16px">
+          <li>Attribute the drop to a named cause with a number attached</li>
+          <li>Ship 3–5 page changes a sprint that a dev won't push back on</li>
+          <li>Walk into the quarterly review with a defensible series</li>
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">FRUSTRATIONS</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0;padding-left:16px">
+          <li>Tools that report a proprietary 0–100 "AI score" with no method page</li>
+          <li>Being handed 400 "opportunities" with no ordering</li>
+          <li>Week-over-week wobble presented as a trend</li>
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">BEHAVIOURS</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0;padding-left:16px">
+          <li>Opens the tool Tuesday and Thursday, 25–40 minutes</li>
+          <li>Builds saved views per topic cluster and never uses the default</li>
+          <li>Exports to CSV to paste into the dev ticket</li>
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">SUCCESS LOOKS LIKE</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0">A fix-proof report showing citation rate on 41 pricing-cluster queries moving 12% → 29%, band-separated, dated either side of a deploy. She forwards the PDF, not a screenshot.</p>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;margin-top:16px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">SCENARIO · TUESDAY 09:40, THE WEEK AFTER A BAD BOARD MEETING</div>
+      <div style="display:grid;grid-template-columns:88px 1fr;gap:0;margin-top:14px;font:400 13px/1.6 inherit">
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">09:41</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">Opens the Monday digest she left unread. Score <span style="font:500 12px 'JetBrains Mono',monospace;color:#141B26">58 ±5</span>, down 4 from last week — the email says <em>within noise</em>, so she doesn't panic. What she does notice is the line beneath: <em>pricing cluster −11, outside band.</em> She clicks that line, not the header.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">09:43</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">Lands on <span style="font:400 11.5px 'JetBrains Mono',monospace">/queries</span> pre-filtered to that cluster, sorted by delta. Eleven rows red. The cause column reads <span style="font:500 11.5px 'JetBrains Mono',monospace;color:#A62F2F">AIO displacement</span> on nine of them and <span style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">other / unexplained</span> on two. She trusts the tool slightly more for the two.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">09:47</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">Expands the worst row. The drawer shows <span style="font:500 12px 'JetBrains Mono',monospace;color:#141B26">2/18</span> cited runs, the engine grid with two <span style="font:500 10px 'JetBrains Mono',monospace">SURFACE</span> and two <span style="font:500 10px 'JetBrains Mono',monospace">PROXY</span> labels, and the three competitor hosts cited instead. One is a competitor's comparison page published in March. That is the moment she stops doubting.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">09:55</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">Jumps to <span style="font:400 11.5px 'JetBrains Mono',monospace">/fixes</span>. Top item is not the AIO cluster — it's a technical-decay fix on a template that blocks the crawler on 60 pages, worth an estimated 34 recoverable citations at low effort. She reorders her sprint on the spot and copies the fix into a ticket.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">Thu 16:20</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">Deploy lands. She marks the fix <span style="font:500 11.5px 'JetBrains Mono',monospace;color:#9A6210">shipped</span> and the queue tells her verification needs two scans, arriving Saturday. No fake instant confirmation.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA;border-bottom:1px solid #E2E5EA">+11 days</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA;border-bottom:1px solid #E2E5EA">Fix flips to <span style="font:500 11.5px 'JetBrains Mono',monospace;color:#0B6151">verified</span>: 12% → 29%, bands don't overlap. She generates a fix-proof report and pastes the link in the exec channel. This is the first time anyone has replied to one of her posts.</div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;margin-top:16px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">JOURNEY MAP · DANA · TRIGGER → PROOF</div>
+        <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">emotional range −2 … +2</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:16px;font:500 10.5px/1.3 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#141B26">
+        <div>1 · Trigger</div><div>2 · Free scan</div><div>3 · Onboarding</div><div>4 · First readout</div><div>5 · Fix &amp; ship</div><div>6 · Proof</div>
+      </div>
+      <div style="position:relative;height:132px;margin-top:10px;background:#F4F5F7;border-radius:8px;overflow:hidden">
+        <div style="position:absolute;left:0;right:0;top:50%;height:1px;background:#C6CBD3"></div>
+        <div style="position:absolute;left:8px;top:calc(50% - 15px);font:400 9.5px 'JetBrains Mono',monospace;color:#8A93A1">neutral</div>
+        <svg viewBox="0 0 600 132" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+          <polyline points="50,96 150,72 250,84 350,34 450,58 550,14" fill="none" stroke="#0E7C66" stroke-width="2.5" stroke-linejoin="round"></polyline>
+          <circle cx="50" cy="96" r="5" fill="#C43D3D"></circle>
+          <circle cx="150" cy="72" r="5" fill="#D98324"></circle>
+          <circle cx="250" cy="84" r="5" fill="#D98324"></circle>
+          <circle cx="350" cy="34" r="5" fill="#0E7C66"></circle>
+          <circle cx="450" cy="58" r="5" fill="#3E5C8A"></circle>
+          <circle cx="550" cy="14" r="5.5" fill="#0E7C66"></circle>
+        </svg>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px;margin-top:14px">
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#EDEFF2;border-radius:8px 8px 2px 2px;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A93A1">Doing</div>
+          <div style="color:#5B6472">Cross-checks GA4 vs GSC for the fourth time</div>
+          <div style="color:#5B6472">Runs the free scan on the marketing site</div>
+          <div style="color:#5B6472">Verifies domain, edits the 25 seed queries up to 500</div>
+          <div style="color:#5B6472">Filters by cluster, opens evidence drawers</div>
+          <div style="color:#5B6472">Copies fix into a ticket, marks shipped</div>
+          <div style="color:#5B6472">Generates fix-proof PDF, posts it</div>
+        </div>
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A93A1">Thinking</div>
+          <div style="color:#5B6472">"The data I have cannot answer this."</div>
+          <div style="color:#5B6472">"25 queries won't be representative — but show me."</div>
+          <div style="color:#5B6472">"Are these the queries my buyers actually type?"</div>
+          <div style="color:#5B6472">"Where did this number come from — and can I re-derive it?"</div>
+          <div style="color:#5B6472">"Will the dev agree this is worth a sprint slot?"</div>
+          <div style="color:#5B6472">"I can defend this in the review."</div>
+        </div>
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A93A1">Feeling</div>
+          <div style="color:#A62F2F">Exposed, slightly gaslit</div>
+          <div style="color:#9A6210">Sceptical but curious</div>
+          <div style="color:#9A6210">Impatient — this is admin</div>
+          <div style="color:#0B6151">Vindicated</div>
+          <div style="color:#34507A">Focused, mildly anxious about the wait</div>
+          <div style="color:#0B6151">Credible</div>
+        </div>
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#FBEDED;border:1px solid #F0D6D6;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#A62F2F">Pain</div>
+          <div style="color:#5B6472">No instrument exists in her stack</div>
+          <div style="color:#5B6472">Fears a vanity score with no method</div>
+          <div style="color:#5B6472">Query editing is the highest-effort step in the whole product</div>
+          <div style="color:#5B6472">500 rows is a lot to face on first login</div>
+          <div style="color:#5B6472">Verification latency is real and unavoidable</div>
+          <div style="color:#5B6472">Needs the method version visible or the proof is contestable</div>
+        </div>
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#E7F2EF;border:1px solid #CFE5DF;border-radius:2px 2px 8px 8px;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#0B6151">Design response</div>
+          <div style="color:#5B6472">Free scan needs no card and no call</div>
+          <div style="color:#5B6472">Method page linked from every score, always</div>
+          <div style="color:#5B6472">Pre-seed 25 real queries; bulk paste + GSC import; skippable</div>
+          <div style="color:#5B6472">Overview opens with one verdict sentence, not the table</div>
+          <div style="color:#5B6472">State the scan count needed for verification up front</div>
+          <div style="color:#5B6472">Snapshot stamps method v1.3 in the PDF footer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="p2" style="scroll-margin-top:16px;margin-top:64px">
+    <div style="display:flex;gap:20px;align-items:flex-start">
+      <div style="flex:none;width:96px;height:96px;border-radius:14px;background:#3E5C8A;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 30px 'JetBrains Mono',monospace">MV</div>
+      <div style="flex:1">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">P2 · Primary · the time-poor operator</div>
+        <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Marco Vidal — 41, Founder &amp; CEO, Tallyroom (6 people)</h2>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;max-width:86ch;margin:8px 0 0">Technical founder who does marketing between support tickets and payroll. $340k ARR, growing on content he wrote himself two years ago. Knows enough SEO to be dangerous, has no time to become good at it. Buys tools on a 90-second decision and cancels anything he hasn't opened in a month.</p>
+      </div>
+    </div>
+    <div style="background:#EDEFF2;border-left:3px solid #141B26;border-radius:0 10px 10px 0;padding:18px 22px;margin-top:18px">
+      <div style="font:600 20px/1.45 'Source Serif 4',serif;max-width:72ch">"I don't want a dashboard. I asked ChatGPT for the best tool in my category and it named three competitors and not me. Just tell me if that's a pattern and what to change."</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">GOALS</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0;padding-left:16px">
+          <li>Know in under two minutes whether he has a problem</li>
+          <li>Get one change per month he can do himself in an hour</li>
+          <li>Never think about this again between emails</li>
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">FRUSTRATIONS</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0;padding-left:16px">
+          <li>Onboarding wizards that ask for things he'd have to look up</li>
+          <li>Tools that require a login to see the answer he already paid for</li>
+          <li>Being upsold before being shown anything</li>
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">BEHAVIOURS</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0;padding-left:16px">
+          <li>Reads the digest on a phone, standing up</li>
+          <li>Skips onboarding steps that offer a skip</li>
+          <li>Judges the whole product by the free scan's first sentence</li>
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">SUCCESS LOOKS LIKE</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0">Month four, he has opened the app twice, done two fixes from the email, and his rate went 9% → 22%. He renews without thinking about it — the definition of retention for this segment.</p>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;margin-top:16px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">SCENARIO · SATURDAY 22:10, ON THE SOFA, ONE HAND ON A PHONE</div>
+      <div style="display:grid;grid-template-columns:88px 1fr;gap:0;margin-top:14px;font:400 13px/1.6 inherit">
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">22:10</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">Asks an assistant which tool is best for his category, out of idle vanity. Three competitors, not him. He searches "am I invisible to ChatGPT", lands on the marketing site.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">22:12</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">Types his hostname into the hero field. No card, no account. The teaser runs live and returns a serif sentence: <em>"tallyroom.com was cited in 3 of 25 answers. Two competitors were cited more often."</em> He reads it twice.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">22:14</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">Competitor names are blurred. He is annoyed for exactly as long as it takes to click <em>see the names</em> — the blur is the upsell, sitting on his own data. Enters his email to claim the scan.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">22:16</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">Verifies via the six-digit code in the email rather than the link, because he's on a phone with a mail app that opens links in a webview he distrusts. Same token, either path — this was a deliberate decision in Phase 3b.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">22:18</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">Onboarding: domain already verified from the claim, queries pre-seeded, Search Console offered and <em>skipped</em>. He is on <span style="font:400 11.5px 'JetBrains Mono',monospace">/overview</span> in under 40 seconds of actual input.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA;border-bottom:1px solid #E2E5EA">Mon 08:04</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA;border-bottom:1px solid #E2E5EA">First digest arrives. One sentence, one delta with a band, one fix: add a comparison table to a page he already has. He does it Tuesday in 50 minutes. Three weeks later a digest says <em>verified, 3/25 → 8/25</em>. That email is why he stays.</div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;margin-top:16px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">JOURNEY MAP · MARCO · CURIOSITY → HABIT</div>
+        <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">low tolerance for friction — note the step-3 dip</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:16px;font:500 10.5px/1.3 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#141B26">
+        <div>1 · Vanity check</div><div>2 · Free teaser</div><div>3 · Claim + verify</div><div>4 · Blur lifted</div><div>5 · Digest habit</div><div>6 · Renewal</div>
+      </div>
+      <div style="position:relative;height:132px;margin-top:10px;background:#F4F5F7;border-radius:8px;overflow:hidden">
+        <div style="position:absolute;left:0;right:0;top:50%;height:1px;background:#C6CBD3"></div>
+        <div style="position:absolute;left:8px;top:calc(50% - 15px);font:400 9.5px 'JetBrains Mono',monospace;color:#8A93A1">neutral</div>
+        <svg viewBox="0 0 600 132" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+          <polyline points="50,58 150,88 250,74 350,30 450,24 550,18" fill="none" stroke="#0E7C66" stroke-width="2.5" stroke-linejoin="round"></polyline>
+          <circle cx="50" cy="58" r="5" fill="#3E5C8A"></circle>
+          <circle cx="150" cy="88" r="5" fill="#C43D3D"></circle>
+          <circle cx="250" cy="74" r="5" fill="#D98324"></circle>
+          <circle cx="350" cy="30" r="5" fill="#0E7C66"></circle>
+          <circle cx="450" cy="24" r="5" fill="#0E7C66"></circle>
+          <circle cx="550" cy="18" r="5.5" fill="#0E7C66"></circle>
+        </svg>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px;margin-top:14px">
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#EDEFF2;border-radius:8px 8px 2px 2px;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A93A1">Doing</div>
+          <div style="color:#5B6472">Asks an assistant about his own category</div>
+          <div style="color:#5B6472">Types hostname in the hero, watches it run</div>
+          <div style="color:#5B6472">Enters email, uses the 6-digit code</div>
+          <div style="color:#5B6472">Reads competitor names, skips GSC</div>
+          <div style="color:#5B6472">Acts on one fix a month from the email</div>
+          <div style="color:#5B6472">Card renews; he doesn't notice</div>
+        </div>
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A93A1">Thinking</div>
+          <div style="color:#5B6472">"Wait — why not me?"</div>
+          <div style="color:#5B6472">"If this asks me to book a demo I'm closing it."</div>
+          <div style="color:#5B6472">"How many more steps."</div>
+          <div style="color:#5B6472">"Oh. It's them. Of course it's them."</div>
+          <div style="color:#5B6472">"One thing to do. Fine, I can do one thing."</div>
+          <div style="color:#5B6472">"It moved. Keep it."</div>
+        </div>
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A93A1">Feeling</div>
+          <div style="color:#34507A">Piqued, a little stung</div>
+          <div style="color:#A62F2F">Guarded — peak abandon risk</div>
+          <div style="color:#9A6210">Mild friction fatigue</div>
+          <div style="color:#0B6151">Satisfied, competitive</div>
+          <div style="color:#0B6151">Low-effort trust</div>
+          <div style="color:#0B6151">Indifferent in the good way</div>
+        </div>
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#FBEDED;border:1px solid #F0D6D6;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#A62F2F">Pain</div>
+          <div style="color:#5B6472">Nothing to measure the feeling against</div>
+          <div style="color:#5B6472">A scan that takes &gt;20s on a phone loses him</div>
+          <div style="color:#5B6472">Email round-trip is the single biggest drop-off in the funnel</div>
+          <div style="color:#5B6472">Would bounce off a 500-row table</div>
+          <div style="color:#5B6472">A digest with three asks gets none done</div>
+          <div style="color:#5B6472">Any month with no verified movement is a churn risk</div>
+        </div>
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#E7F2EF;border:1px solid #CFE5DF;border-radius:2px 2px 8px 8px;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#0B6151">Design response</div>
+          <div style="color:#5B6472">Rank the "not cited" fear in the hero copy</div>
+          <div style="color:#5B6472">Teaser streams partial results; verdict sentence first</div>
+          <div style="color:#5B6472">Link <em>and</em> code are the same token; code works on any device</div>
+          <div style="color:#5B6472">Onboarding steps 2 and 3 are both skippable</div>
+          <div style="color:#5B6472">Digest carries exactly one fix, never a list</div>
+          <div style="color:#5B6472">Fix-verified email is a first-class send, not a log line</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="p3" style="scroll-margin-top:16px;margin-top:64px">
+    <div style="display:flex;gap:20px;align-items:flex-start">
+      <div style="flex:none;width:96px;height:96px;border-radius:14px;background:#0E7C66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 30px 'JetBrains Mono',monospace">PR</div>
+      <div style="flex:1">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">P3 · Primary · the reseller</div>
+        <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Priya Raman — 38, Owner, Halfstack SEO (12 staff, 14 retainers)</h2>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;max-width:86ch;margin:8px 0 0">Runs a boutique agency on $4k–$18k monthly retainers. Her margin is her team's hours, and the last week of every month currently disappears into reporting decks. Two clients asked about AI answers this quarter; she answered honestly that she was looking into it, and hated how that sounded.</p>
+      </div>
+    </div>
+    <div style="background:#EDEFF2;border-left:3px solid #141B26;border-radius:0 10px 10px 0;padding:18px 22px;margin-top:18px">
+      <div style="font:600 20px/1.45 'Source Serif 4',serif;max-width:72ch">"I need a chart in my template, with my logo, that says what we changed and what it moved. If your brand is on the PDF I can't send it — and if the number restates itself next month, I've handed a client a reason to distrust me."</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">GOALS</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0;padding-left:16px">
+          <li>Add an AI-visibility line item to every retainer without adding hours</li>
+          <li>Cut monthly reporting from 4 hours per client to minutes</li>
+          <li>Walk into renewals with proof, not narrative</li>
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">FRUSTRATIONS</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0;padding-left:16px">
+          <li>Per-seat pricing that punishes her for having a team</li>
+          <li>Tools that make her clients log in to a fourth dashboard</li>
+          <li>Numbers that change retroactively after she's presented them</li>
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">BEHAVIOURS</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0;padding-left:16px">
+          <li>Works in a 2-hour block in the last week of the month</li>
+          <li>Switches client context 14 times in that block</li>
+          <li>Gives clients a <span style="font:500 11px 'JetBrains Mono',monospace">client</span>-role seat, read-only, or no seat at all</li>
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">SUCCESS LOOKS LIKE</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0">She raises two retainers by $800/mo on the strength of a new deliverable that costs her 20 minutes a month, and quotes the fix-proof report in a renewal she expected to lose.</p>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;margin-top:16px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">SCENARIO · THE LAST THURSDAY OF THE MONTH, 14:00–15:40</div>
+      <div style="display:grid;grid-template-columns:88px 1fr;gap:0;margin-top:14px;font:400 13px/1.6 inherit">
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">14:02</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">Opens <span style="font:400 11.5px 'JetBrains Mono',monospace">/reports</span>. Fourteen monthly snapshots were frozen automatically on the 1st, each already carrying its method version. Nothing to generate; the work is review, not production.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">14:06</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">One client's rate dropped 6 points. She checks the band before she panics: bands overlap, so the readout labels it <em>within noise</em> and she does not put it on a slide. This is the single most valuable thing the product does for her credibility.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">14:20</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">Another client — the one at renewal risk — has a verified fix from week two: 14% → 31% across nine queries. She opens the fix-proof snapshot, confirms the dates straddle the deploy, and downloads the white-label PDF. Her logo, her accent colour, one immovable footer line referencing the methodology.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">14:35</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">Cycles the workspace switcher through the remaining twelve. Two need a sentence of context typed into the report note; the rest ship as-is. Nine of fourteen reports leave without her editing anything.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA">15:10</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA">A quota banner: one client is 140 queries over. She buys two overage blocks from <span style="font:400 11.5px 'JetBrains Mono',monospace">/settings/billing</span> without leaving the flow. The scan was never interrupted, so there's no hole in that client's series.</div>
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#3E5C8A;padding:9px 0;border-top:1px solid #E2E5EA;border-bottom:1px solid #E2E5EA">15:38</div>
+        <div style="color:#5B6472;padding:9px 0;border-top:1px solid #E2E5EA;border-bottom:1px solid #E2E5EA">Done in 96 minutes for 14 clients. Previously: two working days. She adds the deliverable to her pitch deck the same week.</div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;margin-top:16px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">JOURNEY MAP · PRIYA · EVALUATION → RESALE</div>
+        <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">the dip is trust, not usability</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:16px;font:500 10.5px/1.3 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#141B26">
+        <div>1 · Client asks</div><div>2 · Evaluate</div><div>3 · Set up 14 ws</div><div>4 · First report month</div><div>5 · Client reaction</div><div>6 · Renewal / upsell</div>
+      </div>
+      <div style="position:relative;height:132px;margin-top:10px;background:#F4F5F7;border-radius:8px;overflow:hidden">
+        <div style="position:absolute;left:0;right:0;top:50%;height:1px;background:#C6CBD3"></div>
+        <div style="position:absolute;left:8px;top:calc(50% - 15px);font:400 9.5px 'JetBrains Mono',monospace;color:#8A93A1">neutral</div>
+        <svg viewBox="0 0 600 132" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+          <polyline points="50,84 150,50 250,92 350,36 450,20 550,12" fill="none" stroke="#0E7C66" stroke-width="2.5" stroke-linejoin="round"></polyline>
+          <circle cx="50" cy="84" r="5" fill="#D98324"></circle>
+          <circle cx="150" cy="50" r="5" fill="#3E5C8A"></circle>
+          <circle cx="250" cy="92" r="5" fill="#C43D3D"></circle>
+          <circle cx="350" cy="36" r="5" fill="#0E7C66"></circle>
+          <circle cx="450" cy="20" r="5" fill="#0E7C66"></circle>
+          <circle cx="550" cy="12" r="5.5" fill="#0E7C66"></circle>
+        </svg>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px;margin-top:14px">
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#EDEFF2;border-radius:8px 8px 2px 2px;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A93A1">Doing</div>
+          <div style="color:#5B6472">Fields an "are we in ChatGPT" question on a call</div>
+          <div style="color:#5B6472">Free-scans two clients, reads /for/agencies and /security</div>
+          <div style="color:#5B6472">Creates 14 workspaces, sets brand, invites 4 staff</div>
+          <div style="color:#5B6472">Reviews 14 frozen snapshots, sends 14 PDFs</div>
+          <div style="color:#5B6472">Presents a verified fix in a renewal meeting</div>
+          <div style="color:#5B6472">Raises two retainers, adds it to the pitch deck</div>
+        </div>
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A93A1">Thinking</div>
+          <div style="color:#5B6472">"I can't be the agency that doesn't know."</div>
+          <div style="color:#5B6472">"Can I put my name on this output?"</div>
+          <div style="color:#5B6472">"Fourteen times any amount of setup is a project."</div>
+          <div style="color:#5B6472">"Would I defend this number to a CFO?"</div>
+          <div style="color:#5B6472">"They asked a follow-up question. Good sign."</div>
+          <div style="color:#5B6472">"This is a product line now, not a tool."</div>
+        </div>
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A93A1">Feeling</div>
+          <div style="color:#9A6210">Professionally exposed</div>
+          <div style="color:#34507A">Evaluative, cautious</div>
+          <div style="color:#A62F2F">Overwhelmed — the real risk moment</div>
+          <div style="color:#0B6151">Relieved</div>
+          <div style="color:#0B6151">Confident</div>
+          <div style="color:#0B6151">Commercially expansive</div>
+        </div>
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#FBEDED;border:1px solid #F0D6D6;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#A62F2F">Pain</div>
+          <div style="color:#5B6472">No credible answer to give a paying client</div>
+          <div style="color:#5B6472">Our brand on her deliverable is a hard blocker</div>
+          <div style="color:#5B6472">14 × onboarding is the biggest single friction in the product</div>
+          <div style="color:#5B6472">One restated number destroys a year of trust</div>
+          <div style="color:#5B6472">A client logging into our UI dilutes her value</div>
+          <div style="color:#5B6472">Per-seat pricing would cap the upside</div>
+        </div>
+        <div style="display:grid;grid-template-columns:96px repeat(6,1fr);gap:10px;padding:11px 14px;background:#E7F2EF;border:1px solid #CFE5DF;border-radius:2px 2px 8px 8px;font:400 12px/1.5 inherit">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#0B6151">Design response</div>
+          <div style="color:#5B6472">/for/agencies leads with the deliverable, not features</div>
+          <div style="color:#5B6472">White-label PDF on Scale+; footer line is the only trace</div>
+          <div style="color:#5B6472">Bulk workspace creation; brand set once, inherited by all</div>
+          <div style="color:#5B6472">Snapshots immutable; method version printed on every page</div>
+          <div style="color:#5B6472">A <span style="font:500 11px 'JetBrains Mono',monospace">client</span> role exists, and PDF-only is a valid choice</div>
+          <div style="color:#5B6472">Unlimited seats on Agency; workspaces are the meter instead</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="p4" style="scroll-margin-top:16px;margin-top:64px">
+    <div style="display:flex;gap:20px;align-items:flex-start">
+      <div style="flex:none;width:96px;height:96px;border-radius:14px;background:#FFFFFF;border:1px solid #C6CBD3;color:#5B6472;display:flex;align-items:center;justify-content:center;font:500 30px 'JetBrains Mono',monospace">ES</div>
+      <div style="flex:1">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">P4 · Secondary · shapes v2, not v1</div>
+        <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Elena Sørensen — 45, Director of Organic Growth, regulated enterprise</h2>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;max-width:86ch;margin:8px 0 0">Will never open the dashboard. A delegate pulls the number into a board pack via the read API. Her involvement is procurement: DPA, sub-processor list, SSO/SAML, data residency, an audit trail of who exported what. She is listed here because the <em>absence</em> of her requirements is a v1 decision we should make on purpose rather than discover in a sales call.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">SHIPPED IN V1 FOR HER</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0;padding-left:16px">
+          <li><span style="font:400 11.5px 'JetBrains Mono',monospace">/security</span> and <span style="font:400 11.5px 'JetBrains Mono',monospace">/legal/[slug]</span> as real sales assets</li>
+          <li>Read API on Growth+, read-write on Scale+</li>
+          <li>Session list with revoke, per user</li>
+          <li>Immutable snapshots — the audit story starts here</li>
+        </ul>
+      </div>
+      <div style="background:#FDF2E3;border:1px solid #F2E0C4;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#9A6210">KNOWINGLY DEFERRED</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0;padding-left:16px">
+          <li>SSO / SAML and SCIM provisioning</li>
+          <li>2FA enrolment (out of scope in Phase 8 onboarding by decision)</li>
+          <li>Export audit log and data-residency choice</li>
+          <li>Contractual SLA and uptime page</li>
+        </ul>
+      </div>
+      <div style="background:#EBEFF6;border:1px solid #D8E0EE;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#34507A">WHY DEFERRING IS SAFE</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:9px 0 0">Enterprise is priced "talk to us" precisely so the first two or three deals can be served with a bespoke contract and manual provisioning. Building SSO before a signed logo is building for a persona who hasn't paid yet. Revisit the moment a deal stalls on it twice.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="anti" style="scroll-margin-top:16px;margin-top:64px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">✕ · Anti-persona</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Who we refuse to design for</h2>
+    <div style="background:#141B26;border-radius:14px;padding:24px 28px;margin-top:16px;color:#F4F5F7">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div>
+          <div style="font:600 20px/1.35 'Source Serif 4',serif">"Ravi" — growth hacker chasing an AI-visibility number to put on a slide</div>
+          <p style="font:400 13px/1.65 inherit;color:#8A93A1;margin:10px 0 0">Wants one big score, going up, weekly, with no method page and no error bars. Would happily accept a made-up cause for every query. Would love a leaderboard. Would churn the first month the number honestly went sideways.</p>
+        </div>
+        <div>
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">WHAT SERVING HIM WOULD COST US</div>
+          <ul style="font:400 13px/1.65 inherit;color:#8A93A1;margin:10px 0 0;padding-left:16px">
+            <li>Dropping the confidence band, which is the only reason Priya can send a report</li>
+            <li>Removing the unexplained segment, which is the only reason Dana believes the other three</li>
+            <li>Weekly "wins" emails, which is exactly why Marco unsubscribes from other tools</li>
+          </ul>
+          <p style="font:400 13px/1.65 inherit;color:#F4F5F7;margin:12px 0 0">Every feature request that reduces to "make the number simpler and friendlier" gets tested against this card first.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="margin-top:64px;padding-top:20px;border-top:2px solid #141B26;display:flex;justify-content:space-between;align-items:baseline;font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">
+    <span>Phase 9b · personas, scenarios &amp; journey maps</span>
+    <span><a href="./Phase 9a - Product Model and IA.dc.html">← 9a</a> &nbsp;·&nbsp; next → <a href="./Phase 9c - User Flow Diagrams.dc.html">9c user flows</a></span>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

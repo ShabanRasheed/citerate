@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import Legal from "../../layouts/Legal.astro";
+
+export async function getStaticPaths() {
+  const docs = await getCollection("legal");
+  return docs
+    .filter((d) => d.id.replace(/\.mdx?$/, "") !== "security")
+    .map((doc) => ({ params: { slug: doc.id.replace(/\.mdx?$/, "") }, props: { doc } }));
+}
+
+const { doc } = Astro.props;
+const { Content } = await doc.render();
+const d = doc.data;
+---
+
+<Legal
+  title={d.title}
+  description={d.description}
+  updated={d.updated}
+  version={d.version}
+  summary={d.summary}
+  draft={d.draft}
+  history={d.history}
+>
+  <Content />
+</Legal>

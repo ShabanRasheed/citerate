@@ -1,0 +1,208 @@
+---
+/**
+ * Team. Seats, roles, pending invites, and join requests from people at the same
+ * domain. Client seats are free and read-only, so they are listed separately —
+ * an agency should never wonder whether sharing a dashboard costs money.
+ */
+import App from "../../layouts/App.astro";
+import { members, pendingInvites, usage } from "../../lib/data";
+import { all } from "../../lib/db";
+import { ROLE_LABEL, ROLE_HINT, can, type Role } from "../../lib/rbac";
+import { PLANS, ADDONS, type PlanId } from "../../lib/plans";
+import { relative, initials } from "../../lib/format";
+
+const env = Astro.locals.runtime.env;
+const workspace = Astro.locals.workspace!;
+const limits = PLANS[workspace.plan as PlanId];
+
+const [team, invites, requests, counters] = await Promise.all([
+  members(env, workspace.workspaceId),
+  pendingInvites(env, workspace.workspaceId),
+  all<{ id: string; hostname: string; email: string; created_at: number; expires_at: number }>(
+    env.DB,
+    `SELECT j.id, j.hostname, u.email, j.created_at, j.expires_at
+       FROM join_requests j JOIN users u ON u.id = j.user_id
+      WHERE j.workspace_id = ? AND j.status = 'pending' AND j.expires_at > unixepoch()`,
+    workspace.workspaceId
+  ),
+  usage(env, workspace.workspaceId)
+]);
+
+Astro.locals.usage = counters;
+
+const canInvite = can(workspace.role, "invite");
+const paidSeats = team.filter((m) => m.role !== "client");
+const clientSeats = team.filter((m) => m.role === "client");
+const seatLimit = limits.seats === "unlimited" ? Infinity : limits.seats;
+const seatsLeft = seatLimit === Infinity ? "unlimited" : Math.max(0, seatLimit - paidSeats.length);
+const roles: Role[] = ["admin", "editor", "viewer", "client"];
+---
+
+<App title="Team" current="settings" crumb={`${paidSeats.length} seats`}>
+  <nav class="seg" role="tablist" aria-label="Settings">
+    <a class="seg__btn" href="/settings" aria-pressed="false">Account</a>
+    <a class="seg__btn" href="/settings/team" aria-pressed="true">Team</a>
+    <a class="seg__btn" href="/settings/billing" aria-pressed="false">Plan &amp; billing</a>
+    <a class="seg__btn" href="/settings/brand" aria-pressed="false">Branding</a>
+  </nav>
+
+  {
+    requests.length > 0 && (
+      <section class="c-card" style="border-left:3px solid var(--warn)">
+        <span class="t-label t-label--ink">Join requests</span>
+        <p class="chart__note">
+          Someone with an email at your domain tried to track it. They cannot see anything until you decide.
+        </p>
+        <div class="stack stack--3" style="margin-top:12px">
+          {requests.map((r) => (
+            <form class="row-between" method="post" action={`/api/team/requests/${r.id}`} style="gap:12px;padding:12px 14px;background:var(--paper);border-radius:var(--r-sm)">
+              <span class="stack stack--1">
+                <span style="color:var(--ink)">{r.email}</span>
+                <span class="chart__note">asked {relative(r.created_at)} · expires {relative(r.expires_at)}</span>
+              </span>
+              <span style="display:flex;gap:8px;align-items:center">
+                <select class="form-field__input" name="role" aria-label="Role" style="min-height:36px;padding:4px 10px">
+                  <option value="viewer">Viewer</option>
+                  <option value="editor">Editor</option>
+                </select>
+                <button class="btn-primary-c" type="submit" name="action" value="approve">Approve</button>
+                <button class="btn-quiet" type="submit" name="action" value="decline">Decline</button>
+              </span>
+            </form>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <div class="grid-app">
+    <div class="col-7">
+      <section class="dt">
+        <div class="dt__head">
+          <span class="t-label t-label--ink">Seats</span>
+          <span class="chart__note">
+            {paidSeats.length} of {limits.seats === "unlimited" ? "unlimited" : limits.seats} ·
+            {typeof seatsLeft === "number" ? ` ${seatsLeft} left` : " unlimited"}
+            {limits.seats !== "unlimited" && ` · extra seat $${ADDONS.seatGrowth.price}/mo`}
+          </span>
+        </div>
+        <div class="dt__scroll">
+          <table>
+            <thead><tr><th>Member</th><th>Role</th><th>Last seen</th><th></th></tr></thead>
+            <tbody>
+              {
+                paidSeats.map((m) => (
+                  <tr data-row>
+                    <td data-label="Member">
+                      <span style="display:flex;align-items:center;gap:10px">
+                        <span class="owner__avatar">{initials(m.name ?? m.email)}</span>
+                        <span class="stack stack--1">
+                          <span style="color:var(--ink)">{m.name ?? m.email}</span>
+                          {m.name && <span class="chart__note">{m.email}</span>}
+                        </span>
+                      </span>
+                    </td>
+                    <td data-label="Role">
+                      {canInvite && m.role !== "owner" ? (
+                        <form method="post" action={`/api/team/${m.user_id}`}>
+                          <select class="form-field__input" name="role" style="min-height:36px;padding:4px 10px" onchange="this.form.requestSubmit()">
+                            {roles.map((r) => (
+                              <option value={r} selected={m.role === r}>{ROLE_LABEL[r]}</option>
+                            ))}
+                          </select>
+                        </form>
+                      ) : (
+                        <span class="pill">{ROLE_LABEL[m.role]}</span>
+                      )}
+                    </td>
+                    <td data-label="Last seen" class="dt__num">{relative(m.last_seen_at)}</td>
+                    <td>
+                      {canInvite && m.role !== "owner" && (
+                        <form method="post" action={`/api/team/${m.user_id}`}>
+                          <button class="btn-quiet" type="submit" name="action" value="remove">Remove</button>
+                        </form>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {
+        clientSeats.length > 0 && (
+          <section class="c-card" style="margin-top:16px">
+            <span class="t-label t-label--ink">Client seats · free, read-only, unlimited</span>
+            <div class="stack stack--2" style="margin-top:12px">
+              {clientSeats.map((m) => (
+                <div class="row-between" style="padding:10px 14px;background:var(--paper);border-radius:var(--r-sm)">
+                  <span>{m.email}</span>
+                  <span class="chart__note">{relative(m.last_seen_at)}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </div>
+
+    <div class="col-5">
+      {
+        canInvite ? (
+          <form class="c-card stack stack--4" method="post" action="/api/team/invite" data-lock>
+            <span class="t-label t-label--ink">Invite someone</span>
+            <label class="form-field">
+              <span class="t-label">Email</span>
+              <input class="form-field__input" name="email" type="email" required placeholder="name@company.com" />
+            </label>
+            <fieldset class="stack stack--3" style="border:0;padding:0;margin:0">
+              <legend class="t-label">Role</legend>
+              {roles.map((r) => (
+                <label class="row-between" style="gap:12px;align-items:flex-start">
+                  <span class="stack stack--1">
+                    <span style="color:var(--ink)">{ROLE_LABEL[r]}</span>
+                    <span class="chart__note">{ROLE_HINT[r]}</span>
+                  </span>
+                  <input class="form-check-input" type="radio" name="role" value={r} checked={r === "editor"} style="min-width:20px;min-height:20px" />
+                </label>
+              ))}
+            </fieldset>
+            <button class="btn-primary-c" type="submit" data-busy="Sending…">Send invite</button>
+            <span class="chart__note">
+              The invite expires in 7 days. Client seats never count against the plan.
+            </span>
+          </form>
+        ) : (
+          <div class="c-card">
+            <span class="t-d4">Invites need admin</span>
+            <p class="chart__note">Your role is {ROLE_LABEL[workspace.role]}. Ask an owner or admin to add someone.</p>
+          </div>
+        )
+      }
+
+      {
+        invites.length > 0 && (
+          <section class="c-card" style="margin-top:16px">
+            <span class="t-label t-label--ink">Pending invites</span>
+            <div class="stack stack--2" style="margin-top:12px">
+              {invites.map((i) => (
+                <form class="row-between" method="post" action={`/api/team/invite/${i.id}`} style="gap:12px;padding:10px 14px;background:var(--paper);border-radius:var(--r-sm)">
+                  <span class="stack stack--1">
+                    <span style="color:var(--ink)">{i.email}</span>
+                    <span class="chart__note">{ROLE_LABEL[i.role]} · expires {relative(i.expires_at)}</span>
+                  </span>
+                  <span style="display:flex;gap:8px">
+                    <button class="btn-quiet" type="submit" name="action" value="resend">Resend</button>
+                    <button class="btn-quiet" type="submit" name="action" value="revoke">Revoke</button>
+                  </span>
+                </form>
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </div>
+  </div>
+</App>

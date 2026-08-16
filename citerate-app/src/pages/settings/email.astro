@@ -1,0 +1,60 @@
+---
+/**
+ * Change email. Two-sided: the new address has to confirm, and the old address is
+ * told it happened. That second email is the one that catches an account
+ * takeover, so it is not optional.
+ */
+import App from "../../layouts/App.astro";
+import { usage } from "../../lib/data";
+
+const env = Astro.locals.runtime.env;
+const user = Astro.locals.user!;
+const workspace = Astro.locals.workspace!;
+Astro.locals.usage = await usage(env, workspace.workspaceId);
+const sent = Astro.url.searchParams.get("sent");
+---
+
+<App title="Change email" current="settings">
+  <div class="grid-app">
+    <div class="col-6">
+      <form class="c-card stack stack--4" method="post" action="/api/settings/email" data-lock>
+        <span class="t-label t-label--ink">Change email</span>
+        <span class="chart__note">
+          Current: <strong>{user.email}</strong>. We send a confirmation link to the new address and a notice to the old
+          one. Nothing changes until the new address confirms.
+        </span>
+
+        {
+          sent && (
+            <div class="c-card c-card--sunk" style="border-left:3px solid var(--cited)">
+              <span class="t-data-sm" style="color:var(--cited-ink)">
+                Confirmation sent. The link expires in 15 minutes; your current address still works until then.
+              </span>
+            </div>
+          )
+        }
+
+        <label class="form-field">
+          <span class="t-label">New email</span>
+          <input class="form-field__input" name="email" type="email" required placeholder="new@company.com" />
+        </label>
+
+        <div class="row-between">
+          <a class="btn-quiet" href="/settings">Back to account</a>
+          <button class="btn-primary-c" type="submit" data-busy="Sending…">Send confirmation</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-6">
+      <section class="c-card stack stack--3">
+        <span class="t-label t-label--ink">What moves with the address</span>
+        <span class="chart__note">
+          Your memberships, your owned workspaces, and your fix assignments all follow the user record, not the address —
+          changing email never orphans a workspace. Sessions on other devices stay signed in; use “sign out everywhere
+          else” on the account pane if that is not what you want.
+        </span>
+      </section>
+    </div>
+  </div>
+</App>

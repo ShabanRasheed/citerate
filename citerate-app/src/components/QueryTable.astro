@@ -1,0 +1,145 @@
+---
+/**
+ * Query table. Server-rendered rows (sortable and filterable client-side, never
+ * re-fetched), 44px rows, and a detail row that holds the evidence: per-engine
+ * runs, the rank, the AIO flag, and who got cited instead.
+ */
+import { pct, ratio, causeLabel, causeKey, confidenceLabel } from "../lib/format";
+import type { QueryRow } from "../lib/data";
+
+interface Props {
+  rows: QueryRow[];
+  clusters: { cluster: string; n: number }[];
+  canEdit: boolean;
+}
+const { rows, clusters, canEdit } = Astro.props;
+---
+
+<section class="dt" data-query-table>
+  <div class="dt__head">
+    <div class="dt__tools">
+      <label class="visually-hidden" for="q-filter">Filter queries</label>
+      <input
+        class="form-field__input"
+        id="q-filter"
+        type="search"
+        placeholder="Filter queries…"
+        data-filter
+        style="min-width:240px"
+      />
+      <div class="seg" role="group" aria-label="Cause">
+        <button class="seg__btn" type="button" data-cause-filter="" aria-pressed="true">All</button>
+        <button class="seg__btn" type="button" data-cause-filter="aio_displacement" aria-pressed="false">AIO</button>
+        <button class="seg__btn" type="button" data-cause-filter="ranking_decline" aria-pressed="false">Rank</button>
+        <button class="seg__btn" type="button" data-cause-filter="technical_decay" aria-pressed="false">Tech</button>
+        <button class="seg__btn" type="button" data-cause-filter="unexplained" aria-pressed="false">Other</button>
+      </div>
+      {
+        clusters.length > 1 && (
+          <select class="form-field__input" data-cluster-filter aria-label="Cluster" style="min-width:180px">
+            <option value="">All clusters</option>
+            {clusters.map((c) => (
+              <option value={c.cluster}>{c.cluster} ({c.n})</option>
+            ))}
+          </select>
+        )
+      }
+    </div>
+
+    <div class="dt__tools">
+      <span class="chart__note" data-row-count>{rows.length} queries</span>
+      <button class="btn-ghost" type="button" data-export="queries">Export CSV</button>
+      {canEdit && <button class="btn-primary-c" type="button" data-bs-toggle="modal" data-bs-target="#add-queries">Add queries</button>}
+    </div>
+  </div>
+
+  <div class="dt__scroll">
+    <table>
+      <thead>
+        <tr>
+          <th aria-sort="none" data-sort="text">Query</th>
+          <th aria-sort="none" data-sort="cluster">Cluster</th>
+          <th aria-sort="ascending" data-sort="rate" style="text-align:right">Cited</th>
+          <th aria-sort="none" data-sort="runs" style="text-align:right">Runs</th>
+          <th aria-sort="none" data-sort="cause">Why</th>
+          <th aria-sort="none" data-sort="rank" style="text-align:right">Organic</th>
+          <th><span class="visually-hidden">Detail</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((r) => (
+            <tr
+              data-row
+              data-query-id={r.id}
+              data-cause={r.cause ?? ""}
+              data-cluster={r.cluster ?? ""}
+              data-rate={r.citation_rate ?? 0}
+              data-runs={r.runs ?? 0}
+              data-rank={r.organic_rank ?? 999}
+            >
+              <td data-label="Query">
+                <span class="dt__q" title={r.text}>{r.text}</span>
+              </td>
+              <td data-label="Cluster">
+                <span class="pill">{r.cluster ?? "uncategorised"}</span>
+              </td>
+              <td data-label="Cited" class="dt__num">
+                {pct(r.citation_rate)}
+                {r.mention_runs && r.mention_runs > 0 ? (
+                  <span class="pill pill--warn" style="margin-left:6px" title="Named without a link — never counted as a citation">
+                    +{r.mention_runs} mention
+                  </span>
+                ) : null}
+              </td>
+              <td data-label="Runs" class="dt__num">{ratio(r.cited_runs ?? 0, r.runs ?? 0)}</td>
+              <td data-label="Why">
+                <span class={`pill pill--${causeKey(r.cause) === "cited" ? "cited" : causeKey(r.cause) === "aio" ? "gap" : causeKey(r.cause) === "rank" ? "warn" : causeKey(r.cause) === "tech" ? "tech" : ""}`}>
+                  {causeLabel(r.cause)}
+                </span>
+                {r.cause_confidence !== null && r.cause !== null && (
+                  <span class="chart__note" style="margin-left:6px">{confidenceLabel(r.cause_confidence)}</span>
+                )}
+              </td>
+              <td data-label="Organic" class="dt__num">{r.organic_rank ? `#${r.organic_rank}` : "—"}</td>
+              <td>
+                <button
+                  class="btn-quiet"
+                  type="button"
+                  data-expand={r.id}
+                  aria-expanded="false"
+                  aria-controls={`detail-${r.id}`}
+                >
+                  Details
+                </button>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  {
+    rows.length === 0 && (
+      <div class="empty">
+        <span class="t-d4">No queries tracked yet</span>
+        <span class="chart__note">
+          The scan seeds 25 from your site and category. Add your own any time — the meter counts queries, nothing else.
+        </span>
+        {canEdit && <button class="btn-primary-c" type="button" data-bs-toggle="modal" data-bs-target="#add-queries">Add queries</button>}
+      </div>
+    )
+  }
+</section>
+
+<!-- Detail is fetched once per row and cached in the DOM. -->
+<template id="row-detail-template">
+  <tr class="dt__detail" data-detail-row>
+    <td colspan="7">
+      <div class="evidence" data-evidence>
+        <span class="chart__note">Loading evidence…</span>
+      </div>
+    </td>
+  </tr>
+</template>

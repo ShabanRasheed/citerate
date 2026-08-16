@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Disallow: /scan/
+Disallow: /api/
+
+# We measure AI engines; we do not block them from reading us.
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://citerate.com/sitemap-index.xml

@@ -1,0 +1,117 @@
+// Fix Queue card. Impact pill, owner, state, and — once shipped — the fix's own
+// before/after delta on its own queries. The delta is the whole product promise,
+// so it is never smaller than --t-data.
+
+.fix {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-5);
+  background: var(--card);
+  border: var(--bw) solid var(--line);
+  border-radius: var(--r-md);
+  transition: border-color var(--dur-1) var(--ease-out);
+
+  &:hover { border-color: var(--line-strong); }
+
+  &--aio  { border-left: 3px solid var(--gap); }
+  &--rank { border-left: 3px solid var(--warn); }
+  &--tech { border-left: 3px solid var(--tech); }
+  &--other { border-left: 3px solid var(--neutral); }
+  &--verified { border-left: 3px solid var(--cited); }
+  &--dismissed { opacity: 0.55; }
+}
+
+.fix__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.fix__title {
+  font: var(--t-d4);
+  text-wrap: pretty;
+  margin: 0;
+}
+
+.fix__detail {
+  font: var(--t-ui);
+  color: var(--ink-soft);
+  max-width: 78ch;
+  text-wrap: pretty;
+}
+
+.fix__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  flex-wrap: wrap;
+  padding-top: var(--s-3);
+  border-top: var(--bw) solid var(--line);
+}
+
+.fix__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  flex-wrap: wrap;
+  font: var(--t-data-sm);
+  color: var(--ink-soft);
+}
+
+.fix__actions { display: flex; align-items: center; gap: var(--s-2); }
+
+.owner {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font: var(--t-data-sm);
+  color: var(--ink-soft);
+}
+
+.owner__avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--tech-wash);
+  color: var(--tech-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--t-label);
+}
+
+// Verified proof block: before → after on the fix's own queries, per engine.
+.proof {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  background: var(--cited-wash);
+  border-radius: var(--r-sm);
+  padding: var(--s-2) var(--s-3);
+  font: var(--t-data);
+  color: var(--cited-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.proof__arrow { color: var(--ink-muted); }
+
+// Grouped queue: causes are headings, not filters you have to discover.
+.queue-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.queue-group__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  font: var(--t-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}

@@ -1,0 +1,14 @@
+---
+/** Toast host. Bootstrap's Toast drives it; modules/toasts.js is the only caller. */
+---
+
+<div class="toast-container position-fixed bottom-0 end-0 p-4" data-toast-host aria-live="polite" aria-atomic="true"></div>
+
+<template id="toast-template">
+  <div class="toast" role="status">
+    <div class="toast-body d-flex align-items-center justify-content-between gap-3">
+      <span data-toast-message></span>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Dismiss"></button>
+    </div>
+  </div>
+</template>

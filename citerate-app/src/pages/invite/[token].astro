@@ -1,0 +1,94 @@
+---
+/**
+ * Invite acceptance. Shows who invited you, to what, and with which role before
+ * anything is joined — an invite that silently adds you to a stranger's
+ * workspace is how people end up in the wrong account.
+ */
+import Auth from "../../layouts/Auth.astro";
+import { one, sha256, now, run } from "../../lib/db";
+import { ROLE_LABEL, ROLE_HINT, type Role } from "../../lib/rbac";
+import { audit } from "../../lib/auth";
+
+const env = Astro.locals.runtime.env;
+const { token } = Astro.params;
+const session = Astro.locals.session;
+
+const invite = await one<{
+  id: string; workspace_id: string; email: string; role: Role; expires_at: number;
+  accepted_at: number | null; revoked_at: number | null; workspace_name: string; inviter: string | null;
+}>(
+  env.DB,
+  `SELECT i.id, i.workspace_id, i.email, i.role, i.expires_at, i.accepted_at, i.revoked_at,
+          w.name AS workspace_name, u.email AS inviter
+     FROM invites i
+     JOIN workspaces w ON w.id = i.workspace_id
+     LEFT JOIN users u ON u.id = i.invited_by
+    WHERE i.token_hash = ?`,
+  await sha256(token ?? "")
+);
+
+const invalid = !invite || invite.revoked_at || invite.accepted_at || invite.expires_at < now();
+
+// Signed in with the invited address: accept on POST.
+if (Astro.request.method === "POST" && !invalid && session) {
+  await env.DB.batch([
+    env.DB.prepare(
+      `INSERT INTO memberships (workspace_id, user_id, role, created_at) VALUES (?, ?, ?, ?)
+       ON CONFLICT (workspace_id, user_id) DO UPDATE SET role = excluded.role`
+    ).bind(invite!.workspace_id, session.user.id, invite!.role, now()),
+    env.DB.prepare(`UPDATE invites SET accepted_at = ? WHERE id = ?`).bind(now(), invite!.id)
+  ]);
+  await audit(env, invite!.workspace_id, session.user.id, "member.joined", invite!.role);
+  Astro.cookies.set("cr_ws", invite!.workspace_id, { path: "/", httpOnly: true, secure: true, sameSite: "lax" });
+  return Astro.redirect("/overview?joined=1", 302);
+}
+---
+
+<Auth title="Accept invitation">
+  {
+    invalid ? (
+      <>
+        <h1 class="auth__title">This invitation is no longer valid</h1>
+        <p class="auth__sub">
+          Invites last 7 days and can be revoked. Ask whoever invited you to send a new one — nothing about your account
+          changed.
+        </p>
+        <a class="btn-ghost" href="/sign-in">Sign in instead</a>
+      </>
+    ) : (
+      <>
+        <h1 class="auth__title">Join {invite!.workspace_name}</h1>
+        <p class="auth__sub">
+          {invite!.inviter ? `${invite!.inviter} invited ` : "You were invited as "}
+          <strong>{invite!.email}</strong> as {ROLE_LABEL[invite!.role]}.
+        </p>
+
+        <div class="c-card c-card--sunk stack stack--2">
+          <span class="t-label t-label--ink">{ROLE_LABEL[invite!.role]}</span>
+          <span class="chart__note">{ROLE_HINT[invite!.role]}</span>
+        </div>
+
+        {
+          session ? (
+            <form method="post" data-lock>
+              <button class="btn-primary-c btn-primary-c--lg" type="submit" style="width:100%" data-busy="Joining…">
+                Join as {session.user.email}
+              </button>
+            </form>
+          ) : (
+            <form class="stack stack--4" method="post" action="/api/auth/request-link" data-lock>
+              <input type="hidden" name="email" value={invite!.email} />
+              <input type="hidden" name="next" value={`/invite/${token}`} />
+              <p class="chart__note">
+                Sign in as {invite!.email} to accept. We email a link and a code — no password to set up.
+              </p>
+              <button class="btn-primary-c btn-primary-c--lg" type="submit" data-busy="Sending…">Email me a link</button>
+            </form>
+          )
+        }
+
+        <p class="auth__foot">Not you? Ignore this and nothing happens.</p>
+      </>
+    )
+  }
+</Auth>

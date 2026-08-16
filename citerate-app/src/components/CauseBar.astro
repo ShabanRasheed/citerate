@@ -1,0 +1,59 @@
+---
+/**
+ * Cause-separation bar. Four segments, each clickable as a filter. "Other /
+ * unexplained" is always striped so hue is never the only signal, and it is
+ * never hidden — a diagnosis tool that always has a diagnosis is a horoscope.
+ */
+interface Props {
+  causes: { aio: number; rank: number; tech: number; other: number };
+  interactive?: boolean;
+  note?: string;
+}
+const { causes, interactive = true, note } = Astro.props;
+
+const segments = [
+  { key: "aio", label: "AIO displacement", value: causes.aio },
+  { key: "rank", label: "Ranking decline", value: causes.rank },
+  { key: "tech", label: "Technical decay", value: causes.tech },
+  { key: "other", label: "Other / unexplained", value: causes.other }
+].filter((s) => s.value > 0);
+
+const total = segments.reduce((sum, s) => sum + s.value, 0) || 1;
+---
+
+<div class="chart" data-cause-bar>
+  <div class="chart__head">
+    <h2 class="chart__title">Why you are not cited</h2>
+    <span class="chart__note">Share of uncited queries</span>
+  </div>
+
+  <div class="cause-bar" role="img" aria-label={segments.map((s) => `${s.label} ${Math.round((s.value / total) * 100)}%`).join(", ")}>
+    {
+      segments.map((s) =>
+        interactive ? (
+          <button
+            class="cause-bar__seg"
+            data-cause={s.key}
+            aria-pressed="false"
+            style={`width:${(s.value / total) * 100}%`}
+            title={`${s.label} — ${Math.round((s.value / total) * 100)}%`}
+          ></button>
+        ) : (
+          <span class="cause-bar__seg" data-cause={s.key} style={`width:${(s.value / total) * 100}%`}></span>
+        )
+      )
+    }
+  </div>
+
+  <div class="chart__legend">
+    {
+      segments.map((s) => (
+        <span class="chart__key" data-cause={s.key}>
+          {s.label} {Math.round((s.value / total) * 100)}%
+        </span>
+      ))
+    }
+  </div>
+
+  {note && <p class="chart__note">{note}</p>}
+</div>

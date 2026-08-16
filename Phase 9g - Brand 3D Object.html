@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phase 9g — CiteRate brand object in 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.184.0/build/three.module.js",
+    "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js",
+    "three/addons/exporters/OBJExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js",
+    "three/addons/exporters/GLTFExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js"
+  },
+  "integrity": {
+    "https://unpkg.com/three@0.184.0/build/three.module.js": "sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J",
+    "https://unpkg.com/three@0.184.0/build/three.core.js": "sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT",
+    "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js": "sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js": "sha384-nbwtoZENJD3Vq+ACK0CuGQdPMuDWHkamC2KJD70EV5nfg6jQjfppKOea07YJN+N3",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js": "sha384-VofkvpG6HERhFCYbsUOHeNXBCqID2nfqkQqnVzE1jc/oPcz+qJ13ADdXH08hE+cQ"
+  }
+}
+</script>
+<style>
+  body{margin:0;background:#F4F5F7;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26}
+  a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+  three-d-stage:not(:defined){visibility:hidden}
+  .vbtn{appearance:none;text-align:left;cursor:pointer;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 15px;font-family:inherit;color:#141B26;transition:border-color 120ms,background 120ms}
+  .vbtn:hover{border-color:#C6CBD3}
+  .vbtn[aria-pressed="true"]{background:#141B26;border-color:#141B26;color:#F4F5F7}
+  .vbtn[aria-pressed="true"] .vsub{color:#8A93A1}
+  .vbtn:focus-visible{outline:none;box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #3E5C8A}
+  .vlab{font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1}
+  .vttl{font:600 17px/1.25 'Source Serif 4',serif;margin-top:7px}
+  .vsub{font:400 12px/1.5 inherit;color:#5B6472;margin-top:5px}
+</style>
+</head>
+<body>
+
+<div style="max-width:1300px;margin:0 auto;padding:44px 40px 90px">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:20px;border-bottom:2px solid #141B26">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Phase 9g · UX package 7 of 8 · 2026-07-29</div>
+      <h1 style="font:600 34px/1.15 'Source Serif 4',serif;letter-spacing:-.015em;margin:10px 0 0">The brand mark as a physical object</h1>
+      <p style="font:400 14px/1.55 inherit;color:#5B6472;max-width:82ch;margin:8px 0 0;text-wrap:pretty">Four variations, all built from the same brand rule: the slash is a division sign, and division is the only thing this product measures. Drag to orbit, scroll to zoom, and download any of them as OBJ + MTL or GLB from the toolbar — they open straight into Blender, Cinema 4D, Unity or a keynote render.</p>
+    </div>
+    <div style="flex:none;text-align:right;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+      <div>variations &nbsp;4</div>
+      <div>materials &nbsp;&nbsp;7</div>
+      <div>units &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;metres, y-up</div>
+      <div style="color:#8A93A1">export &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OBJ+MTL · GLB</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:262px 1fr;gap:20px;margin-top:22px;align-items:start">
+
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <div class="vlab" style="padding:0 2px 2px">Choose a variation</div>
+      <button class="vbtn" id="v-tile" aria-pressed="true" data-name="citerate-mark-tile">
+        <span class="vlab">01 · app icon</span>
+        <div class="vttl">Mark tile</div>
+        <div class="vsub">The favicon made solid. Ink slab, chamfered, with the slash raised in <em>cited</em> green. Reads at 32px and at two metres.</div>
+      </button>
+      <button class="vbtn" id="v-monolith" aria-pressed="false" data-name="citerate-slash-monolith">
+        <span class="vlab">02 · brand sculpture</span>
+        <div class="vttl">Slash monolith</div>
+        <div class="vsub">The slash alone, standing on a plinth. For event backdrops, office signage and the hero render on a pitch deck.</div>
+      </button>
+      <button class="vbtn" id="v-network" aria-pressed="false" data-name="citerate-citation-network">
+        <span class="vlab">03 · the diagnosis</span>
+        <div class="vttl">Citation network</div>
+        <div class="vsub">One host at the centre. Three green struts are citations won; five grey stubs are answers that went elsewhere. The product's thesis as a sculpture.</div>
+      </button>
+      <button class="vbtn" id="v-instrument" aria-pressed="false" data-name="citerate-instrument">
+        <span class="vlab">04 · the readout</span>
+        <div class="vttl">The instrument</div>
+        <div class="vsub">A bench device: the four-segment cause bar in machined blocks, under a confidence-band arc with a needle. The fourth segment is slatted, not solid.</div>
+      </button>
+      <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:10px;padding:13px 15px;margin-top:4px">
+        <div class="vlab">Why this and not a logo render</div>
+        <p style="font:400 12px/1.55 inherit;color:#5B6472;margin:7px 0 0">A 3D object earns its place only if it carries an idea. Each of these encodes one: the mark, the wordmark, the diagnosis, and the instrument. None of them is decoration with a bevel on it.</p>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+      <three-d-stage name="citerate-mark-tile" background="#F4F5F7" autorotate style="display:block;width:100%;height:620px"></three-d-stage>
+      <div style="border-top:1px solid #E2E5EA;padding:13px 18px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap">
+        <div id="caption" style="font:400 12.5px/1.55 inherit;color:#5B6472;max-width:88ch">Drag to orbit · scroll to zoom · right-drag to pan. The toolbar downloads the object you are looking at.</div>
+        <div id="partcount" style="flex:none;font:400 11px 'JetBrains Mono',monospace;color:#8A93A1"></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px">
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+      <div class="vlab">Material palette</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:11px">
+        <div style="display:flex;align-items:center;gap:9px"><span style="width:22px;height:22px;border-radius:5px;background:#1B2431"></span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">ink &nbsp;rough .45 &nbsp;metal .10</span></div>
+        <div style="display:flex;align-items:center;gap:9px"><span style="width:22px;height:22px;border-radius:5px;background:#14947A"></span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">cited &nbsp;rough .30 &nbsp;metal .25</span></div>
+        <div style="display:flex;align-items:center;gap:9px"><span style="width:22px;height:22px;border-radius:5px;background:#D8DCE2"></span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">steel &nbsp;rough .28 &nbsp;metal .35</span></div>
+        <div style="display:flex;align-items:center;gap:9px"><span style="width:22px;height:22px;border-radius:5px;background:#CF4A4A"></span><span style="width:22px;height:22px;border-radius:5px;background:#E09339"></span><span style="width:22px;height:22px;border-radius:5px;background:#4A6C9E"></span><span style="width:22px;height:22px;border-radius:5px;background:#9AA3B0"></span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">cause 1–4</span></div>
+      </div>
+      <p style="font:400 12px/1.55 inherit;color:#5B6472;margin:11px 0 0">Base colours are lifted a step from the screen palette because the studio rig has no environment map — metalness above ~0.4 would render near-black.</p>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+      <div class="vlab">Brand rules this obeys</div>
+      <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:11px 0 0;padding-left:16px">
+        <li>The slash is <em>always</em> the cited green — never red or amber. Those hues carry data meaning.</li>
+        <li>Clear space around the mark equals the slash's own thickness, in three dimensions as on screen.</li>
+        <li>The fourth cause segment is slatted rather than solid, because texture — not hue — is what makes it survive greyscale.</li>
+        <li>No gradient, no glow, no chrome. The material story is matte ink, one green, one machined grey.</li>
+      </ul>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+      <div class="vlab">Where these get used</div>
+      <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:11px 0 0;padding-left:16px">
+        <li><strong>Mark tile</strong> — app store listing, favicon master, sticker die-line, 3D-printed desk object.</li>
+        <li><strong>Monolith</strong> — pitch-deck cover render, conference backdrop, office reception piece.</li>
+        <li><strong>Network</strong> — the <span style="font:400 11.5px 'JetBrains Mono',monospace">/how-it-works</span> hero and the diagram on the method page.</li>
+        <li><strong>Instrument</strong> — the "Clinical Readout" identity made literal; good for a launch film's opening shot.</li>
+      </ul>
+      <p style="font:400 12px/1.55 inherit;color:#5B6472;margin:11px 0 0">Every mesh and material is named, so the OBJ and GLB arrive in Blender with a usable part hierarchy rather than one welded blob.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:56px;padding-top:20px;border-top:2px solid #141B26;display:flex;justify-content:space-between;align-items:baseline;font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">
+    <span>Phase 9g · 4 variations · OBJ + MTL and GLB export</span>
+    <span><a href="./Phase 9f - Wireframes.dc.html">← 9f</a> &nbsp;·&nbsp; next → <a href="./Phase 9h - Landscape and Accessibility.dc.html">9h landscape &amp; a11y</a></span>
+  </div>
+
+</div>
+
+<script src="./three-d-stage.js"></script>
+<script type="module">
+const stage = document.querySelector('three-d-stage');
+const { THREE } = await stage.ready;
+
+const M = {
+  ink:     new THREE.MeshStandardMaterial({ color: 0x1B2431, roughness: 0.45, metalness: 0.10, name: 'ink' }),
+  cited:   new THREE.MeshStandardMaterial({ color: 0x14947A, roughness: 0.30, metalness: 0.25, name: 'cited_green' }),
+  steel:   new THREE.MeshStandardMaterial({ color: 0xD8DCE2, roughness: 0.28, metalness: 0.35, name: 'machined_steel' }),
+  paper:   new THREE.MeshStandardMaterial({ color: 0xF2F3F5, roughness: 0.62, metalness: 0.00, name: 'paper' }),
+  gap:     new THREE.MeshStandardMaterial({ color: 0xCF4A4A, roughness: 0.38, metalness: 0.12, name: 'cause_aio' }),
+  warn:    new THREE.MeshStandardMaterial({ color: 0xE09339, roughness: 0.38, metalness: 0.12, name: 'cause_rank' }),
+  tech:    new THREE.MeshStandardMaterial({ color: 0x4A6C9E, roughness: 0.38, metalness: 0.12, name: 'cause_tech' }),
+  neutral: new THREE.MeshStandardMaterial({ color: 0x9AA3B0, roughness: 0.50, metalness: 0.08, name: 'cause_unexplained' })
+};
+
+function roundedRect(w, h, r) {
+  const s = new THREE.Shape();
+  const x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y);
+  s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+}
+
+/* The mark: a parallelogram leaning right — a division slash, not a letter. */
+function slashShape(h, t, lean) {
+  const s = new THREE.Shape();
+  s.moveTo(-t / 2 - lean / 2, -h / 2);
+  s.lineTo(t / 2 - lean / 2, -h / 2);
+  s.lineTo(t / 2 + lean / 2, h / 2);
+  s.lineTo(-t / 2 + lean / 2, h / 2);
+  s.closePath();
+  return s;
+}
+
+function extrude(shape, depth, mat, name, bevel = 0.004) {
+  const geo = new THREE.ExtrudeGeometry(shape, {
+    depth, bevelEnabled: bevel > 0, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 3, curveSegments: 24
+  });
+  geo.translate(0, 0, -depth / 2);
+  const m = new THREE.Mesh(geo, mat);
+  m.name = name;
+  m.castShadow = true; m.receiveShadow = true;
+  return m;
+}
+
+function box(w, h, d, mat, name) {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+  m.name = name; m.castShadow = true; m.receiveShadow = true;
+  return m;
+}
+
+function strut(a, b, r, mat, name) {
+  const dir = new THREE.Vector3().subVectors(b, a);
+  const len = dir.length();
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, len, 20), mat);
+  m.name = name;
+  m.position.copy(a).add(b).multiplyScalar(0.5);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+  m.castShadow = true; m.receiveShadow = true;
+  return m;
+}
+
+/* ── 01 · Mark tile ───────────────────────────────────────────────── */
+function buildTile() {
+  const g = new THREE.Group();
+  g.name = 'citerate_mark_tile';
+  const W = 0.30, TH = 0.055;
+
+  const slab = extrude(roundedRect(W, W, 0.062), TH, M.ink, 'tile_body', 0.005);
+  g.add(slab);
+
+  // Slash raised off the front face. 0.001 clearance so faces never z-fight.
+  const mark = extrude(slashShape(W * 0.60, W * 0.115, W * 0.30), 0.016, M.cited, 'slash_raised', 0.003);
+  mark.position.z = TH / 2 + 0.008 + 0.001;
+  g.add(mark);
+
+  // Debossed register line on the back — where a serial number would go.
+  const line = box(W * 0.46, 0.004, 0.006, M.steel, 'register_line');
+  line.position.set(0, -W * 0.34, -TH / 2 - 0.002);
+  g.add(line);
+
+  g.position.y = W / 2 + 0.004;
+  return g;
+}
+
+/* ── 02 · Slash monolith ──────────────────────────────────────────── */
+function buildMonolith() {
+  const g = new THREE.Group();
+  g.name = 'citerate_slash_monolith';
+
+  const PH = 0.038;
+  const plinth = extrude(roundedRect(0.30, 0.22, 0.014), PH, M.ink, 'plinth', 0.004);
+  plinth.rotation.x = -Math.PI / 2;
+  plinth.position.y = PH / 2;
+  g.add(plinth);
+
+  const H = 0.46, T = 0.082, LEAN = 0.155;
+  const blade = extrude(slashShape(H, T, LEAN), 0.072, M.cited, 'slash_blade', 0.005);
+  blade.position.y = PH + H / 2 - 0.0005;
+  g.add(blade);
+
+  // A thin steel keel inside the blade's foot — reads as a machined joint.
+  const keel = box(T * 0.42, 0.014, 0.078, M.steel, 'blade_keel');
+  keel.position.set(-LEAN / 2, PH + 0.007, 0);
+  g.add(keel);
+
+  // Two counter-strokes: the numerator and denominator of a rate, abstracted.
+  const num = box(0.070, 0.012, 0.030, M.paper, 'numerator_bar');
+  num.position.set(LEAN / 2 + T * 0.9, PH + H * 0.82, 0);
+  g.add(num);
+  const den = box(0.070, 0.012, 0.030, M.paper, 'denominator_bar');
+  den.position.set(-LEAN / 2 - T * 0.9, PH + H * 0.18, 0);
+  g.add(den);
+
+  return g;
+}
+
+/* ── 03 · Citation network ────────────────────────────────────────── */
+function buildNetwork() {
+  const g = new THREE.Group();
+  g.name = 'citerate_citation_network';
+
+  const PH = 0.026, R = 0.155;
+  const base = extrude(roundedRect(0.40, 0.40, 0.196), PH, M.ink, 'base_disc', 0.004);
+  base.rotation.x = -Math.PI / 2;
+  base.position.y = PH / 2;
+  g.add(base);
+
+  const CY = PH + 0.215;
+  const centre = new THREE.Vector3(0, CY, 0);
+
+  const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.011, CY - PH, 24), M.steel);
+  mast.name = 'centre_mast';
+  mast.position.y = PH + (CY - PH) / 2;
+  mast.castShadow = true; mast.receiveShadow = true;
+  g.add(mast);
+
+  const host = new THREE.Mesh(new THREE.SphereGeometry(0.045, 40, 28), M.cited);
+  host.name = 'host_node';
+  host.position.copy(centre);
+  host.castShadow = true; host.receiveShadow = true;
+  g.add(host);
+
+  // A collar ring at the host: the confidence band, drawn in three dimensions.
+  const collar = new THREE.Mesh(new THREE.TorusGeometry(0.064, 0.0055, 16, 60), M.steel);
+  collar.name = 'confidence_collar';
+  collar.position.copy(centre);
+  collar.rotation.x = Math.PI / 2;
+  collar.castShadow = true; collar.receiveShadow = true;
+  g.add(collar);
+
+  // 8 answers. 3 cited (green, linked to the host), 5 lost (grey, linked to nothing).
+  const answers = [
+    { a: 0,    r: R,        y: 0.085,  cited: true  },
+    { a: 45,   r: R * 0.92, y: -0.045, cited: false },
+    { a: 90,   r: R * 1.05, y: 0.030,  cited: true  },
+    { a: 135,  r: R * 0.88, y: -0.085, cited: false },
+    { a: 180,  r: R,        y: 0.062,  cited: true  },
+    { a: 225,  r: R * 0.95, y: -0.030, cited: false },
+    { a: 270,  r: R * 1.02, y: -0.070, cited: false },
+    { a: 315,  r: R * 0.90, y: 0.010,  cited: false }
+  ];
+
+  answers.forEach((s, i) => {
+    const rad = (s.a * Math.PI) / 180;
+    const p = new THREE.Vector3(Math.cos(rad) * s.r, CY + s.y, Math.sin(rad) * s.r);
+    const mat = s.cited ? M.cited : M.neutral;
+    const node = new THREE.Mesh(new THREE.SphereGeometry(s.cited ? 0.024 : 0.019, 32, 22), mat);
+    node.name = (s.cited ? 'answer_cited_' : 'answer_lost_') + (i + 1);
+    node.position.copy(p);
+    node.castShadow = true; node.receiveShadow = true;
+    g.add(node);
+
+    if (s.cited) {
+      g.add(strut(centre, p, 0.0055, M.cited, 'citation_link_' + (i + 1)));
+    } else {
+      // A stub that starts at the answer and stops short — the citation that never landed.
+      const stop = p.clone().lerp(centre, 0.42);
+      g.add(strut(p, stop, 0.0035, M.neutral, 'severed_link_' + (i + 1)));
+    }
+  });
+
+  return g;
+}
+
+/* ── 04 · The instrument ──────────────────────────────────────────── */
+function buildInstrument() {
+  const g = new THREE.Group();
+  g.name = 'citerate_instrument';
+
+  const PH = 0.034, BW = 0.42, BD = 0.26;
+  const bed = extrude(roundedRect(BW, BD, 0.016), PH, M.ink, 'instrument_bed', 0.004);
+  bed.rotation.x = -Math.PI / 2;
+  bed.position.y = PH / 2;
+  g.add(bed);
+
+  const rail = box(BW * 0.86, 0.008, 0.056, M.steel, 'bar_rail');
+  rail.position.set(0, PH + 0.004, -0.030);
+  g.add(rail);
+
+  // The cause-separation bar as four machined blocks, widths = the real mix.
+  const segs = [
+    { w: 0.148, mat: M.gap,     name: 'segment_aio_displacement', h: 0.052 },
+    { w: 0.080, mat: M.warn,    name: 'segment_ranking_decline',  h: 0.044 },
+    { w: 0.048, mat: M.tech,    name: 'segment_technical_decay',  h: 0.038 },
+    { w: 0.062, mat: M.neutral, name: 'segment_unexplained',      h: 0.032, slatted: true }
+  ];
+  const total = segs.reduce((s, x) => s + x.w, 0) + 0.006 * (segs.length - 1);
+  let x = -total / 2;
+  segs.forEach((s) => {
+    if (s.slatted) {
+      // Three slats with air between them: the stripe, built as geometry so it
+      // survives greyscale, an OBJ export and a 3D print alike.
+      const slatW = (s.w - 0.008) / 3;
+      for (let k = 0; k < 3; k++) {
+        const slat = box(slatW, s.h, 0.048, s.mat, s.name + '_slat_' + (k + 1));
+        slat.position.set(x + slatW / 2 + k * (slatW + 0.004), PH + s.h / 2, -0.030);
+        g.add(slat);
+      }
+    } else {
+      const b = box(s.w, s.h, 0.048, s.mat, s.name);
+      b.position.set(x + s.w / 2, PH + s.h / 2, -0.030);
+      g.add(b);
+    }
+    x += s.w + 0.006;
+  });
+
+  // The confidence band: an arc over the bar, with a needle reading the centre.
+  const arc = new THREE.Mesh(new THREE.TorusGeometry(0.132, 0.0075, 18, 80, Math.PI), M.steel);
+  arc.name = 'confidence_arc';
+  arc.position.set(0, PH + 0.062, 0.052);
+  g.add(arc);
+  arc.castShadow = true; arc.receiveShadow = true;
+
+  const post = new THREE.Mesh(new THREE.CylinderGeometry(0.010, 0.013, 0.062, 28), M.steel);
+  post.name = 'needle_post';
+  post.position.set(0, PH + 0.031, 0.052);
+  post.castShadow = true; post.receiveShadow = true;
+  g.add(post);
+
+  const needle = new THREE.Mesh(new THREE.CylinderGeometry(0.0032, 0.0055, 0.118, 20), M.cited);
+  needle.name = 'needle';
+  needle.position.set(-0.030, PH + 0.114, 0.052);
+  needle.rotation.z = 0.42;
+  needle.castShadow = true; needle.receiveShadow = true;
+  g.add(needle);
+
+  // Two tick blocks marking the band's edges — an estimate without a band is not shipped.
+  [-0.108, 0.108].forEach((tx, i) => {
+    const tick = box(0.010, 0.026, 0.030, M.paper, 'band_tick_' + (i + 1));
+    tick.position.set(tx, PH + 0.013, 0.052);
+    g.add(tick);
+  });
+
+  // The score plate: a raised paper-coloured pad where the number is engraved.
+  const plate = extrude(roundedRect(0.086, 0.052, 0.008), 0.010, M.paper, 'score_plate', 0.002);
+  plate.rotation.x = -Math.PI / 2;
+  plate.position.set(BW / 2 - 0.062, PH + 0.005, 0.078);
+  g.add(plate);
+
+  return g;
+}
+
+const VARIANTS = {
+  'v-tile':       { build: buildTile,       caption: 'Mark tile — 3 named parts. The slash sits 1 mm clear of the face so the two surfaces never z-fight in an export, and the chamfer is 5 mm so the silhouette still reads as a rounded square at icon scale.' },
+  'v-monolith':   { build: buildMonolith,   caption: 'Slash monolith — 5 named parts. The two paper bars are the numerator and denominator of a rate, placed so the eye reads 4/9 before it reads a letterform. Blade height 46 cm on a 30 × 22 cm plinth.' },
+  'v-network':    { build: buildNetwork,    caption: 'Citation network — 20 named parts. Three green struts reach the host; five grey stubs stop 42% short, because a lost citation is a link that never landed. The steel collar is the confidence band.' },
+  'v-instrument': { build: buildInstrument, caption: 'The instrument — 14 named parts. Segment widths are a real cause mix, and the fourth segment is three slats with air between them: texture carries the meaning, never hue alone.' }
+};
+
+const cache = {};
+function show(id) {
+  const v = VARIANTS[id];
+  if (!cache[id]) cache[id] = v.build();
+  const obj = cache[id];
+  stage.setAttribute('name', document.getElementById(id).dataset.name);
+  stage.setObject(obj);
+  document.getElementById('caption').textContent = v.caption;
+  let meshes = 0;
+  obj.traverse((n) => { if (n.isMesh) meshes++; });
+  document.getElementById('partcount').textContent = meshes + ' named meshes · 7 materials';
+  Object.keys(VARIANTS).forEach((k) => {
+    document.getElementById(k).setAttribute('aria-pressed', String(k === id));
+  });
+}
+
+Object.keys(VARIANTS).forEach((k) => {
+  document.getElementById(k).addEventListener('click', () => show(k));
+});
+
+show('v-tile');
+</script>
+</body>
+</html>

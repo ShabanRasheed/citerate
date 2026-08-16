@@ -1,0 +1,151 @@
+---
+import Marketing from "../../layouts/Marketing.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import pricing from "../../data/pricing.json";
+
+const agency = pricing.enterpriseTiers.find((t) => t.id === "agency")!;
+const clients = [
+  { initials: "NR", host: "northridge-dental.com", rate: "61%", tone: "tx-cited", color: "var(--tech)" },
+  { initials: "AV", host: "aveline-skincare.com", rate: "38%", tone: "tx-warn", color: "var(--cited)" },
+  { initials: "BL", host: "bolt-logistics.io", rate: "19%", tone: "tx-gap", color: "var(--warn)" }
+];
+---
+
+<Marketing
+  title="Citerate for agencies"
+  description="GEO is the first new retainer line since social. Run every client from one account, white-label every surface including the login domain, and bill it as yours."
+  nav="agencies"
+  scrollNarrative={true}
+>
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid--split-r">
+        <div class="stack stack--4">
+          <span class="t-label">For agencies</span>
+          <h1 class="t-hero u-mw-20">Your clients are asking about AI visibility. Bill for the answer.</h1>
+          <p class="t-lead" style="max-width:54ch">
+            GEO is the first new retainer line since social. Run every client from one account, white-label
+            every surface including the login domain, and report monthly with your logo on the PDF. Clients see
+            your brand; the invoice sees your margin.
+          </p>
+          <div style="display:flex;gap:12px;margin-top:6px;flex-wrap:wrap">
+            <a class="btn-primary-c btn-primary-c--lg" href="/contact?intent=agency" data-cta="agency-hero">
+              Book an agency demo
+            </a>
+            <a class="btn-ghost" href="/pricing">Agency pricing</a>
+          </div>
+        </div>
+
+        <div class="c-card c-card--lg">
+          <div class="row-between" style="gap:12px">
+            <span class="t-label t-label--ink">Client workspaces</span>
+            <span class="t-data-sm">one account, one bill</span>
+          </div>
+          {
+            clients.map((c) => (
+              <div class="row-between" style="gap:12px;background:var(--paper);border-radius:var(--r-sm);padding:12px 14px">
+                <span style="display:flex;align-items:center;gap:10px">
+                  <span
+                    style={`width:26px;height:26px;border-radius:var(--r-sm);background:${c.color};color:#fff;font:500 11px/26px var(--font-mono);text-align:center`}
+                  >
+                    {c.initials}
+                  </span>
+                  <span class="t-sm" style="color:var(--ink)">{c.host}</span>
+                </span>
+                <span class={`t-data ${c.tone}`}>{c.rate}</span>
+              </div>
+            ))
+          }
+          <div
+            style="display:flex;align-items:center;justify-content:center;border:1.5px dashed var(--lock-line);border-radius:var(--r-sm);padding:11px"
+          >
+            <span class="t-data-sm">+ 22 more workspaces on the plan</span>
+          </div>
+          <span class="figcap">Demo data. Pooled 5,000-query budget; client seats read-only and free.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--card">
+    <div class="wrap">
+      <h2 class="t-d2" style="max-width:28ch;margin-bottom:26px">White label means the client never sees us.</h2>
+      <div class="grid grid--3">
+        <div class="c-card c-card--sunk">
+          <span class="t-label t-label--ink">The report</span>
+          <span class="t-d4">Your logo, your accent color</span>
+          <span class="t-sm">
+            The monthly PDF carries your brand. Methodology note stays — it's what makes your number defensible
+            in the client's board meeting too.
+          </span>
+        </div>
+        <div class="c-card c-card--sunk">
+          <span class="t-label t-label--ink">The dashboard</span>
+          <span class="t-d4">Your domain at login</span>
+          <span class="t-sm">
+            reports.youragency.com, your logo top-left. Client seats are read-only, free, and unlimited — share
+            dashboards without buying seats.
+          </span>
+        </div>
+        <div class="c-card c-card--sunk">
+          <span class="t-label t-label--ink">The invoice</span>
+          <span class="t-d4">Reseller billing hides your cost</span>
+          <span class="t-sm">
+            You pay us once; what you charge per client is your business. Extra client workspace $29 — the
+            margin math works at boutique scale.
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid--split">
+        <div class="stack stack--4">
+          <span class="t-label">The pitch kit</span>
+          <h2 class="t-d2">Win the retainer with the prospect's own scan.</h2>
+          <p class="t-body tx-soft" style="font-size:15px;line-height:1.6">
+            Run the free scan on a prospect's domain before the pitch. Walk in with their citation rate, their
+            named competitors, and three fixes — the strongest sales page you own is a report about them.
+            On-demand rescan packs make the follow-up meeting a before/after.
+          </p>
+          <a class="btn-quiet" href="/contact?intent=agency">Book an agency demo →</a>
+        </div>
+
+        <div class="c-card c-card--lg">
+          <span class="t-label t-label--ink">Retainer math, sketched</span>
+          <div class="row-between" style="gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px">
+            <span class="t-sm">Agency plan, 25 workspaces</span>
+            <span class="t-data" style="font-size:14px">
+              <span data-swap="pricing" data-month={`$${agency.monthly}`} data-year={`$${agency.yearly}`}>
+                ${agency.monthly}
+              </span>/mo
+            </span>
+          </div>
+          <div class="row-between" style="gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px">
+            <span class="t-sm">Cost per client at 20 active</span>
+            <span class="t-data" style="font-size:14px">≈ $40/mo</span>
+          </div>
+          <div class="row-between" style="gap:12px">
+            <span class="t-sm">Typical GEO retainer line, your rate card</span>
+            <span class="t-data tx-cited" style="font-size:14px">yours to set</span>
+          </div>
+          <span class="figcap">We state our price and your cost math. We don't invent your revenue for you.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink section--flush">
+    <div class="wrap">
+      <CtaBand
+        headline="Twenty minutes, your client list in hand."
+        body="We'll scan two of your clients live on the call."
+        cta="Book an agency demo"
+        href="/contact?intent=agency"
+        event="agency_foot"
+      />
+    </div>
+  </section>
+</Marketing>

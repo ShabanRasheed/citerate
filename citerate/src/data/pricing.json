@@ -1,0 +1,109 @@
+{
+  "intervals": ["month", "year"],
+  "yearlyNote": "two months free",
+  "meter": {
+    "name": "tracked query",
+    "definition": "One prompt, checked on every engine in your plan, on every refresh in your plan. Engines and refresh frequency are not separate meters.",
+    "overage": "Going over does not stop the scan. It shows a banner and bills the overage block at the end of the cycle.",
+    "overageBlock": { "queries": 100, "price": 19 }
+  },
+  "free": {
+    "id": "free",
+    "label": "Free scan",
+    "price": "$0",
+    "sub": "no account",
+    "body": "One domain, 25 queries, two engines. Your citation rate, the cause split, and your top three fixes — in about 90 seconds. Email only to save it.",
+    "limits": "Competitor names hidden. No history. One scan per domain per day.",
+    "cta": { "label": "Run it now", "href": "/#scan" }
+  },
+  "tiers": [
+    {
+      "id": "starter",
+      "label": "Starter",
+      "monthly": 49,
+      "yearly": 41,
+      "pitch": "One brand, one person, weekly rhythm. Answers whether you have a problem.",
+      "features": [
+        "100 tracked queries",
+        "2 engines, weekly refresh",
+        "Score, causes, 90 day history",
+        "Top 10 fixes",
+        "1 seat, CSV export"
+      ],
+      "locked": ["Competitor names locked"],
+      "cta": { "label": "Start with a free scan", "href": "/#scan" }
+    },
+    {
+      "id": "growth",
+      "label": "Growth",
+      "featured": true,
+      "flag": "Most teams land here",
+      "monthly": 199,
+      "yearly": 166,
+      "pitch": "The first plan that tells you who is winning instead of just that you are losing.",
+      "features": [
+        "500 tracked queries, 3 domains",
+        "4 engines, daily refresh",
+        "Full Fix Queue with owners",
+        "12 month history, PDF reports",
+        "5 seats, Slack, Search Console, read API"
+      ],
+      "unlock": ["Competitor names and share of citations"],
+      "cta": { "label": "Start with a free scan", "href": "/#scan" }
+    },
+    {
+      "id": "scale",
+      "label": "Scale",
+      "monthly": 499,
+      "yearly": 416,
+      "pitch": "Several brands, several markets, and someone who reports upward every month.",
+      "features": [
+        "2,000 tracked queries, 10 domains",
+        "All engines, daily plus on demand",
+        "Unlimited history and exports",
+        "White label PDF, webhooks, write API",
+        "15 seats, Google Workspace sign in",
+        "Same day support"
+      ],
+      "cta": { "label": "Start with a free scan", "href": "/#scan" }
+    }
+  ],
+  "enterpriseTiers": [
+    {
+      "id": "agency",
+      "label": "Agency",
+      "monthly": 799,
+      "yearly": 666,
+      "body": "25 client workspaces, 5,000 pooled queries, white label on every surface including the login domain. Client seats read-only and free. Reseller billing hides your cost. Extra workspace $29. Sold annually only.",
+      "cta": { "label": "Book an agency demo", "href": "/contact?intent=agency" }
+    },
+    {
+      "id": "enterprise",
+      "label": "Enterprise",
+      "price": "Talk to us",
+      "body": "SAML SSO, audit log export, data residency, signed DPA and MSA, invoicing, custom engines and prompt sets, security review, uptime commitment.",
+      "cta": { "label": "Talk to us", "href": "/contact?intent=sales" }
+    }
+  ],
+  "addons": [
+    { "label": "100 extra queries", "price": 19 },
+    { "label": "Extra domain", "price": 39 },
+    { "label": "On-demand rescan pack of 10", "price": 15 },
+    { "label": "90-day historical backfill (one-off)", "price": 99 },
+    { "label": "Additional seat (Growth)", "price": 12 },
+    { "label": "Extra client workspace (Agency)", "price": 29 }
+  ],
+  "comparison": {
+    "columns": ["Free", "Starter", "Growth", "Scale", "Agency"],
+    "rows": [
+      { "label": "Tracked queries", "values": ["25", "100", "500", "2,000", "5,000 pooled"] },
+      { "label": "Engines", "values": ["2", "2", "4", "All", "All"] },
+      { "label": "Refresh", "values": ["Once", "Weekly", "Daily", "Daily + on demand", "Daily + on demand"] },
+      { "label": "Competitor names", "values": ["Locked", "Locked", "Yes", "Yes", "Yes"], "unlockAt": 2 },
+      { "label": "History", "values": ["None", "90 days", "12 months", "Unlimited", "Unlimited"] },
+      { "label": "Reports", "values": ["Share link", "CSV", "PDF, scheduled", "White label PDF", "White label all"] },
+      { "label": "Seats", "values": ["1", "1", "5", "15", "Unlimited"] },
+      { "label": "API and webhooks", "values": ["No", "No", "Read", "Read + write", "Read + write"] }
+    ]
+  }
+}

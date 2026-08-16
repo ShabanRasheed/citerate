@@ -1,0 +1,56 @@
+// Local self-hosted webfonts. 4 files total, per the perf budget.
+// Download once into public/fonts/ (see README "Fonts"), never hotlink Google.
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("/fonts/source-serif-4-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+2000-206F, U+2074, U+20AC, U+2122, U+2212;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("/fonts/source-serif-4-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/jetbrains-mono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/jetbrains-mono-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: var(--t-ui);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg, video { max-width: 100%; height: auto; display: block; }
+
+:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--r-sm); }
+
+::selection { background: var(--cited-wash); color: var(--cited-ink); }
+
+.visually-hidden-focusable:focus {
+  position: fixed; top: 12px; left: 12px; z-index: 1000;
+  background: var(--card); padding: 12px 16px; border-radius: var(--r-sm);
+  box-shadow: var(--shadow-md);
+}

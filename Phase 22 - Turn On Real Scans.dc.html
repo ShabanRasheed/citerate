@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EDEFF2;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="display:grid;grid-template-columns:300px minmax(0,1fr);min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="background:#141B26;color:#F4F5F7;padding:24px 20px;display:flex;flex-direction:column;gap:22px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#35B394">Phase 22 · real engines</div>
+      <div style="font:600 21px/1.3 'Source Serif 4',serif;margin-top:8px">Scan a real site for real</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#8A93A1;margin:8px 0 0">Two keys get you a genuine scan of shabanrasheed.com. Two more unlock the higher plan tiers.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">on this board</div>
+      <a href="#which" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">Which keys, and why</a>
+      <a href="#local" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">Turning it on locally</a>
+      <a href="#prod" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">Turning it on in production</a>
+      <a href="#spend" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">What a scan costs</a>
+      <a href="#first" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">Your first real scan</a>
+      <a href="#expect" style="color:#35B394;font:500 12.5px/1.6 inherit">What to expect from it</a>
+    </div>
+
+    <div style="margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-direction:column;gap:8px">
+      <a href="Phase 20 - Run It On Windows.dc.html" style="color:#35B394;font:400 12px/1 inherit">← Run it locally</a>
+      <a href="Phase 21 - Git and Cloudflare Setup.dc.html" style="color:#35B394;font:400 12px/1 inherit">Phase 21 · Git and Cloudflare</a>
+      <a href="Phase 19 - Handover Index.dc.html" style="color:#35B394;font:400 12px/1 inherit">Handover index</a>
+    </div>
+  </div>
+
+  <div style="padding:34px 40px 72px;display:flex;flex-direction:column;gap:28px;min-width:0">
+
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:78ch">
+      <h1 style="font:600 30px/1.25 'Source Serif 4',serif;margin:0;text-wrap:pretty">Switching the engines from mock to real</h1>
+      <p style="font:400 14.5px/1.65 inherit;color:#5B6472;margin:0;text-wrap:pretty">One flag decides it. With <span style="font-family:'JetBrains Mono',monospace;font-size:13px">USE_ENGINE_MOCKS=true</span> the pipeline runs completely but the answers are deterministic fakes. Set it to <span style="font-family:'JetBrains Mono',monospace;font-size:13px">false</span> and the same code asks the real engines. Nothing else changes — same queries, same citation maths, same screens.</p>
+      <p style="font:400 14.5px/1.65 inherit;color:#5B6472;margin:0;text-wrap:pretty">A missing key does not break a scan. That engine is marked <span style="font-family:'JetBrains Mono',monospace;font-size:13px">unavailable</span> for the run and the rest proceed, so you can start with one key and add the others later.</p>
+    </div>
+
+    <div id="which" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">Which keys, and why</h2>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,.7fr) minmax(0,1.5fr);gap:14px;padding:11px 20px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472"><span>key</span><span>unlocks</span><span>where to get it</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,.7fr) minmax(0,1.5fr);gap:14px;padding:13px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;overflow-wrap:anywhere">OPENAI_API_KEY</span><span style="color:#0B6151;font:500 12px/1.5 'JetBrains Mono',monospace">ChatGPT</span><span style="color:#5B6472">platform.openai.com → API keys. Prepay credit; there is no free tier. Required — this is the engine the free scan is mostly about.</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,.7fr) minmax(0,1.5fr);gap:14px;padding:13px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;overflow-wrap:anywhere">SERP_API_KEY</span><span style="color:#0B6151;font:500 12px/1.5 'JetBrains Mono',monospace">Google AI Overviews</span><span style="color:#5B6472">A SERP scraping provider such as SerpApi. Also supplies the organic-position evidence next to each query, so without it those columns are blank.</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,.7fr) minmax(0,1.5fr);gap:14px;padding:13px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;overflow-wrap:anywhere">PERPLEXITY_API_KEY</span><span style="color:#8A93A1;font:500 12px/1.5 'JetBrains Mono',monospace">Perplexity</span><span style="color:#5B6472">perplexity.ai API settings. Growth tier and above. Optional for a first look.</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,.7fr) minmax(0,1.5fr);gap:14px;padding:13px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;overflow-wrap:anywhere">GEMINI_API_KEY</span><span style="color:#8A93A1;font:500 12px/1.5 'JetBrains Mono',monospace">Gemini</span><span style="color:#5B6472">Google AI Studio. Growth tier and above. Has a free usage allowance, so it is the cheapest one to try.</span></div>
+      </div>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">Copilot and Claude are listed on the Scale tier and currently route through keys you already have rather than their own. If you sell that tier, they need real clients first — worth knowing before the pricing page goes live.</p>
+    </div>
+
+    <div id="local" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">Turning it on locally</h2>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">Open <span style="font-family:'JetBrains Mono',monospace;font-size:13px">citerate\.env</span>, paste the keys, and flip the flag:</p>
+      <pre style="margin:0;background:#141B26;color:#F4F5F7;border-radius:10px;padding:16px 18px;overflow-x:auto;font:400 12.5px/1.7 'JetBrains Mono',monospace">OPENAI_API_KEY=sk-...
+SERP_API_KEY=...
+USE_ENGINE_MOCKS=false</pre>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">Then also set <span style="font-family:'JetBrains Mono',monospace;font-size:13px">USE_ENGINE_MOCKS = "false"</span> in <span style="font-family:'JetBrains Mono',monospace;font-size:13px">citerate\workers\scanner\wrangler.toml</span>, because the scanner reads its own vars, not your <span style="font-family:'JetBrains Mono',monospace;font-size:13px">.env</span>. Missing that is the usual reason someone pastes keys and still gets mock answers.</p>
+      <pre style="margin:0;background:#141B26;color:#F4F5F7;border-radius:10px;padding:16px 18px;overflow-x:auto;font:400 12.5px/1.7 'JetBrains Mono',monospace">pnpm preflight:local</pre>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;font:400 13px/1.6 inherit;color:#5B6472"><span style="color:#0B6151;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase">expect</span><br><span style="font-family:'JetBrains Mono',monospace;font-size:12px">USE_ENGINE_MOCKS false — scans hit the real engines</span>. If a key is unset while the flag is false, preflight blocks and names it. Restart both terminals afterwards; neither picks up config changes while running.</div>
+    </div>
+
+    <div id="prod" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">Turning it on in production</h2>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">The engine keys belong to the scanner Worker, not the Pages project. Set them there, then redeploy the scanner.</p>
+      <pre style="margin:0;background:#141B26;color:#F4F5F7;border-radius:10px;padding:16px 18px;overflow-x:auto;font:400 12.5px/1.7 'JetBrains Mono',monospace">cd C:\citerate\citerate
+npx wrangler secret put OPENAI_API_KEY     --config workers/scanner/wrangler.toml
+npx wrangler secret put SERP_API_KEY       --config workers/scanner/wrangler.toml
+pnpm scanner:deploy
+pnpm scanner:tail</pre>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">The production preflight treats a true flag as a hard block, not a warning — you cannot accidentally ship a live site that serves fake numbers.</p>
+    </div>
+
+    <div id="spend" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">What a scan costs</h2>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">Priced by multiplication, not by scan. A free scan is capped at 25 queries, and each query is asked 3 times per engine — repetition is the whole method, since these engines answer differently run to run. Two engines makes 150 calls per scan.</p>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.6fr) minmax(0,1.2fr);gap:14px;padding:11px 20px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472"><span>knob</span><span>default</span><span>effect</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.6fr) minmax(0,1.2fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;overflow-wrap:anywhere">FREE_SCAN_QUERY_LIMIT</span><span style="font:500 12.5px/1.5 'JetBrains Mono',monospace">25</span><span style="color:#5B6472">Drop to 5 while testing. Linear on cost.</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.6fr) minmax(0,1.2fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;overflow-wrap:anywhere">RUNS_PER_ENGINE</span><span style="font:500 12.5px/1.5 'JetBrains Mono',monospace">3</span><span style="color:#5B6472">Set to 1 while testing. Also linear. Below 3 the citation rate gets noisy.</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.6fr) minmax(0,1.2fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;overflow-wrap:anywhere">FREE_SCAN_ENGINES</span><span style="font:500 12.5px/1.5 'JetBrains Mono',monospace">2</span><span style="color:#5B6472">chatgpt and google_aio. Cut to one to halve the spend.</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.6fr) minmax(0,1.2fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;overflow-wrap:anywhere">FREE_SCAN_CACHE_TTL_SECONDS</span><span style="font:500 12.5px/1.5 'JetBrains Mono',monospace">86400</span><span style="color:#5B6472">One live scan per domain per day. Refreshing the page does not re-spend.</span></div>
+      </div>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">I will not quote you per-call prices, because they change and I would rather you read them off the provider's page than trust a number from me. Model pricing is per token at platform.openai.com/pricing; SERP providers charge per search on a monthly plan. Set a hard spend cap on the OpenAI account before your first real scan — that is the one safeguard the code cannot give you.</p>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">For your very first real run I would set the limit to 5 queries and runs to 1. Ten calls, cents of spend, and you learn whether the plumbing works before you learn what it costs.</p>
+    </div>
+
+    <div id="first" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">Your first real scan</h2>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">Enter <span style="font-family:'JetBrains Mono',monospace;font-size:13px">shabanrasheed.com</span> without the protocol — the form normalises it, but bare hostnames are what the cache keys on. Watch the scanner terminal while it runs: you will see one log line per engine call, and any key problem shows up there as <span style="font-family:'JetBrains Mono',monospace;font-size:13px">unavailable</span> with a reason attached.</p>
+    </div>
+
+    <div id="expect" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">What to expect from it</h2>
+      <div style="background:#FFF9E8;border:1px solid #C99A2E;border-radius:12px;padding:18px 20px;font:400 13.5px/1.65 inherit;color:#141B26;max-width:80ch;text-wrap:pretty">
+        A personal portfolio site will almost certainly come back with a citation rate near zero, and that is the correct answer rather than a bug. These engines cite sites they consider authoritative on a query, and the generated queries for a single-person portfolio have very few natural citation opportunities. Do not read a low number as the scanner failing.
+      </div>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">If you want a first scan that produces an interesting-looking result — several cited queries, competitors with real share, a fix queue with something in it — pick a domain that already ranks for commercial queries. Somewhere you have worked, a client, or a competitor in a category you know. The product tells a much clearer story on a site that has something to lose.</p>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">One more honest note: the queries are generated from the domain, so their quality decides whether the scan means anything. Read the query list on the first real run before you judge the numbers underneath it.</p>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}"></script>
+</body>
+</html>

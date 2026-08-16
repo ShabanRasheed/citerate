@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#F4F5F7;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="max-width:1240px;margin:0 auto;padding:48px 40px 120px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:20px;border-bottom:2px solid #141B26">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Phase 9d · UX package 4 of 8 · 2026-07-29</div>
+      <h1 style="font:600 34px/1.15 'Source Serif 4',serif;letter-spacing:-.015em;margin:10px 0 0">User stories &amp; acceptance criteria</h1>
+      <p style="font:400 14px/1.55 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0;text-wrap:pretty">Nine epics, forty-one stories, every one traced to a persona, a route and a flow id from 9c. Acceptance criteria are written Given / When / Then so they can be lifted straight into tickets or test names. MoSCoW priority reflects what v1 already ships versus what is deliberately deferred.</p>
+    </div>
+    <div style="flex:none;text-align:right;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+      <div>epics &nbsp;&nbsp;&nbsp;&nbsp;9</div>
+      <div>stories &nbsp;41</div>
+      <div style="color:#0B6151">must &nbsp;&nbsp;&nbsp;&nbsp;24</div>
+      <div style="color:#9A6210">should 11 &nbsp;<span style="color:#8A93A1">could 6</span></div>
+    </div>
+  </div>
+
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px;margin-top:20px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">HOW TO READ A CARD</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;align-items:center;font:400 12px/1.4 inherit;color:#5B6472">
+      <span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-00</span> story id ·
+      <span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em">MUST</span>
+      <span style="background:#FDF2E3;color:#9A6210;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em">SHOULD</span>
+      <span style="background:#EDEFF2;color:#5B6472;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em">COULD</span>
+      priority ·
+      <span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em">P1 P2 P3</span> persona from 9b ·
+      <span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F09</span> flow from 9c ·
+      <span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/route</span> where it lives
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0">
+    <a href="#map" style="font:500 11.5px 'JetBrains Mono',monospace;color:#F4F5F7;background:#141B26;border:1px solid #141B26;border-radius:999px;padding:5px 12px">★ story map</a>
+    <a href="#e1" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">E1 acquisition</a>
+    <a href="#e2" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">E2 identity</a>
+    <a href="#e3" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">E3 activation</a>
+    <a href="#e4" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">E4 diagnosis</a>
+    <a href="#e5" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">E5 remediation</a>
+    <a href="#e6" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">E6 reporting</a>
+    <a href="#e7" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">E7 collaboration</a>
+    <a href="#e8" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">E8 commerce</a>
+    <a href="#e9" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">E9 trust &amp; a11y</a>
+    <a href="#dod" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">definition of done</a>
+  </div>
+
+  <section id="map" style="scroll-margin-top:16px;margin-top:52px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">★ · Story map</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">The backbone, and what sits under each vertebra</h2>
+    <p style="font:400 13.5px/1.6 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0">Top row is the user's narrative left to right. Below it, stories in release order — everything above the dashed line is in v1.</p>
+    <div style="overflow-x:auto;margin-top:20px">
+      <div style="min-width:1080px">
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+          <div style="background:#141B26;color:#F4F5F7;border-radius:10px 10px 0 0;padding:12px 14px;font:600 15px/1.3 'Source Serif 4',serif">Discover</div>
+          <div style="background:#141B26;color:#F4F5F7;border-radius:10px 10px 0 0;padding:12px 14px;font:600 15px/1.3 'Source Serif 4',serif">Get in</div>
+          <div style="background:#141B26;color:#F4F5F7;border-radius:10px 10px 0 0;padding:12px 14px;font:600 15px/1.3 'Source Serif 4',serif">Set up</div>
+          <div style="background:#141B26;color:#F4F5F7;border-radius:10px 10px 0 0;padding:12px 14px;font:600 15px/1.3 'Source Serif 4',serif">Diagnose</div>
+          <div style="background:#141B26;color:#F4F5F7;border-radius:10px 10px 0 0;padding:12px 14px;font:600 15px/1.3 'Source Serif 4',serif">Act &amp; prove</div>
+          <div style="background:#141B26;color:#F4F5F7;border-radius:10px 10px 0 0;padding:12px 14px;font:600 15px/1.3 'Source Serif 4',serif">Report &amp; sustain</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:2px;align-items:start">
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-01 run a scan with no account</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-02 verdict sentence first</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-03 see the method before buying</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-04 blurred competitor tease</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-05 emailed readout on timeout</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-06 claim a scan into an account</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-07 link or code, same token</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-08 stay signed in</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-09 recover an expired link</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-10 accept an invite</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-11 verify a domain</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-12 request access on collision</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-13 edit the query set</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-14 skip onboarding steps</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-15 connect Search Console</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-16 read one verdict sentence</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-17 see the cause mix</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-18 know noise from signal</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-19 open run-level evidence</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-20 save a filtered view</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-21 name the competitors</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-22 ranked fix queue</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-23 fix detail I can hand a dev</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-24 mark shipped</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-25 automatic verification</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-26 honest "no change"</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-27 rescan on demand</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-28 monthly snapshot, no work</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-29 white-label PDF</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-30 immutable history</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-32 switch client workspace</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-36 one weekly email</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit">US-37 overage never blocks</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin:16px 0 10px">
+          <div style="flex:1;border-top:2px dashed #C6CBD3"></div>
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">— V1 LINE · BELOW IS DEFERRED —</div>
+          <div style="flex:1;border-top:2px dashed #C6CBD3"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-items:start">
+          <div></div><div style="background:#EDEFF2;border:1px dashed #C6CBD3;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit;color:#5B6472">SSO / SAML · 2FA enrolment</div><div style="background:#EDEFF2;border:1px dashed #C6CBD3;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit;color:#5B6472">Bulk CSV domain import</div><div style="background:#EDEFF2;border:1px dashed #C6CBD3;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit;color:#5B6472">Query suggestions from competitor gaps</div><div style="background:#EDEFF2;border:1px dashed #C6CBD3;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit;color:#5B6472">Auto-apply fixes via CMS integration</div><div style="background:#EDEFF2;border:1px dashed #C6CBD3;border-radius:6px;padding:8px 10px;font:400 11.5px/1.4 inherit;color:#5B6472">Scheduled report delivery to client inbox</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="e1" style="scroll-margin-top:16px;margin-top:60px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding-bottom:12px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Epic 1 · Acquisition &amp; the free scan</div>
+        <h2 style="font:600 24px/1.28 'Source Serif 4',serif;margin:7px 0 0">Prove the problem is real before asking for anything</h2>
+      </div>
+      <div style="flex:none;font:400 11px/1.6 'JetBrains Mono',monospace;color:#8A93A1;text-align:right">flows F01 F02 · marketing repo<br>5 stories · 5 must</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+          <span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-01</span>
+          <span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em">MUST</span>
+          <span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em">P2</span>
+          <span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F01 · /</span>
+        </div>
+        <p style="font:600 16px/1.5 'Source Serif 4',serif;margin:10px 0 0;max-width:92ch"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS A</span> founder who suspects he is invisible to AI answers, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> to see my real citation rate by typing only my domain, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> I can judge whether this matters to me before spending anything — including my email address.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">GIVEN</span> I am on the marketing home page and have never visited before, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">WHEN</span> I enter a resolvable hostname and submit, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> a scan starts with no account, no card and no email required.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> results stream in progressively — the first engine's outcome appears without waiting for the last.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> 25 queries across 2 engines are run, and the count is stated on screen so the sample size is never implied.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#A62F2F">AND</span> if the hostname does not resolve, the error appears inline beneath the field with my input preserved — no page navigation, no lost typing.</div>
+        </div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+          <span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-02</span>
+          <span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em">MUST</span>
+          <span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em">P2 P1</span>
+          <span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F01 · /scan/[token]</span>
+        </div>
+        <p style="font:600 16px/1.5 'Source Serif 4',serif;margin:10px 0 0;max-width:92ch"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS A</span> visitor with ninety seconds of attention, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> the finding stated as one plain sentence before any chart, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> I understand the result without interpreting a dashboard.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">GIVEN</span> a scan has completed, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">WHEN</span> the readout renders, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> the first element is a serif sentence naming the host, the cited count and the run count.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> every rate on the page is rendered as <span style="font:500 11.5px 'JetBrains Mono',monospace">cited/runs — pct</span>; a bare percentage anywhere fails this story.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> each engine carries a visible <span style="font:500 11px 'JetBrains Mono',monospace">SURFACE</span> or <span style="font:500 11px 'JetBrains Mono',monospace">PROXY</span> label wherever its number appears.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-03</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P1 · /how-it-works</span></div>
+          <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As an</span> SEO manager who will be cross-examined on this number, <span style="color:#8A93A1">I want</span> the full method published before I sign up, <span style="color:#8A93A1">so that</span> I can decide whether it is defensible.</p>
+          <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Method page states the run-based rate, the Wilson band, the three causes, the confidence floor and the current method version — and every score in the product links to it.</div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-04</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P2 · /scan/[token]</span></div>
+          <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As a</span> visitor, <span style="color:#8A93A1">I want</span> to see that competitor names <em>exist</em> in my result even while they're hidden, <span style="color:#8A93A1">so that</span> I know exactly what I'd be paying for.</p>
+          <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Locked region renders my real data blurred with a dashed border and a count ("3 competitors cited"), never an empty placeholder or a marketing panel.</div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-05</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P2 · F01</span></div>
+          <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As a</span> visitor whose scan is slow, <span style="color:#8A93A1">I want</span> the finished part now and the rest emailed, <span style="color:#8A93A1">so that</span> a slow engine doesn't cost me the answer.</p>
+          <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">After 20s, completed engines render with their reduced denominator visible, incomplete ones are labelled <em>still running</em>, and an email option appears carrying the same token.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="e2" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding-bottom:12px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Epic 2 · Identity without passwords</div>
+        <h2 style="font:600 24px/1.28 'Source Serif 4',serif;margin:7px 0 0">One token type, two redemption paths, zero passwords</h2>
+      </div>
+      <div style="flex:none;font:400 11px/1.6 'JetBrains Mono',monospace;color:#8A93A1;text-align:right">flows F02–F05 · auth.ts session.ts<br>5 stories · 4 must · 1 could</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-06</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P2</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F02 · /claim/[token]</span></div>
+        <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS A</span> visitor who just saw a real result, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> claiming that scan to also create my account and verify my domain, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> I never re-enter what I already gave you.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">GIVEN</span> an unclaimed scan and my email, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">WHEN</span> I verify, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> a user, workspace and verified domain are created and the 25 queries plus their runs migrate intact.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> I land on onboarding step 2 with data already on screen — step 1 is marked complete, not re-asked.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> if that email already has an account, this becomes a sign-in that attaches the scan as an additional domain, subject to the plan's domain limit.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-07</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P2 P3</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F04 · /check-email</span></div>
+        <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS A</span> user on a phone whose mail app opens links in a webview I don't trust, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> to type a code instead, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> I can finish signing in on the device I started on.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">GIVEN</span> an auth email, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> it contains both a link and a 6-digit code that are the <em>same</em> token — consuming either invalidates the other.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> the code field is focused on arrival, accepts paste, and auto-submits on the sixth character.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> resend is available on a 30-second cooldown with the remaining seconds shown.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-08</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P3 · F04</span></div>
+        <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As an</span> agency owner signing in dozens of times a month, <span style="color:#8A93A1">I want</span> to stay signed in and see my sessions, <span style="color:#8A93A1">so that</span> passwordless doesn't mean an email round trip every day.</p>
+        <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Long-lived session cookie; a valid session lands directly on the last-visited route. Every session is listed with device, location and last-seen, and is individually revocable.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-09</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">all · F18</span></div>
+        <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As a</span> user who opened the email an hour late, <span style="color:#8A93A1">I want</span> a one-tap recovery, <span style="color:#8A93A1">so that</span> an expired link is not a dead end.</p>
+        <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Expiry states the 15-minute TTL, pre-fills the email, and re-mints on one tap. Any attached scan survives because it is keyed to the email, not the token. Unknown emails never reveal whether an account exists.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-10</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P3 · /invite/[token]</span></div>
+        <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As an</span> invited colleague or client, <span style="color:#8A93A1">I want</span> to land inside the right workspace already set up, <span style="color:#8A93A1">so that</span> I never see onboarding for someone else's account.</p>
+        <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Accepting creates a membership at the invited role and lands on /overview. A revoked or expired invite names the inviter and offers to notify them. Role <span style="font:500 11px 'JetBrains Mono',monospace">client</span> sees only Overview and Reports.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="e3" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding-bottom:12px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Epic 3 · Activation</div>
+        <h2 style="font:600 24px/1.28 'Source Serif 4',serif;margin:7px 0 0">Get to a real number with the least possible input</h2>
+      </div>
+      <div style="flex:none;font:400 11px/1.6 'JetBrains Mono',monospace;color:#8A93A1;text-align:right">flows F06–F08 · 5 stories<br>3 must · 2 should</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-11</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P1 P3</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F06 · /onboarding/domain</span></div>
+        <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS A</span> new user, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> three ways to prove I own the domain, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> I am not blocked by whichever one I lack access to.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">GIVEN</span> a hostname, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> DNS TXT, a meta tag, or a connected GSC property all satisfy verification.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> hostnames are normalised (protocol, www, trailing slash, case) before any comparison.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#9A6210">AND</span> if proof isn't in place yet I can still proceed and browse; verification is required only before the first <em>scheduled</em> scan and before any report. I am told which, plainly.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-13</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P1</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F07 · /onboarding/queries</span></div>
+        <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS AN</span> SEO manager, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> to review and reshape the generated query set in bulk, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> the numbers reflect prompts my buyers actually type.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">GIVEN</span> a verified domain, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> 25 seeded queries are pre-populated and grouped into topic clusters.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> I can bulk-paste, inline-add, delete, and re-tag clusters without leaving the step.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> a live counter shows usage against the plan limit; exceeding it displays the overage cost inline and <em>never</em> blocks the save.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-12</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P1 · join_requests</span></div>
+        <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As a</span> new colleague at a company already using CiteRate, <span style="color:#8A93A1">I want</span> to request access rather than hit a wall, <span style="color:#8A93A1">so that</span> a collision becomes an introduction.</p>
+        <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">A pending request is created with a 7-day expiry, admins are notified, I see a clear pending state, and I can add a different domain meanwhile. We never disclose who owns the host beyond the email domain.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-14</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P2 · F07 F08</span></div>
+        <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As a</span> time-poor founder, <span style="color:#8A93A1">I want</span> to skip everything optional, <span style="color:#8A93A1">so that</span> I reach a number in under a minute of input.</p>
+        <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Steps 2 and 3 each offer a primary-weight skip ("Use these 25 for now"), not a grey link. Skipping never leaves a nag banner in more than one place, and both are resumable from Settings.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-15</span><span style="background:#FDF2E3;color:#9A6210;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">SHOULD</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P1 · api/connect/gsc</span></div>
+        <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As an</span> SEO manager, <span style="color:#8A93A1">I want</span> to connect Search Console read-only, <span style="color:#8A93A1">so that</span> ranking decline is separated from AIO displacement rather than pooled into "unexplained".</p>
+        <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Exact scope stated before the redirect. Granting also satisfies domain verification. Declining is a first-class path, and the resulting loss of precision is named on Overview — once.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="e4" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding-bottom:12px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Epic 4 · Diagnosis</div>
+        <h2 style="font:600 24px/1.28 'Source Serif 4',serif;margin:7px 0 0">Turn a rate into a believed, actionable finding</h2>
+      </div>
+      <div style="flex:none;font:400 11px/1.6 'JetBrains Mono',monospace;color:#8A93A1;text-align:right">flows F09 F11 · scoring.ts<br>6 stories · 5 must · 1 should</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-18</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P1 P3</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F09 · /overview · confidenceBand()</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#A62F2F">highest-value story in the product</span></div>
+        <p style="font:600 16px/1.5 'Source Serif 4',serif;margin:10px 0 0;max-width:92ch"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS A</span> professional who will present this number to someone senior, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> the product to tell me when a movement is statistically meaningless, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> I never build a story on noise.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">GIVEN</span> two periods with computed Wilson intervals, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">WHEN</span> the intervals overlap, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> the delta is labelled <em>within noise</em> everywhere it appears — Overview, Queries, digest email and report alike.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> no score renders without its band; a bare score is a failing build.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> rate-drop alerts fire only when the movement is outside the band <em>and</em> past my threshold — the threshold can narrow what I hear, never override the statistics.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> a within-noise week produces no task and no manufactured urgency; the session is allowed to end.</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-19</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P1</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F09 · drawer</span></div>
+          <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS AN</span> analyst, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> to see the individual runs behind any rate, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> I can re-derive the number myself.</p>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> the drawer lists every run with engine, timestamp, cited / mentioned / absent, whether an AI answer was present, and which competitor hosts were cited.</div>
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> the assigned cause is shown with its confidence, or the striped <em>unexplained</em> marker when below the 0.6 floor.</div>
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> it is a drawer, not a route — closing returns me to my exact scroll position and filter.</div>
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> evidence is never plan-gated. Only <em>names</em> and <em>remediation</em> are.</div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-17</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P1</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F09 · causeMix()</span></div>
+          <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS AN</span> SEO manager, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> my uncited queries split by cause with the unknown portion shown, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> I can tell an AI problem from an ordinary SEO problem.</p>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> the bar shows four segments — AIO displacement, ranking decline, technical decay, other / unexplained — and the fourth is <em>always present</em>, striped, even at 0%.</div>
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> hue is never the only signal: each segment carries a texture or label so the chart survives greyscale print and colour-vision deficiency.</div>
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> clicking a segment navigates to Queries pre-filtered to that cause, sorted by delta.</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-16</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P2 · /overview</span></div>
+          <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As any</span> user opening the app, <span style="color:#8A93A1">I want</span> one sentence telling me where I stand, <span style="color:#8A93A1">so that</span> I am not asked to interpret widgets.</p>
+          <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Fixed order: verdict sentence → score with band → cause bar → trend. Scanning and empty states occupy the same slot with the same hierarchy — never a spinner over a blank grid.</div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-20</span><span style="background:#FDF2E3;color:#9A6210;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">SHOULD</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P1 · saved_views</span></div>
+          <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As an</span> analyst with 500 tracked queries, <span style="color:#8A93A1">I want</span> to name and save a filter set, <span style="color:#8A93A1">so that</span> my Monday check is two minutes instead of twenty.</p>
+          <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Cluster, cause, engine and sort are captured as one named view, optionally shared with the workspace, and deep-linkable so the digest email can point at it.</div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-21</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P1 P3 · /competitors</span></div>
+          <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As a</span> marketer building a business case, <span style="color:#8A93A1">I want</span> the named hosts cited instead of mine on <em>my</em> queries, <span style="color:#8A93A1">so that</span> I have the slide that unlocks budget.</p>
+          <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Ranked by citations won on my tracked set — never a generic market-share figure. Each host drills to the queries and the per-run receipts. Below Growth: counts visible, names blurred over my own data.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="e5" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding-bottom:12px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Epic 5 · Remediation &amp; proof</div>
+        <h2 style="font:600 24px/1.28 'Source Serif 4',serif;margin:7px 0 0">Close the loop, or admit that it didn't close</h2>
+      </div>
+      <div style="flex:none;font:400 11px/1.6 'JetBrains Mono',monospace;color:#8A93A1;text-align:right">flows F10 F12 · Growth+<br>6 stories · 4 must · 2 should</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-22</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P1</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F10 · /fixes</span></div>
+          <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS AN</span> SEO manager with one sprint slot, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> the queue ordered by what it would recover against what it costs, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> the top item is genuinely the right thing to do first.</p>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> each item shows estimated recoverable citations <em>with a band</em> and an effort class, and the sort is that ratio by default.</div>
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> technical-decay fixes rank above all else by rule, because unreadable pages invalidate every other diagnosis.</div>
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> queries whose cause is <em>unexplained</em> never generate a fix — we do not invent work to fill the queue.</div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-25</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P1 P3</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F10 · isWithinNoise()</span></div>
+          <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS SOMEONE</span> who shipped a change, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> the product to verify it for me against the band, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> the proof is the tool's word and not mine.</p>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">GIVEN</span> a fix marked shipped, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">WHEN</span> two subsequent scans have re-measured the flagged queries, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> a verdict is issued.</div>
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> the two-scan latency is stated at the moment I mark it shipped — no fake instant confirmation.</div>
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> verified fires an email and makes a fix-proof snapshot available.</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-26</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P1 P3</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F10 · the integrity story</span></div>
+          <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS A</span> user whose fix did nothing, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> to be told that plainly, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> I can trust the times it says the fix worked.</p>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> overlapping bands after a fix yield <span style="font:500 11.5px 'JetBrains Mono',monospace">no measurable change</span> — never "failed", never silence.</div>
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> I am offered two more scans of observation rather than a dead end.</div>
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#A62F2F">AND</span> a fix that made the rate worse is reported as a regression with the same rigour, and its template is down-weighted for everyone.</div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-23</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P1</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F10 · FixCard</span></div>
+          <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS SOMEONE</span> who must convince a developer, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> each fix to name the URL, the change and the expected recovery, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> I can paste it into a ticket unedited.</p>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> the card carries the exact URL, the concrete change, the queries it should recover, and the evidence link back to the drawer.</div>
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> "copy for ticket" produces plain text that reads correctly with no CiteRate context.</div>
+            <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> dismissing requires a reason, which feeds template weighting.</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-24</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P1 · api/fixes/[id]</span></div>
+          <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As an</span> editor, <span style="color:#8A93A1">I want</span> to record when the change went live, <span style="color:#8A93A1">so that</span> verification compares the right periods.</p>
+          <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Marking shipped records a deploy timestamp I can back-date, flags the affected queries for re-test, and states when the verdict will arrive. Viewers and clients don't see the control at all — it is absent, not disabled.</div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-27</span><span style="background:#FDF2E3;color:#9A6210;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">SHOULD</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P1 · api/rescan</span></div>
+          <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As an</span> impatient user, <span style="color:#8A93A1">I want</span> to trigger a scan now, <span style="color:#8A93A1">so that</span> I'm not waiting a day to see whether a change landed.</p>
+          <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Runs natively on Scale+, otherwise offers a $15/10 pack with the price shown before the click. Progress lives in the topbar; the page stays usable. If one rescan cannot resolve a within-band tie, we say so <em>before</em> spending the credit.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="e6" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding-bottom:12px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Epic 6 · Reporting</div>
+        <h2 style="font:600 24px/1.28 'Source Serif 4',serif;margin:7px 0 0">A deliverable an agency can put its own name on</h2>
+      </div>
+      <div style="flex:none;font:400 11px/1.6 'JetBrains Mono',monospace;color:#8A93A1;text-align:right">flow F13 · report_snapshots · R2<br>4 stories · 3 must · 1 could</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-30</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P3</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F13 · the trust guarantee</span></div>
+        <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS AN</span> agency owner who has already presented last month's number, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> it to be impossible for that number to change, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> my credibility does not depend on your release schedule.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">GIVEN</span> a snapshot, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> it renders from its stored payload and is never recomputed — the method version that produced it is printed on it.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> when the method version changes, charts spanning the change render a flagged discontinuity linking the changelog — history is annotated, never rewritten.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> one snapshot per domain / period / kind is enforced at the database level.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-29</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P3</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F13 · /settings/brand · Scale+</span></div>
+        <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS AN</span> agency owner, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> the PDF to carry my brand, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> I can send it to a client without explaining who you are.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> my logo, one accent colour and a client-facing footer line are applied, with a live preview before I send anything.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#9A6210">AND</span> the accent replaces the <em>cited</em> colour only; ink, paper, the SURFACE/PROXY marks and the methodology block are locked because they carry meaning.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#9A6210">AND</span> exactly one 10.5px footer line references the methodology; it is not removable, and that is stated in the pricing copy so it is never a surprise.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-28</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P3 · /reports</span></div>
+        <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As an</span> agency owner with 14 clients, <span style="color:#8A93A1">I want</span> monthly reports to already exist, <span style="color:#8A93A1">so that</span> my month-end is review work and not production work.</p>
+        <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Snapshots freeze automatically on the 1st for every domain, with no user action. The index lists period, kind and method version. An optional per-report note is the only writing required.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-31</span><span style="background:#EDEFF2;color:#5B6472;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">COULD</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P3 · deferred</span></div>
+        <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As an</span> agency owner, <span style="color:#8A93A1">I want</span> reports delivered straight to my client's inbox on a schedule, <span style="color:#8A93A1">so that</span> I don't forward fourteen emails.</p>
+        <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Deferred past v1 deliberately: sending mail <em>as</em> an agency needs domain authentication, and getting that wrong damages their deliverability, not ours. Manual send is the honest v1 answer.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="e7" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding-bottom:12px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Epic 7 · Collaboration &amp; permissions</div>
+        <h2 style="font:600 24px/1.28 'Source Serif 4',serif;margin:7px 0 0">Four roles, many workspaces, no accidents</h2>
+      </div>
+      <div style="flex:none;font:400 11px/1.6 'JetBrains Mono',monospace;color:#8A93A1;text-align:right">flows F15 F16 · rbac.ts<br>4 stories · 3 must · 1 should</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-32</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P3</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F16 · topbar switcher</span></div>
+        <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS AN</span> agency owner doing the same task for 14 clients, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> to switch client and stay on the same screen, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> switching costs me one keystroke, not a re-navigation.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> the switcher is in the shell, type-ahead, keyboard-reachable, and shows each client's current score inline for triage before the click.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> switching re-scopes workspace, domain, plan and brand together — a half-switched page is a defect.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> I land on the equivalent route in the new workspace, falling back to Overview only when that route is gated there.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-33</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P3</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F15 · rbac.ts · middleware.ts</span></div>
+        <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS AN</span> agency owner, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> a client seat that shows only their readout, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> a client never sees my machinery or another client's name.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> role <span style="font:500 11.5px 'JetBrains Mono',monospace">client</span> sees Overview and Reports only; fixes, settings, billing and the workspace switcher are absent from the navigation, not disabled.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> permissions are resolved server-side on every request; a hand-typed URL to a gated route returns the same result as a missing link.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> "no seat at all, PDF only" remains a fully supported way to serve a client.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-34</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P1 P3 · /settings/team</span></div>
+        <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As an</span> admin, <span style="color:#8A93A1">I want</span> invites, pending requests and members in one list, <span style="color:#8A93A1">so that</span> access is one screen and not a hunt.</p>
+        <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Pending invites show the email before acceptance and are revocable. Join requests are approvable at a chosen role. The last admin cannot demote or remove themselves — blocked before the click, with the reason given.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-35</span><span style="background:#FDF2E3;color:#9A6210;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">SHOULD</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">P3 · /settings/workspaces</span></div>
+        <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As an</span> agency owner onboarding a new client, <span style="color:#8A93A1">I want</span> a workspace created from a template, <span style="color:#8A93A1">so that</span> client fifteen costs me two minutes.</p>
+        <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Name + domain, brand inherited from the agency default, staff seats copied from a template, notification prefs seeded off. 25 included on Agency, then $29 — never a hard cap.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="e8" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding-bottom:12px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Epic 8 · Commerce &amp; limits</div>
+        <h2 style="font:600 24px/1.28 'Source Serif 4',serif;margin:7px 0 0">Never interrupt measurement to collect money</h2>
+      </div>
+      <div style="flex:none;font:400 11px/1.6 'JetBrains Mono',monospace;color:#8A93A1;text-align:right">flow F14 · plans.ts<br>4 stories · 3 must · 1 should</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-37</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P3</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F14 · meter()</span></div>
+        <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS A</span> customer who went over my query limit, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> measurement to continue and the overage billed, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> a billing event never puts an unrecoverable hole in my series.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">GIVEN</span> usage above the plan limit, <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> the scan still runs and a banner states the exact overage cost in $19 / 100-query blocks.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> a warning appears at 85% of the limit, before I am over.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> three recoveries are one click each: buy blocks, upgrade, or trim the query set.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> usage is read from counters, never counted live over observations.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-38</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P2</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F14 · Locked.astro</span></div>
+        <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS A</span> user hitting a locked feature, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> the upgrade to be about the thing I just tried to do, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> I am buying an answer rather than a plan.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> locked regions render <em>my real data</em>, blurred behind a dashed border with a lock badge — never a marketing panel in place of content.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> the upsell names the specific unlock in my own numbers ("competitor names on 41 queries").</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> after checkout I return to the exact screen and scroll position that triggered it, unlocked.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-39</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">MUST</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">all · F14 downgrade</span></div>
+        <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As a</span> customer considering a downgrade, <span style="color:#8A93A1">I want</span> to be told what I lose in my own numbers, <span style="color:#8A93A1">so that</span> I am not surprised after the fact.</p>
+        <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">The confirmation quantifies the loss ("312 of your 500 queries stop being tracked; 4 saved views become read-only"), takes effect at period end, and retains history rather than deleting it.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-40</span><span style="background:#FDF2E3;color:#9A6210;border-radius:999px;padding:2px 8px;font:500 9px 'JetBrains Mono',monospace">SHOULD</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">all · F18</span></div>
+        <p style="font:400 12.5px/1.55 inherit;margin:9px 0 0"><span style="color:#8A93A1">As a</span> customer whose card failed, <span style="color:#8A93A1">I want</span> a stated grace period, <span style="color:#8A93A1">so that</span> an expired card doesn't cost me a month of data.</p>
+        <div style="font:400 11.5px/1.5 inherit;color:#5B6472;margin-top:9px;padding-left:11px;border-left:2px solid #E2E5EA">Grace window shown with a date. Scans continue and data stays readable throughout. Two reminders before anything degrades, each with a portal deep link.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="e9" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding-bottom:12px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Epic 9 · Trust, notification hygiene &amp; access</div>
+        <h2 style="font:600 24px/1.28 'Source Serif 4',serif;margin:7px 0 0">The stories that make the other eight believable</h2>
+      </div>
+      <div style="flex:none;font:400 11px/1.6 'JetBrains Mono',monospace;color:#8A93A1;text-align:right">flow F17 · see 9h for full a11y spec<br>2 stories · 2 must</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-36</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">P2</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F17 · notification_prefs</span></div>
+        <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS A</span> founder who will not open a dashboard, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> one weekly email with one thing to do, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> the email <em>is</em> the product for me.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> the digest sends Monday 08:00 in my own timezone and contains a verdict sentence, one delta with its band, exactly one fix, and one competitor line.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> it deep-links the specific filtered view, not the app home.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> preferences are stored per membership, so a person in 14 workspaces is not sent 14 digests by default.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> a within-noise week still sends, and says so — silence would be read as breakage.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">US-41</span><span style="background:#E7F2EF;color:#0B6151;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">MUST</span><span style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:3px 9px;font:500 9.5px 'JetBrains Mono',monospace">all</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">every route · WCAG 2.2 AA</span></div>
+        <p style="font:600 15.5px/1.5 'Source Serif 4',serif;margin:10px 0 0"><span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">AS A</span> user relying on a keyboard, a screen reader, or greyscale print, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">I WANT</span> the same findings, <span style="color:#8A93A1;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em">SO THAT</span> the diagnosis does not depend on how I read.</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-left:14px;border-left:2px solid #E2E5EA">
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">THEN</span> every chart segment carries a texture or text label — hue is never the sole carrier of meaning.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> the evidence drawer is a focus-trapped dialog that returns focus to the row that opened it.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> the amber <em>warn</em> hue is never used for text, and every interactive element shows the two-tone focus ring.</div>
+          <div style="font:400 12.5px/1.55 inherit;color:#5B6472"><span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">AND</span> reduced-motion preferences remove animation without removing state change. Full spec in 9h.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dod" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Definition of done</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">The nine gates every story passes, not just its own criteria</h2>
+    <div style="background:#141B26;border-radius:14px;padding:24px 28px;margin-top:16px;color:#F4F5F7">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+        <div>
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">DATA INTEGRITY</div>
+          <ul style="font:400 12.5px/1.65 inherit;color:#8A93A1;margin:9px 0 0;padding-left:16px">
+            <li>Every rate shown with its run count</li>
+            <li>Every estimate shown with its band</li>
+            <li>Unexplained segment present even at 0%</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">DISCLOSURE</div>
+          <ul style="font:400 12.5px/1.65 inherit;color:#8A93A1;margin:9px 0 0;padding-left:16px">
+            <li>SURFACE / PROXY label travels with every engine figure</li>
+            <li>Method version reachable from any score</li>
+            <li>Placeholders never silently return fake data</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">STATES</div>
+          <ul style="font:400 12.5px/1.65 inherit;color:#8A93A1;margin:9px 0 0;padding-left:16px">
+            <li>Loading, empty, partial, error, locked and over-quota all designed</li>
+            <li>Every dead end has a named recovery edge</li>
+            <li>Gated controls are absent, never disabled</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">PERMISSIONS</div>
+          <ul style="font:400 12.5px/1.65 inherit;color:#8A93A1;margin:9px 0 0;padding-left:16px">
+            <li>Resolved server-side on every request</li>
+            <li>Hand-typed URL matches the missing-link behaviour</li>
+            <li>Client role never sees agency machinery</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">ACCESS</div>
+          <ul style="font:400 12.5px/1.65 inherit;color:#8A93A1;margin:9px 0 0;padding-left:16px">
+            <li>Keyboard path proven end to end</li>
+            <li>Non-colour encoding on every chart</li>
+            <li>Focus returns where it came from</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">COPY</div>
+          <ul style="font:400 12.5px/1.65 inherit;color:#8A93A1;margin:9px 0 0;padding-left:16px">
+            <li>Findings as sentences, not adjectives</li>
+            <li>No manufactured urgency on a within-noise week</li>
+            <li>Errors say what happened and what to do</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="margin-top:64px;padding-top:20px;border-top:2px solid #141B26;display:flex;justify-content:space-between;align-items:baseline;font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">
+    <span>Phase 9d · 9 epics · 41 stories · 24 must</span>
+    <span><a href="./Phase 9c - User Flow Diagrams.dc.html">← 9c</a> &nbsp;·&nbsp; next → <a href="./Phase 9e - Whiteboard Sketches.dc.html">9e sketches</a></span>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

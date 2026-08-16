@@ -1,0 +1,93 @@
+// Status pills and small labels. Bootstrap's .badge is compiled but the app uses
+// these because they carry semantic tokens and a 44px-safe hit area when they
+// double as buttons.
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--t-data-sm);
+  border-radius: var(--r-pill);
+  padding: 4px 10px;
+  white-space: nowrap;
+  background: var(--neutral-wash);
+  color: var(--ink-soft);
+
+  &--cited { background: var(--cited-wash); color: var(--cited-ink); }
+  &--gap   { background: var(--gap-wash);   color: var(--gap-ink); }
+  &--warn  { background: var(--warn-wash);  color: var(--warn-ink); }
+  &--tech  { background: var(--tech-wash);  color: var(--tech-ink); }
+  &--solid { background: var(--ink); color: var(--ink-inverse); }
+}
+
+button.pill,
+a.pill {
+  min-height: 32px;
+  border: var(--bw) solid transparent;
+
+  &:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+}
+
+// Segmented control: engine filter, range picker, report period.
+.seg {
+  display: inline-flex;
+  background: var(--paper-sunk);
+  border: var(--bw) solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 2px;
+  gap: 2px;
+}
+
+.seg__btn {
+  min-height: 34px;
+  padding: 0 var(--s-3);
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  font: var(--t-ui-sm);
+  color: var(--ink-soft);
+
+  &[aria-pressed="true"] {
+    background: var(--card);
+    color: var(--ink);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+}
+
+.state-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  display: inline-block;
+  background: var(--neutral);
+
+  &--running { background: var(--warn); }
+  &--complete { background: var(--cited); }
+  &--failed { background: var(--gap); }
+}
+
+// Toast: Bootstrap JS drives it, tokens dress it.
+.toast {
+  background: var(--ink);
+  color: var(--side-ink);
+  border: 0;
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-lg);
+  font: var(--t-ui);
+}
+
+.toast-container { z-index: 1090; }
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-3);
+  text-align: center;
+  padding: var(--s-8) var(--s-5);
+  background: var(--card);
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--r-md);
+}

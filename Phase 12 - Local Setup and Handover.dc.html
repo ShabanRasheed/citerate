@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#F4F5F7;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="max-width:1240px;margin:0 auto;padding:48px 40px 120px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;box-sizing:border-box">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:20px;border-bottom:2px solid #141B26">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Phase 12 · run it yourself · 2026-08-03</div>
+      <h1 style="font:600 34px/1.15 'Source Serif 4',serif;letter-spacing:-.015em;margin:10px 0 0">Export, run, verify, hand over</h1>
+      <p style="font:400 14px/1.55 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0;text-wrap:pretty">Four questions, four answers. The local setup was built in from Phase 7 and both repos share one local database on purpose; what was missing was a way to <em>prove</em> a local run is healthy without clicking through twenty screens. That is now one command.</p>
+    </div>
+    <div style="flex:none;text-align:right;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+      <div>new this phase &nbsp;&nbsp;2</div>
+      <div>local checks &nbsp;&nbsp;&nbsp;11</div>
+      <div>by hand &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4</div>
+      <div style="color:#8A93A1">from you &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 accounts</div>
+    </div>
+  </div>
+
+  <section style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px;align-items:start">
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:4px 10px 10px 4px;padding:22px 24px;min-width:0">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0B6151">Q1 · CAN I EXPORT THE WHOLE PROJECT</div>
+      <div style="font:600 19px/1.3 'Source Serif 4',serif;margin-top:9px">Yes — it downloads as one zip</div>
+      <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:9px 0 0">A download card is in the chat below this board. Everything is in it: both repos with real source, migrations, seeds, config templates, and all 30-odd design boards from Phases 1–12.</p>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:7px 14px;margin-top:14px;font:400 12.5px/1.5 inherit;color:#5B6472;align-items:baseline">
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#0B6151">in</div><div><span style="color:#141B26">citerate/</span> — marketing site + scanner Worker</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#0B6151">in</div><div><span style="color:#141B26">citerate-app/</span> — dashboard, migrations, seeds, preflight, doctor</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#0B6151">in</div><div><span style="color:#141B26">*.dc.html</span> — every phase board, opens in any browser</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">out</div><div><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">node_modules</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">.wrangler</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">dist</span> — rebuilt by <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">pnpm install</span></div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">out</div><div><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">.env</span> and real keys — never were in here; <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">.env.example</span> is</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">out</div><div>The four licensed <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">.woff2</span> font files — yours to drop in</div>
+      </div>
+      <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:14px 0 0;padding-top:12px;border-top:1px solid #E2E5EA">Unzip so the two repo folders sit <strong>side by side</strong>. That relationship is load-bearing: the dashboard reads the marketing repo's local database state by relative path.</p>
+    </div>
+
+    <div style="background:#141B26;border-radius:10px;padding:22px 24px;color:#F4F5F7;min-width:0">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">Q2 · HOW DO I RUN IT LOCALLY</div>
+      <div style="font:600 19px/1.3 'Source Serif 4',serif;margin-top:9px">Two terminals, seven commands, no accounts</div>
+      <p style="font:400 13px/1.6 inherit;color:#8A93A1;margin:9px 0 0">Nothing external is needed for a local run. Mocks stand in for the engines, magic links print to the console, and Cloudflare's always-passes test key covers Turnstile.</p>
+      <div style="background:#0D131C;border-radius:8px;padding:14px 16px;margin-top:14px;font:400 11.5px/1.9 'JetBrains Mono',monospace;overflow-wrap:break-word">
+        <div style="color:#5B6472"># terminal 1 — marketing repo. Its 0001 creates the base tables.</div>
+        <div>cd citerate</div>
+        <div>pnpm install</div>
+        <div>cp .env.example .env</div>
+        <div>pnpm db:migrate:local &amp;&amp; pnpm db:seed:local</div>
+        <div>pnpm dev <span style="color:#5B6472">→ :4321</span></div>
+        <div style="color:#5B6472;margin-top:12px"># terminal 2 — dashboard. Same database, applies 0002 + 0003.</div>
+        <div>cd citerate-app</div>
+        <div>pnpm install</div>
+        <div>cp .env.example .env</div>
+        <div>pnpm db:migrate:local &amp;&amp; pnpm db:seed:local</div>
+        <div>pnpm dev <span style="color:#5B6472">→ :4322</span></div>
+      </div>
+      <p style="font:400 12.5px/1.6 inherit;color:#8A93A1;margin:14px 0 0">Order matters once: the marketing repo's migration first, or 0002 has no tables to build on. Node 20.11+ and pnpm 9. Only value worth editing in either <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#F4F5F7">.env</span> is <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#F4F5F7">SESSION_SECRET</span>.</p>
+    </div>
+
+  </section>
+
+  <section style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:24px 26px;margin-top:14px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid #E2E5EA">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">Q3 · HOW DO I VERIFY IT ACTUALLY WORKS</div>
+        <div style="font:600 19px/1.3 'Source Serif 4',serif;margin-top:9px">One command for the eleven things you cannot see — then four you must</div>
+      </div>
+      <div style="background:#EDEFF2;border-radius:6px;padding:9px 12px;font:400 12px/1.5 'JetBrains Mono',monospace;color:#141B26">pnpm verify:local</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:24px;margin-top:18px;align-items:start">
+      <div style="background:#141B26;border-radius:8px;padding:18px 20px;color:#F4F5F7;min-width:0">
+        <div style="display:flex;flex-direction:column;gap:4px;font:400 11.5px/1.55 'JetBrains Mono',monospace">
+          <div style="color:#8A93A1;padding-bottom:8px">citerate local verification — app :4322 · site :4321</div>
+          <div style="display:grid;grid-template-columns:44px 132px 1fr;gap:0 10px"><div style="color:#35B394">PASS</div><div>app server</div><div style="color:#8A93A1;min-width:0">answering</div></div>
+          <div style="display:grid;grid-template-columns:44px 132px 1fr;gap:0 10px"><div style="color:#35B394">PASS</div><div>marketing server</div><div style="color:#8A93A1;min-width:0">answering</div></div>
+          <div style="display:grid;grid-template-columns:44px 132px 1fr;gap:0 10px"><div style="color:#35B394">PASS</div><div>database</div><div style="color:#8A93A1;min-width:0">D1 answers through platformProxy</div></div>
+          <div style="display:grid;grid-template-columns:44px 132px 1fr;gap:0 10px"><div style="color:#35B394">PASS</div><div>migrations</div><div style="color:#8A93A1;min-width:0">0001 + 0002 + 0003 applied</div></div>
+          <div style="display:grid;grid-template-columns:44px 132px 1fr;gap:0 10px"><div style="color:#35B394">PASS</div><div>seed</div><div style="color:#8A93A1;min-width:0">users:4 workspaces:2 queries:12 scans:2</div></div>
+          <div style="display:grid;grid-template-columns:44px 132px 1fr;gap:0 10px"><div style="color:#35B394">PASS</div><div>bindings</div><div style="color:#8A93A1;min-width:0">DB, SCAN_CACHE, RATE_LIMIT, ARTIFACTS live</div></div>
+          <div style="display:grid;grid-template-columns:44px 132px 1fr;gap:0 10px"><div style="color:#35B394">PASS</div><div>engine</div><div style="color:#8A93A1;min-width:0">mocks — expected locally, no API spend</div></div>
+          <div style="display:grid;grid-template-columns:44px 132px 1fr;gap:0 10px"><div style="color:#35B394">PASS</div><div>auth guard</div><div style="color:#8A93A1;min-width:0">7 panes redirect to /sign-in</div></div>
+          <div style="display:grid;grid-template-columns:44px 132px 1fr;gap:0 10px"><div style="color:#35B394">PASS</div><div>public app routes</div><div style="color:#8A93A1;min-width:0">sign-in, sign-up, check-email all 200</div></div>
+          <div style="display:grid;grid-template-columns:44px 132px 1fr;gap:0 10px"><div style="color:#35B394">PASS</div><div>robots.txt</div><div style="color:#8A93A1;min-width:0">disallows everything</div></div>
+          <div style="display:grid;grid-template-columns:44px 132px 1fr;gap:0 10px"><div style="color:#35B394">PASS</div><div>marketing pages</div><div style="color:#8A93A1;min-width:0">pricing, how-it-works, agencies, security 200</div></div>
+          <div style="color:#8A93A1;padding-top:10px">11 of 11 clear.</div>
+        </div>
+        <p style="font:400 12px/1.6 inherit;color:#8A93A1;margin:14px 0 0">Every FAIL says what to run next — a missing table names the migration, an empty seed names the command, a leaking pane names the route and the status it returned.</p>
+      </div>
+      <div style="min-width:0">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">THEN FOUR THAT NEED YOUR EYES</div>
+        <div style="display:flex;flex-direction:column;gap:11px;margin-top:13px">
+          <div style="display:flex;gap:11px;align-items:baseline"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">01</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">Sign in.</span> Request a link on <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">/sign-in</span>, copy the URL from the dev console, open it. You should land in onboarding, not an empty dashboard.</div></div>
+          <div style="display:flex;gap:11px;align-items:baseline"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">02</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">Onboarding.</span> Any domain works. Queries should arrive labelled <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">crawl</span> <em>and</em> <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">category</span> — category-only means the crawl step failed quietly.</div></div>
+          <div style="display:flex;gap:11px;align-items:baseline"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">03</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">Print a report.</span> Open a seeded report and print to PDF. No clipped cards, no dark panels bleeding, footnotes intact. Locally this is the print path — Browser Rendering is production-only.</div></div>
+          <div style="display:flex;gap:11px;align-items:baseline"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">04</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">Client role.</span> Sign in as the seeded client user: no billing, no settings, no second workspace anywhere in the nav.</div></div>
+        </div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:16px 0 0;padding-top:13px;border-top:1px solid #E2E5EA"><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">pnpm preflight:local</span> is the sibling check — it reads config rather than the running app, and warns if the shared database state is missing before you waste time on a failing server.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;align-items:start">
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #C43D3D;border-radius:4px 10px 10px 4px;padding:22px 24px;min-width:0">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#A62F2F">Q4 · WHAT IS STILL NEEDED FROM YOU</div>
+      <div style="font:600 19px/1.3 'Source Serif 4',serif;margin-top:9px">Nothing for local. Three accounts and two files for live.</div>
+      <div style="display:flex;flex-direction:column;gap:11px;margin-top:14px">
+        <div style="display:flex;gap:11px;align-items:baseline"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">01</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">Cloudflare</span> — create the D1, KV and R2 resources, paste the ids into both <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">wrangler.toml</span> files. Same ids in both.</div></div>
+        <div style="display:flex;gap:11px;align-items:baseline"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">02</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">Paddle</span> — 12 prices (4 plans × 2 intervals + 4 add-ons), then the JSON map.</div></div>
+        <div style="display:flex;gap:11px;align-items:baseline"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">03</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">Google Cloud</span> — one OAuth client for sign-in and Search Console, callback registered verbatim.</div></div>
+        <div style="display:flex;gap:11px;align-items:baseline"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">04</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">Engine API keys</span> — OpenAI, Perplexity, Gemini, SERP. Missing keys mark an engine unavailable rather than failing a scan, so you can start with two.</div></div>
+        <div style="display:flex;gap:11px;align-items:baseline"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">05</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">The four woff2 files</span> — licensed, so I cannot ship them. Into <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">public/fonts/</span> in both repos, or type falls back to Georgia.</div></div>
+      </div>
+      <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:14px 0 0;padding-top:12px;border-top:1px solid #E2E5EA">Every one of these has a preflight line, so you cannot forget one and find out from a customer. Full sequence with commands is on <a href="./Phase 11 - Launch Runbook.dc.html">the Phase 11 runbook</a>.</p>
+    </div>
+
+    <div style="background:#141B26;border-radius:10px;padding:22px 24px;color:#F4F5F7;min-width:0">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">Q5 · WHEN CAN I HAND THIS TO CLAUDE CHAT</div>
+      <div style="font:600 19px/1.3 'Source Serif 4',serif;margin-top:9px">Now — but hand over the right thing</div>
+      <p style="font:400 13px/1.6 inherit;color:#8A93A1;margin:9px 0 0">The code is complete and self-describing: two READMEs, three migrations, seeds, preflight, doctor. A fresh conversation can read all of it. Two honest limits, though.</p>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:12px 16px;margin-top:16px;align-items:baseline">
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#35B394">GOOD FOR</div>
+        <div style="font:400 12.5px/1.6 inherit;color:#8A93A1">Reading and explaining the code, reviewing copy, debugging a failing command from pasted output, writing a new page against the existing patterns, planning the scanner Worker.</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#F07A6A">NOT FOR</div>
+        <div style="font:400 12.5px/1.6 inherit;color:#8A93A1">Running your terminal, deploying, or holding the whole 30-board design history in one conversation. A chat cannot see whether a command succeeded — you paste the output.</div>
+      </div>
+      <p style="font:400 12.5px/1.6 inherit;color:#8A93A1;margin:16px 0 0;padding-top:13px;border-top:1px solid #2A3441">What to attach: the zip, or at minimum both <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#F4F5F7">README.md</span> files, both <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#F4F5F7">wrangler.toml</span>, and the Phase 11 runbook. Say which step of the runbook you are on — that single sentence saves a chat from guessing at context it cannot see.</p>
+      <p style="font:400 12.5px/1.6 inherit;color:#8A93A1;margin:12px 0 0"><span style="color:#F4F5F7">My advice:</span> keep design and visual work here where the boards and design system live; take deployment troubleshooting to a chat, since that is paste-the-error work and needs no history.</p>
+    </div>
+
+  </section>
+
+  <div style="display:flex;justify-content:space-between;gap:24px;margin-top:36px;padding-top:16px;border-top:1px solid #E2E5EA;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1;flex-wrap:wrap">
+    <div>phase 12 · export · local run · verification · handover</div>
+    <div><a href="./Phase 11 - Launch Runbook.dc.html">← phase 11</a> &nbsp;·&nbsp; <a href="./Phase 9 - UX Package Index.dc.html">phase 9 index</a></div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

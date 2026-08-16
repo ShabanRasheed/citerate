@@ -1,0 +1,71 @@
+---
+/**
+ * The free-scan form. Appears in the hero, at the foot of most pages, and
+ * mid-article on the blog. Progressively enhanced: without JS it POSTs to
+ * /api/scan and the server redirects, so it still works.
+ */
+interface Props {
+  id?: string;
+  variant?: "default" | "ink";
+  note?: string;
+  cta?: string;
+  showProgress?: boolean;
+}
+
+const {
+  id = "scan",
+  variant = "default",
+  note = "25 queries · ChatGPT + Google AI Overviews · no signup · about 90 seconds",
+  cta = "Run free scan",
+  showProgress = false
+} = Astro.props;
+
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+<div id={id} class="stack stack--3">
+  <form class="scan-form" method="POST" action="/api/scan" data-scan-form novalidate>
+    <label class="visually-hidden-focusable" for={`${id}-domain`}>Your domain</label>
+    <input
+      class="scan-form__field"
+      id={`${id}-domain`}
+      name="domain"
+      type="text"
+      inputmode="url"
+      autocomplete="url"
+      spellcheck="false"
+      placeholder="yourdomain.com"
+      required
+      data-scan-input
+    />
+    <button class="btn-primary-c btn-primary-c--lg scan-form__btn" type="submit" data-scan-submit data-idle-label={cta}>
+      {cta}
+    </button>
+
+    {
+      siteKey && (
+        <div
+          class="cf-turnstile"
+          data-sitekey={siteKey}
+          data-size="invisible"
+          data-appearance="interaction-only"
+        />
+      )
+    }
+  </form>
+
+  <p class="scan-form__error" hidden data-scan-error role="alert"></p>
+
+  {
+    showProgress && (
+      <div class="scan-progress" data-scan-progress>
+        <span class="t-data-sm" data-scan-label>Ready</span>
+        <div class="scan-progress__rail">
+          <div class="scan-progress__fill" data-scan-fill></div>
+        </div>
+      </div>
+    )
+  }
+
+  <p class={variant === "ink" ? "scan-form__note" : "scan-form__note"} style="margin:0">{note}</p>
+</div>

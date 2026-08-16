@@ -1,0 +1,136 @@
+---
+/**
+ * Account settings. Sessions are listed with device labels because "sign out
+ * everywhere" is the control people actually look for after a laptop goes
+ * missing — it is not buried in a security sub-page.
+ */
+import App from "../../layouts/App.astro";
+import { all } from "../../lib/db";
+import { usage } from "../../lib/data";
+import { relative, initials } from "../../lib/format";
+import { ROLE_LABEL } from "../../lib/rbac";
+
+const env = Astro.locals.runtime.env;
+const user = Astro.locals.user!;
+const workspace = Astro.locals.workspace!;
+const session = Astro.locals.session!;
+
+const [sessions, prefs, counters] = await Promise.all([
+  all<{ id: string; device_label: string | null; ip: string | null; trusted: number; created_at: number; expires_at: number }>(
+    env.DB,
+    `SELECT id, device_label, ip, trusted, created_at, expires_at FROM sessions WHERE user_id = ? ORDER BY created_at DESC`,
+    user.id
+  ),
+  all<Record<string, number>>(
+    env.DB,
+    `SELECT weekly_digest, scan_complete, fix_verified, rate_drop, quota_warning FROM notification_prefs WHERE workspace_id = ? AND user_id = ?`,
+    workspace.workspaceId,
+    user.id
+  ),
+  usage(env, workspace.workspaceId)
+]);
+
+Astro.locals.usage = counters;
+const p = prefs[0] ?? { weekly_digest: 1, scan_complete: 1, fix_verified: 1, rate_drop: 1, quota_warning: 1 };
+
+const notifications = [
+  { key: "weekly_digest", label: "Monday digest", hint: "One email: the rate, the delta, and what moved outside the band." },
+  { key: "scan_complete", label: "Scan complete", hint: "Only for on-demand scans you started." },
+  { key: "fix_verified", label: "Fix verified", hint: "When measurement confirms a shipped fix moved its own queries." },
+  { key: "rate_drop", label: "Rate drop", hint: "Fires only when the drop lands outside the confidence band." },
+  { key: "quota_warning", label: "Quota warning", hint: "At 85% of tracked queries, and again at the overage boundary." }
+];
+---
+
+<App title="Account" current="settings">
+  <nav class="seg" role="tablist" aria-label="Settings">
+    <a class="seg__btn" href="/settings" aria-pressed="true">Account</a>
+    <a class="seg__btn" href="/settings/team" aria-pressed="false">Team</a>
+    <a class="seg__btn" href="/settings/billing" aria-pressed="false">Plan &amp; billing</a>
+    <a class="seg__btn" href="/settings/brand" aria-pressed="false">Branding</a>
+  </nav>
+
+  <div class="grid-app">
+    <div class="col-6">
+      <form class="c-card stack stack--4" method="post" action="/api/settings/profile" data-lock>
+        <span class="t-label t-label--ink">Profile</span>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span class="owner__avatar" style="width:44px;height:44px;font:var(--t-data)">{initials(user.name ?? user.email)}</span>
+          <span class="stack stack--1">
+            <span style="color:var(--ink)">{user.name ?? "No name set"}</span>
+            <span class="chart__note">{user.email} · {ROLE_LABEL[workspace.role]} of {workspace.name}</span>
+          </span>
+        </div>
+
+        <label class="form-field">
+          <span class="t-label">Name</span>
+          <input class="form-field__input" name="name" type="text" value={user.name ?? ""} placeholder="Your name" />
+        </label>
+
+        <div class="row-between">
+          <a class="btn-quiet" href="/settings/email">Change email →</a>
+          <button class="btn-primary-c" type="submit" data-busy="Saving…">Save</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-6">
+      <form class="c-card stack stack--4" method="post" action="/api/settings/notifications">
+        <span class="t-label t-label--ink">Notifications</span>
+        <span class="chart__note">Per workspace, not per account — an agency seat does not want every client's digest.</span>
+
+        {
+          notifications.map((n) => (
+            <label class="row-between" style="gap:16px;align-items:flex-start">
+              <span class="stack stack--1">
+                <span style="color:var(--ink)">{n.label}</span>
+                <span class="chart__note">{n.hint}</span>
+              </span>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name={n.key}
+                checked={p[n.key] === 1}
+                style="min-width:20px;min-height:20px"
+              />
+            </label>
+          ))
+        }
+
+        <button class="btn-ghost" type="submit">Save notifications</button>
+      </form>
+    </div>
+
+    <div class="col-12">
+      <section class="dt">
+        <div class="dt__head">
+          <span class="t-label t-label--ink">Signed-in devices</span>
+          <form method="post" action="/api/settings/sessions">
+            <button class="btn-ghost" type="submit" name="action" value="revoke_others">Sign out everywhere else</button>
+          </form>
+        </div>
+        <div class="dt__scroll">
+          <table>
+            <thead><tr><th>Device</th><th>IP</th><th>Trusted</th><th>Started</th><th>Expires</th></tr></thead>
+            <tbody>
+              {
+                sessions.map((s) => (
+                  <tr data-row>
+                    <td data-label="Device">
+                      {s.device_label ?? "Unknown device"}
+                      {s.id === session.sessionId && <span class="pill pill--cited" style="margin-left:8px">this device</span>}
+                    </td>
+                    <td data-label="IP" class="dt__num">{s.ip ?? "—"}</td>
+                    <td data-label="Trusted">{s.trusted ? "yes" : "session only"}</td>
+                    <td data-label="Started" class="dt__num">{relative(s.created_at)}</td>
+                    <td data-label="Expires" class="dt__num">{relative(s.expires_at)}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+</App>

@@ -1,0 +1,27 @@
+---
+/**
+ * Figure wrapper. Every chart on the site is wrapped in this, because every
+ * figure must state what the data is — and is not.
+ */
+interface Props {
+  label: string;
+  caption: string;
+  tone?: "card" | "sunk" | "ink";
+  marked?: boolean;
+}
+const { label, caption, tone = "card", marked = false } = Astro.props;
+---
+
+<figure
+  class:list={[
+    "c-card",
+    tone === "sunk" && "c-card--sunk",
+    tone === "ink" && "c-card--ink",
+    marked && "c-card--accent-cited"
+  ]}
+  style="margin:0"
+>
+  <figcaption class="t-label t-label--ink">{label}</figcaption>
+  <slot />
+  <figcaption class="figcap">{caption}</figcaption>
+</figure>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EDEFF2;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="display:grid;grid-template-columns:300px minmax(0,1fr);min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="background:#141B26;color:#F4F5F7;padding:24px 20px;display:flex;flex-direction:column;gap:22px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#35B394">handover · index</div>
+      <div style="font:600 21px/1.3 'Source Serif 4',serif;margin-top:8px">Everything, and what is left</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#8A93A1;margin:8px 0 0">One board that names every phase, what it settled, and where it lives. The open items are at the bottom, and there are four of them.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">on this board</div>
+      <a href="#design" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">Design and direction · 1–6</a>
+      <a href="#build" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">Build handoff · 7–8</a>
+      <a href="#ux" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">UX package · 9</a>
+      <a href="#close" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">Closing the gaps · 10–13</a>
+      <a href="#proto" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">Prototype · 14</a>
+      <a href="#checks" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">Live checks · 15–18</a>
+      <a href="#going" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">Going live · 20–22</a>
+      <a href="#left" style="color:#35B394;font:500 12.5px/1.6 inherit">What is left</a>
+    </div>
+
+    <div style="margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-direction:column;gap:8px">
+      <a href="Phase 14 - Prototype Launcher.dc.html" style="color:#35B394;font:400 12px/1 inherit">Prototype launcher</a>
+      <a href="Phase 12 - Local Setup and Handover.dc.html" style="color:#35B394;font:400 12px/1 inherit">Run it locally</a>
+      <a href="Phase 17 - Deploy Preflight.dc.html" style="color:#35B394;font:400 12px/1 inherit">Deploy preflight</a>
+    </div>
+  </div>
+
+  <div style="padding:34px 40px 72px;display:flex;flex-direction:column;gap:34px;min-width:0">
+
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:78ch">
+      <h1 style="font:600 30px/1.25 'Source Serif 4',serif;margin:0;text-wrap:pretty">Eighteen phases, in the order they happened</h1>
+      <p style="font:400 14.5px/1.65 inherit;color:#5B6472;margin:0;text-wrap:pretty">Phases 1 to 6 decided what CiteRate looks like and says. Phases 7 and 8 turned that into the two repos. Phase 9 wrote the UX documentation around it. Phases 10 to 13 closed the loose ends. Phase 14 is the clickable prototype. Phases 15 to 18 are live checks that read the repos and re-run every time you open them, so they cannot go stale.</p>
+      <p style="font:400 14.5px/1.65 inherit;color:#5B6472;margin:0;text-wrap:pretty">Nothing in the design work is outstanding. What is left is four decisions and one deploy, listed at the bottom.</p>
+    </div>
+
+    <div id="design" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">Design and direction</h2>
+        <span style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">phases 1–6 · settled</span>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:11px 20px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472">
+          <span>phase</span><span>board</span><span>what it settled</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">01</span>
+          <a href="Direction Boards.dc.html">Direction boards</a>
+          <span style="color:#5B6472">Three visual directions; the clinical readout won.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">01</span>
+          <a href="Brand Guideline.dc.html">Brand guideline</a>
+          <span style="color:#5B6472">Colour, type, spacing, tone. The law every later board follows.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">02</span>
+          <a href="Phase 2 - Home and Teaser.dc.html">Home and teaser</a>
+          <span style="color:#5B6472">The first screen and the free scan result that sells the account.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">02</span>
+          <a href="Phase 2 - Overview and Fix Queue.dc.html">Overview and fix queue</a>
+          <span style="color:#5B6472">The two screens the product is actually about.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">03</span>
+          <a href="Phase 3 - Funnel, Auth, Onboarding.dc.html">Funnel, auth, onboarding</a>
+          <span style="color:#5B6472">Scan to signed-in workspace, every step drawn.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">03b</span>
+          <a href="Phase 3b - Auth Complete.dc.html">Auth complete</a>
+          <span style="color:#5B6472">Invites, verification, sign-out, the states nobody remembers.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">04</span>
+          <a href="Phase 4 - App Screens.dc.html">App screens</a>
+          <span style="color:#5B6472">Queries, evidence, competitors.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">04</span>
+          <a href="Phase 4 - Reports, PDF, Emails, States.dc.html">Reports, PDF, emails, states</a>
+          <span style="color:#5B6472">Everything the product sends out, plus empty and error states.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">05</span>
+          <a href="Phase 5 - Interaction Spec.dc.html">Interaction spec</a>
+          <span style="color:#5B6472">Hover, focus, loading, motion, timings. What engineering builds against.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">06</span>
+          <a href="Phase 6a - Architecture, Pricing, IA.dc.html">Architecture, pricing, IA</a>
+          <span style="color:#5B6472">Two repos, one database. Plan tiers and the sitemap.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">06</span>
+          <a href="Phase 6b - Home and Pricing.dc.html">Home and pricing</a>
+          <span style="color:#5B6472">The two pages that carry the funnel, at final fidelity.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">06</span>
+          <a href="Phase 6c - Method, Use Cases, Compare, Contact.dc.html">Method, use cases, compare, contact</a>
+          <span style="color:#5B6472">The pages that answer "how does this work" and "is it for me".</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">06</span>
+          <a href="Phase 6d - Blog, Docs, Changelog, About, Legal.dc.html">Blog, docs, changelog, about, legal</a>
+          <span style="color:#5B6472">The long tail, so no route ships without a design.</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="build" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">Build handoff</h2>
+        <span style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">phases 7–8 · code exists</span>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">07</span>
+          <a href="Phase 7 - Build Handoff.dc.html">Site build handoff</a>
+          <span style="color:#5B6472">The marketing site and scan engine became <span style="font-family:'JetBrains Mono',monospace;font-size:12px">citerate/</span>.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">08</span>
+          <a href="Phase 8 - Dashboard Handoff.dc.html">Dashboard handoff</a>
+          <span style="color:#5B6472">The signed-in app became <span style="font-family:'JetBrains Mono',monospace;font-size:12px">citerate-app/</span>, sharing the same D1 database.</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="ux" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">UX package</h2>
+        <span style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">phase 9 · nine boards</span>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">09</span>
+          <a href="Phase 9 - UX Package Index.dc.html">Package index</a>
+          <span style="color:#5B6472">The contents page for everything below.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">09a</span>
+          <a href="Phase 9a - Product Model and IA.dc.html">Product model and IA</a>
+          <span style="color:#5B6472">Objects, mechanics, and how the two properties fit together.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">09b</span>
+          <a href="Phase 9b - Personas and Journeys.dc.html">Personas and journeys</a>
+          <span style="color:#5B6472">Who this is for and what a week with it looks like.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">09c</span>
+          <a href="Phase 9c - User Flow Diagrams.dc.html">User flow diagrams</a>
+          <span style="color:#5B6472">Every path through both properties.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">09d</span>
+          <a href="Phase 9d - User Stories.dc.html">User stories</a>
+          <span style="color:#5B6472">Stories with acceptance criteria, ready for a backlog.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">09e</span>
+          <a href="Phase 9e - Whiteboard Sketches.dc.html">Whiteboard sketches</a>
+          <span style="color:#5B6472">The thinking before the pixels.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">09f</span>
+          <a href="Phase 9f - Wireframes.dc.html">Wireframes</a>
+          <span style="color:#5B6472">Low-fidelity layouts for every screen.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">09g</span>
+          <a href="Phase 9g - Brand 3D Object.html">Brand 3D object</a>
+          <span style="color:#5B6472">The mark as a physical object, downloadable as OBJ or GLB.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">09h</span>
+          <a href="Phase 9h - Landscape and Accessibility.dc.html">Landscape and accessibility</a>
+          <span style="color:#5B6472">Competitors, and the accessibility specification to hold to.</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="close" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">Closing the gaps</h2>
+        <span style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">phases 10–13 · closed</span>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">10</span>
+          <a href="Phase 10 - Placeholders Closed.dc.html">Placeholders closed</a>
+          <span style="color:#5B6472">The four things earlier boards left as "to be decided".</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">11</span>
+          <a href="Phase 11 - Launch Runbook.dc.html">Launch runbook</a>
+          <span style="color:#5B6472">The ordered steps from a working local build to a live site.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">12</span>
+          <a href="Phase 12 - Local Setup and Handover.dc.html">Local setup and handover</a>
+          <span style="color:#5B6472">Export, install, run both repos, verify, hand over.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">13</span>
+          <a href="Phase 13 - Responsive Matrix.dc.html">Responsive matrix</a>
+          <span style="color:#5B6472">Every screen at every breakpoint, side by side.</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="proto" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">Prototype</h2>
+        <span style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">phase 14 · clickable, shared session</span>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">14</span>
+          <a href="Phase 14 - Prototype Launcher.dc.html">Launcher</a>
+          <span style="color:#5B6472">Where to start, and the state of the shared session.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">14a</span>
+          <a href="Phase 14a - Prototype, Scan Flow.dc.html">Scan flow</a>
+          <span style="color:#5B6472">Domain in, teaser out, claim the result.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">14b</span>
+          <a href="Phase 14b - Prototype, Auth and Onboarding.dc.html">Auth and onboarding</a>
+          <span style="color:#5B6472">Sign up, verify, pick queries, first run.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">14c</span>
+          <a href="Phase 14c - Prototype, Dashboard.dc.html">Dashboard</a>
+          <span style="color:#5B6472">Overview, queries, fixes, competitors.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">14d</span>
+          <a href="Phase 14d - Prototype, Reports and Settings.dc.html">Reports and settings</a>
+          <span style="color:#5B6472">Report build, PDF, sharing, billing, team.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">14e</span>
+          <a href="Phase 14e - Prototype, Pages and Flow Playback.dc.html">Pages and flow playback</a>
+          <span style="color:#5B6472">Marketing and content pages, plus an auto-played walkthrough.</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="checks" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">Live checks</h2>
+        <span style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">phases 15–18 · re-run on open</span>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">15</span>
+          <a href="Phase 15 - Breakpoint Parity.dc.html">Breakpoint parity</a>
+          <span style="color:#5B6472">The phone column checked against what the stylesheet really does.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">16</span>
+          <a href="Phase 16 - CSS Audit.dc.html">CSS audit</a>
+          <span style="color:#5B6472">Tokens, duplication, and dead rules across both stylesheets.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">17</span>
+          <a href="Phase 17 - Deploy Preflight.dc.html">Deploy preflight</a>
+          <span style="color:#5B6472">Every value that has to exist in both environments before a deploy.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">18</span>
+          <a href="Phase 18 - Route Parity.dc.html">Route parity</a>
+          <span style="color:#5B6472">49 of 56 claimed routes have a page file; the other 7 are prototype views an existing route already serves. No missing pages.</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="going" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">Going live</h2>
+        <span style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">phases 20–22 · do these in order</span>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">20</span>
+          <a href="Phase 20 - Run It On Windows.dc.html">Run it on Windows</a>
+          <span style="color:#5B6472">Ten steps to both halves running locally, with what you should see after each.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">21</span>
+          <a href="Phase 21 - Git and Cloudflare Setup.dc.html">Git and Cloudflare setup</a>
+          <span style="color:#5B6472">Push to one repo, create the account and resources, three deploys, domains.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.4fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline">
+          <span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">22</span>
+          <a href="Phase 22 - Turn On Real Scans.dc.html">Turn on real scans</a>
+          <span style="color:#5B6472">Which keys, where to get them, how to keep the first run cheap.</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="left" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">What is left</h2>
+        <span style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">four items · none of them design</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:8px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1">01 · yours to decide</div>
+          <div style="font:600 16px/1.35 'Source Serif 4',serif">Git-based deployment</div>
+          <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:0;text-wrap:pretty">Deliberately deferred. Nothing is wired for the Pages Git integration and nothing will be until you say so. Deploys go through <span style="font-family:'JetBrains Mono',monospace;font-size:12px">pnpm deploy</span> today.</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:8px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1">02 · yours to run</div>
+          <div style="font:600 16px/1.35 'Source Serif 4',serif">The first real deploy</div>
+          <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:0;text-wrap:pretty">Phase 17 lists the secrets and vars to set; Phase 11 has the ordered steps. Both repos deploy separately against the one shared database.</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:8px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1">03 · scoping call</div>
+          <div style="font:600 16px/1.35 'Source Serif 4',serif">The 7 prototype-only views</div>
+          <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:0;text-wrap:pretty">Shared scan view, shared report link, a standalone verify-fix screen, a schedule tab. Each is either a real page later or a state on an existing page. Nothing breaks either way.</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:8px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1">04 · optional</div>
+          <div style="font:600 16px/1.35 'Source Serif 4',serif">Parity checks not yet written</div>
+          <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:0;text-wrap:pretty">The live checks cover routes, CSS, breakpoints and deploy config. Copy, database schema, and the auth flow have designs but no automated board watching them. Worth adding only if you want the same guarantee there.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}"></script>
+</body>
+</html>

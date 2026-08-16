@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#F4F5F7;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="max-width:1240px;margin:0 auto;padding:48px 40px 120px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:20px;border-bottom:2px solid #141B26">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Phase 10 · engineering closeout · 2026-07-30</div>
+      <h1 style="font:600 34px/1.15 'Source Serif 4',serif;letter-spacing:-.015em;margin:10px 0 0">Phase 10 — the four placeholders, closed</h1>
+      <p style="font:400 14px/1.55 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0;text-wrap:pretty">Phase 8 shipped the dashboard with four labelled placeholders — the honest kind, each returning a readable reason instead of pretending. Phase 10 replaces all four with working implementations in <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px">citerate-app</span>. Nothing fake remains behind a button.</p>
+    </div>
+    <div style="flex:none;text-align:right;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+      <div>new files &nbsp;&nbsp;&nbsp;5</div>
+      <div>edited &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10</div>
+      <div>migration &nbsp;&nbsp;0003</div>
+      <div style="color:#8A93A1">secrets added &nbsp;0</div>
+    </div>
+  </div>
+
+  <section style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px">
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:4px 10px 10px 4px;padding:22px 24px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0B6151">1 · QUERY GENERATOR</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">lib/query-generator.ts</div></div>
+      <div style="font:600 19px/1.3 'Source Serif 4',serif;margin-top:8px">Crawl + category blend, provenance kept</div>
+      <p style="font:400 12.5px/1.62 inherit;color:#5B6472;margin:8px 0 0">Onboarding now crawls the domain — homepage title, meta description, H1/H2s, sitemap slugs — and derives real queries from what the site says about itself (&ldquo;best {category phrase}&rdquo;, heading and slug phrases). The deterministic template becomes the floor, not the whole set. Search Console queries join as a third source after OAuth. Every row is labelled <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">crawl</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">gsc</span>, or <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">category</span> in the database.</p>
+      <div style="font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:10px">failure mode → category-only within 5s; onboarding never blocks on a slow site</div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #3E5C8A;border-radius:4px 10px 10px 4px;padding:22px 24px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#34507A">2 · PADDLE PRICE IDS</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">api/billing/checkout.ts · addon.ts · portal.ts</div></div>
+      <div style="font:600 19px/1.3 'Source Serif 4',serif;margin-top:8px">Config, not code</div>
+      <p style="font:400 12.5px/1.62 inherit;color:#5B6472;margin:8px 0 0">Price ids come from the Paddle dashboard, so hardcoding them was never right. They now live in one <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">PADDLE_PRICE_IDS</span> JSON var covering all four plans, both intervals, and the four add-ons. <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">PADDLE_ENV=sandbox</span> routes every call to Paddle's sandbox. Add-ons charge through hosted checkout when configured — the counter is raised by the HMAC-verified webhook on payment, never by a redirect.</p>
+      <div style="font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:10px">failure mode → unchanged readable 501 with the exact var to set</div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #3E5C8A;border-radius:4px 10px 10px 4px;padding:22px 24px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#34507A">3 · SEARCH CONSOLE OAUTH</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">api/connect/gsc/callback.ts · lib/seal.ts · 0003</div></div>
+      <div style="font:600 19px/1.3 'Source Serif 4',serif;margin-top:8px">Callback, sealed tokens, query blend</div>
+      <p style="font:400 12.5px/1.62 inherit;color:#5B6472;margin:8px 0 0">The consent hop now mints a single-use 160-bit state (KV, 10 minutes); the callback burns it, exchanges the code, and stores the refresh token in a new <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">gsc_connections</span> table — sealed with AES-GCM under <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">SESSION_SECRET</span>, so a leaked row is ciphertext and rotating the secret invalidates every token. It then pulls the domain's top 28-day GSC queries into the set, deduped, capped at the plan limit, labelled <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">source: 'gsc'</span>.</p>
+      <div style="font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:10px">failure mode → denied/expired/error each land back with a plain-words note</div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:4px 10px 10px 4px;padding:22px 24px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0B6151">4 · PDF RENDERER</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">api/reports/[id]/pdf.ts</div></div>
+      <div style="font:600 19px/1.3 'Source Serif 4',serif;margin-top:8px">Rendered once, stored forever</div>
+      <p style="font:400 12.5px/1.62 inherit;color:#5B6472;margin:8px 0 0">The first download renders <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">/reports/&lt;id&gt;</span> with Cloudflare's Browser Rendering binding — handing the renderer the caller's own cookies, so it sees exactly what the caller sees — writes the PDF to R2, and stamps <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">artifact_key</span>. Every later download streams the stored file. A snapshot's PDF is rendered once and never recomputed, the same promise the payload already makes.</p>
+      <div style="font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:10px">failure mode → no BROWSER binding falls back to the print path, stated on the page</div>
+    </div>
+
+  </section>
+
+  <div style="background:#141B26;border-radius:14px;padding:26px 30px;margin-top:24px;color:#F4F5F7">
+    <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:34px">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">TO GO LIVE, CONFIGURE — NO CODE CHANGES</div>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px;font:400 12px/1.55 'JetBrains Mono',monospace">
+          <div><span style="color:#F4F5F7">PADDLE_PRICE_IDS</span> <span style="color:#8A93A1">— paste the plan→price JSON from the Paddle dashboard (format in checkout.ts)</span></div>
+          <div><span style="color:#F4F5F7">GOOGLE_CLIENT_ID / _SECRET</span> <span style="color:#8A93A1">— OAuth client with redirect uri /api/connect/gsc/callback</span></div>
+          <div><span style="color:#F4F5F7">[browser] binding</span> <span style="color:#8A93A1">— already in wrangler.toml; delete it if the account lacks the add-on</span></div>
+          <div><span style="color:#F4F5F7">pnpm db:migrate</span> <span style="color:#8A93A1">— applies 0003_connections.sql (gsc_connections)</span></div>
+        </div>
+      </div>
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">STILL OPEN, DELIBERATELY</div>
+        <p style="font:400 13px/1.7 inherit;color:#8A93A1;margin:12px 0 0"><span style="color:#F4F5F7">2FA enrolment</span> — the column and the pane exist; the enrolment screens don't. <span style="color:#F4F5F7">Fonts</span> — four woff2 files copied from the marketing repo. Neither blocks launch; both are listed in README §8 so they can't be forgotten silently.</p>
+        <p style="font:400 13px/1.7 inherit;color:#8A93A1;margin:10px 0 0">The dashed <span style="color:#F4F5F7">.c-placeholder</span> card style stays in the stylesheet — the rule that nothing fake ships unmarked outlives the placeholders it marked.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;gap:24px;margin-top:36px;padding-top:16px;border-top:1px solid #E2E5EA;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1">
+    <div>phase 10 · citerate-app · placeholders → implementations</div>
+    <div><a href="./Phase 9 - UX Package Index.dc.html">← phase 9 index</a></div>
+  </div>
+
+</div>
+
+</x-dc>
+</body>
+</html>

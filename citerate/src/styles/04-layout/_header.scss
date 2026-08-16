@@ -1,0 +1,71 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header__inner {
+  width: 100%;
+  max-width: var(--max-marketing);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font: 600 20px/1 var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.brand:hover { color: var(--ink); text-decoration: none; }
+.brand__mark { width: 12px; height: 12px; background: var(--cited); border-radius: 3px; }
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+.nav__link {
+  font: var(--t-ui);
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 21px 0;
+  border-bottom: 2px solid transparent;
+  transition: color var(--dur-1) var(--ease-out);
+}
+.nav__link:hover { color: var(--ink); text-decoration: none; }
+.nav__link[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 500;
+  border-bottom-color: var(--cited);
+}
+
+.nav__soon {
+  font: 500 9px/1 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--warn-ink);
+  background: var(--warn-wash);
+  border-radius: 999px;
+  padding: 3px 6px;
+}
+
+.site-header__actions { display: flex; align-items: center; gap: 18px; }
+
+.nav-toggle { display: none; }
+
+// Width breakpoints for this file live in 07-responsive/_responsive.scss.

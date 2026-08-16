@@ -1,0 +1,68 @@
+---
+import Marketing from "../layouts/Marketing.astro";
+import PricingTable from "../components/PricingTable.astro";
+import CtaBand from "../components/CtaBand.astro";
+import faq from "../data/faq.json";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a }
+  }))
+};
+---
+
+<Marketing
+  title="Pricing"
+  description="One meter: tracked queries. Engines and refresh frequency come with the plan. Free scan with no account, Starter $49, Growth $199, Scale $499, Agency $799."
+  nav="pricing"
+  jsonLd={jsonLd}
+>
+  <section class="section section--flush" style="padding-top:72px;padding-bottom:40px">
+    <div class="wrap">
+      <div class="stack stack--4" style="align-items:center;text-align:center">
+        <span class="t-label">Pricing</span>
+        <h1 class="t-d1 u-mw-26">Diagnosis is free. The prescription is paid.</h1>
+        <p class="t-lead" style="max-width:60ch">
+          One meter: tracked queries. Engines and refresh frequency come with the plan — we don't count them
+          against you. No feature is sold twice.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush" style="padding-top:0">
+    <div class="wrap">
+      <PricingTable />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2 class="t-d2" style="margin-bottom:22px">Twelve reasons people stall, answered.</h2>
+      <div class="faq">
+        {
+          faq.map((f) => (
+            <div class="faq__item">
+              <span class="faq__q">{f.q}</span>
+              <span class="faq__a">{f.a}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink section--flush">
+    <div class="wrap">
+      <CtaBand
+        headline="Still deciding? The scan is free and takes ninety seconds."
+        body="25 queries · two engines · three runs each · no account"
+        event="pricing_foot"
+      />
+    </div>
+  </section>
+</Marketing>

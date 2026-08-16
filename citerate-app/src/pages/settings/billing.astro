@@ -1,0 +1,174 @@
+---
+/**
+ * Plan & billing. Two honest rules from Phase 6a made visible here:
+ *  - the meter is tracked queries; engines and refresh come with the plan
+ *  - going over never stops a scan, it bills a block at the end of the cycle
+ * Add-ons buy volume only, never a gated feature.
+ */
+import App from "../../layouts/App.astro";
+import { usage } from "../../lib/data";
+import { one } from "../../lib/db";
+import { PLANS, ADDONS, OVERAGE_BLOCK, meter, price, type PlanId } from "../../lib/plans";
+import { can } from "../../lib/rbac";
+import { day } from "../../lib/format";
+
+const env = Astro.locals.runtime.env;
+const workspace = Astro.locals.workspace!;
+const plan = workspace.plan as PlanId;
+const limits = PLANS[plan];
+
+const [counters, subscription] = await Promise.all([
+  usage(env, workspace.workspaceId),
+  one<{ plan: string; interval: string; status: string; current_period_end: number | null; provider_id: string | null }>(
+    env.DB,
+    `SELECT plan, interval, status, current_period_end, provider_id FROM subscriptions
+      WHERE workspace_id = ? ORDER BY updated_at DESC LIMIT 1`,
+    workspace.workspaceId
+  )
+]);
+
+Astro.locals.usage = counters;
+
+const q = meter(counters.trackedQueries.used, counters.trackedQueries.included || limits.trackedQueries);
+const canManage = can(workspace.role, "manage_billing");
+const upgrades: PlanId[] = (["starter", "growth", "scale", "agency"] as PlanId[]).filter((p) => p !== plan);
+const addons = Object.values(ADDONS);
+---
+
+<App title="Plan &amp; billing" current="settings" crumb={limits.label}>
+  <nav class="seg" role="tablist" aria-label="Settings">
+    <a class="seg__btn" href="/settings" aria-pressed="false">Account</a>
+    <a class="seg__btn" href="/settings/team" aria-pressed="false">Team</a>
+    <a class="seg__btn" href="/settings/billing" aria-pressed="true">Plan &amp; billing</a>
+    <a class="seg__btn" href="/settings/brand" aria-pressed="false">Branding</a>
+  </nav>
+
+  <div class="grid-app">
+    <div class="col-7">
+      <section class="c-card c-card--lg stack stack--4">
+        <div class="row-between">
+          <span class="t-label t-label--ink">Current plan</span>
+          <span class={`pill pill--${subscription?.status === "past_due" ? "gap" : "cited"}`}>
+            {subscription?.status ?? (plan === "free" ? "free" : "active")}
+          </span>
+        </div>
+
+        <div class="score__row">
+          <span class="t-d2">{limits.label}</span>
+          <span class="t-data">{price(plan, (subscription?.interval as "month" | "year") ?? "month")}/mo</span>
+          {subscription?.current_period_end && (
+            <span class="chart__note">renews {day(subscription.current_period_end)}</span>
+          )}
+        </div>
+
+        <div class="quota">
+          <div class="row-between">
+            <span class="t-label">Tracked queries · {counters.period}</span>
+            <span class="t-data">{q.used} / {q.included}</span>
+          </div>
+          <div class="quota__rail">
+            <div class="quota__fill" data-state={q.state} style={`width:${Math.min(100, q.pct)}%`}></div>
+          </div>
+          <span class="chart__note">
+            {q.over > 0
+              ? `${q.over} over · ${q.overageUnits} block${q.overageUnits > 1 ? "s" : ""} of ${OVERAGE_BLOCK.queries} at $${OVERAGE_BLOCK.price} = $${q.overageCost} on this cycle's invoice.`
+              : `Engines (${limits.engines === "all" ? "all" : limits.engines}) and refresh (${limits.refresh.replace("+", " + ")}) come with the plan — they are not metered.`}
+          </span>
+        </div>
+
+        <div class="grid-app" style="gap:12px">
+          {
+            [
+              { label: "Domains", value: `${counters.domains.used} / ${limits.domains}` },
+              { label: "Seats", value: `${counters.seats.used} / ${limits.seats}` },
+              { label: "History", value: limits.historyDays === null ? "unlimited" : `${limits.historyDays} days` },
+              { label: "Reports", value: limits.pdfReports === false ? "—" : limits.pdfReports.replace("_", " ") }
+            ].map((row) => (
+              <div class="col-6">
+                <div class="row-between" style="padding:10px 14px;background:var(--paper);border-radius:var(--r-sm)">
+                  <span class="chart__note">{row.label}</span>
+                  <span class="t-data">{row.value}</span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        {
+          canManage ? (
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              {subscription?.provider_id ? (
+                <a class="btn-ghost" href="/api/billing/portal">Manage payment method</a>
+              ) : null}
+              <a class="btn-primary-c" href="#plans">Change plan</a>
+            </div>
+          ) : (
+            <span class="chart__note">Only an owner can change the plan or payment method.</span>
+          )
+        }
+      </section>
+    </div>
+
+    <div class="col-5">
+      <section class="c-card stack stack--4">
+        <span class="t-label t-label--ink">Add-ons</span>
+        <span class="chart__note">
+          Add-ons buy volume, never a feature. Nothing you already paid for gets sold to you twice.
+        </span>
+        {
+          addons.map((a) => (
+            <form class="row-between" method="post" action="/api/billing/addon" style="gap:12px;padding:10px 14px;background:var(--paper);border-radius:var(--r-sm)">
+              <input type="hidden" name="addon" value={a.label} />
+              <span class="stack stack--1">
+                <span style="color:var(--ink)">{a.label}</span>
+                <span class="chart__note">${a.price}</span>
+              </span>
+              {canManage && <button class="btn-quiet" type="submit">Add</button>}
+            </form>
+          ))
+        }
+      </section>
+    </div>
+  </div>
+
+  <section class="c-card" id="plans">
+    <div class="pane-head">
+      <h2 class="chart__title">Change plan</h2>
+      <span class="chart__note">Yearly billing is two months free. Upgrades are prorated; downgrades apply next cycle.</span>
+    </div>
+
+    <div class="grid-app" style="margin-top:20px">
+      {
+        upgrades.map((p) => {
+          const l = PLANS[p];
+          return (
+            <div class="col-4">
+              <div class="c-card c-card--sunk stack stack--3">
+                <span class="t-label t-label--ink">{l.label}</span>
+                <span class="t-d3">{price(p, "month")}<span class="chart__note">/mo</span></span>
+                <span class="chart__note">{l.trackedQueries.toLocaleString()} queries · {l.engines === "all" ? "all" : l.engines} engines · {l.refresh.replace("+", " + ")}</span>
+                <span class="chart__note">
+                  {l.fixQueue ? "Fix Queue" : "No Fix Queue"} · {l.competitorNames ? "named competitors" : "counts only"} ·
+                  {l.pdfReports ? ` ${String(l.pdfReports).replace("_", " ")} PDF` : " no PDF"}
+                </span>
+                {canManage && (
+                  <form method="post" action="/api/billing/checkout">
+                    <input type="hidden" name="plan" value={p} />
+                    <button class="btn-primary-c" type="submit" style="width:100%">
+                      {l.monthly === null ? "Talk to us" : `Switch to ${l.label}`}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <p class="chart__note">
+    Cancelling keeps your history readable for 30 days and your reports downloadable indefinitely — a report you already
+    issued is yours, not a hostage.
+  </p>
+</App>

@@ -1,0 +1,175 @@
+---
+/**
+ * Pricing cards + comparison table, driven entirely by src/data/pricing.json.
+ * The interval toggle is data-driven too: price figures carry data-month /
+ * data-year and scripts/modules/toggle-group.js swaps the text.
+ */
+import pricing from "../data/pricing.json";
+
+interface Props {
+  showFree?: boolean;
+  showTable?: boolean;
+  showToggle?: boolean;
+  compact?: boolean;
+}
+const { showFree = true, showTable = true, showToggle = true, compact = false } = Astro.props;
+---
+
+{
+  showToggle && (
+    <div class="pills" data-toggle-group="pricing" data-event="pricing_interval_toggled" data-persist="url">
+      <button class="pill" type="button" data-value="month" aria-selected="true">Monthly</button>
+      <button class="pill" type="button" data-value="year">Yearly · two months free</button>
+    </div>
+  )
+}
+
+{
+  showFree && (
+    <div class="free-strip" style="margin-top:18px">
+      <div class="stack stack--1" style="min-width:170px">
+        <span class="t-label" style="color:var(--cited-ink)">{pricing.free.label}</span>
+        <span class="t-data-lg">{pricing.free.price} · {pricing.free.sub}</span>
+      </div>
+      <div class="free-strip__body">{pricing.free.body}</div>
+      <a class="btn-ghost u-nowrap" href={pricing.free.cta.href}>{pricing.free.cta.label}</a>
+    </div>
+  )
+}
+
+<div class="grid grid--3" style="margin-top:16px">
+  {
+    pricing.tiers.map((tier) => (
+      <div class:list={["plan", tier.featured && "plan--featured"]}>
+        {tier.flag && <span class="plan__flag">{tier.flag}</span>}
+
+        <div class="stack stack--2">
+          <span class="t-label" style={tier.featured ? "color:var(--cited-ink)" : undefined}>{tier.label}</span>
+          <div class="plan__price">
+            <span
+              class="plan__amount"
+              data-swap="pricing"
+              data-month={`$${tier.monthly}`}
+              data-year={`$${tier.yearly}`}
+            >
+              ${tier.monthly}
+            </span>
+            <span class="plan__per" data-swap="pricing" data-month="/mo" data-year="/mo billed yearly">/mo</span>
+          </div>
+          <span class="t-sm">{tier.pitch}</span>
+        </div>
+
+        <div class="plan__rule"></div>
+
+        <div class="plan__features">
+          {tier.unlock?.map((f) => <span class="plan__feature plan__feature--unlock">{f}</span>)}
+          {tier.features.map((f) => <span class="plan__feature">{f}</span>)}
+          {tier.locked?.map((f) => <span class="plan__feature plan__feature--locked">{f}</span>)}
+        </div>
+
+        <a
+          class:list={["plan__cta", tier.featured ? "btn-primary-c" : "btn-ghost"]}
+          href={tier.cta.href}
+          data-cta={`plan-${tier.id}`}
+        >
+          {tier.cta.label}
+        </a>
+      </div>
+    ))
+  }
+</div>
+
+{
+  !compact && (
+    <div class="grid grid--2" style="margin-top:16px">
+      {pricing.enterpriseTiers.map((t) => (
+        <div class="c-card c-card--sunk">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+            <span class="t-d4">{t.label}</span>
+            <span class="t-data-lg">
+              {"monthly" in t && t.monthly ? (
+                <>
+                  <span data-swap="pricing" data-month={`$${t.monthly}`} data-year={`$${t.yearly}`}>
+                    ${t.monthly}
+                  </span>{" "}
+                  <span data-swap="pricing" data-month="/mo" data-year="/mo billed yearly">/mo</span>
+                </>
+              ) : (
+                t.price
+              )}
+            </span>
+          </div>
+          <p class="t-sm">{t.body}</p>
+          <a class="btn-quiet" href={t.cta.href} data-cta={`plan-${t.id}`}>{t.cta.label} →</a>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+{
+  !compact && (
+    <div class="c-card" style="margin-top:16px">
+      <div class="grid grid--3">
+        <div class="stack stack--2">
+          <span class="t-label t-label--ink">The only meter</span>
+          <span class="t-sm">{pricing.meter.definition}</span>
+        </div>
+        <div class="stack stack--2">
+          <span class="t-label t-label--ink">Going over</span>
+          <span class="t-sm">
+            {pricing.meter.overage} Block: {pricing.meter.overageBlock.queries} queries, $
+            {pricing.meter.overageBlock.price}.
+          </span>
+        </div>
+        <div class="stack stack--2">
+          <span class="t-label t-label--ink">Add-ons buy volume only</span>
+          <span class="t-sm">
+            {pricing.addons.map((a) => `${a.label} $${a.price}`).join(". ")}. No add-on unlocks a gated feature.
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+{
+  showTable && (
+    <div style="margin-top:16px" class="stack stack--3">
+      <span class="t-label t-label--ink">Full comparison</span>
+      <div class="c-table c-table--scroll">
+        <div
+          class="c-table__row c-table__row--head"
+          style="grid-template-columns:240px repeat(5,1fr)"
+        >
+          <span></span>
+          {pricing.comparison.columns.map((c, i) => (
+            <span class="t-label" style={i === 2 ? "color:var(--cited-ink)" : undefined}>{c}</span>
+          ))}
+        </div>
+        {pricing.comparison.rows.map((row, ri) => (
+          <div
+            class:list={["c-table__row", ri % 2 === 1 && "c-table__row--zebra"]}
+            style="grid-template-columns:240px repeat(5,1fr)"
+          >
+            <span class="t-sm" style="color:var(--ink)">{row.label}</span>
+            {row.values.map((v, i) => (
+              <span
+                class="t-data"
+                style={
+                  i === 2
+                    ? row.unlockAt === 2
+                      ? "color:var(--cited-ink)"
+                      : "color:var(--ink)"
+                    : "color:var(--ink-soft);font-weight:400"
+                }
+              >
+                {v}
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}

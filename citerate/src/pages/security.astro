@@ -1,0 +1,62 @@
+---
+import Legal from "../layouts/Legal.astro";
+---
+
+<Legal
+  title="Security overview"
+  description="How Citerate is built and operated: architecture, access control, encryption, disclosure policy, and what we have not done yet."
+  updated="Jul 12, 2026"
+  version="1.2"
+  draft={true}
+  summary="Everything runs on Cloudflare's network with no long-lived servers to patch. Sessions are httpOnly and database-backed, secrets live in the platform's secret store, and every write is audit-logged. We are not SOC 2 certified yet and we say so rather than implying otherwise."
+>
+  <h3>Architecture</h3>
+  <p>
+    The site and API run as edge functions with no long-lived compute. Data lives in Cloudflare D1
+    (SQLite) with rollups, and raw engine answer text in R2. There is no VPN, no bastion host, and no
+    server for an attacker to log into.
+  </p>
+
+  <h3>Authentication and access</h3>
+  <p>
+    Passwordless email links and one-time codes, optional TOTP two-factor, and device trust. Sessions are
+    stored in the database and referenced by an httpOnly, Secure, SameSite cookie — revoking a session is
+    immediate. Internal access to production data requires 2FA and is limited to named staff; every
+    privileged action is written to an audit log.
+  </p>
+
+  <h3>Encryption</h3>
+  <p>
+    TLS 1.3 in transit with HSTS preloaded. Data at rest is encrypted by the platform. Secrets are held in
+    the platform secret store, never in the repository or in environment files.
+  </p>
+
+  <h3>Application security</h3>
+  <p>
+    Strict Content-Security-Policy, no inline third-party scripts beyond Turnstile and the analytics
+    beacon, parameterised database queries throughout, Turnstile plus rate limits on every public form,
+    and dependency review on each release.
+  </p>
+
+  <h3>Availability and backups</h3>
+  <p>
+    Daily database export with 30-day retention, restore tested quarterly. Deploys are atomic with instant
+    rollback. Engine and queue status is published on the <a href="/changelog">changelog</a>.
+  </p>
+
+  <h3>Responsible disclosure</h3>
+  <p>
+    Report to <strong>security@citerate.com</strong>. We acknowledge within 24 hours and triage within 72.
+    We credit reporters unless you prefer to stay anonymous, and we will not pursue legal action for
+    good-faith research that respects customer data and avoids service degradation. Please do not include
+    exploit details in the contact form — use the PGP key published at
+    <code>/.well-known/security.txt</code>.
+  </p>
+
+  <h3>What we have not done yet</h3>
+  <p>
+    No SOC 2 Type II report, no ISO 27001, no third-party penetration test at the time of writing. Data
+    residency and signed security exhibits are available on Enterprise. We would rather list the gaps than
+    imply a certification we do not hold.
+  </p>
+</Legal>

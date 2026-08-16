@@ -1,0 +1,232 @@
+---
+/**
+ * Free-scan teaser readout. Server-rendered, noindex, shareable by link.
+ * This is the strongest sales page you own, because it is about them.
+ */
+export const prerender = false;
+
+import Marketing from "../../layouts/Marketing.astro";
+import CauseBar from "../../components/CauseBar.astro";
+import { env, one, all } from "../../lib/db";
+import { CAUSE_LABEL } from "../../lib/scoring";
+
+const { token } = Astro.params;
+const e = env(Astro);
+
+interface ScanRow {
+  id: string;
+  hostname: string;
+  status: string;
+  citation_rate: number | null;
+  queries_total: number;
+  queries_done: number;
+  created_at: number;
+}
+
+const scan = await one<ScanRow>(
+  e.DB,
+  `SELECT s.id, d.hostname, s.status, s.citation_rate, s.queries_total, s.queries_done, s.created_at
+     FROM scans s JOIN domains d ON d.id = s.domain_id
+    WHERE s.share_token = ?`,
+  token
+);
+
+if (!scan) return Astro.redirect("/?scan=notfound", 302);
+
+interface ObsRow {
+  query: string;
+  engine: string;
+  citation_rate: number;
+  cause: string | null;
+  cause_confidence: number | null;
+}
+
+const observations = await all<ObsRow>(
+  e.DB,
+  `SELECT q.text AS query, o.engine, o.citation_rate, o.cause, o.cause_confidence
+     FROM observations o JOIN queries q ON q.id = o.query_id
+    WHERE o.scan_id = ? ORDER BY o.citation_rate ASC LIMIT 25`,
+  scan.id
+);
+
+interface FindingRow {
+  title: string;
+  cause: string;
+  impact: string;
+}
+
+const findings = await all<FindingRow>(
+  e.DB,
+  `SELECT f.title, f.cause, f.impact
+     FROM findings f JOIN domains d ON d.id = f.domain_id
+    WHERE d.hostname = ?
+    ORDER BY CASE f.impact WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END
+    LIMIT 3`,
+  scan.hostname
+);
+
+const mix = observations.reduce(
+  (acc, o) => {
+    if (o.citation_rate >= 1 || !o.cause) return acc;
+    if (o.cause === "aio_displacement") acc.aio += 1;
+    else if (o.cause === "ranking_decline") acc.rank += 1;
+    else if (o.cause === "technical_decay") acc.tech += 1;
+    else acc.other += 1;
+    return acc;
+  },
+  { aio: 0, rank: 0, tech: 0, other: 0 }
+);
+
+const pct = Math.round((scan.citation_rate ?? 0) * 100);
+const topCause = (["aio", "rank", "tech", "other"] as const).sort((a, b) => mix[b] - mix[a])[0];
+const topCauseLabel =
+  topCause === "aio"
+    ? CAUSE_LABEL.aio_displacement
+    : topCause === "rank"
+      ? CAUSE_LABEL.ranking_decline
+      : topCause === "tech"
+        ? CAUSE_LABEL.technical_decay
+        : CAUSE_LABEL.unexplained;
+---
+
+<Marketing
+  title={`${scan.hostname} — AI citation rate`}
+  description={`${scan.hostname} is cited in ${pct}% of AI answer runs across its 25 tracked queries.`}
+  noindex={true}
+>
+  <section class="section">
+    <div class="wrap">
+      <div class="stack stack--4">
+        <span class="t-label">Diagnosis · free</span>
+        <h1 class="t-d2 u-mw-46">
+          {scan.hostname} is cited in {pct}% of AI answer runs. The largest cause is {topCauseLabel.toLowerCase()}.
+        </h1>
+      </div>
+
+      <div class="c-card c-card--lg" style="margin-top:22px">
+        <div style="display:grid;grid-template-columns:280px minmax(0,1fr);gap:44px;align-items:start">
+          <div class="stack stack--5">
+            <div class="score">
+              <span class="t-label t-label--ink">Citation rate · {scan.hostname}</span>
+              <span class="score__value score__value--hero" data-count={pct} data-count-suffix="">
+                {pct}<span class="score__unit">%</span>
+              </span>
+              <span class="score__caption">
+                of AI answer runs cite you across {scan.queries_total} queries
+              </span>
+            </div>
+            <CauseBar aio={mix.aio} rank={mix.rank} tech={mix.tech} other={mix.other} />
+          </div>
+
+          <div class="stack stack--4">
+            <div class="c-table">
+              <div class="c-table__row c-table__row--head" style="grid-template-columns:minmax(0,1fr) 120px 160px">
+                <span class="t-label">Query</span>
+                <span class="t-label">Rate</span>
+                <span class="t-label">Cause</span>
+              </div>
+              {
+                observations.slice(0, 8).map((o, i) => (
+                  <div
+                    class:list={["c-table__row", i % 2 === 1 && "c-table__row--zebra"]}
+                    style="grid-template-columns:minmax(0,1fr) 120px 160px"
+                  >
+                    <span class="t-data" style="font-weight:400">"{o.query}"</span>
+                    <span class={`t-data ${o.citation_rate > 0 ? "tx-cited" : "tx-gap"}`}>
+                      {Math.round(o.citation_rate * 100)}%
+                    </span>
+                    <span class="t-data-sm">
+                      {o.cause ? CAUSE_LABEL[o.cause as keyof typeof CAUSE_LABEL] : "—"}
+                    </span>
+                  </div>
+                ))
+              }
+            </div>
+            <p class="figcap">
+              Showing 8 of {scan.queries_total} queries. Method: 2 engines, 3 runs each, US region,
+              unpersonalized.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- top three fixes: free tier shows all three, competitor names stay locked -->
+      <div class="grid grid--2" style="margin-top:16px;align-items:start">
+        <div class="c-card">
+          <span class="t-label t-label--ink">Your top three fixes</span>
+          <div class="stack stack--3">
+            {
+              findings.map((f) => (
+                <div class="row-between" style="gap:12px;background:var(--paper);border-radius:var(--r-sm);padding:11px 14px">
+                  <span class="t-sm" style="color:var(--ink)">{f.title}</span>
+                  <span class={`t-data ${f.impact === "high" ? "tx-cited" : "tx-warn"}`} style="font-size:10px">
+                    {f.impact.toUpperCase()}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="locked">
+          <div class="locked__content" aria-hidden="true">
+            <div class="c-card">
+              <span class="t-label t-label--ink">Cited instead of you</span>
+              <div class="stack stack--3">
+                <div class="share-row">
+                  <span class="share-row__label">competitor-a</span>
+                  <span class="share-row__rail"><span class="share-row__fill" style="width:41%"></span></span>
+                  <span class="share-row__val">41%</span>
+                </div>
+                <div class="share-row">
+                  <span class="share-row__label">competitor-b</span>
+                  <span class="share-row__rail"><span class="share-row__fill" style="width:18%"></span></span>
+                  <span class="share-row__val">18%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="locked__veil">
+            <span class="locked__badge">Growth</span>
+            <span class="t-d4 u-mw-26">Two domains are being cited instead of you.</span>
+            <span class="t-sm">Competitor names and share of citations unlock on Growth.</span>
+            <a class="btn-primary-c" href="/pricing" data-cta="teaser-upsell">See plans</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- claim -->
+      <div class="cta-band cta-band--ink" style="margin-top:16px">
+        <div class="stack stack--2">
+          <span class="t-label">Keep this result</span>
+          <span class="t-d4" style="color:var(--side-ink);max-width:34ch">
+            Email it to yourself and it stays available for 90 days.
+          </span>
+        </div>
+        <form method="POST" action="/api/claim" style="display:flex;gap:8px">
+          <input type="hidden" name="token" value={token} />
+          <label class="visually-hidden-focusable" for="claim-email">Email</label>
+          <input
+            class="scan-form__field"
+            id="claim-email"
+            name="email"
+            type="email"
+            required
+            placeholder="you@company.com"
+            style="height:44px;border-color:transparent"
+          />
+          <button class="btn-primary-c u-nowrap" type="submit">Claim result</button>
+        </form>
+      </div>
+
+      <div class="c-card c-card--accent-tech methodology" style="margin-top:16px">
+        <span class="t-label" style="color:var(--tech-ink)">What this scan cannot see</span>
+        <span class="t-sm">
+          Unpersonalized US-region answers only; a logged-in user may see different results. Three runs bound
+          variance, they do not eliminate it. Engines change without notice. Anything we could not attribute
+          with confidence is shown as "unexplained" rather than assigned a cause.
+        </span>
+      </div>
+    </div>
+  </section>
+</Marketing>

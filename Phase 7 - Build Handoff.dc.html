@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EBE9E4;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<section style="padding:40px 44px 80px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+<div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:14px">
+  <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Citerate · Phase 7</span>
+    <span style="width:1px;height:12px;background:#C6CBD3"></span>
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Build handoff · ready to deploy</span>
+  </div>
+  <h1 style="margin:0;font:600 44px/1.1 'Source Serif 4',Georgia,serif;letter-spacing:-0.02em;max-width:26ch">The site is code now, not a board</h1>
+  <p style="margin:0;font:400 16px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;max-width:78ch">Just over a hundred files in <code style="font:400 12.5px/1.6 'JetBrains Mono',monospace;background:#FFFFFF;border:1px solid #E2E5EA;padding:1px 5px;border-radius:4px">/citerate</code>: Astro 5 on Cloudflare Pages, the full D1 schema, the scan-queue Worker, the token system compiled through Bootstrap, every page from phases 6b–6d, and the API routes behind them. It runs locally in five minutes with no Cloudflare account and no engine spend — engine clients ship with deterministic mocks. Download it below.</p>
+</div>
+
+<div style="max-width:1240px;margin:24px auto 0;background:#141B26;border-radius:10px;padding:26px 28px;display:grid;grid-template-columns:1fr 1fr;gap:26px">
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Run it now</div>
+    <pre style="margin:0;font:400 12.5px/1.85 'JetBrains Mono',monospace;color:#C6CBD3;white-space:pre-wrap">pnpm install
+cp .env.example .env
+pnpm db:migrate:local
+pnpm db:seed:local
+pnpm dev            → localhost:4321
+pnpm scanner:dev    → drains the scan queue</pre>
+    <div style="font:400 12.5px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#8A93A1">The scan form works end to end against mock answers. Zero API cost, deterministic results.</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Ship it</div>
+    <pre style="margin:0;font:400 12.5px/1.85 'JetBrains Mono',monospace;color:#C6CBD3;white-space:pre-wrap">wrangler d1 create citerate-db
+wrangler kv namespace create SCAN_CACHE
+wrangler kv namespace create RATE_LIMIT
+wrangler r2 bucket create citerate-artifacts
+# paste ids into both wrangler.toml files
+pnpm db:migrate:remote &amp;&amp; pnpm deploy
+pnpm scanner:deploy</pre>
+    <div style="font:400 12.5px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#8A93A1">Secrets go through <code style="font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#C6CBD3">wrangler pages secret put</code> — never a file. Full list in the README.</div>
+  </div>
+</div>
+
+<!-- 01 WHAT SHIPPED -->
+<div style="max-width:1240px;margin:52px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">01</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">What's in the repo</h2>
+</div>
+<div style="max-width:1240px;margin:18px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:9px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#34507A">Design system</div>
+    <div style="font:400 12.5px/1.9 'JetBrains Mono',monospace;color:#141B26">_tokens.scss<br>_bootstrap-map.scss<br>_bootstrap.scss<br>+ 9 partials</div>
+    <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Tokens verbatim from Phase 1. Bootstrap compiles <em>against</em> them — partials only, no <code style="font:400 11.5px/1.6 'JetBrains Mono',monospace">!important</code> anywhere.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:9px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#34507A">Pages</div>
+    <div style="font:400 12.5px/1.9 'JetBrains Mono',monospace;color:#141B26">16 page routes<br>6 API routes<br>4 layouts<br>8 components</div>
+    <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Every page from 6b–6d. Static by default; <code style="font:400 11.5px/1.6 'JetBrains Mono',monospace">/contact</code> and <code style="font:400 11.5px/1.6 'JetBrains Mono',monospace">/scan/[token]</code> server-render.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:9px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#34507A">Engine</div>
+    <div style="font:400 12.5px/1.9 'JetBrains Mono',monospace;color:#141B26">0001_init.sql<br>scanner/index.ts<br>scoring.ts<br>domain.ts</div>
+    <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">16 tables, cron consumer, Wilson confidence bands, citation matching with redirect following.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:9px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#34507A">Content</div>
+    <div style="font:400 12.5px/1.9 'JetBrains Mono',monospace;color:#141B26">3 blog posts<br>4 changelog entries<br>5 legal drafts<br>3 compare entries</div>
+    <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">MDX with zod schemas. A new post or policy is one file, no CMS.</div>
+  </div>
+</div>
+
+<!-- 02 DECISIONS IN CODE -->
+<div style="max-width:1240px;margin:52px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">02</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">Where each decision lives</h2>
+  <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#8A93A1">so a change lands in one file, not six</span>
+</div>
+<div style="max-width:1240px;margin:18px auto 0;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+  <div style="display:grid;grid-template-columns:240px 250px 1fr;gap:18px;padding:12px 24px;background:#EDEFF2;border-bottom:1px solid #E2E5EA">
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Decision</span>
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">File</span>
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">As implemented</span>
+  </div>
+  <div style="display:grid;grid-template-columns:240px 250px 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Free scan cost control</span><span style="font:400 12.5px/1.5 'JetBrains Mono',monospace">lib/guard.ts</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Turnstile → 5 scans per IP per hour → one live scan per domain per 24h. A repeat visitor gets the cached share token from KV; a rate-limited visitor is redirected to the existing readout, never a dead end.</span></div>
+  <div style="display:grid;grid-template-columns:240px 250px 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA;background:#F4F5F7"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Pricing, plans, metering</span><span style="font:400 12.5px/1.5 'JetBrains Mono',monospace">data/pricing.json<br>lib/plans.ts</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">One JSON file drives the cards, the comparison table, and the interval toggle. <code style="font:400 11.5px/1.6 'JetBrains Mono',monospace">plans.ts</code> holds limits and the overage meter used for gating. Change a price in one place.</span></div>
+  <div style="display:grid;grid-template-columns:240px 250px 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">The method contract</span><span style="font:400 12.5px/1.5 'JetBrains Mono',monospace">lib/scoring.ts</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Rate over runs, Wilson bands, confidence floor 0.6 → <code style="font:400 11.5px/1.6 'JetBrains Mono',monospace">unexplained</code>. <code style="font:400 11.5px/1.6 'JetBrains Mono',monospace">METHOD_VERSION</code> is here; changing a rule requires a changelog entry with <code style="font:400 11.5px/1.6 'JetBrains Mono',monospace">affectsHistory</code> and a rollup recompute.</span></div>
+  <div style="display:grid;grid-template-columns:240px 250px 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA;background:#F4F5F7"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">What counts as a citation</span><span style="font:400 12.5px/1.5 'JetBrains Mono',monospace">lib/domain.ts</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Resolved-URL matching, five redirect hops, tracking params stripped, subdomains and apex included. A brand mention with no link is a separate metric and never enters the rate.</span></div>
+  <div style="display:grid;grid-template-columns:240px 250px 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Docs coming-soon</span><span style="font:400 12.5px/1.5 'JetBrains Mono',monospace">pages/docs/index.astro</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Real shell, greyed sidebar showing the planned shape, one real response body, beta-list capture. Concept pages are wired to publish before endpoints do.</span></div>
+  <div style="display:grid;grid-template-columns:240px 250px 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA;background:#F4F5F7"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Perf budget</span><span style="font:400 12.5px/1.5 'JetBrains Mono',monospace">scripts/main.js</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Each module imports only when its markup exists. GSAP: two pages, ≥900px, motion allowed — and not in package.json until that page ships. No Bootstrap JS on marketing. Charts are hand-built SVG.</span></div>
+  <div style="display:grid;grid-template-columns:240px 250px 1fr;gap:18px;padding:14px 24px"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Nothing fake ships</span><span style="font:400 12.5px/1.5 'JetBrains Mono',monospace">05-components/_card.scss</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472"><code style="font:400 11.5px/1.6 'JetBrains Mono',monospace">.c-placeholder</code> renders dashed with an amber "do not ship" flag. Used on home proof, about, and customers — which is noindex and unlinked until a study is real.</span></div>
+</div>
+
+<!-- 03 QUEUE -->
+<div style="max-width:1240px;margin:52px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">03</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">The scan queue, without a queue service</h2>
+</div>
+<div style="max-width:1240px;margin:18px auto 0;background:#FFFFFF;border:1px solid #E2E5EA;border-left:2px solid #3E5C8A;border-radius:10px;padding:22px 26px;display:grid;grid-template-columns:1fr 1fr;gap:26px">
+  <div style="display:flex;flex-direction:column;gap:9px">
+    <div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">How a scan runs</div>
+    <div style="font:400 13.5px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472"><strong style="font-weight:600;color:#141B26">1.</strong> <code style="font:400 12px/1.6 'JetBrains Mono',monospace">POST /api/scan</code> normalises the domain, checks the KV cache, clears Turnstile and both rate limits, then writes a domain, a 25-prompt set, a scan row, and one <code style="font:400 12px/1.6 'JetBrains Mono',monospace">scan_jobs</code> row per query per engine.</div>
+    <div style="font:400 13.5px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472"><strong style="font-weight:600;color:#141B26">2.</strong> The cron Worker ticks every minute, claims a batch of twelve, resets stale claims older than five minutes, and asks each engine three times.</div>
+    <div style="font:400 13.5px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472"><strong style="font-weight:600;color:#141B26">3.</strong> Raw answer text goes to R2 — that is what "show me the receipt" reads. Observations, citations, and discovered competitors go to D1.</div>
+    <div style="font:400 13.5px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472"><strong style="font-weight:600;color:#141B26">4.</strong> When every job settles, the scan closes with a rate, a confidence band, and a cause mix written to <code style="font:400 12px/1.6 'JetBrains Mono',monospace">daily_rollups</code>. Charts only ever read rollups.</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:9px">
+    <div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Cost and failure behaviour</div>
+    <div style="font:400 13.5px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">A tick is one Worker invocation. At 100k invocations a day free, the cron alone is ~43k a month — the queue is genuinely free until scan volume, not tick count, forces Cloudflare Queues.</div>
+    <div style="font:400 13.5px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">A failing engine marks that job <code style="font:400 12px/1.6 'JetBrains Mono',monospace">error</code> after three attempts and the scan closes as <code style="font:400 12px/1.6 'JetBrains Mono',monospace">partial</code>, not <code style="font:400 12px/1.6 'JetBrains Mono',monospace">failed</code> — a missing engine is a coverage note, not a broken product.</div>
+    <div style="font:400 13.5px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">A missing API key marks that engine unavailable for the run instead of throwing, so you can ship with two engines and add the rest later.</div>
+    <div style="font:400 13.5px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472"><code style="font:400 12px/1.6 'JetBrains Mono',monospace">USE_ENGINE_MOCKS=true</code> gives deterministic answers per query and engine, so the whole pipeline is developable and testable at zero spend.</div>
+  </div>
+</div>
+
+<!-- 04 OUTSTANDING -->
+<div style="max-width:1240px;margin:52px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">04</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">Before this goes public</h2>
+  <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#8A93A1">honest list, not a launch checklist theatre</span>
+</div>
+<div style="max-width:1240px;margin:18px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:2px solid #D98324;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:10px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#9A6210">You or a specialist</div>
+    <div style="font:400 13.5px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">— Counsel review on all five legal drafts. Every file is <code style="font:400 12px/1.6 'JetBrains Mono',monospace">draft: true</code> and the sidebar shows an amber warning until you flip it.<br>— Fill the founder and method-owner placeholders on <code style="font:400 12px/1.6 'JetBrains Mono',monospace">/about</code>. An anonymous measurement company is a contradiction.<br>— Buy the domain, create the Turnstile widget, verify the Resend sending domain, paste the Web Analytics token.<br>— Download the four woff2 font files into <code style="font:400 12px/1.6 'JetBrains Mono',monospace">public/fonts/</code>. Nothing hotlinks.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:2px solid #3E5C8A;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:10px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#34507A">Next build phase</div>
+    <div style="font:400 13.5px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">— The real 25-prompt generator (site crawl + Search Console + category patterns). The seeded one in <code style="font:400 12px/1.6 'JetBrains Mono',monospace">api/scan.ts</code> is a placeholder and labelled as such.<br>— The technical-decay check: <code style="font:400 12px/1.6 'JetBrains Mono',monospace">tech_pass</code> is hardcoded <code style="font:400 12px/1.6 'JetBrains Mono',monospace">true</code> in the scanner, which currently biases attribution toward displacement.<br>— OG image route and the PDF reporter Worker (both R2-backed).<br>— The dashboard: separate build, opposite JS balance (Bootstrap JS + Alpine + ECharts), auth tables already exist in migration 0001.</div>
+  </div>
+</div>
+
+<div style="max-width:1240px;margin:26px auto 0;font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#8A93A1;border-top:1px solid #E2E5EA;padding-top:16px">Full setup, secrets list, route table, and method-integrity rules are in <code style="font:400 12px/1.6 'JetBrains Mono',monospace">citerate/README.md</code>. Phases 1–6 boards remain the design source of truth; this repo is their implementation.</div>
+
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1340}}"></script>
+</body>
+</html>

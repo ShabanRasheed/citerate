@@ -1,0 +1,111 @@
+// The score unit: one number, its band, its delta, and the verdict sentence.
+// Nothing else in the app is allowed to render a citation rate this large.
+
+.score {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-5) var(--s-5) var(--s-4);
+  background: var(--card);
+  border: var(--bw) solid var(--line);
+  border-radius: var(--r-lg);
+}
+
+.score__label {
+  font: var(--t-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.score__row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+
+.score__value {
+  font: var(--t-data-xl);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.score__band {
+  font: var(--t-data-sm);
+  color: var(--ink-soft);
+}
+
+.score__verdict {
+  font: var(--t-d3);
+  text-wrap: pretty;
+  max-width: 34ch;
+}
+
+.delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: var(--t-data);
+  font-variant-numeric: tabular-nums;
+  padding: 3px 8px;
+  border-radius: var(--r-pill);
+
+  &--up   { color: var(--cited-ink); background: var(--cited-wash); }
+  &--down { color: var(--gap-ink);   background: var(--gap-wash); }
+  &--flat { color: var(--ink-soft);  background: var(--neutral-wash); }
+}
+
+// "Within noise" is a first-class state, not a footnote.
+.noise {
+  font: var(--t-data-sm);
+  color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  &::before {
+    content: "";
+    width: 14px;
+    height: 6px;
+    border-radius: 2px;
+    background: var(--chart-band);
+  }
+}
+
+// Locked region: freemium and plan gates use the same treatment everywhere.
+.locked {
+  position: relative;
+  border: 1.5px dashed var(--lock-line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+
+.locked__content {
+  filter: blur(var(--lock-blur));
+  pointer-events: none;
+  user-select: none;
+}
+
+.locked__veil {
+  position: absolute;
+  inset: 0;
+  background: var(--lock-veil);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  text-align: center;
+  padding: var(--s-5);
+}
+
+.locked__badge {
+  font: var(--t-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  background: var(--lock-badge-bg);
+  color: var(--lock-badge-ink);
+  border-radius: var(--r-pill);
+  padding: 5px 10px;
+}

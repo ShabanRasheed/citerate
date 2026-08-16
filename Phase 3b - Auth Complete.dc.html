@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EBE9E4;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<section style="padding:40px 44px 48px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+  <div style="display:flex;align-items:baseline;gap:10px"><span style="font:500 10px ui-monospace,Menlo,monospace;background:#141B26;color:#fff;border-radius:4px;padding:3px 7px">3b</span><span style="font:600 13px inherit">Phase 3b · Auth, complete — 8 passwordless screens + the optional password/2FA track</span></div>
+  <p style="font:400 12px/1.6 inherit;color:rgba(0,0,0,.55);max-width:96ch;margin:8px 0 0">Magic link stays the default path: it's the one the funnel already produces, and it has no password store to leak. The password and TOTP track is opt-in per account (Settings → Security) for agency and enterprise buyers whose policy requires it — when it's on, magic links still work unless the account disables them. Auth cards are 400px content in a 440px frame, centred on paper; every state names what happened, what we did, and the single next step.</p>
+
+  <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.45);margin:30px 0 10px">Passwordless · 1–4</div>
+  <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+
+    <div style="width:440px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:32px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">1 · sign up</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:26px;margin-top:10px">
+        <span style="font:500 18px 'JetBrains Mono',monospace;letter-spacing:-.03em">cite<span style="color:#0E7C66">/</span>rate</span>
+        <div style="font:600 24px/1.28 'Source Serif 4',serif;margin-top:14px">Create your account</div>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;margin:6px 0 0">One domain to start. You can add more later on Agency.</p>
+        <label style="display:block;font:500 12px inherit;color:#5B6472;margin-top:16px">Work email</label>
+        <div style="border:1px solid #C6CBD3;border-radius:6px;padding:12px 13px;margin-top:6px;font:400 14px 'JetBrains Mono',monospace;color:#8A93A1">you@northline.co</div>
+        <label style="display:block;font:500 12px inherit;color:#5B6472;margin-top:12px">Domain to track</label>
+        <div style="display:flex;align-items:center;gap:8px;border:1px solid #C6CBD3;border-radius:6px;padding:12px 13px;margin-top:6px"><span style="font:400 12.5px 'JetBrains Mono',monospace;color:#8A93A1">https://</span><span style="font:400 14px 'JetBrains Mono',monospace;color:#8A93A1">northline.co</span></div>
+        <span style="display:block;text-align:center;font:500 14px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:12px;margin-top:14px">Email me a sign-in link</span>
+        <div style="display:flex;align-items:center;gap:10px;margin:14px 0">
+          <span style="flex:1;height:1px;background:#E2E5EA"></span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">or</span><span style="flex:1;height:1px;background:#E2E5EA"></span>
+        </div>
+        <span style="display:flex;align-items:center;justify-content:center;gap:10px;font:500 14px inherit;color:#141B26;border:1px solid #C6CBD3;border-radius:999px;padding:11px">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 12.2c0-.7-.06-1.36-.18-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3z" fill="#4285F4"></path><path d="M12 22c2.6 0 4.8-.87 6.4-2.36l-3.2-2.5c-.9.6-2 .96-3.2.96a5.6 5.6 0 0 1-5.3-3.9H3.4v2.6A10 10 0 0 0 12 22z" fill="#34A853"></path><path d="M6.7 14.2a6 6 0 0 1 0-3.9V7.7H3.4a10 10 0 0 0 0 8.6l3.3-2.1z" fill="#FBBC05"></path><path d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.4 7.7l3.3 2.6A5.6 5.6 0 0 1 12 6.1z" fill="#EA4335"></path></svg>
+          Continue with Google
+        </span>
+        <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:12px">No password to create — links are single-use and expire in 15 minutes. Google is the same account we use for Search Console, so most people end up with one identity.</div>
+        <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:8px">By continuing you accept the <a href="#">terms</a> and <a href="#">privacy notice</a>.</div>
+      </div>
+    </div>
+
+    <div style="width:440px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:32px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">2 · Google path &amp; account-exists</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:22px;margin-top:10px">
+        <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1">2a · consent screen we hand off to</div>
+        <div style="border:1px solid #E2E5EA;border-radius:8px;padding:14px;margin-top:9px;background:#F4F5F7">
+          <div style="font:400 13px/1.6 inherit;color:#5B6472">Google's own consent UI. We request <span style="font:400 12px 'JetBrains Mono',monospace">openid email profile</span> only at sign-in; the read-only Search Console scope is requested later, in onboarding, so the first ask is small.</div>
+        </div>
+        <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-top:18px">2b · already registered</div>
+        <div style="border:1px solid #E2E5EA;border-left:3px solid #3E5C8A;border-radius:8px;padding:14px 16px;margin-top:9px">
+          <div style="font:600 18px/1.3 'Source Serif 4',serif">You already have an account</div>
+          <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:6px 0 0">northline.co is tracked under you@northline.co. We've signed you in rather than starting again — your 7 scans are intact.</p>
+          <span style="display:inline-block;font:500 13px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:9px 16px;margin-top:11px">Open dashboard</span>
+        </div>
+        <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-top:18px">2c · domain already claimed by someone else</div>
+        <div style="border:1px solid #E2E5EA;border-left:3px solid #D98324;border-radius:8px;padding:14px 16px;margin-top:9px">
+          <div style="font:600 18px/1.3 'Source Serif 4',serif">northline.co is already being tracked</div>
+          <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:6px 0 0">Someone at your domain verified it first. We've emailed them your request to join; they can add you as a viewer or editor. Nothing about their account is shown to you.</p>
+          <div style="font:400 12px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:9px">request sent 2026-07-27 · they have 7 days</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="width:440px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:32px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">3 · claim your scan</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:26px;margin-top:10px">
+        <span style="font:500 18px 'JetBrains Mono',monospace;letter-spacing:-.03em">cite<span style="color:#0E7C66">/</span>rate</span>
+        <div style="font:600 24px/1.28 'Source Serif 4',serif;margin-top:14px">Keep the scan you already ran</div>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;margin:6px 0 0">We still have the full result for northline.co from 2026-07-24. Claiming it creates your account — nothing is re-scanned, so your free scan stays unused.</p>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:16px;padding:14px 16px;border:1px solid #E2E5EA;border-radius:8px">
+          <div style="font:500 30px/1 'JetBrains Mono',monospace">62</div>
+          <div style="font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#5B6472">score ±6 · 9 runs<br>20 queries · 4 engines<br>7 fixes found</div>
+        </div>
+        <span style="display:block;text-align:center;font:500 14px inherit;color:#FFFFFF;background:#0E7C66;border-radius:999px;padding:12px;margin-top:14px">Claim this scan</span>
+        <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:12px">Held for 30 days from the scan date, then deleted. The link in your report email lands here already signed in — one tap, no form.</div>
+      </div>
+    </div>
+
+    <div style="width:440px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:32px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">4 · invite acceptance</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:26px;margin-top:10px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="width:26px;height:26px;border-radius:6px;background:#3E5C8A;color:#fff;display:flex;align-items:center;justify-content:center;font:500 11px 'JetBrains Mono',monospace">RM</span>
+          <span style="font:500 13px inherit;color:#5B6472">Ridgeway Media invited you</span>
+        </div>
+        <div style="font:600 24px/1.28 'Source Serif 4',serif;margin-top:14px">View the northline.co report</div>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;margin:6px 0 0">You'll get read-only access to one workspace: the score, causes, queries and fix queue. No billing, no other clients.</p>
+        <label style="display:block;font:500 12px inherit;color:#5B6472;margin-top:16px">Your name</label>
+        <div style="border:1px solid #C6CBD3;border-radius:6px;padding:12px 13px;margin-top:6px;font:400 14px inherit;color:#8A93A1">so they know who's viewing</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:12px;padding:11px 13px;background:#F4F5F7;border-radius:6px">
+          <span style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#5B6472;border:1px solid #E2E5EA;border-radius:999px;padding:2px 9px">VIEWER</span>
+          <span style="font:400 12.5px inherit;color:#5B6472">client@northline.co</span>
+        </div>
+        <span style="display:block;text-align:center;font:500 14px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:12px;margin-top:14px">Accept and view</span>
+        <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:12px">Invites expire after 14 days. Declining tells Ridgeway Media only that you declined.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.45);margin:34px 0 10px">Passwordless · 5–8</div>
+  <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+
+    <div style="width:440px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:32px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">5 · change email</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;margin-top:10px">
+        <div style="font:600 22px/1.3 'Source Serif 4',serif">Change your email</div>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;margin:6px 0 0">Because email is how you sign in, we confirm on both addresses before switching.</p>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:9px">
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid #E2E5EA;border-radius:6px"><span style="color:#0E7C66">✓</span><div style="flex:1;font:400 13px inherit">Confirmed from <span style="font:400 12.5px 'JetBrains Mono',monospace">you@northline.co</span></div></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid #C6CBD3;border-radius:6px;background:#F4F5F7"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">2</span><div style="flex:1;font:400 13px inherit">Waiting on <span style="font:400 12.5px 'JetBrains Mono',monospace">me@northline.co</span></div><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">13:58</span></div>
+        </div>
+        <div style="font:400 12.5px/1.6 inherit;color:#5B6472;margin-top:12px">Until the second link is opened, the old address still signs you in. Nothing about your scans, domains or plan changes.</div>
+        <div style="display:flex;gap:8px;margin-top:14px"><span style="flex:none;white-space:nowrap;font:500 13px inherit;border:1px solid #C6CBD3;border-radius:999px;padding:8px 15px">Resend</span><span style="flex:none;white-space:nowrap;font:500 13px inherit;color:#A62F2F;border:1px solid #E9B9B9;border-radius:999px;padding:8px 15px">Cancel change</span></div>
+      </div>
+    </div>
+
+    <div style="width:440px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:32px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">6 · account recovery — inbox unreachable</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;margin-top:10px">
+        <div style="font:600 22px/1.3 'Source Serif 4',serif">Can't reach that inbox?</div>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;margin:6px 0 0">If the address on the account no longer exists — someone left, or the mailbox was closed — prove you control the domain instead. It's the same TXT check as verification.</p>
+        <div style="background:#F4F5F7;border:1px solid #E2E5EA;border-radius:8px;padding:14px;margin-top:14px">
+          <div style="display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center;font:400 12.5px 'JetBrains Mono',monospace"><span style="color:#8A93A1">Host</span><span>@</span><span style="font:500 11.5px inherit;color:#0B6151">copy</span></div>
+          <div style="height:1px;background:#E2E5EA;margin:10px 0"></div>
+          <div style="display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center;font:400 12.5px 'JetBrains Mono',monospace"><span style="color:#8A93A1">Value</span><span style="word-break:break-all">citerate-recover=4b7e02c9</span><span style="font:500 11.5px inherit;color:#0B6151">copy</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:14px"><span style="flex:none;white-space:nowrap;font:500 13.5px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:10px 18px">Check the record</span><span style="flex:1;min-width:0;font:400 12px inherit;color:#8A93A1">then tell us the new address</span></div>
+        <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:12px">A recovery holds the account for 72 hours and emails the old address the whole time, so a hijack attempt is visible. Billing and data export stay locked until an admin confirms — we'd rather be slow here than wrong.</div>
+      </div>
+    </div>
+
+    <div style="width:660px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">7 · sessions &amp; devices (Settings → Security)</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;margin-top:10px;overflow:hidden">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #E2E5EA">
+          <div><div style="font:600 20px/1.3 'Source Serif 4',serif">Where you're signed in</div><div style="font:400 12.5px inherit;color:#5B6472;margin-top:3px">Sessions last 30 days and renew while you're active.</div></div>
+          <span style="flex:none;white-space:nowrap;font:500 13px inherit;color:#A62F2F;border:1px solid #E9B9B9;border-radius:999px;padding:8px 15px">Sign out everywhere</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1.6fr 1.2fr 1fr auto;gap:12px;padding:9px 20px;background:#F4F5F7;border-bottom:1px solid #E2E5EA;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1"><span>device</span><span>location · ip</span><span>last active</span><span></span></div>
+        <div style="display:grid;grid-template-columns:1.6fr 1.2fr 1fr auto;gap:12px;padding:13px 20px;border-bottom:1px solid #E2E5EA;align-items:center;font:400 13.5px inherit"><span>Chrome · macOS <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#0B6151;background:#E7F2EF;border-radius:999px;padding:2px 8px">THIS DEVICE</span></span><span style="font:400 12.5px 'JetBrains Mono',monospace;color:#5B6472">London, GB · 81.2.·.·</span><span style="font:400 12.5px 'JetBrains Mono',monospace;color:#5B6472">now</span><span style="font:400 12.5px inherit;color:#8A93A1">—</span></div>
+        <div style="display:grid;grid-template-columns:1.6fr 1.2fr 1fr auto;gap:12px;padding:13px 20px;border-bottom:1px solid #E2E5EA;align-items:center;font:400 13.5px inherit"><span>Safari · iPhone</span><span style="font:400 12.5px 'JetBrains Mono',monospace;color:#5B6472">London, GB · 81.2.·.·</span><span style="font:400 12.5px 'JetBrains Mono',monospace;color:#5B6472">2h ago</span><span style="font:500 12.5px inherit;color:#A62F2F">Revoke</span></div>
+        <div style="display:grid;grid-template-columns:1.6fr 1.2fr 1fr auto;gap:12px;padding:13px 20px;align-items:center;font:400 13.5px inherit"><span>Chrome · Windows</span><span style="font:400 12.5px 'JetBrains Mono',monospace;color:#5B6472">Berlin, DE · 91.7.·.·</span><span style="font:400 12.5px 'JetBrains Mono',monospace;color:#5B6472">2026-07-19</span><span style="font:500 12.5px inherit;color:#A62F2F">Revoke</span></div>
+        <div style="padding:12px 20px;border-top:1px solid #E2E5EA;font:400 12px/1.6 inherit;color:#8A93A1">Revoking is immediate. We email you whenever a session starts on a device we haven't seen, with the same location and time detail shown here — so this table and that email always agree.</div>
+      </div>
+    </div>
+
+    <div style="width:440px;display:flex;flex-direction:column;gap:12px">
+      <div style="background:#FFFFFF;border:1px solid rgba(0,0,0,.1);border-radius:8px;padding:18px 20px">
+        <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#9A6210">8a · too many attempts</div>
+        <div style="margin-top:12px;border:1px solid #E2E5EA;border-left:3px solid #D98324;border-radius:10px;padding:16px 18px">
+          <div style="font:600 20px/1.3 'Source Serif 4',serif">Too many link requests</div>
+          <p style="font:400 13.5px/1.6 inherit;color:#5B6472;margin:7px 0 0">We've sent five links to this address in ten minutes, so we've paused for <span style="font:500 13.5px 'JetBrains Mono',monospace">4:38</span>. The most recent link still works — check the newest email, not the first.</p>
+          <div style="font:400 12.5px/1.6 inherit;color:#5B6472;margin-top:9px">Still nothing arriving? Your mail server may be filtering us. <a href="#">How to allowlist</a>.</div>
+        </div>
+      </div>
+      <div style="background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:8px;padding:18px 20px">
+        <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">8b · new-device notice email</div>
+        <div style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472;margin-top:6px">subject: New sign-in from Chrome on Windows</div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:22px;margin-top:8px">
+          <span style="font:500 15px Menlo,monospace;letter-spacing:-.03em">cite<span style="color:#0E7C66">/</span>rate</span>
+          <div style="font:600 20px/1.35 Georgia,serif;margin-top:14px">Someone signed in from a device we haven't seen before</div>
+          <div style="font:400 13.5px/1.8 Menlo,monospace;color:#5B6472;margin-top:12px">2026-07-27 09:14 UTC<br>Chrome 128 · Windows<br>Berlin, DE · 91.7.·.·</div>
+          <p style="font:400 14px/1.6 inherit;color:#5B6472;margin:12px 0 0">Was it you? Nothing to do. If not, sign out that session and turn on two-factor — both take a minute.</p>
+          <div style="display:inline-block;font:500 14px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:11px 20px;margin-top:12px">Review sessions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.45);margin:34px 0 10px">Optional track · password (9–13)</div>
+  <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+
+    <div style="width:440px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:32px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">9 · set a password (Settings → Security)</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;margin-top:10px">
+        <div style="font:600 22px/1.3 'Source Serif 4',serif">Add a password</div>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;margin:6px 0 0">Optional. Some security policies require one; magic links keep working unless you switch them off below.</p>
+        <label style="display:block;font:500 12px inherit;color:#5B6472;margin-top:16px">New password</label>
+        <div style="display:flex;align-items:center;justify-content:space-between;border:1px solid #3E5C8A;border-radius:6px;padding:12px 13px;margin-top:6px;box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px rgba(62,92,138,.35)"><span style="font:400 14px 'JetBrains Mono',monospace;letter-spacing:.1em">••••••••••••••••</span><span style="font:500 11.5px inherit;color:#0B6151">show</span></div>
+        <div style="display:flex;gap:4px;margin-top:9px"><span style="flex:1;height:4px;border-radius:2px;background:#0E7C66"></span><span style="flex:1;height:4px;border-radius:2px;background:#0E7C66"></span><span style="flex:1;height:4px;border-radius:2px;background:#0E7C66"></span><span style="flex:1;height:4px;border-radius:2px;background:#E2E5EA"></span></div>
+        <div style="font:400 12.5px/1.6 inherit;color:#5B6472;margin-top:7px">Strong — 19 characters. Minimum 12; we check against known breached passwords and reject those. No composition rules, no forced expiry.</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid #E2E5EA">
+          <span style="width:34px;height:20px;border-radius:999px;background:#E2E5EA;position:relative;flex:none"><span style="position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:999px;background:#FFFFFF"></span></span>
+          <span style="font:400 13px/1.5 inherit;color:#5B6472">Disable magic links for this account</span>
+        </div>
+        <span style="display:block;text-align:center;font:500 14px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:12px;margin-top:14px">Save password</span>
+      </div>
+    </div>
+
+    <div style="width:440px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:32px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">10 · sign in with password (+ error)</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:26px;margin-top:10px">
+        <span style="font:500 18px 'JetBrains Mono',monospace;letter-spacing:-.03em">cite<span style="color:#0E7C66">/</span>rate</span>
+        <div style="font:600 24px/1.28 'Source Serif 4',serif;margin-top:14px">Sign in</div>
+        <label style="display:block;font:500 12px inherit;color:#5B6472;margin-top:16px">Email</label>
+        <div style="border:1px solid #C6CBD3;border-radius:6px;padding:12px 13px;margin-top:6px;font:400 14px 'JetBrains Mono',monospace">you@northline.co</div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:12px"><label style="font:500 12px inherit;color:#5B6472">Password</label><span style="font:500 12px inherit;color:#0B6151">Forgot password?</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;border:1px solid #C43D3D;border-radius:6px;padding:12px 13px;margin-top:6px"><span style="font:400 14px 'JetBrains Mono',monospace;letter-spacing:.1em">••••••••</span><span style="color:#C43D3D">⚠</span></div>
+        <div id="pw-err" style="font:400 12.5px/1.5 inherit;color:#A62F2F;margin-top:6px">That email and password don't match. Two attempts left before we pause sign-in for 15 minutes — or use a sign-in link instead.</div>
+        <span style="display:block;text-align:center;font:500 14px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:12px;margin-top:12px">Sign in</span>
+        <div style="text-align:center;font:500 13px inherit;color:#0B6151;margin-top:12px">Email me a link instead</div>
+        <div style="font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1;margin-top:12px">aria-describedby="pw-err" · aria-invalid="true" · error never says which field was wrong</div>
+      </div>
+    </div>
+
+    <div style="width:440px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:32px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">11 · forgot password &nbsp;→&nbsp; 12 · set new</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;margin-top:10px">
+        <div style="font:600 22px/1.3 'Source Serif 4',serif">Reset your password</div>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;margin:6px 0 0">Enter your email and we'll send a reset link, valid 30 minutes.</p>
+        <div style="border:1px solid #C6CBD3;border-radius:6px;padding:12px 13px;margin-top:12px;font:400 14px 'JetBrains Mono',monospace;color:#8A93A1">you@northline.co</div>
+        <span style="display:block;text-align:center;font:500 14px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:12px;margin-top:10px">Send reset link</span>
+        <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:10px">We show this same confirmation whether or not an account exists — that's deliberate, so the page can't be used to discover who has an account.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;margin-top:12px">
+        <div style="font:600 22px/1.3 'Source Serif 4',serif">Choose a new password</div>
+        <label style="display:block;font:500 12px inherit;color:#5B6472;margin-top:14px">New password</label>
+        <div style="display:flex;align-items:center;justify-content:space-between;border:1px solid #C6CBD3;border-radius:6px;padding:12px 13px;margin-top:6px"><span style="font:400 14px 'JetBrains Mono',monospace;letter-spacing:.1em">••••••••••••</span><span style="font:500 11.5px inherit;color:#0B6151">show</span></div>
+        <div style="display:flex;gap:4px;margin-top:9px"><span style="flex:1;height:4px;border-radius:2px;background:#D98324"></span><span style="flex:1;height:4px;border-radius:2px;background:#D98324"></span><span style="flex:1;height:4px;border-radius:2px;background:#E2E5EA"></span><span style="flex:1;height:4px;border-radius:2px;background:#E2E5EA"></span></div>
+        <div style="font:400 12.5px/1.5 inherit;color:#9A6210;margin-top:7px">Fair — add a few more words to make it strong. 12 characters minimum.</div>
+        <span style="display:block;text-align:center;font:500 14px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:12px;margin-top:12px">Save and sign in</span>
+        <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:10px">Saving signs out every other session and emails you to say so.</div>
+      </div>
+    </div>
+
+    <div style="width:440px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:32px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#A62F2F">13 · reset link expired or used</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #C43D3D;border-radius:14px;padding:24px;margin-top:10px">
+        <div style="font:600 22px/1.3 'Source Serif 4',serif">That reset link has expired</div>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;margin:6px 0 0">Reset links last 30 minutes and work once. Your password hasn't changed and your account is untouched — request a new link, or sign in with a magic link and skip the password entirely.</p>
+        <div style="border:1px solid #C6CBD3;border-radius:6px;padding:12px 13px;margin-top:14px;font:400 14px 'JetBrains Mono',monospace">you@northline.co</div>
+        <span style="display:block;text-align:center;font:500 14px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:12px;margin-top:10px">Send a new reset link</span>
+        <div style="text-align:center;font:500 13px inherit;color:#0B6151;margin-top:11px">Email me a sign-in link instead</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid rgba(0,0,0,.1);border-radius:8px;padding:16px 18px;margin-top:12px">
+        <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Copy rule</div>
+        <div style="font:400 12.5px/1.65 inherit;color:#5B6472;margin-top:8px">Every expiry screen states the lifetime, confirms nothing was lost, and offers the shortest way back. "Invalid token" never appears in front of a user.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.45);margin:34px 0 10px">Optional track · two-factor (14)</div>
+  <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+    <div style="width:440px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:32px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">14a · enrol (TOTP)</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;margin-top:10px">
+        <div style="font:600 22px/1.3 'Source Serif 4',serif">Turn on two-factor</div>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;margin:6px 0 0">Scan this with any authenticator app. We'll ask for a code when you sign in on a new device.</p>
+        <div style="display:flex;gap:16px;align-items:flex-start;margin-top:14px">
+          <div style="width:112px;height:112px;flex:none;background:#F4F5F7;border:1px solid #E2E5EA;border-radius:8px;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);gap:2px;padding:8px;box-sizing:border-box">
+            <span style="background:#141B26"></span><span style="background:#141B26"></span><span style="background:#141B26"></span><span></span><span style="background:#141B26"></span><span></span><span style="background:#141B26"></span>
+            <span style="background:#141B26"></span><span></span><span style="background:#141B26"></span><span style="background:#141B26"></span><span></span><span style="background:#141B26"></span><span style="background:#141B26"></span>
+            <span style="background:#141B26"></span><span style="background:#141B26"></span><span></span><span></span><span style="background:#141B26"></span><span></span><span style="background:#141B26"></span>
+            <span></span><span></span><span style="background:#141B26"></span><span style="background:#141B26"></span><span></span><span style="background:#141B26"></span><span></span>
+            <span style="background:#141B26"></span><span></span><span style="background:#141B26"></span><span></span><span style="background:#141B26"></span><span style="background:#141B26"></span><span style="background:#141B26"></span>
+            <span></span><span style="background:#141B26"></span><span></span><span style="background:#141B26"></span><span style="background:#141B26"></span><span></span><span></span>
+            <span style="background:#141B26"></span><span style="background:#141B26"></span><span style="background:#141B26"></span><span></span><span style="background:#141B26"></span><span></span><span style="background:#141B26"></span>
+          </div>
+          <div>
+            <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1">or enter this key</div>
+            <div style="font:400 13px/1.7 'JetBrains Mono',monospace;color:#141B26;margin-top:5px;word-break:break-all">JBSW Y3DP EHPK 3PXP</div>
+            <div style="font:500 11.5px inherit;color:#0B6151;margin-top:6px">copy key</div>
+          </div>
+        </div>
+        <label style="display:block;font:500 12px inherit;color:#5B6472;margin-top:14px">6-digit code from your app</label>
+        <div style="display:flex;gap:6px;margin-top:6px">
+          <span style="flex:1;text-align:center;border:1px solid #C6CBD3;border-radius:6px;padding:11px 0;font:500 17px 'JetBrains Mono',monospace">4</span>
+          <span style="flex:1;text-align:center;border:1px solid #C6CBD3;border-radius:6px;padding:11px 0;font:500 17px 'JetBrains Mono',monospace">1</span>
+          <span style="flex:1;text-align:center;border:1px solid #C6CBD3;border-radius:6px;padding:11px 0;font:500 17px 'JetBrains Mono',monospace">9</span>
+          <span style="flex:1;text-align:center;border:1px solid #C6CBD3;border-radius:6px;padding:11px 0;font:500 17px 'JetBrains Mono',monospace">7</span>
+          <span style="flex:1;text-align:center;border:1px solid #3E5C8A;border-radius:6px;padding:11px 0;font:500 17px 'JetBrains Mono',monospace;box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px rgba(62,92,138,.35)">2</span>
+          <span style="flex:1;text-align:center;border:1px solid #C6CBD3;border-radius:6px;padding:11px 0;font:500 17px 'JetBrains Mono',monospace;color:#8A93A1">—</span>
+        </div>
+        <span style="display:block;text-align:center;font:500 14px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:12px;margin-top:12px">Verify and turn on</span>
+        <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:10px">One field per digit, mono, auto-advance, paste fills all six. Codes accept ±1 time step.</div>
+      </div>
+    </div>
+
+    <div style="width:440px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:32px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">14b · challenge at sign-in</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:26px;margin-top:10px">
+        <span style="font:500 18px 'JetBrains Mono',monospace;letter-spacing:-.03em">cite<span style="color:#0E7C66">/</span>rate</span>
+        <div style="font:600 24px/1.28 'Source Serif 4',serif;margin-top:14px">Enter your code</div>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;margin:6px 0 0">From your authenticator app, for you@northline.co.</p>
+        <div style="display:flex;gap:6px;margin-top:14px">
+          <span style="flex:1;text-align:center;border:1px solid #C6CBD3;border-radius:6px;padding:13px 0;font:500 19px 'JetBrains Mono',monospace;color:#8A93A1">—</span>
+          <span style="flex:1;text-align:center;border:1px solid #C6CBD3;border-radius:6px;padding:13px 0;font:500 19px 'JetBrains Mono',monospace;color:#8A93A1">—</span>
+          <span style="flex:1;text-align:center;border:1px solid #C6CBD3;border-radius:6px;padding:13px 0;font:500 19px 'JetBrains Mono',monospace;color:#8A93A1">—</span>
+          <span style="flex:1;text-align:center;border:1px solid #C6CBD3;border-radius:6px;padding:13px 0;font:500 19px 'JetBrains Mono',monospace;color:#8A93A1">—</span>
+          <span style="flex:1;text-align:center;border:1px solid #C6CBD3;border-radius:6px;padding:13px 0;font:500 19px 'JetBrains Mono',monospace;color:#8A93A1">—</span>
+          <span style="flex:1;text-align:center;border:1px solid #C6CBD3;border-radius:6px;padding:13px 0;font:500 19px 'JetBrains Mono',monospace;color:#8A93A1">—</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:14px">
+          <span style="width:34px;height:20px;border-radius:999px;background:#0E7C66;position:relative;flex:none"><span style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:999px;background:#FFFFFF"></span></span>
+          <span style="font:400 13px inherit;color:#5B6472">Trust this device for 30 days</span>
+        </div>
+        <span style="display:block;text-align:center;font:500 14px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:12px;margin-top:14px">Verify</span>
+        <div style="text-align:center;font:500 13px inherit;color:#0B6151;margin-top:11px">Use a recovery code</div>
+        <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:12px">Codes are checked server-side with a 5-attempt limit per 15 minutes; after that the account requires a recovery code or domain recovery.</div>
+      </div>
+    </div>
+
+    <div style="width:440px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:32px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">14c · recovery codes</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;margin-top:10px">
+        <div style="font:600 22px/1.3 'Source Serif 4',serif">Save your recovery codes</div>
+        <p style="font:400 13.5px/1.6 inherit;color:#5B6472;margin:6px 0 0">Each works once, if you lose your phone. Store them where you keep passwords — not in your inbox, since that's the other way in.</p>
+        <div style="background:#F4F5F7;border:1px solid #E2E5EA;border-radius:8px;padding:16px;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;font:400 13.5px/1.6 'JetBrains Mono',monospace;color:#141B26">
+          <span>4b7e-02c9</span><span>9f31-77ad</span>
+          <span>a02c-4e18</span><span>c5d9-1b60</span>
+          <span>7e44-90f2</span><span>2a8b-5c37</span>
+          <span style="color:#8A93A1;text-decoration:line-through">e10f-3d75</span><span>81c6-4fa9</span>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:12px"><span style="flex:none;white-space:nowrap;font:500 13px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:9px 16px">Download .txt</span><span style="flex:none;white-space:nowrap;font:500 13px inherit;border:1px solid #C6CBD3;border-radius:999px;padding:8px 15px">Copy all</span><span style="flex:none;white-space:nowrap;font:500 13px inherit;border:1px solid #C6CBD3;border-radius:999px;padding:8px 15px">Regenerate</span></div>
+        <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:12px">Struck-through codes are already spent. We show the used count in Settings ("7 of 8 remaining") and email you when the last two are left.</div>
+      </div>
+    </div>
+
+    <div style="width:440px;display:flex;flex-direction:column;gap:12px">
+      <div style="background:#FFFFFF;border:1px solid rgba(0,0,0,.1);border-radius:8px;padding:18px 20px">
+        <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Security panel · where these live</div>
+        <div style="margin-top:12px;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid #E2E5EA;font:400 13.5px inherit">Magic links<span style="font:500 11px 'JetBrains Mono',monospace;color:#0B6151;background:#E7F2EF;border-radius:999px;padding:3px 9px">on</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid #E2E5EA;font:400 13.5px inherit">Password<span style="font:500 12.5px inherit;color:#0B6151">Add</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid #E2E5EA;font:400 13.5px inherit">Two-factor<span style="font:500 12.5px inherit;color:#0B6151">Turn on</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid #E2E5EA;font:400 13.5px inherit">Sessions<span style="font:500 12.5px inherit;color:#5B6472">3 active</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;font:400 13.5px inherit">Sign-in history<span style="font:500 12.5px inherit;color:#5B6472">last 90 days</span></div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid rgba(0,0,0,.1);border-radius:8px;padding:18px 20px">
+        <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#A62F2F">Flags for you</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;font:400 12.5px/1.6 inherit;color:#5B6472">
+          <div><b style="color:#141B26">Two ways in doubles the attack surface.</b> With a password enabled, the account has two credentials and the weaker one sets the floor — which is why "disable magic links" sits next to the password field, and why I'd default new accounts to links only.</div>
+          <div><b style="color:#141B26">Domain recovery beats support tickets</b> but assumes DNS access. For agency accounts where the client owns DNS, recovery should fall back to an admin-confirmed manual check — say the word and I'll design that state.</div>
+          <div><b style="color:#141B26">Passkeys</b> would replace both tracks with something stronger and shorter (one tap, no shared secret, phishing-resistant). If you're open to it I'd design that instead of the password track for v2.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</x-dc>
+</body>
+</html>

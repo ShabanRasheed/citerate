@@ -1,0 +1,151 @@
+---
+/**
+ * Docs — coming-soon state (the agreed decision). The shell is real, the
+ * sidebar shows the planned shape, and one real response body is published so
+ * the page earns its nav slot instead of apologising.
+ */
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+
+const sample = `{
+  "data": [
+    {
+      "id": "obs_2c91f4",
+      "query_id": "q_8f21",
+      "query": "best crm for startups",
+      "engine": "chatgpt",
+      "scanned_at": "2026-07-27T06:12:44Z",
+      "runs": 3,
+      "cited_runs": 1,
+      "citation_rate": 0.333,
+      "cited_urls": ["https://acmecrm.com/startups"],
+      "competitor_urls": ["https://competitor-a.com", "https://competitor-b.com"],
+      "cause": { "label": "aio_displacement", "confidence": 0.86 }
+    }
+  ],
+  "next_cursor": "obs_2c91f4"
+}`;
+
+const groups = [
+  { label: "Getting started", items: ["Overview", "Authentication", "Rate limits"], live: 1 },
+  { label: "Concepts", items: ["Queries and sets", "Scans and runs", "Observations", "Findings and causes"], live: 0 },
+  {
+    label: "API reference",
+    items: ["GET /v1/domains", "GET /v1/scans", "GET /v1/observations", "POST /v1/scans", "Webhooks"],
+    live: 0,
+    mono: true
+  }
+];
+---
+
+<Base
+  title="Docs & API"
+  description="The Citerate API is being designed in public. The resource model, one real response body, and a beta list for schema changes."
+  noindex={false}
+>
+  <Header current="docs" />
+
+  <main id="main" class="docs">
+    <aside class="docs__side" aria-label="Documentation">
+      {
+        groups.map((g) => (
+          <div class="docs__group">
+            <span class="t-label t-label--ink">{g.label}</span>
+            {g.items.map((item, i) => (
+              <span
+                class:list={["docs__link", i >= g.live && "docs__link--disabled"]}
+                style={g.mono ? "font-family:var(--font-mono);font-size:13px" : undefined}
+                aria-current={i < g.live ? "page" : undefined}
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        ))
+      }
+      <div class="docs__notice">
+        <strong style="display:block;font:500 10px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">
+          Not live yet
+        </strong>
+        Sidebar shows the planned shape. Pages unlock as endpoints stabilise.
+      </div>
+    </aside>
+
+    <div class="docs__body">
+      <div style="max-width:820px" class="stack stack--4">
+        <div class="post-meta">
+          <span class="chip chip--warn">Coming soon</span>
+          <span>read API in private beta · write API after</span>
+        </div>
+
+        <h1 class="t-d1 u-mw-26">The API is being designed in public, not documented in advance.</h1>
+
+        <p class="t-lead">
+          We'd rather show you the shape we're building than publish endpoints we'll rename next month. Below
+          is the resource model as it stands and one real response body. If you're planning an integration,
+          join the beta list and you'll get schema changes as they land — including breaking ones, with notice.
+        </p>
+
+        <div class="grid grid--2" style="margin-top:16px">
+          <div class="c-card">
+            <span class="t-label t-label--ink">Read API · Growth and above</span>
+            <span class="t-sm">
+              Pull citation rates, per-query observations, causes, and findings into your BI or client
+              reporting. Bearer token, JSON, cursor pagination.
+            </span>
+            <span class="t-data-sm tx-cited">Private beta now</span>
+          </div>
+          <div class="c-card">
+            <span class="t-label t-label--ink">Write API + webhooks · Scale</span>
+            <span class="t-sm">
+              Create query sets, trigger on-demand scans, and receive a POST when a scan completes or a finding
+              changes state.
+            </span>
+            <span class="t-data-sm tx-warn">After read API ships</span>
+          </div>
+        </div>
+
+        <div class="c-card c-card--ink c-card--flush" style="margin-top:8px">
+          <div
+            class="row-between"
+            style="padding:12px 20px;border-bottom:1px solid var(--side-line);gap:12px"
+          >
+            <span class="t-data-sm">GET /v1/observations?query_id=q_8f21&amp;engine=chatgpt</span>
+            <span class="t-data-sm" style="color:var(--ink-soft)">shape may change</span>
+          </div>
+          <pre
+            style="margin:0;padding:20px;font:var(--t-code);color:#C6CBD3;white-space:pre-wrap;overflow-x:auto"
+          >{sample}</pre>
+        </div>
+
+        <div class="c-card" style="margin-top:8px">
+          <div class="row-between">
+            <div class="stack stack--2">
+              <span class="t-d4">Get schema changes before they ship</span>
+              <span class="t-sm">Beta list only. Roughly one email per change, no marketing.</span>
+            </div>
+            <form style="display:flex;gap:8px" method="POST" action="/api/subscribe">
+              <input type="hidden" name="source" value="api_beta" />
+              <label class="visually-hidden-focusable" for="api-email">Email</label>
+              <input
+                class="form-field__input"
+                id="api-email"
+                name="email"
+                type="email"
+                required
+                placeholder="you@company.com"
+                style="width:220px"
+              />
+              <button class="btn-primary-c u-nowrap" type="submit">Join API beta</button>
+            </form>
+          </div>
+        </div>
+
+        <p class="figcap">
+          Concept pages (queries, scans, observations, causes) publish before the endpoints do — they're the
+          same vocabulary the dashboard uses, so they're useful with or without the API.
+        </p>
+      </div>
+    </div>
+  </main>
+</Base>

@@ -1,0 +1,45 @@
+#:schema node_modules/wrangler/config-schema.json
+# ---------------------------------------------------------------------------
+# Scan consumer. Same bindings as the Pages project, plus a cron trigger.
+# The whole queue is a jobs table + this tick. Zero cost until volume forces
+# Cloudflare Queues (the $5/month line).
+# ---------------------------------------------------------------------------
+name = "citerate-scanner"
+main = "index.ts"
+compatibility_date = "2026-07-01"
+compatibility_flags = ["nodejs_compat"]
+
+[triggers]
+crons = ["* * * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "citerate-db"
+database_id = "REPLACE_WITH_D1_ID"
+migrations_dir = "../../migrations"
+
+[[kv_namespaces]]
+binding = "SCAN_CACHE"
+id = "REPLACE_WITH_KV_ID"
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "REPLACE_WITH_KV_ID_2"
+
+[[r2_buckets]]
+binding = "ARTIFACTS"
+bucket_name = "citerate-artifacts"
+
+[vars]
+RUNS_PER_ENGINE = "3"
+SCAN_BATCH_SIZE = "12"
+USE_ENGINE_MOCKS = "true"   # flip to "false" once engine keys are set
+
+[observability]
+enabled = true
+
+# Secrets:
+#   wrangler secret put OPENAI_API_KEY --config workers/scanner/wrangler.toml
+#   wrangler secret put PERPLEXITY_API_KEY --config workers/scanner/wrangler.toml
+#   wrangler secret put GEMINI_API_KEY --config workers/scanner/wrangler.toml
+#   wrangler secret put SERP_API_KEY --config workers/scanner/wrangler.toml

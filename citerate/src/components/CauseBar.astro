@@ -1,0 +1,52 @@
+---
+/**
+ * Cause-separation bar + legend. Hue is never the only signal: "other" is
+ * always striped, per the token contract.
+ */
+interface Props {
+  aio: number;
+  rank: number;
+  tech: number;
+  other: number;
+  tall?: boolean;
+  legend?: boolean;
+}
+const { aio, rank, tech, other, tall = false, legend = true } = Astro.props;
+
+const total = aio + rank + tech + other || 1;
+const pct = (n: number) => `${((n / total) * 100).toFixed(1)}%`;
+
+const segs = [
+  { key: "aio", label: "AIO displacement", value: aio },
+  { key: "rank", label: "Ranking", value: rank },
+  { key: "tech", label: "Technical", value: tech },
+  { key: "other", label: "Other", value: other }
+] as const;
+---
+
+<div class="stack stack--2">
+  <div
+    class:list={["cause-bar", tall && "cause-bar--tall"]}
+    role="img"
+    aria-label={segs.map((s) => `${s.label} ${pct(s.value)}`).join(", ")}
+  >
+    {
+      segs.map(
+        (s) => s.value > 0 && <div class={`cause-bar__seg cause-bar__seg--${s.key}`} style={`width:${pct(s.value)}`} />
+      )
+    }
+  </div>
+
+  {
+    legend && (
+      <div class="legend">
+        {segs.map((s) => (
+          <span class="legend__item">
+            <span class={`legend__swatch legend__swatch--${s.key}`} aria-hidden="true"></span>
+            {s.label}
+          </span>
+        ))}
+      </div>
+    )
+  }
+</div>

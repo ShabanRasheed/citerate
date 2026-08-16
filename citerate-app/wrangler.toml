@@ -1,0 +1,48 @@
+name = "citerate-app"
+compatibility_date = "2025-03-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "./dist"
+
+# Same ids as the marketing repo's wrangler.toml — one database, two front ends.
+[[d1_databases]]
+binding = "DB"
+database_name = "citerate-db"
+database_id = "REPLACE_WITH_D1_ID"
+migrations_dir = "migrations"
+
+[[kv_namespaces]]
+binding = "SCAN_CACHE"
+id = "REPLACE_WITH_SCAN_CACHE_ID"
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "REPLACE_WITH_RATE_LIMIT_ID"
+
+[[r2_buckets]]
+binding = "ARTIFACTS"
+bucket_name = "citerate-artifacts"
+
+# Browser Rendering — renders /reports/<id> to PDF once, then R2 serves it.
+# Optional: without this binding the route falls back to the print path.
+[browser]
+binding = "BROWSER"
+
+[vars]
+PUBLIC_SITE_URL = "https://citerate.com"
+PUBLIC_APP_URL = "https://app.citerate.com"
+PUBLIC_TURNSTILE_SITE_KEY = "REPLACE_WITH_TURNSTILE_SITE_KEY"
+SESSION_TTL_DAYS = "30"
+SESSION_TTL_DAYS_UNTRUSTED = "1"
+MAGIC_LINK_TTL_MINUTES = "15"
+USE_ENGINE_MOCKS = "true"
+PADDLE_ENV = "production"
+# Plan→price JSON map — format in api/billing/checkout.ts. Not a secret.
+PADDLE_PRICE_IDS = ""
+GOOGLE_CLIENT_ID = "REPLACE_WITH_GOOGLE_CLIENT_ID"
+
+# Secrets are never in this file:
+#   wrangler pages secret put SESSION_SECRET        --project-name=citerate-app
+#   wrangler pages secret put TURNSTILE_SECRET_KEY  --project-name=citerate-app
+#   wrangler pages secret put RESEND_API_KEY        --project-name=citerate-app
+#   wrangler pages secret put PADDLE_API_KEY        --project-name=citerate-app
+#   wrangler pages secret put GOOGLE_CLIENT_SECRET  --project-name=citerate-app

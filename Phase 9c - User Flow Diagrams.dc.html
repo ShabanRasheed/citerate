@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#F4F5F7;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="max-width:1320px;margin:0 auto;padding:48px 40px 120px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:20px;border-bottom:2px solid #141B26">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Phase 9c · UX package 3 of 8 · 2026-07-29</div>
+      <h1 style="font:600 34px/1.15 'Source Serif 4',serif;letter-spacing:-.015em;margin:10px 0 0">User flow diagrams — every path, both properties</h1>
+      <p style="font:400 14px/1.55 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0;text-wrap:pretty">Eighteen flows covering acquisition, auth, onboarding, the core diagnostic loop, reporting, billing, collaboration and every dead end. Route names are the real ones from the two repos, so a flow can be read as a build checklist. Every decision node names its condition; every failure has a labelled recovery edge.</p>
+    </div>
+    <div style="flex:none;text-align:right;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+      <div>flows &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18</div>
+      <div>decisions &nbsp;41</div>
+      <div>dead ends 9 <span style="color:#8A93A1">all recoverable</span></div>
+      <div style="color:#8A93A1">personas &nbsp;&nbsp;P1 P2 P3</div>
+    </div>
+  </div>
+
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px;margin-top:20px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">LEGEND</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;align-items:center">
+      <div style="background:#141B26;color:#F4F5F7;border-radius:999px;padding:7px 14px;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em">TERMINAL</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:6px 12px;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#141B26">SCREEN / ROUTE</div>
+      <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:6px 12px;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#5B6472">SYSTEM / API</div>
+      <div style="background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:6px 12px;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#34507A">◆ DECISION</div>
+      <div style="background:#FFFFFF;border:1px dashed #8A93A1;border-radius:8px;padding:6px 12px;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#5B6472">✉ EMAIL</div>
+      <div style="background:#FBEDED;border:1px solid #F0D6D6;border-radius:8px;padding:6px 12px;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#A62F2F">ERROR / BLOCKED</div>
+      <div style="background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:6px 12px;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#0B6151">✓ GOAL REACHED</div>
+      <div style="background:#FDF2E3;border:1px solid #F2E0C4;border-radius:8px;padding:6px 12px;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#9A6210">🔒 PLAN GATE</div>
+      <div style="font:400 12px/1.4 inherit;color:#5B6472;padding-left:6px">→ sequence &nbsp;·&nbsp; ⤶ branch &nbsp;·&nbsp; ↺ returns to an earlier node</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0">
+    <a href="#a" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">A · acquisition &amp; auth</a>
+    <a href="#b" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">B · onboarding</a>
+    <a href="#c" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">C · the loop</a>
+    <a href="#d" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">D · commerce &amp; team</a>
+    <a href="#e" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">E · edges &amp; failures</a>
+    <a href="#master" style="font:500 11.5px 'JetBrains Mono',monospace;color:#F4F5F7;background:#141B26;border:1px solid #141B26;border-radius:999px;padding:5px 12px">★ master map</a>
+  </div>
+
+  <section id="master" style="scroll-margin-top:16px;margin-top:52px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">★ · Master map</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">The whole product on one line</h2>
+    <p style="font:400 13.5px/1.6 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0">Five bands. Everything below this map is a zoom into one of them. Read the vertical stack inside each band as "any of these", and the arrows between bands as "and then".</p>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px;align-items:start">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #3E5C8A;border-radius:4px 4px 10px 10px;padding:16px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#34507A">BAND 1 · REACH</div>
+        <div style="font:600 17px/1.3 'Source Serif 4',serif;margin-top:8px">Marketing site</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px;font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#5B6472">
+          <div>/ hero teaser</div><div>/pricing</div><div>/how-it-works</div><div>/for/agencies</div><div>/compare/[slug]</div><div>/blog · /docs</div>
+        </div>
+        <div style="font:400 11.5px/1.5 inherit;color:#8A93A1;margin-top:10px;padding-top:10px;border-top:1px solid #E2E5EA">Exit: a hostname typed into the hero, or nothing.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #0E7C66;border-radius:4px 4px 10px 10px;padding:16px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0B6151">BAND 2 · CONVERT</div>
+        <div style="font:600 17px/1.3 'Source Serif 4',serif;margin-top:8px">Free scan &amp; auth</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px;font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#5B6472">
+          <div>/scan/[token]</div><div>/claim/[token]</div><div>/sign-up · /sign-in</div><div>/check-email · /verify</div><div>/invite/[token]</div>
+        </div>
+        <div style="font:400 11.5px/1.5 inherit;color:#8A93A1;margin-top:10px;padding-top:10px;border-top:1px solid #E2E5EA">The seam. One token type, two redemption paths (link or code).</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #D98324;border-radius:4px 4px 10px 10px;padding:16px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#9A6210">BAND 3 · ACTIVATE</div>
+        <div style="font:600 17px/1.3 'Source Serif 4',serif;margin-top:8px">Onboarding, 3 steps</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px;font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#5B6472">
+          <div>/onboarding/domain</div><div>/onboarding/queries</div><div>/onboarding/connect</div>
+        </div>
+        <div style="font:400 11.5px/1.5 inherit;color:#8A93A1;margin-top:10px;padding-top:10px;border-top:1px solid #E2E5EA">Steps 2 and 3 are skippable. Step 1 is not — everything is scoped to a verified domain.</div>
+      </div>
+      <div style="background:#141B26;border:1px solid #141B26;border-radius:10px;padding:16px;color:#F4F5F7">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">BAND 4 · THE LOOP</div>
+        <div style="font:600 17px/1.3 'Source Serif 4',serif;margin-top:8px">Diagnose → fix → prove</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px;font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">
+          <div style="color:#F4F5F7">/overview</div><div style="color:#F4F5F7">/queries + drawer</div><div style="color:#F4F5F7">/fixes</div><div style="color:#F4F5F7">/competitors</div><div style="color:#F4F5F7">/reports · /reports/[id]</div>
+        </div>
+        <div style="font:400 11.5px/1.5 inherit;color:#8A93A1;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.14)">Where retention is won or lost. Re-entered weekly by P1, monthly by P2/P3.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #8A93A1;border-radius:4px 4px 10px 10px;padding:16px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#5B6472">BAND 5 · SUSTAIN</div>
+        <div style="font:600 17px/1.3 'Source Serif 4',serif;margin-top:8px">Settings &amp; commerce</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px;font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#5B6472">
+          <div>/settings (profile)</div><div>/settings/team</div><div>/settings/billing</div><div>/settings/brand</div><div>/settings/email</div><div>/settings/workspaces</div>
+        </div>
+        <div style="font:400 11.5px/1.5 inherit;color:#8A93A1;margin-top:10px;padding-top:10px;border-top:1px solid #E2E5EA">Entered on purpose, twice a quarter — except /workspaces, which P3 uses 14 times an hour.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="a" style="scroll-margin-top:16px;margin-top:64px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Band A · Acquisition &amp; authentication</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Five ways a person becomes a signed-in user</h2>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;margin-top:18px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F01</span> <span style="font:600 20px/1.3 'Source Serif 4',serif">Free scan — anonymous to readout</span></div>
+        <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">persona P2 primary · P1 P3 evaluate here · marketing repo</div>
+      </div>
+      <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0;max-width:90ch">No account, no card, no call. The entire funnel hinges on this returning a real sentence in under twenty seconds; anything slower and P2 is gone.</p>
+      <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin-top:16px">
+        <div style="flex:0 0 auto;background:#141B26;color:#F4F5F7;border-radius:999px;padding:11px 16px;display:flex;align-items:center;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em">START · SEARCH / LLM REFERRAL</div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:190px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SCREEN /</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Hero: one hostname field, serif promise, no signup CTA above it</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DECISION</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Hostname resolves &amp; is not on the abuse list?</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM api/scan</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Mint scan token, queue 25 seed queries × 2 engines</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:200px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SCREEN /scan/[token]</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Streams partial results; verdict sentence lands first, table fills behind it</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:190px;background:#FDF2E3;border:1px solid #F2E0C4;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#9A6210">🔒 GATE</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Competitor names blurred, history absent — real data behind a veil</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:9px 11px;max-width:170px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">✓ GOAL</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">"Claim this scan" → F02</div>
+        </div>
+      </div>
+      <div style="margin-left:14px;margin-top:12px;padding-left:16px;border-left:2px dashed #C6CBD3">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#A62F2F">⤶ NO · UNRESOLVABLE</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:280px;background:#FBEDED;border:1px solid #F0D6D6;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Inline error under the field, hostname preserved, suggestion offered ("did you mean www.…"). Never a page navigation.</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">↺</div>
+          <div style="font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">back to hero field</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#9A6210">⤶ TIMEOUT &gt;20s</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:280px;background:#FDF2E3;border:1px solid #F2E0C4;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Show what finished, label the rest <em>still running</em>, offer email delivery of the finished readout.</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:180px;background:#FFFFFF;border:1px dashed #8A93A1;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">✉ "Your scan is ready" with the same token</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#34507A">⤶ ALREADY CLAIMED HOST</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:320px;background:#EBEFF6;border:1px solid #D8E0EE;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Still runs the scan — we never reveal that another workspace tracks the host at this stage. Collision is only surfaced <em>after</em> authentication, in F06.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;margin-top:14px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F02</span> <span style="font:600 20px/1.3 'Source Serif 4',serif">Claim a scan — the seam between the two repos</span></div>
+        <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">marketing mints · app redeems · redemption = account creation</div>
+      </div>
+      <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0;max-width:90ch">The highest-leverage flow in the product: it is simultaneously sign-up, domain verification and first data load. One token, two redemption paths, because P2 is on a phone and does not trust his mail app's webview.</p>
+      <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin-top:16px">
+        <div style="flex:0 0 auto;max-width:170px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SCREEN /scan/[token]</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Email field on the blurred region</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM api/claim</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Attach scan to email, mint one token, hash it, 15-min TTL</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:190px;background:#FFFFFF;border:1px dashed #8A93A1;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">✉ EMAIL</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Magic link <em>and</em> the same 6-digit code — one token rendered two ways</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DECISION</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Link tapped, or code typed on <span style="font:400 11px 'JetBrains Mono',monospace">/check-email</span>?</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:190px;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM /verify → /claim/[token]</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Create user + workspace, mark domain verified, migrate the 25 queries and their runs</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:190px;background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">✓ GOAL</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Onboarding step 1 <em>pre-satisfied</em>; lands on step 2 with data already on screen</div>
+        </div>
+      </div>
+      <div style="margin-left:14px;margin-top:12px;padding-left:16px;border-left:2px dashed #C6CBD3">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#A62F2F">⤶ TOKEN EXPIRED</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:340px;background:#FBEDED;border:1px solid #F0D6D6;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">"That link has expired" with a one-tap resend, email pre-filled. The <em>scan itself is not lost</em> — it is keyed to the email, not the token.</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">↺</div>
+          <div style="font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">re-mint, same scan</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#34507A">⤶ EMAIL ALREADY HAS AN ACCOUNT</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:340px;background:#EBEFF6;border:1px solid #D8E0EE;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Same email, same token mechanism — it silently becomes a sign-in that also attaches the new scan as a second domain (or offers to, if the plan's domain limit is reached).</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#9A6210">⤶ ROLE-ACCOUNT EMAIL (info@, admin@)</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:340px;background:#FDF2E3;border:1px solid #F2E0C4;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Allowed, but the confirmation copy warns that anyone reading that inbox can access the workspace. No hard block — P2 often <em>is</em> info@.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F03</span> <span style="font:600 18px/1.3 'Source Serif 4',serif">Cold sign-up (no prior scan)</span></div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">The path P1 takes when she arrives from <span style="font:400 11.5px 'JetBrains Mono',monospace">/how-it-works</span> and wants the real thing immediately.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
+          <div style="display:flex;gap:8px;align-items:center"><span style="flex:none;width:20px;font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">01</span><div style="flex:1;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit"><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/sign-up</span> — email only. No password field exists anywhere in the product.</div></div>
+          <div style="display:flex;gap:8px;align-items:center"><span style="flex:none;width:20px;font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">02</span><div style="flex:1;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit"><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">api/auth/request-link</span> — rate-limited per email and per IP.</div></div>
+          <div style="display:flex;gap:8px;align-items:center"><span style="flex:none;width:20px;font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">03</span><div style="flex:1;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit"><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/check-email</span> — code field focused, resend on a 30s cooldown, "wrong address?" edit link.</div></div>
+          <div style="display:flex;gap:8px;align-items:center"><span style="flex:none;width:20px;font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">04</span><div style="flex:1;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit"><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/verify</span> — session cookie set, workspace created, redirect to onboarding step 1.</div></div>
+          <div style="display:flex;gap:8px;align-items:center"><span style="flex:none;width:20px;font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">05</span><div style="flex:1;background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">✓ <span style="font:400 11px 'JetBrains Mono',monospace">/onboarding/domain</span> — nothing pre-filled, unlike F02.</div></div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F04</span> <span style="font:600 18px/1.3 'Source Serif 4',serif">Returning sign-in</span></div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">Runs 40+ times a month for P3. The whole cost of passwordless auth is paid here, so this flow is optimised hardest.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
+          <div style="display:flex;gap:8px;align-items:center"><span style="flex:none;width:20px;font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">01</span><div style="flex:1;background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:8px 11px;font:400 12px/1.4 inherit">◆ Valid session cookie? → straight to <span style="font:400 11px 'JetBrains Mono',monospace">/overview</span>, no interstitial. Sessions are long-lived and listed in Settings for revocation.</div></div>
+          <div style="display:flex;gap:8px;align-items:center"><span style="flex:none;width:20px;font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">02</span><div style="flex:1;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit"><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/sign-in</span> — email remembered from local storage; one tap sends the link.</div></div>
+          <div style="display:flex;gap:8px;align-items:center"><span style="flex:none;width:20px;font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">03</span><div style="flex:1;background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:8px 11px;font:400 12px/1.4 inherit">◆ Multiple workspace memberships? → workspace picker; single membership skips it entirely.</div></div>
+          <div style="display:flex;gap:8px;align-items:center"><span style="flex:none;width:20px;font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">04</span><div style="flex:1;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit"><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">middleware.ts</span> — restores last-visited route, so a deep link survives the auth round trip.</div></div>
+          <div style="display:flex;gap:8px;align-items:center"><span style="flex:none;width:20px;font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">05</span><div style="flex:1;background:#FBEDED;border:1px solid #F0D6D6;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Unknown email → we still say "check your inbox". No account enumeration; the email that arrives is a sign-<em>up</em> invitation instead.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;margin-top:14px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F05</span> <span style="font:600 20px/1.3 'Source Serif 4',serif">Accepting a seat invite</span></div>
+        <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">P3's staff and clients enter here · /invite/[token]</div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin-top:16px">
+        <div style="flex:0 0 auto;max-width:180px;background:#FFFFFF;border:1px dashed #8A93A1;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">✉ EMAIL</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">"Priya invited you to Halfstack · Northline" — names the workspace <em>and</em> the role</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DECISION</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Token valid, unrevoked, unexpired?</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DECISION</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Existing user? Add membership. New? Create user first.</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:190px;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM rbac.ts</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Role applied: admin · editor · viewer · client. Notification prefs seeded per membership.</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:200px;background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">✓ GOAL</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Lands on <span style="font:400 11px 'JetBrains Mono',monospace">/overview</span>, already scoped — <em>never</em> onboarding. The workspace is already set up.</div>
+        </div>
+      </div>
+      <div style="margin-left:14px;margin-top:12px;padding-left:16px;border-left:2px dashed #C6CBD3">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#A62F2F">⤶ REVOKED OR SEAT LIMIT REACHED</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:420px;background:#FBEDED;border:1px solid #F0D6D6;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Plain explanation + "ask <em>Priya</em> to re-invite you" with her name resolved. Notifies the inviting admin. A revoked invite must never look like a broken product.</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#34507A">⤶ ROLE = CLIENT</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:420px;background:#EBEFF6;border:1px solid #D8E0EE;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Sidebar collapses to Overview + Reports only. No fix queue, no settings, no billing, no other workspace visible. P3's client should never see agency machinery.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="b" style="scroll-margin-top:16px;margin-top:64px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Band B · Onboarding</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Three steps, two of them skippable</h2>
+    <p style="font:400 13.5px/1.6 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0">Onboarding is where P2 abandons and where P3 multiplies effort by fourteen. Both problems are solved by making steps 2 and 3 optional and by pre-satisfying step 1 whenever the user arrived through F02. No 2FA enrolment here — that was decided out of scope in Phase 8.</p>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;margin-top:18px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F06</span> <span style="font:600 20px/1.3 'Source Serif 4',serif">Step 1 — domain verification, and the collision it can hit</span></div>
+        <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/onboarding/domain · api/onboarding/domain · join_requests</div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin-top:16px">
+        <div style="flex:0 0 auto;max-width:170px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SCREEN step 1/3</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Hostname field; pre-filled and pre-verified if arriving from F02</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:190px;background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DECISION A</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Is this hostname already <em>verified</em> by another workspace?</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:190px;background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DECISION B</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Ownership proof: DNS TXT, meta tag, or already-connected GSC property</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:190px;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM domain.ts</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Normalise host, poll for proof, mark verified, seed topic clusters</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:170px;background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">✓ STEP 2</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Query set</div>
+        </div>
+      </div>
+      <div style="margin-left:14px;margin-top:12px;padding-left:16px;border-left:2px dashed #C6CBD3">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#9A6210">⤶ A = YES · COLLISION</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:250px;background:#FDF2E3;border:1px solid #F2E0C4;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">"northline.co is already tracked by a workspace on this account's domain." Offer: <strong>request access</strong>.</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:200px;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Row in <span style="font:400 11px 'JetBrains Mono',monospace">join_requests</span>, 7-day expiry, admins notified</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:200px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Pending state screen; can still add a <em>different</em> domain meanwhile → F15 approval</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#A62F2F">⤶ B = NO PROOF YET</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:420px;background:#FBEDED;border:1px solid #F0D6D6;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Not a blocker: the account is created, the free scan already ran, and the user can proceed to browse read-only. Verification is required only before the <em>first scheduled</em> scan and before any report. State that plainly rather than trapping them on step 1.</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#34507A">⤶ P3 BULK PATH</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:420px;background:#EBEFF6;border:1px solid #D8E0EE;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">An agency creating 14 client workspaces verifies via connected GSC properties in one pass from <span style="font:400 11px 'JetBrains Mono',monospace">/settings/workspaces</span>, never fourteen times through onboarding.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F07</span> <span style="font:600 18px/1.3 'Source Serif 4',serif">Step 2 — the query set</span></div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">The highest-effort step in the whole product, and the one that most determines whether the numbers feel real. Every design decision here reduces typing.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
+          <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM seed-queries.ts</span><div style="margin-top:3px">25 queries generated from the domain's topic clusters, shown already populated. <span style="color:#9A6210">Note: generator is a Phase 8 placeholder — first thing to build in Phase 10.</span></div></div>
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SCREEN</span><div style="margin-top:3px">Editable list, inline add, bulk paste, cluster tags. Counter against the plan limit is always visible.</div></div>
+          <div style="background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DECISION</span><div style="margin-top:3px">Over the plan's <span style="font:400 11px 'JetBrains Mono',monospace">trackedQueries</span>? → show overage cost inline, never block the save.</div></div>
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SKIP</span><div style="margin-top:3px">"Use these 25 for now" is a primary-weight button, not a grey link. P2 takes it every time.</div></div>
+          <div style="background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit">✓ Queries saved → step 3</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F08</span> <span style="font:600 18px/1.3 'Source Serif 4',serif">Step 3 — connect Search Console</span></div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">Optional, and honest about why: GSC is what lets us separate <em>ranking decline</em> from <em>AIO displacement</em>. Without it, more queries land in "unexplained" — and we say so.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SCREEN /onboarding/connect</span><div style="margin-top:3px">States the exact benefit and the exact scope requested. Read-only, one property.</div></div>
+          <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM api/connect/gsc</span><div style="margin-top:3px">OAuth redirect. <span style="color:#9A6210">Callback URL is a Phase 8 placeholder.</span></div></div>
+          <div style="background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DECISION</span><div style="margin-top:3px">Granted → property list → match to this domain → also satisfies F06 verification.</div></div>
+          <div style="background:#FDF2E3;border:1px solid #F2E0C4;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#9A6210">DENIED / SKIPPED</span><div style="margin-top:3px">Proceed. A persistent, dismissible card on <span style="font:400 11px 'JetBrains Mono',monospace">/overview</span> explains what is less precise without it.</div></div>
+          <div style="background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit">✓ First scan queued → <span style="font:400 11px 'JetBrains Mono',monospace">/overview</span> with a scanning state, not an empty state</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="c" style="scroll-margin-top:16px;margin-top:64px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Band C · The core loop</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Diagnose, prioritise, ship, prove</h2>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;margin-top:18px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F09</span> <span style="font:600 20px/1.3 'Source Serif 4',serif">The weekly diagnostic session (P1's main flow)</span></div>
+        <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">digest email → /overview → /queries → drawer → /fixes</div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin-top:16px">
+        <div style="flex:0 0 auto;max-width:180px;background:#FFFFFF;border:1px dashed #8A93A1;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">✉ ENTRY</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Monday digest, deep-linking the <em>cluster</em> that moved, not the home page</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SCREEN /overview</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Verdict sentence → score ±band → cause bar → trend. In that order, always.</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DECISION</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Is the delta outside the band?</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:190px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SCREEN /queries</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Click a cause segment → table arrives pre-filtered and sorted by delta</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:190px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">DRAWER (not a route)</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Run-by-run evidence, engine grid with SURFACE/PROXY, competitor hosts, confidence</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">✓ GOAL</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Believes the number → continues to F11</div>
+        </div>
+      </div>
+      <div style="margin-left:14px;margin-top:12px;padding-left:16px;border-left:2px dashed #C6CBD3">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#0B6151">⤶ INSIDE THE BAND</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:440px;background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Overview says <em>within noise</em> and the session <strong>ends here on purpose</strong>. A tool that manufactures a task every week trains users to ignore it. This is a feature, and it is why P3 can send reports.</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#34507A">⤶ SAVED VIEW</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:440px;background:#EBEFF6;border:1px solid #D8E0EE;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Any filter set can be named and saved (<span style="font:400 11px 'JetBrains Mono',monospace">saved_views</span>), optionally shared with the workspace. This is the mechanism that turns a 500-row table into a two-minute routine.</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#9A6210">⤶ 🔒 STARTER / FREE</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:440px;background:#FDF2E3;border:1px solid #F2E0C4;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Cause column present, competitor names blurred, no fix queue link. The drawer still opens — evidence is never gated, only <em>names</em> and <em>remediation</em> are.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;margin-top:14px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F10</span> <span style="font:600 20px/1.3 'Source Serif 4',serif">Fix lifecycle — open → shipped → verified</span></div>
+        <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">the flow the entire product exists to complete · Growth+</div>
+      </div>
+      <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0;max-width:92ch">Note the two-scan latency between <em>shipped</em> and any verdict. We state it up front rather than showing a fake instant confirmation — the credibility of the whole loop depends on not lying at this exact moment.</p>
+      <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin-top:16px">
+        <div style="flex:0 0 auto;max-width:190px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SCREEN /fixes</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Queue ordered by recoverable citations × effort. Technical decay floats to the top by rule.</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:190px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">FIX CARD EXPANDED</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">The URL, the exact change, the queries it should recover, the estimated recovery with a band</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DECISION</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Act now · copy to ticket · snooze · dismiss with a reason</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM api/fixes/[id]</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">status = shipped, deploy timestamp recorded, affected queries flagged for re-test</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM next 2 scans</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Re-measure only the flagged queries; compare bands either side of the deploy</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DECISION</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Bands separated?</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">✓ VERIFIED</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Badge + ✉ email + a fix-proof snapshot becomes available → F13</div>
+        </div>
+      </div>
+      <div style="margin-left:14px;margin-top:12px;padding-left:16px;border-left:2px dashed #C6CBD3">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#8A93A1">⤶ BANDS STILL OVERLAP</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:460px;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Status becomes <span style="font:500 11px 'JetBrains Mono',monospace">no measurable change</span> — <em>not</em> "failed". The honest label, plus the option to keep watching for two more scans. This state must be as well-designed as success; it is what separates us from a horoscope.</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#A62F2F">⤶ RATE WENT DOWN</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:460px;background:#FBEDED;border:1px solid #F0D6D6;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Reported as a regression with the same rigour, and the fix template is down-weighted globally. We do not quietly hide fixes that hurt.</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#34507A">⤶ ROLE = VIEWER / CLIENT</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:460px;background:#EBEFF6;border:1px solid #D8E0EE;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">Can read the queue, cannot change status. The mark-shipped control is absent, not disabled — a disabled button invites a support ticket.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F11</span> <span style="font:600 18px/1.3 'Source Serif 4',serif">Competitor investigation</span></div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">The flow that unlocks budget, because a rival's name is more persuasive than any score.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SCREEN /competitors</span><div style="margin-top:3px">Hosts ranked by citations won on <em>your</em> tracked queries. Not a generic market share figure.</div></div>
+          <div style="background:#FDF2E3;border:1px solid #F2E0C4;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#9A6210">🔒 GATE</span><div style="margin-top:3px">Below Growth: shapes and counts visible, names blurred. The upsell sits on the user's own data — the single most effective conversion surface in the product.</div></div>
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">DRILL</span><div style="margin-top:3px">Click a host → the queries where it beat you → per-run receipts in the drawer.</div></div>
+          <div style="background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit">✓ Exports as a slide-ready block, or feeds a fix ("their comparison page is cited; you don't have one").</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F12</span> <span style="font:600 18px/1.3 'Source Serif 4',serif">On-demand rescan</span></div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">The impatience valve. Scale+ has it natively; everyone else can buy a pack of ten.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">TRIGGER</span><div style="margin-top:3px">"Rescan now" from a fix card, a query row, or the topbar.</div></div>
+          <div style="background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DECISION</span><div style="margin-top:3px">Plan includes on-demand? → run. Else → offer the $15/10 pack inline, price shown before the click.</div></div>
+          <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM api/rescan</span><div style="margin-top:3px">Queued, progress in the topbar, page stays usable — never a blocking modal.</div></div>
+          <div style="background:#FDF2E3;border:1px solid #F2E0C4;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#9A6210">WARNING</span><div style="margin-top:3px">A single rescan cannot break a tie inside the band, and the UI says so before spending a credit. Selling a credit that can't answer the question is a refund waiting to happen.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;margin-top:14px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F13</span> <span style="font:600 20px/1.3 'Source Serif 4',serif">Reporting — three kinds of snapshot, one immutability rule</span></div>
+        <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">P3's core flow · /reports · report_snapshots · R2</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px">
+        <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#5B6472">KIND · MONTHLY</div>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">Frozen automatically on the 1st. No user action — for P3 the monthly report is <em>review</em> work, never <em>production</em> work. That is the 4-hours-to-20-minutes claim.</p>
+        </div>
+        <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#5B6472">KIND · AD HOC</div>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">User-triggered for an arbitrary window. Same immutability: once created it is a fixed artefact with a fixed method version.</p>
+        </div>
+        <div style="background:#E7F2EF;border:1px solid #CFE5DF;border-radius:10px;padding:14px 16px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0B6151">KIND · FIX PROOF</div>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">Generated when a fix verifies. Before/after with both bands and the deploy date between them. The single most valuable artefact the product produces.</p>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin-top:14px">
+        <div style="flex:0 0 auto;max-width:170px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SCREEN /reports</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">List by period; method version shown per row</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SCREEN /reports/[id]</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">The readout exactly as it read then, from the stored payload — never recomputed</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:180px;background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DECISION</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">pdfReports = false · standard · white_label</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:190px;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM render → R2</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Brand applied from /settings/brand; <span style="color:#9A6210">renderer is a Phase 8 placeholder</span></div>
+        </div>
+        <div style="display:flex;align-items:center;color:#C6CBD3;font:400 16px 'JetBrains Mono',monospace;padding:0 6px">→</div>
+        <div style="flex:0 0 auto;max-width:200px;background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:9px 11px">
+          <div style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#0B6151">✓ GOAL</div>
+          <div style="font:400 12px/1.4 inherit;margin-top:3px">Download or share link. Agency's accent colour replaces --cited; our one footer line stays.</div>
+        </div>
+      </div>
+      <div style="margin-left:14px;margin-top:12px;padding-left:16px;border-left:2px dashed #C6CBD3">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+          <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#A62F2F">⤶ METHOD VERSION CHANGED SINCE</div>
+          <div style="color:#C6CBD3;font:400 14px 'JetBrains Mono',monospace">→</div>
+          <div style="max-width:520px;background:#FBEDED;border:1px solid #F0D6D6;border-radius:8px;padding:8px 11px;font:400 12px/1.4 inherit">The old report is <strong>never</strong> regenerated. Charts spanning the change render a flagged discontinuity and link the changelog entry. Rewriting history is the one thing that would end the product's usefulness to P3.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="d" style="scroll-margin-top:16px;margin-top:64px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Band D · Commerce, team &amp; settings</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Four flows entered on purpose</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F14</span> <span style="font:600 18px/1.3 'Source Serif 4',serif">Upgrade, add-on &amp; overage</span></div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">Three entry points, one destination. The rule: never interrupt measurement to collect money.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">ENTRY 1 · A BLUR</span><div style="margin-top:3px">Clicking a locked region carries the <em>context</em> to checkout ("unlock competitor names on 41 queries"), not a generic pricing page.</div></div>
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">ENTRY 2 · A METER</span><div style="margin-top:3px">Quota banner at 85% (<span style="font:400 11px 'JetBrains Mono',monospace">meter().state = near</span>) and again when over. Over ≠ blocked: the scan runs, the block is billed at cycle end.</div></div>
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">ENTRY 3 · SETTINGS</span><div style="margin-top:3px"><span style="font:400 11px 'JetBrains Mono',monospace">/settings/billing</span> — plan, meters, add-ons, invoices in one pane.</div></div>
+          <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM api/billing/checkout · portal · addon</span><div style="margin-top:3px">Provider-hosted checkout, webhook flips the plan. <span style="color:#9A6210">Price IDs are Phase 8 placeholders returning 501.</span></div></div>
+          <div style="background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ DOWNGRADE</span><div style="margin-top:3px">Names what will be lost <em>using their own numbers</em> ("312 of your 500 queries stop being tracked; 4 saved views become read-only"), then takes effect at period end. History is retained, not deleted.</div></div>
+          <div style="background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit">✓ Returns to the exact screen that triggered it, unlocked, scrolled to the same row.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F15</span> <span style="font:600 18px/1.3 'Source Serif 4',serif">Team, roles &amp; join-request approval</span></div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">Four roles, one approval queue, and the resolution of F06's collision.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SCREEN /settings/team</span><div style="margin-top:3px">Members, pending invites (email visible before acceptance), and pending join requests in one list.</div></div>
+          <div style="background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ SEATS AVAILABLE?</span><div style="margin-top:3px">No → offer the $12 Growth seat add-on inline rather than a hard stop.</div></div>
+          <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM api/team/invite</span><div style="margin-top:3px">Hash the token, store the email, expire in 7 days, revocable → F05.</div></div>
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">JOIN REQUEST</span><div style="margin-top:3px">Approve → membership created at a chosen role. Decline → the requester is told plainly, once, and can add a different domain instead. Silence for 7 days → expired, and we say which.</div></div>
+          <div style="background:#FBEDED;border:1px solid #F0D6D6;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#A62F2F">LAST ADMIN</span><div style="margin-top:3px">Cannot demote or remove yourself if you are the only admin. Blocked before the click, with the reason stated.</div></div>
+          <div style="background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit">✓ Roles resolved by <span style="font:400 11px 'JetBrains Mono',monospace">rbac.ts</span> on every request in <span style="font:400 11px 'JetBrains Mono',monospace">middleware.ts</span> — never trusted from the client.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F16</span> <span style="font:600 18px/1.3 'Source Serif 4',serif">Agency workspace switching</span></div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">Run 14 times inside one 90-minute block. The most repeated interaction in P3's month, so it lives in the shell, not in settings.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">SWITCHER · TOPBAR</span><div style="margin-top:3px">Type-ahead over client names, keyboard-reachable, shows each client's score inline so she can trisage before she clicks.</div></div>
+          <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5B6472">SYSTEM re-scope</span><div style="margin-top:3px">Whole shell re-scopes: workspace + domain + plan + brand. Never a half-switched page.</div></div>
+          <div style="background:#EBEFF6;border:1px solid #D8E0EE;border-left:3px solid #3E5C8A;border-radius:4px 8px 8px 4px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#34507A">◆ SAME ROUTE EXISTS?</span><div style="margin-top:3px">Stay on the equivalent route in the new workspace (she is doing the same task 14 times). Fall back to /overview only if the route is gated there.</div></div>
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">CREATE CLIENT WS</span><div style="margin-top:3px">From <span style="font:400 11px 'JetBrains Mono',monospace">/settings/workspaces</span>: name, domain, brand inherited from the agency default, staff seats copied from a template.</div></div>
+          <div style="background:#FDF2E3;border:1px solid #F2E0C4;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#9A6210">🔒 GATE</span><div style="margin-top:3px">Agency plan: 25 included, then $29 each. Never a hard cap — an agency winning a client at 2am must not be stopped.</div></div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#3E5C8A">F17</span> <span style="font:600 18px/1.3 'Source Serif 4',serif">Settings — profile, sessions, notifications, brand</span></div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">Low-frequency, high-consequence. Each pane saves independently; nothing here has a wizard.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">/settings · PROFILE</span><div style="margin-top:3px">Name, timezone (drives the Monday 08:00 send), and email change — which re-verifies via the same token flow as F04.</div></div>
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">/settings · SESSIONS</span><div style="margin-top:3px">Device, location, last seen, revoke. Revoking the current session signs you out and says so first.</div></div>
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">/settings/email · RULES</span><div style="margin-top:3px">Per <em>membership</em>: digest, scan-complete, fix-verified, rate-drop with a threshold slider (default 5 points), quota warnings, Slack webhook. Alerts still only fire outside the band — the threshold narrows, it cannot override the statistics.</div></div>
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">/settings/brand</span><div style="margin-top:3px">Logo, one accent colour, client-facing footer line. Live PDF preview, because P3 will not risk finding out at send time.</div></div>
+          <div style="background:#FDF2E3;border:1px solid #F2E0C4;border-radius:8px;padding:9px 11px;font:400 12px/1.45 inherit"><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#9A6210">CONSTRAINT</span><div style="margin-top:3px">The accent replaces <span style="font:400 11px 'JetBrains Mono',monospace">--cited</span> only. Ink, paper, the SURFACE/PROXY marks and the methodology block are not re-mappable — they carry meaning, not decoration.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="e" style="scroll-margin-top:16px;margin-top:64px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Band E · Edges &amp; failures</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">F18 · Every dead end and its way out</h2>
+    <p style="font:400 13.5px/1.6 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0">Nine states that would otherwise become support tickets. Each one has a named recovery edge — no flow in this document terminates without one.</p>
+    <div style="overflow-x:auto;margin-top:18px">
+      <div style="min-width:900px;display:flex;flex-direction:column;gap:2px">
+        <div style="display:grid;grid-template-columns:180px 1fr 1fr 130px;gap:14px;padding:11px 18px;background:#141B26;border-radius:10px 10px 2px 2px;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1">
+          <div>Condition</div><div>What the user sees</div><div>Recovery edge</div><div>Route</div>
+        </div>
+        <div style="display:grid;grid-template-columns:180px 1fr 1fr 130px;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 12px 'JetBrains Mono',monospace">Expired auth token</div>
+          <div style="color:#5B6472">"That link expired — they last 15 minutes." Email pre-filled.</div>
+          <div style="color:#0B6151">One-tap resend; any attached scan survives because it is keyed to the email</div>
+          <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/verify</div>
+        </div>
+        <div style="display:grid;grid-template-columns:180px 1fr 1fr 130px;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 12px 'JetBrains Mono',monospace">Revoked invite</div>
+          <div style="color:#5B6472">Named explanation: "Priya revoked this invitation."</div>
+          <div style="color:#0B6151">Request a new one; the inviting admin is notified</div>
+          <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/invite/[token]</div>
+        </div>
+        <div style="display:grid;grid-template-columns:180px 1fr 1fr 130px;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 12px 'JetBrains Mono',monospace">Domain collision</div>
+          <div style="color:#5B6472">"Already tracked" — never who by, beyond the email domain</div>
+          <div style="color:#0B6151">Request access (7-day TTL) <em>or</em> add a different domain now</div>
+          <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/onboarding/domain</div>
+        </div>
+        <div style="display:grid;grid-template-columns:180px 1fr 1fr 130px;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 12px 'JetBrains Mono',monospace">Scan partially failed</div>
+          <div style="color:#5B6472">Per-engine status. A rate is shown over the runs that <em>did</em> complete, with the reduced denominator visible.</div>
+          <div style="color:#0B6151">Auto-retry the failed engine on the next cycle; never silently average over a hole</div>
+          <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/overview</div>
+        </div>
+        <div style="display:grid;grid-template-columns:180px 1fr 1fr 130px;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 12px 'JetBrains Mono',monospace">Zero cited runs</div>
+          <div style="color:#5B6472"><span style="font:500 12px 'JetBrains Mono',monospace">0/60 — 0%</span> stated plainly, with the cause mix. Not an error, not an empty state.</div>
+          <div style="color:#0B6151">Fix queue is at its most valuable here; the copy says so without gloating</div>
+          <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/overview</div>
+        </div>
+        <div style="display:grid;grid-template-columns:180px 1fr 1fr 130px;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 12px 'JetBrains Mono',monospace">All causes unexplained</div>
+          <div style="color:#5B6472">"We can't attribute this yet" — the striped segment at 100%, and what would change that (connect GSC, more runs)</div>
+          <div style="color:#0B6151">Offer GSC connect and an extra run cycle; never invent a cause to fill the space</div>
+          <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/queries</div>
+        </div>
+        <div style="display:grid;grid-template-columns:180px 1fr 1fr 130px;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 12px 'JetBrains Mono',monospace">Quota exceeded</div>
+          <div style="color:#5B6472">Banner with the exact overage cost. Measurement continues.</div>
+          <div style="color:#0B6151">Buy blocks, upgrade, or trim the query set — three doors, all one click</div>
+          <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">any + /settings/billing</div>
+        </div>
+        <div style="display:grid;grid-template-columns:180px 1fr 1fr 130px;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+          <div style="font:500 12px 'JetBrains Mono',monospace">Payment failed</div>
+          <div style="color:#5B6472">Grace period stated with a date. Data stays readable; scans continue through the grace window.</div>
+          <div style="color:#0B6151">Billing portal deep link; second reminder before anything degrades</div>
+          <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/settings/billing</div>
+        </div>
+        <div style="display:grid;grid-template-columns:180px 1fr 1fr 130px;gap:14px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:2px 2px 10px 10px;font:400 12.5px/1.5 inherit">
+          <div style="font:500 12px 'JetBrains Mono',monospace">Route not found / server error</div>
+          <div style="color:#5B6472">404 offers the five loop routes by name; 500 states that no data was lost and gives a reference id.</div>
+          <div style="color:#0B6151">Named links, not a "go home" button — the user was trying to do something specific</div>
+          <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">404 · 500</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="margin-top:64px;padding-top:20px;border-top:2px solid #141B26;display:flex;justify-content:space-between;align-items:baseline;font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">
+    <span>Phase 9c · 18 flows · 41 decisions · 9 recoverable dead ends</span>
+    <span><a href="./Phase 9b - Personas and Journeys.dc.html">← 9b</a> &nbsp;·&nbsp; next → <a href="./Phase 9d - User Stories.dc.html">9d user stories</a></span>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

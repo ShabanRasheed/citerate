@@ -1,0 +1,543 @@
+---
+/**
+ * Home — rhythm 2a, "instrument first": the readout arrives before any argument.
+ * Ten sections. Prerendered static; the scan form talks to /api/scan.
+ */
+import Marketing from "../layouts/Marketing.astro";
+import ScanForm from "../components/ScanForm.astro";
+import CauseBar from "../components/CauseBar.astro";
+import Figure from "../components/Figure.astro";
+import CtaBand from "../components/CtaBand.astro";
+import PricingTable from "../components/PricingTable.astro";
+import engines from "../data/engines.json";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Citerate",
+    applicationCategory: "BusinessApplication",
+    description:
+      "Measures how often AI engines cite your domain, and separates the causes when they do not.",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "Free scan, no account" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Citerate",
+    url: "https://citerate.com"
+  }
+];
+
+const roles = [
+  {
+    id: "in-house",
+    tab: "In-house SEO",
+    head: "Prove the work landed.",
+    body:
+      "You shipped the content, fixed the pages, and did the schema work. Citerate ties each fix to citation-rate movement on its own queries, so the Monday update carries a delta instead of a hope.",
+    bullets: [
+      "Fixes ranked by impact on your queries, not generic checklists",
+      "Before/after deltas per fix, per engine",
+      "One number your weekly report can carry without a footnote war"
+    ],
+    link: { label: "How in-house teams use Citerate →", href: "/for/in-house" },
+    stat: "Daily",
+    statCap: "refresh on every tracked query, from the Growth plan"
+  },
+  {
+    id: "leadership",
+    tab: "Leadership",
+    head: "One number for the board slide.",
+    body:
+      "You don't need another dashboard, you need a defensible figure with its causes attached. The scheduled PDF arrives Monday morning with the trend, the cause split, and what changed — readable in ninety seconds.",
+    bullets: [
+      "Scheduled PDF report, auto-sent to whoever reports upward",
+      "Trend with causes, so \"why\" is answered before it's asked",
+      "Methodology note on every report — the number survives scrutiny"
+    ],
+    link: { label: "See a sample report →", href: "/for/in-house#reporting" },
+    stat: "1 page",
+    statCap: "the Monday summary your leadership actually reads"
+  },
+  {
+    id: "agency",
+    tab: "Agency",
+    head: "A new retainer line, white labeled.",
+    body:
+      "GEO is the service your clients are starting to ask about. Run every client from one account, put your logo on every surface including the domain they log into, and bill it as yours.",
+    bullets: [
+      "25 client workspaces on one bill, pooled query budget",
+      "White-label reports, dashboard, and login domain",
+      "Read-only client seats are free and unlimited"
+    ],
+    link: { label: "For agencies →", href: "/for/agencies" },
+    stat: "25",
+    statCap: "client workspaces on the Agency plan, extra ones $29"
+  }
+];
+---
+
+<Marketing
+  title="Citerate — measure how often AI engines cite you"
+  description="Your ranking didn't break; the answer above the links did. Citerate asks AI engines your buyers' questions, measures how often you're cited, and separates the causes when you're not. Free scan, no account."
+  jsonLd={jsonLd}
+>
+  <!-- 01 hero, ink -->
+  <section class="section section--ink section--loose">
+    <div class="wrap">
+      <div class="grid grid--split-r">
+        <div class="stack">
+          <span class="t-label">AI visibility diagnostics</span>
+          <h1 class="t-hero" style="color:var(--side-ink);margin-top:16px">
+            Impressions holding.<br />Clicks falling.
+          </h1>
+          <p class="t-lead" style="margin-top:18px;max-width:50ch">
+            Your ranking didn't break — the answer above the links did. Citerate asks the AI engines your
+            buyers' questions, measures how often you're cited, and separates the causes when you're not.
+          </p>
+          <div style="margin-top:30px">
+            <ScanForm id="scan" variant="ink" showProgress={true} />
+          </div>
+        </div>
+
+        <!-- hero instrument -->
+        <div class="c-card c-card--lg" style="gap:16px">
+          <div class="row-between" style="gap:12px">
+            <span class="t-label t-label--ink">Scan in progress</span>
+            <span class="t-data-sm">acmecrm.com</span>
+          </div>
+          <div class="stack stack--2">
+            <div class="scan-row">
+              <span>"best crm for startups"</span>
+              <span class="scan-row__verdict scan-row__verdict--gap">Not cited</span>
+            </div>
+            <div class="scan-row">
+              <span>"crm with free tier"</span>
+              <span class="scan-row__verdict scan-row__verdict--cited">Cited</span>
+            </div>
+            <div class="scan-row">
+              <span>"hubspot alternatives"</span>
+              <span class="scan-row__verdict scan-row__verdict--gap">Not cited</span>
+            </div>
+            <div class="scan-row tx-muted">
+              <span>"crm for a 10 person team"</span>
+              <span class="scan-row__verdict scan-row__verdict--pending">Checking…</span>
+            </div>
+          </div>
+          <hr class="u-rule" />
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px">
+            <div class="score">
+              <span class="t-label t-label--ink">Citation rate so far</span>
+              <span class="score__value" data-count="34" data-count-suffix="">34<span class="score__unit">%</span></span>
+            </div>
+            <div class="scan-progress">
+              <span class="t-data-sm">17 of 25 checked</span>
+              <div class="scan-progress__rail"><div class="scan-progress__fill" style="width:68%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 the readout -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-head__num">01</span>
+        <h2 class="t-d2">This is what you get in ninety seconds.</h2>
+      </div>
+
+      <div class="c-card c-card--lg" data-reveal>
+        <div style="display:grid;grid-template-columns:280px minmax(0,1fr);gap:44px;align-items:start">
+          <div class="stack stack--5">
+            <div class="score">
+              <span class="t-label t-label--ink">Citation rate · acmecrm.com</span>
+              <span class="score__value score__value--hero">34<span class="score__unit">%</span></span>
+              <span class="score__caption">of AI answer runs cite you on your 25 queries</span>
+            </div>
+            <CauseBar aio={46} rank={27} tech={17} other={10} />
+          </div>
+
+          <div class="stack stack--4">
+            <p class="t-d3 u-mw-46" style="margin:0">
+              Acme ranks top-5 for 16 of 25 queries — but is cited in only 34% of AI answer runs. The largest
+              cause is AIO displacement: the answer cites three sources, and none are Acme.
+            </p>
+
+            <div class="c-table">
+              <div class="c-table__row c-table__row--head" style="grid-template-columns:minmax(0,1fr) 170px 90px">
+                <span class="t-label">Top fixes</span>
+                <span class="t-label">Cause addressed</span>
+                <span class="t-label">Impact</span>
+              </div>
+              <div class="c-table__row" style="grid-template-columns:minmax(0,1fr) 170px 90px">
+                <span class="t-sm" style="color:var(--ink)">Publish a comparison page answering "hubspot alternatives" directly</span>
+                <span class="t-data-sm tx-gap">AIO displacement</span>
+                <span class="t-data tx-cited">High</span>
+              </div>
+              <div class="c-table__row" style="grid-template-columns:minmax(0,1fr) 170px 90px">
+                <span class="t-sm" style="color:var(--ink)">Add per-plan pricing detail — engines cite pages that state numbers</span>
+                <span class="t-data-sm tx-gap">AIO displacement</span>
+                <span class="t-data tx-cited">High</span>
+              </div>
+              <div class="c-table__row" style="grid-template-columns:minmax(0,1fr) 170px 90px">
+                <span class="t-sm" style="color:var(--ink)">Fix soft-404s on 3 of your most-asked documentation URLs</span>
+                <span class="t-data-sm tx-tech">Technical decay</span>
+                <span class="t-data tx-warn">Medium</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="figcap">
+          Fig. 01 — a free scan readout. Real structure, demonstration data. Yours takes about 90 seconds and
+          no account.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 the problem, measured -->
+  <section class="section section--card">
+    <div class="wrap">
+      <div class="grid grid--split">
+        <div class="stack stack--4">
+          <div class="sec-head" style="margin:0">
+            <span class="sec-head__num">02</span>
+            <span class="t-label">The problem, measured</span>
+          </div>
+          <h2 class="t-d2">Your rank tracker says nothing changed. Your analytics disagrees.</h2>
+          <p class="t-body tx-soft" style="font-size:15px;line-height:1.6">
+            When an AI answer sits above the links, the query still fires an impression — the click just never
+            comes. Position trackers can't see it, because your position didn't move. The gap between those
+            two lines is the thing Citerate measures.
+          </p>
+        </div>
+
+        <Figure
+          label="Impressions vs organic clicks"
+          caption="Fig. 02 — the divergence pattern, 12 months, typical affected domain. Illustrative shape."
+          tone="sunk"
+        >
+          <svg class="trend" height="230" viewBox="0 0 640 230" preserveAspectRatio="none" role="img" aria-label="Impressions hold flat while organic clicks fall after AI Overviews expand">
+            <line class="trend__grid" x1="0" y1="46" x2="640" y2="46" />
+            <line class="trend__grid" x1="0" y1="92" x2="640" y2="92" />
+            <line class="trend__grid" x1="0" y1="138" x2="640" y2="138" />
+            <line class="trend__grid" x1="0" y1="184" x2="640" y2="184" />
+            <line class="trend__marker" x1="236" y1="18" x2="236" y2="212" />
+            <path class="trend__line--impressions" d="M0,64 C60,60 110,66 160,62 C210,58 260,64 320,60 C380,56 440,62 520,58 C570,56 610,60 640,58" />
+            <path class="trend__line--clicks" d="M0,84 C50,86 110,82 170,86 C210,90 240,98 280,112 C330,130 380,146 440,160 C500,172 570,180 640,186" />
+          </svg>
+          <div class="row-between">
+            <div class="legend">
+              <span class="legend__item"><span class="legend__swatch legend__swatch--tech"></span>Impressions</span>
+              <span class="legend__item"><span class="legend__swatch legend__swatch--aio"></span>Organic clicks</span>
+            </div>
+            <span class="t-data-sm">dashed line: AI Overviews expand on your queries</span>
+          </div>
+        </Figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 four causes -->
+  <section class="section">
+    <div class="wrap">
+      <div class="stack stack--3 u-mw-66" style="margin-bottom:26px">
+        <div class="sec-head" style="margin:0">
+          <span class="sec-head__num">03</span>
+          <span class="t-label">Cause separation</span>
+        </div>
+        <h2 class="t-d2">Not all lost clicks have the same cause. The fix depends on which one is yours.</h2>
+      </div>
+
+      <div class="grid grid--4">
+        {
+          engines.causes.map((c) => (
+            <div
+              class:list={[
+                "c-card",
+                c.id === "aio_displacement" && "c-card--cause-aio",
+                c.id === "ranking_decline" && "c-card--cause-rank",
+                c.id === "technical_decay" && "c-card--cause-tech",
+                c.id === "unexplained" && "c-card--cause-other"
+              ]}
+              data-reveal
+            >
+              <span
+                class="t-label"
+                style={`color:var(--${c.color === "neutral" ? "ink-soft" : `${c.color}-ink`})`}
+              >
+                {c.label}
+              </span>
+              <span class="t-d4">{c.title}</span>
+              <span class="t-sm">{c.body}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 method teaser -->
+  <section class="section section--card">
+    <div class="wrap">
+      <div class="grid grid--split">
+        <div class="stack stack--4">
+          <div class="sec-head" style="margin:0">
+            <span class="sec-head__num">04</span>
+            <span class="t-label">Method</span>
+          </div>
+          <h2 class="t-d2">A number you can defend in the meeting where someone asks how it's calculated.</h2>
+          <p class="t-body tx-soft" style="font-size:15px;line-height:1.6">
+            Every query is asked on every engine, every run. Citations are matched to your domain by resolved
+            URL, not string similarity. Causes are attributed per query, and anything below confidence stays
+            "unexplained." The method page follows one real query end to end.
+          </p>
+          <a class="btn-quiet" href="/how-it-works">Read the full method →</a>
+        </div>
+
+        <div class="c-card c-card--sunk c-card--lg" style="gap:12px">
+          <div class="t-code" style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 14px">
+            "best crm for startups"
+          </div>
+          <div style="display:flex;gap:8px">
+            <div class="c-card" style="flex:1;padding:10px 12px;gap:4px">
+              <span class="t-data-sm">ChatGPT</span>
+              <span class="scan-row__verdict scan-row__verdict--gap">Not cited</span>
+            </div>
+            <div class="c-card" style="flex:1;padding:10px 12px;gap:4px">
+              <span class="t-data-sm">Google AIO</span>
+              <span class="scan-row__verdict scan-row__verdict--gap">Not cited</span>
+            </div>
+            <div class="c-card" style="flex:1;padding:10px 12px;gap:4px">
+              <span class="t-data-sm">Perplexity</span>
+              <span class="scan-row__verdict scan-row__verdict--cited">Cited</span>
+            </div>
+          </div>
+          <div class="c-card" style="padding:12px 14px">
+            <span class="t-code tx-soft" style="line-height:1.7">
+              …for early-stage teams, <mark style="background:var(--gap-wash);color:var(--gap-ink);border-radius:3px;padding:1px 4px">competitor-a.com</mark>
+              and <mark style="background:var(--gap-wash);color:var(--gap-ink);border-radius:3px;padding:1px 4px">competitor-b.com</mark>
+              are most often recommended for their free tiers…
+            </span>
+          </div>
+          <div class="row-between" style="gap:12px">
+            <span class="t-data tx-gap">Cause: AIO displacement · confidence 0.86</span>
+            <span class="t-data-sm">1 of 25 queries</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 product -->
+  <section class="section">
+    <div class="wrap">
+      <div class="row-between" style="align-items:flex-end;margin-bottom:26px">
+        <div class="stack stack--3 u-mw-56">
+          <div class="sec-head" style="margin:0">
+            <span class="sec-head__num">05</span>
+            <span class="t-label">After the diagnosis</span>
+          </div>
+          <h2 class="t-d2">Then it tells you what to do, in what order, and whether it worked.</h2>
+        </div>
+        <a class="btn-ghost btn-ghost--pill u-nowrap" href="/how-it-works">See how it works →</a>
+      </div>
+
+      <div class="grid grid--3">
+        <div class="c-card" data-reveal>
+          <span class="t-label t-label--ink">Fix Queue</span>
+          <div class="stack stack--2">
+            <div class="row-between" style="gap:8px;background:var(--paper);border-radius:var(--r-sm);padding:9px 12px">
+              <span class="t-ui-xs" style="font:var(--t-ui-xs)">Comparison page for 3 queries</span>
+              <span class="t-data tx-cited" style="font-size:10px">HIGH</span>
+            </div>
+            <div class="row-between" style="gap:8px;background:var(--paper);border-radius:var(--r-sm);padding:9px 12px">
+              <span style="font:var(--t-ui-xs)">State pricing on /plans</span>
+              <span class="t-data tx-cited" style="font-size:10px">HIGH</span>
+            </div>
+            <div class="row-between" style="gap:8px;background:var(--paper);border-radius:var(--r-sm);padding:9px 12px">
+              <span style="font:var(--t-ui-xs)">Fix soft-404 on /docs/api</span>
+              <span class="t-data tx-warn" style="font-size:10px">MED</span>
+            </div>
+          </div>
+          <span class="t-sm u-auto" style="margin-top:auto">
+            Every finding becomes a ranked task with an owner — not a chart you admire.
+          </span>
+        </div>
+
+        <div class="c-card" data-reveal data-reveal-delay="80">
+          <span class="t-label t-label--ink">Before / after</span>
+          <svg class="trend" height="96" viewBox="0 0 300 96" preserveAspectRatio="none" role="img" aria-label="Citation rate rises after a fix ships">
+            <line class="trend__marker" x1="150" y1="8" x2="150" y2="88" />
+            <path class="trend__line--citations" d="M0,62 C30,64 60,60 90,63 C110,65 130,62 150,63 C180,58 210,46 240,38 C270,32 290,28 300,26" />
+          </svg>
+          <div class="row-between">
+            <span class="t-data-sm">fix shipped ↑</span>
+            <span class="t-data tx-cited">citation rate, per query</span>
+          </div>
+          <span class="t-sm" style="margin-top:auto">
+            Each fix gets a before/after delta on its own queries. The work is provable.
+          </span>
+        </div>
+
+        <div class="c-card" data-reveal data-reveal-delay="160">
+          <span style="display:flex;align-items:center;gap:8px">
+            <span class="t-label t-label--ink">Share of citations</span>
+            <span class="chip chip--ink">Growth</span>
+          </span>
+          <div class="stack stack--3">
+            <div class="share-row">
+              <span class="share-row__label">competitor-a</span>
+              <span class="share-row__rail"><span class="share-row__fill" style="width:41%"></span></span>
+              <span class="share-row__val">41%</span>
+            </div>
+            <div class="share-row">
+              <span class="share-row__label share-row__label--you">you</span>
+              <span class="share-row__rail"><span class="share-row__fill share-row__fill--you" style="width:34%"></span></span>
+              <span class="share-row__val tx-cited">34%</span>
+            </div>
+            <div class="share-row">
+              <span class="share-row__label">competitor-b</span>
+              <span class="share-row__rail"><span class="share-row__fill" style="width:18%"></span></span>
+              <span class="share-row__val">18%</span>
+            </div>
+          </div>
+          <span class="t-sm" style="margin-top:auto">
+            Who the engines cite instead of you, named — and how the share moves.
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 roles -->
+  <section class="section section--card">
+    <div class="wrap">
+      <div class="row-between" style="align-items:flex-end;margin-bottom:26px">
+        <div class="stack stack--3">
+          <div class="sec-head" style="margin:0">
+            <span class="sec-head__num">06</span>
+            <span class="t-label">Who it's for</span>
+          </div>
+          <h2 class="t-d2">Same instrument, three jobs.</h2>
+        </div>
+        <div class="pills" data-toggle-group="role" data-event="role_tab_viewed">
+          {
+            roles.map((r, i) => (
+              <button class="pill" type="button" data-value={r.id} aria-selected={i === 0 ? "true" : "false"}>
+                {r.tab}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <div data-panel-group="role">
+        {
+          roles.map((r, i) => (
+            <div data-panel={r.id} hidden={i !== 0}>
+              <div class="c-card c-card--sunk c-card--lg">
+                <div style="display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:44px;align-items:center">
+                  <div class="stack stack--4">
+                    <span class="t-d3">{r.head}</span>
+                    <span class="t-body tx-soft" style="font-size:15px;line-height:1.6;max-width:64ch">{r.body}</span>
+                    <div class="stack stack--2" style="margin-top:4px">
+                      {r.bullets.map((b) => (
+                        <div style="display:flex;align-items:baseline;gap:10px">
+                          <span class="t-data tx-cited">—</span>
+                          <span class="t-body">{b}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <a class="btn-quiet" href={r.link.href} style="margin-top:6px">{r.link.label}</a>
+                  </div>
+                  <div class="c-card" style="align-self:start">
+                    <span style="font:500 44px/1 var(--font-mono);letter-spacing:var(--tracking-tight)">{r.stat}</span>
+                    <span class="t-sm">{r.statCap}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 proof — placeholders stay visibly marked until a named customer exists -->
+  <section class="section">
+    <div class="wrap">
+      <div class="stack stack--3 u-mw-66" style="margin-bottom:26px">
+        <div class="sec-head" style="margin:0">
+          <span class="sec-head__num">07</span>
+          <span class="t-label">Proof</span>
+        </div>
+        <h2 class="t-d2">Teams measuring their AI visibility with Citerate</h2>
+      </div>
+
+      <div class="grid grid--2">
+        <div class="c-placeholder">
+          <span class="c-placeholder__flag">Placeholder — do not ship</span>
+          <span class="t-d4" style="color:var(--ink-muted)">
+            "Customer quote about proving the citation-rate recovery to their leadership goes here, with a real
+            name and a real number."
+          </span>
+          <span class="t-data-sm">Name, role, company — awaiting first named customer</span>
+        </div>
+        <div class="c-placeholder">
+          <span class="c-placeholder__flag">Placeholder — do not ship</span>
+          <span class="t-d4" style="color:var(--ink-muted)">
+            "Agency quote about billing GEO as a retainer line and white-labeling the Monday report goes here."
+          </span>
+          <span class="t-data-sm">Name, role, agency — awaiting first named customer</span>
+        </div>
+      </div>
+
+      <p class="figcap">
+        Section stays unpublished until one customer agrees to be named. Nothing fake ships. Until then, the
+        band below carries the honesty line instead.
+      </p>
+
+      <div style="margin-top:16px">
+        <CtaBand
+          variant="card"
+          headline="We're new, and the product is a measurement. So don't take our word — take a reading."
+          cta="Run the free scan"
+          event="proof_honesty"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 pricing preview -->
+  <section class="section section--card">
+    <div class="wrap">
+      <div class="row-between" style="align-items:flex-end;margin-bottom:26px">
+        <div class="stack stack--3">
+          <div class="sec-head" style="margin:0">
+            <span class="sec-head__num">08</span>
+            <span class="t-label">Pricing</span>
+          </div>
+          <h2 class="t-d2">Diagnosis is free. The prescription is paid.</h2>
+        </div>
+        <a class="btn-ghost btn-ghost--pill u-nowrap" href="/pricing">Compare all plans →</a>
+      </div>
+
+      <PricingTable showFree={false} showTable={false} showToggle={true} compact={true} />
+    </div>
+  </section>
+
+  <!-- 10 final CTA -->
+  <section class="section section--ink section--loose">
+    <div class="wrap">
+      <div class="stack stack--4">
+        <span class="t-label">Free · no signup</span>
+        <h2 class="t-d1 u-mw-26" style="color:var(--side-ink)">Get your number. Then decide.</h2>
+        <ScanForm id="scan-foot" variant="ink" note="One scan per domain per day. Results are shareable by link." />
+      </div>
+    </div>
+  </section>
+</Marketing>

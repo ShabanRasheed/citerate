@@ -1,0 +1,115 @@
+---
+/**
+ * Fix card. The state control is a real <form> so it works without JS; the
+ * client module intercepts it for the optimistic path. Once a fix is verified
+ * the card shows the before/after on its own queries — that proof is the reason
+ * anyone renews.
+ */
+import { pct, relative, initials, causeKey } from "../lib/format";
+import type { FixRow } from "../lib/data";
+
+interface Props {
+  fix: FixRow;
+  canEdit: boolean;
+  index: number;
+  members: { user_id: string; email: string; name: string | null }[];
+}
+const { fix, canEdit, index, members } = Astro.props;
+
+const key = causeKey(fix.cause as never);
+const queryCount = (() => {
+  try { return (JSON.parse(fix.query_ids) as string[]).length; } catch { return 0; }
+})();
+const verified = fix.state === "verified";
+const owner = fix.owner_name ?? fix.owner_email;
+const impactTone = fix.impact === "high" ? "gap" : fix.impact === "medium" ? "warn" : "";
+---
+
+<article
+  class={`fix fix--${verified ? "verified" : key}${fix.state === "dismissed" ? " fix--dismissed" : ""}`}
+  data-fix={fix.id}
+  data-state={fix.state}
+>
+  <div class="fix__top">
+    <h3 class="fix__title">
+      <span class="chart__note" style="margin-right:8px">{String(index).padStart(2, "0")}</span>
+      {fix.title}
+    </h3>
+    {
+      verified ? (
+        <span class="pill pill--solid" style="background:var(--cited)">verified ✓</span>
+      ) : (
+        <span class={`pill pill--${impactTone}`}>{fix.impact} impact</span>
+      )
+    }
+  </div>
+
+  {fix.detail && <p class="fix__detail">{fix.detail}</p>}
+
+  {
+    verified && fix.baseline_rate !== null && fix.verified_rate !== null && (
+      <div class="proof">
+        <span>{pct(fix.baseline_rate)}</span>
+        <span class="proof__arrow" aria-hidden="true">→</span>
+        <span>{pct(fix.verified_rate)}</span>
+        <span style="color:var(--ink-soft)">
+          on this fix's {queryCount} queries · shipped {relative(fix.shipped_at)}
+        </span>
+      </div>
+    )
+  }
+
+  <div class="fix__foot">
+    <div class="fix__meta">
+      <span>{queryCount} queries</span>
+      {fix.cluster && <span>{fix.cluster}</span>}
+      {
+        owner ? (
+          <span class="owner">
+            <span class="owner__avatar">{initials(owner)}</span>
+            {owner}
+          </span>
+        ) : (
+          <span class="owner">unassigned</span>
+        )
+      }
+      {fix.updated_at && <span>updated {relative(fix.updated_at)}</span>}
+    </div>
+
+    {
+      canEdit && (
+        <form class="fix__actions" method="post" action={`/api/fixes/${fix.id}`} data-fix-form>
+          <label class="visually-hidden" for={`owner-${fix.id}`}>Owner</label>
+          <select class="form-field__input" id={`owner-${fix.id}`} name="owner" data-fix-owner style="min-height:36px;padding:4px 10px">
+            <option value="">Unassigned</option>
+            {members.map((m) => (
+              <option value={m.user_id} selected={m.user_id === fix.owner_user_id}>
+                {m.name ?? m.email}
+              </option>
+            ))}
+          </select>
+
+          <label class="visually-hidden" for={`state-${fix.id}`}>State</label>
+          <select class="form-field__input" id={`state-${fix.id}`} name="state" data-fix-state style="min-height:36px;padding:4px 10px">
+            <option value="open" selected={fix.state === "open"}>Open</option>
+            <option value="in_progress" selected={fix.state === "in_progress"}>In progress</option>
+            <option value="shipped" selected={fix.state === "shipped"}>Shipped</option>
+            <option value="verified" selected={verified} disabled>Verified (measured)</option>
+            <option value="dismissed" selected={fix.state === "dismissed"}>Dismissed</option>
+          </select>
+
+          <noscript><button class="btn-ghost" type="submit">Save</button></noscript>
+        </form>
+      )
+    }
+  </div>
+
+  {
+    fix.state === "shipped" && (
+      <span class="chart__note">
+        Marked shipped — the next scheduled scan measures these queries and moves this to verified on its own.
+        We never mark our own homework.
+      </span>
+    )
+  }
+</article>

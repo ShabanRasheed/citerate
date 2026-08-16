@@ -1,0 +1,36 @@
+{
+  "name": "citerate-app",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Citerate dashboard — authenticated SSR app on Cloudflare Pages. Shares the D1 database with the marketing repo.",
+  "scripts": {
+    "dev": "astro dev --port 4322",
+    "build": "astro build",
+    "preview": "wrangler pages dev ./dist --persist-to ../citerate/.wrangler/state",
+    "check": "astro check && tsc --noEmit",
+    "preflight": "node src/scripts/preflight.mjs",
+    "preflight:local": "node src/scripts/preflight.mjs --local",
+    "verify:local": "node src/scripts/doctor.mjs",
+    "deploy": "pnpm preflight && astro build && wrangler pages deploy ./dist --project-name=citerate-app",
+    "deploy:force": "astro build && wrangler pages deploy ./dist --project-name=citerate-app",
+    "db:migrate:local": "wrangler d1 migrations apply citerate-db --local --persist-to ../citerate/.wrangler/state",
+    "db:migrate:remote": "wrangler d1 migrations apply citerate-db --remote",
+    "db:seed:local": "wrangler d1 execute citerate-db --local --persist-to ../citerate/.wrangler/state --file=./infra/seeds/app-dev.sql"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.2.1",
+    "@cloudflare/puppeteer": "^1.0.2",
+    "alpinejs": "^3.14.9",
+    "astro": "^5.6.1",
+    "bootstrap": "^5.3.3",
+    "echarts": "^5.5.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250204.0",
+    "sass": "^1.85.1",
+    "typescript": "^5.7.3",
+    "wrangler": "^3.109.2"
+  },
+  "packageManager": "pnpm@9.15.4"
+}

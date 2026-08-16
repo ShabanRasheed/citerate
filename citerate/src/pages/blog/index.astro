@@ -1,0 +1,137 @@
+---
+import { getCollection } from "astro:content";
+import Marketing from "../../layouts/Marketing.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const [lead, ...rest] = posts;
+
+const CATS = [
+  { value: "all", label: "All posts" },
+  { value: "research", label: "Research" },
+  { value: "playbook", label: "Playbooks" },
+  { value: "method", label: "Method notes" }
+];
+
+const chipClass = (c: string) =>
+  c === "research" ? "chip--solid" : c === "playbook" ? "chip--tech" : "chip--warn";
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" });
+---
+
+<Marketing
+  title="Field notes"
+  description="Research, playbooks, and method notes on AI visibility — every post built on scan data we actually ran."
+  nav="blog"
+>
+  <section class="section section--flush" style="padding-top:64px;padding-bottom:32px">
+    <div class="wrap">
+      <div class="stack stack--4">
+        <span class="t-label">Field notes</span>
+        <h1 class="t-d1 u-mw-26">What we measure, and what it means</h1>
+        <p class="t-lead" style="max-width:62ch">
+          Every post here is built on scan data we actually ran. Where the sample is thin, we say the sample is
+          thin.
+        </p>
+        <div class="pills" data-toggle-group="category" data-persist="url" style="margin-top:10px">
+          {
+            CATS.map((c, i) => (
+              <button class="pill" type="button" data-value={c.value} aria-selected={i === 0 ? "true" : "false"}>
+                {c.label}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    lead && (
+      <section class="section section--flush" style="padding-top:0">
+        <div class="wrap">
+          <a
+            class="c-card c-card--flush"
+            href={`/blog/${lead.id.replace(/\.mdx?$/, "")}`}
+            style="display:grid;grid-template-columns:1.05fr .95fr;text-decoration:none;color:inherit"
+          >
+            <div style="padding:34px 36px;display:flex;flex-direction:column;gap:14px">
+              <div class="post-meta">
+                <span class={`chip ${chipClass(lead.data.category)}`}>{lead.data.category}</span>
+                <span>{fmt(lead.data.date)} · {lead.data.readingTime}</span>
+              </div>
+              <h2 class="t-d2 u-mw-26">{lead.data.title}</h2>
+              <p class="t-body tx-soft" style="font-size:15px;line-height:1.65;max-width:52ch">{lead.data.dek}</p>
+              <div style="display:flex;align-items:center;gap:10px;margin-top:auto;padding-top:12px">
+                <span style="width:28px;height:28px;border-radius:999px;background:var(--paper-sunk);border:1px solid var(--line)"></span>
+                <span class="t-sm">{lead.data.author}</span>
+              </div>
+            </div>
+            <div class="c-card--ink" style="padding:34px 36px;display:flex;flex-direction:column;gap:16px;justify-content:center">
+              <span class="t-label">{lead.data.figure?.label ?? "Figure"}</span>
+              <div class="stack stack--3">
+                {
+                  (lead.data.figure?.rows ?? []).map((r, i) => (
+                    <div class="share-row">
+                      <span class="share-row__label" style="color:#C6CBD3">{r.label}</span>
+                      <span class="share-row__rail" style="background:rgba(255,255,255,0.10)">
+                        <span
+                          class="share-row__fill"
+                          style={`width:${r.value}%;background:var(--side-${["cited", "tech", "warn", "gap"][i % 4]})`}
+                        ></span>
+                      </span>
+                      <span class="share-row__val" style="color:#F4F5F7">{r.value}%</span>
+                    </div>
+                  ))
+                }
+              </div>
+              {lead.data.figure?.note && <span class="figcap">{lead.data.figure.note}</span>}
+            </div>
+          </a>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section section--flush" style="padding-top:16px">
+    <div class="wrap">
+      <div class="grid grid--3">
+        {
+          rest.map((p) => (
+            <a class="c-card" href={`/blog/${p.id.replace(/\.mdx?$/, "")}`} style="text-decoration:none;color:inherit">
+              <div class="post-meta">
+                <span class={`chip ${chipClass(p.data.category)}`}>{p.data.category}</span>
+                <span>{fmt(p.data.date)}</span>
+              </div>
+              <span class="t-d4">{p.data.title}</span>
+              <span class="t-sm">{p.data.dek}</span>
+              <span class="t-data-sm" style="margin-top:auto;padding-top:8px">{p.data.readingTime}</span>
+            </a>
+          ))
+        }
+
+        <div class="c-card c-card--ink" style="justify-content:center">
+          <span class="t-label">Field notes, monthly</span>
+          <span class="t-d4" style="color:var(--side-ink)">One email a month, always with data in it.</span>
+          <form style="display:flex;gap:8px" method="POST" action="/api/subscribe">
+            <input type="hidden" name="source" value="blog" />
+            <label class="visually-hidden-focusable" for="sub-email">Email</label>
+            <input
+              class="scan-form__field"
+              id="sub-email"
+              name="email"
+              type="email"
+              required
+              placeholder="you@company.com"
+              style="height:40px;font-size:12.5px;border-color:transparent"
+            />
+            <button class="btn-primary-c" type="submit" style="height:40px;padding:0 16px">Subscribe</button>
+          </form>
+          <span class="t-data-sm">No drip sequence. Unsubscribe in one click.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</Marketing>

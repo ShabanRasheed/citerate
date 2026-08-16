@@ -1,0 +1,60 @@
+// Section rhythm. Marketing pages are built out of these, never bespoke padding.
+.section {
+  padding: 76px 0;
+  border-bottom: 1px solid var(--line);
+}
+.section--tight { padding: 56px 0; }
+.section--loose { padding: 96px 0; }
+.section--card { background: var(--card); }
+.section--ink { background: var(--ink); color: var(--side-ink); border-bottom: 0; }
+.section--ink .t-label { color: var(--side-ink-muted); }
+.section--ink .t-lead { color: var(--side-ink-muted); }
+.section--flush { border-bottom: 0; }
+
+
+.wrap {
+  width: 100%;
+  max-width: var(--max-marketing);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.wrap--prose { max-width: calc(var(--max-prose) + var(--gutter) * 2); }
+.wrap--wide { max-width: 1240px; }
+
+// Numbered section head, the lab-report device used across the site.
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.sec-head__num {
+  font: var(--t-label);
+  letter-spacing: var(--tracking-label);
+  color: var(--ink-muted);
+}
+.sec-head__aside { margin-left: auto; }
+
+// Figure caption, mono, always states what the data is and is not.
+.figcap {
+  font: var(--t-data-sm);
+  color: var(--ink-muted);
+  margin-top: 12px;
+}
+
+// Grids used repeatedly. gap-based so drag-reorder in editors survives.
+.grid { display: grid; gap: 16px; }
+.grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid--split { grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center; }
+.grid--split-r { grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center; }
+
+
+.stack { display: flex; flex-direction: column; }
+.stack--1 { gap: 4px; }  .stack--2 { gap: 8px; }
+.stack--3 { gap: 12px; } .stack--4 { gap: 16px; }
+.stack--5 { gap: 24px; } .stack--6 { gap: 32px; }
+
+.row-between { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }

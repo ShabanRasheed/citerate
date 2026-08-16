@@ -1,0 +1,75 @@
+---
+const year = new Date().getFullYear();
+const cols = [
+  {
+    label: "Product",
+    links: [
+      { href: "/how-it-works", label: "How it works" },
+      { href: "/pricing", label: "Pricing" },
+      { href: "/compare/spreadsheet", label: "Compare" },
+      { href: "/changelog", label: "Changelog" }
+    ]
+  },
+  {
+    label: "Solutions",
+    links: [
+      { href: "/for/in-house", label: "For in-house teams" },
+      { href: "/for/agencies", label: "For agencies" },
+      { href: "/customers", label: "Customers" }
+    ]
+  },
+  {
+    label: "Resources",
+    links: [
+      { href: "/blog", label: "Blog" },
+      { href: "/docs", label: "Docs & API", soon: true },
+      { href: "/security", label: "Security" },
+      { href: "/contact", label: "Contact" }
+    ]
+  },
+  {
+    label: "Legal",
+    links: [
+      { href: "/legal/privacy", label: "Privacy" },
+      { href: "/legal/terms", label: "Terms" },
+      { href: "/legal/dpa", label: "DPA" },
+      { href: "/legal/subprocessors", label: "Subprocessors" }
+    ]
+  }
+];
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__cols">
+      <div class="site-footer__brand">
+        <span class="brand">
+          <span class="brand__mark" aria-hidden="true"></span>
+          Citerate
+        </span>
+        <span class="site-footer__note">
+          AI visibility, measured like an instrument, not argued like an ad.
+        </span>
+      </div>
+
+      {
+        cols.map((col) => (
+          <div class="site-footer__col">
+            <span class="t-label">{col.label}</span>
+            {col.links.map((l) => (
+              <a href={l.href}>
+                {l.label}
+                {"soon" in l && l.soon && <span class="nav__soon" style="margin-left:6px">Soon</span>}
+              </a>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="site-footer__bar">
+      <span>© {year} Citerate</span>
+      <a class="status-dot" href="/changelog">All engines operational</a>
+    </div>
+  </div>
+</footer>

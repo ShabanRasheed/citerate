@@ -1,0 +1,84 @@
+---
+/**
+ * Workspace switcher pane. Agencies live here: one account, many client
+ * workspaces, one bill. Client workspaces are listed under their parent so the
+ * hierarchy is visible rather than implied by naming convention.
+ */
+import App from "../../layouts/App.astro";
+import { workspacesFor } from "../../lib/auth";
+import { usage } from "../../lib/data";
+import { PLANS, ADDONS, type PlanId } from "../../lib/plans";
+import { ROLE_LABEL } from "../../lib/rbac";
+
+const env = Astro.locals.runtime.env;
+const user = Astro.locals.user!;
+const current = Astro.locals.workspace!;
+
+const spaces = await workspacesFor(env, user.id);
+const counters = await usage(env, current.workspaceId);
+Astro.locals.usage = counters;
+
+const parents = spaces.filter((s) => !s.parent_id);
+const childrenOf = (id: string) => spaces.filter((s) => s.parent_id === id);
+const limits = PLANS[current.plan as PlanId];
+const canAddClients = Boolean(limits.clientWorkspaces);
+---
+
+<App title="Workspaces" current="settings" crumb={`${spaces.length} total`}>
+  <div class="stack stack--4">
+    {
+      parents.map((space) => (
+        <section class="c-card">
+          <div class="row-between" style="gap:16px">
+            <span class="stack stack--1">
+              <span class="t-d4">{space.name}</span>
+              <span class="chart__note">
+                {PLANS[space.plan as PlanId].label} · {ROLE_LABEL[space.role as never]}
+                {space.id === current.workspaceId && " · current"}
+              </span>
+            </span>
+            {space.id === current.workspaceId ? (
+              <span class="pill pill--cited">active</span>
+            ) : (
+              <form method="post" action="/api/settings/workspace">
+                <input type="hidden" name="workspaceId" value={space.id} />
+                <button class="btn-ghost" type="submit">Switch</button>
+              </form>
+            )}
+          </div>
+
+          {childrenOf(space.id).length > 0 && (
+            <div class="stack stack--2" style="margin-top:16px">
+              <span class="t-label">Client workspaces</span>
+              {childrenOf(space.id).map((child) => (
+                <form class="row-between" method="post" action="/api/settings/workspace" style="gap:12px;padding:10px 14px;background:var(--paper);border-radius:var(--r-sm)">
+                  <input type="hidden" name="workspaceId" value={child.id} />
+                  <span>{child.name}</span>
+                  <button class="btn-quiet" type="submit">Open</button>
+                </form>
+              ))}
+            </div>
+          )}
+        </section>
+      ))
+    }
+
+    {
+      canAddClients && (
+        <form class="c-card stack stack--4" method="post" action="/api/settings/workspace" data-lock>
+          <span class="t-label t-label--ink">Add a client workspace</span>
+          <span class="chart__note">
+            Pooled {limits.trackedQueries.toLocaleString()}-query budget across up to {limits.clientWorkspaces} clients.
+            Beyond that, {ADDONS.clientWorkspace.label.toLowerCase()} is ${ADDONS.clientWorkspace.price}/mo. Client seats
+            stay free and read-only.
+          </span>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <input class="form-field__input" name="name" type="text" placeholder="Client name" required style="min-width:240px" />
+            <input type="hidden" name="action" value="create_child" />
+            <button class="btn-primary-c" type="submit" data-busy="Creating…">Create workspace</button>
+          </div>
+        </form>
+      )
+    }
+  </div>
+</App>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#F4F5F7;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="max-width:1240px;margin:0 auto;padding:48px 40px 120px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;box-sizing:border-box">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:20px;border-bottom:2px solid #141B26">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Phase 11 · launch runbook · 2026-07-30</div>
+      <h1 style="font:600 34px/1.15 'Source Serif 4',serif;letter-spacing:-.015em;margin:10px 0 0">Phase 11 — the runbook to live</h1>
+      <p style="font:400 14px/1.55 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0;text-wrap:pretty">Every remaining launch item is configuration a human holds: account ids, price ids, OAuth credentials, secrets. So Phase 11 ships one piece of code — a preflight that reads the repo and refuses a deploy that would ship something broken or fake — and this ordered runbook for the rest.</p>
+    </div>
+    <div style="flex:none;text-align:right;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+      <div>new files &nbsp;&nbsp;&nbsp;1</div>
+      <div>edited &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2</div>
+      <div>steps &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8</div>
+      <div style="color:#8A93A1">app code changed &nbsp;0</div>
+    </div>
+  </div>
+
+  <section style="display:grid;grid-template-columns:1.05fr 1fr;gap:14px;margin-top:28px;align-items:start">
+
+    <div style="background:#141B26;border-radius:10px;padding:20px 22px;color:#F4F5F7;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">THE GATE — pnpm preflight</div>
+        <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">src/scripts/preflight.mjs</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;font:400 11.5px/1.55 'JetBrains Mono',monospace;margin-top:14px">
+        <div style="color:#8A93A1;padding-bottom:8px">citerate-app preflight — production (wrangler.toml)</div>
+        <div style="display:grid;grid-template-columns:46px 138px 1fr;gap:0 10px"><div style="color:#F07A6A">BLOCK</div><div>wrangler.toml ids</div><div style="color:#8A93A1;min-width:0">still placeholder: REPLACE_WITH_D1_ID, …</div></div>
+        <div style="display:grid;grid-template-columns:46px 138px 1fr;gap:0 10px"><div style="color:#F07A6A">BLOCK</div><div>USE_ENGINE_MOCKS</div><div style="color:#8A93A1;min-width:0">is "true" — every readout would be mock</div></div>
+        <div style="display:grid;grid-template-columns:46px 138px 1fr;gap:0 10px"><div style="color:#F07A6A">BLOCK</div><div>PADDLE_PRICE_IDS</div><div style="color:#8A93A1;min-width:0">unset — checkout 501s for every plan</div></div>
+        <div style="display:grid;grid-template-columns:46px 138px 1fr;gap:0 10px"><div style="color:#F07A6A">BLOCK</div><div>GOOGLE_CLIENT_ID</div><div style="color:#8A93A1;min-width:0">unset — sign-in hidden, GSC unconfigured</div></div>
+        <div style="display:grid;grid-template-columns:46px 138px 1fr;gap:0 10px"><div style="color:#E9A44A">WARN</div><div>fonts</div><div style="color:#8A93A1;min-width:0">0 of 4 woff2 — README §8</div></div>
+        <div style="display:grid;grid-template-columns:46px 138px 1fr;gap:0 10px"><div style="color:#E9A44A">WARN</div><div>2FA enrolment</div><div style="color:#8A93A1;min-width:0">pane exists, screens do not — §8</div></div>
+        <div style="display:grid;grid-template-columns:46px 138px 1fr;gap:0 10px"><div style="color:#7FA0D4">NOTE</div><div>secrets</div><div style="color:#8A93A1;min-width:0">confirm all five are set</div></div>
+        <div style="display:grid;grid-template-columns:46px 138px 1fr;gap:0 10px"><div style="color:#7FA0D4">NOTE</div><div>migrations applied</div><div style="color:#8A93A1;min-width:0">db:migrate:remote before deploy</div></div>
+        <div style="display:grid;grid-template-columns:46px 138px 1fr;gap:0 10px"><div style="color:#35B394">PASS</div><div>PDF renderer</div><div style="color:#8A93A1;min-width:0">[browser] + @cloudflare/puppeteer</div></div>
+        <div style="display:grid;grid-template-columns:46px 138px 1fr;gap:0 10px"><div style="color:#35B394">PASS</div><div>public/_headers</div><div style="color:#8A93A1;min-width:0">noindex + no-store</div></div>
+        <div style="color:#8A93A1;padding-top:10px">4 blocking, 2 open-by-choice, 4 clear.</div>
+        <div style="color:#8A93A1">Not deployable yet.</div>
+      </div>
+      <p style="font:400 12.5px/1.62 inherit;color:#8A93A1;margin:14px 0 0"><span style="color:#F4F5F7">pnpm deploy</span> runs it first and exits on any BLOCK, so a misconfigured deploy stops on your machine rather than on Cloudflare. <span style="color:#F4F5F7">deploy:force</span> exists for a deliberate partial deploy.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:4px 10px 10px 4px;padding:20px 22px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0B6151">WHAT IT CATCHES THAT A CHECKLIST FORGETS</div>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-top:12px;font:400 12.5px/1.5 inherit;color:#5B6472">
+          <div><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#141B26">USE_ENGINE_MOCKS</span> still true — the app would look perfect and mean nothing.</div>
+          <div><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#141B26">PADDLE_ENV</span> left on sandbox in production — real cards, sandbox API.</div>
+          <div>A price map that parses but is short of the 8 plan prices or 4 add-ons, or holds values that aren't <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#141B26">pri_…</span>.</div>
+          <div>A secret assigned in <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#141B26">wrangler.toml</span> instead of <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#141B26">secret put</span>.</div>
+          <div>A <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#141B26">[browser]</span> binding with no puppeteer dependency behind it.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">THREE LEVELS, NO OTHERS</div>
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:8px 12px;margin-top:12px;font:400 12.5px/1.5 inherit;color:#5B6472;align-items:baseline">
+          <div style="font:500 11px 'JetBrains Mono',monospace;color:#A62F2F">BLOCK</div><div>deploying now ships something broken or fake. Exits 1.</div>
+          <div style="font:500 11px 'JetBrains Mono',monospace;color:#9A6210">WARN</div><div>known-open, named in README §8, does not block launch.</div>
+          <div style="font:500 11px 'JetBrains Mono',monospace;color:#34507A">NOTE</div><div>unverifiable from the repo — a human confirms it.</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1;margin:34px 0 14px">THE EIGHT STEPS · IN ORDER · EACH ONE VERIFIABLE</div>
+
+  <section style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">01 · BINDING IDS</div><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">you · 5 min</div></div>
+      <div style="font:600 17px/1.3 'Source Serif 4',serif;margin-top:7px">One database, two front ends</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:7px 0 0">Paste the <em>same</em> D1, KV and R2 ids the marketing repo already uses into <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">wrangler.toml</span>. Different ids mean two databases and a dashboard that can't see what the scanner wrote.</p>
+      <div style="background:#EDEFF2;border-radius:6px;padding:9px 11px;margin-top:10px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#141B26;overflow-wrap:break-word">wrangler pages project create citerate-app</div>
+      <div style="font:400 11px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:8px">verify → pnpm preflight shows no REPLACE_WITH_</div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">02 · PADDLE</div><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">you · 30 min</div></div>
+      <div style="font:600 17px/1.3 'Source Serif 4',serif;margin-top:7px">Twelve prices, created once</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:7px 0 0">Four plans × monthly/yearly, plus the four add-ons. Paste the map into <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">PADDLE_PRICE_IDS</span> and flip <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">PADDLE_ENV</span> to production. Test in sandbox first with the same shape.</p>
+      <div style="background:#EDEFF2;border-radius:6px;padding:9px 11px;margin-top:10px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#141B26;overflow-wrap:break-word;word-break:break-all">{"starter":{"month":"pri_…","year":"pri_…"},…,"addons":{"extra_queries":"pri_…",…}}</div>
+      <div style="font:400 11px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:8px">verify → preflight: 8 plan prices + 4 add-ons, all pri_…</div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">03 · GOOGLE OAUTH</div><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">you · 15 min</div></div>
+      <div style="font:600 17px/1.3 'Source Serif 4',serif;margin-top:7px">One client, two uses</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:7px 0 0">The same client serves sign-in and Search Console. Register the redirect uri verbatim — a trailing slash is a mismatch. Add the Search Console read-only scope.</p>
+      <div style="background:#EDEFF2;border-radius:6px;padding:9px 11px;margin-top:10px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#141B26;overflow-wrap:break-word;word-break:break-all">https://app.citerate.com/api/connect/gsc/callback</div>
+      <div style="font:400 11px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:8px">verify → connect once; gsc_connections gains a sealed row</div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">04 · SECRETS</div><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">you · 5 min</div></div>
+      <div style="font:600 17px/1.3 'Source Serif 4',serif;margin-top:7px">Five, none in the repo</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:7px 0 0"><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">SESSION_SECRET</span> is the load-bearing one: it seals GSC refresh tokens as well as sessions, so rotating it signs everyone out <em>and</em> invalidates stored tokens. 32+ random bytes, generated not typed.</p>
+      <div style="background:#EDEFF2;border-radius:6px;padding:9px 11px;margin-top:10px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#141B26;overflow-wrap:break-word;word-break:break-all">wrangler pages secret put SESSION_SECRET --project-name=citerate-app</div>
+      <div style="font:400 11px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:8px">verify → wrangler pages secret list shows five names</div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">05 · INSTALL &amp; TYPECHECK</div><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">you · 3 min</div></div>
+      <div style="font:600 17px/1.3 'Source Serif 4',serif;margin-top:7px">The puppeteer dependency</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:7px 0 0">Phase 10 added <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">@cloudflare/puppeteer</span> for the PDF route. Install, then typecheck before you spend a deploy on a compile error.</p>
+      <div style="background:#EDEFF2;border-radius:6px;padding:9px 11px;margin-top:10px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#141B26;overflow-wrap:break-word">pnpm install &amp;&amp; pnpm check</div>
+      <div style="font:400 11px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:8px">verify → astro check and tsc both clean</div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">06 · MIGRATIONS</div><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">you · 2 min</div></div>
+      <div style="font:600 17px/1.3 'Source Serif 4',serif;margin-top:7px">0003 before the deploy, not after</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:7px 0 0">Deploying first means the connect route writes to a table that doesn't exist. Run remote migrations, confirm <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">gsc_connections</span> landed, then ship.</p>
+      <div style="background:#EDEFF2;border-radius:6px;padding:9px 11px;margin-top:10px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#141B26;overflow-wrap:break-word">pnpm db:migrate:remote</div>
+      <div style="font:400 11px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:8px">verify → d1 execute "select name from sqlite_master" lists it</div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #C43D3D;border-radius:4px 10px 10px 4px;padding:18px 20px;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#A62F2F">07 · MOCKS OFF</div><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">you + scanner · gated</div></div>
+      <div style="font:600 17px/1.3 'Source Serif 4',serif;margin-top:7px">The one that decides whether launch is real</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:7px 0 0">Every readout still comes from mocks. Flip <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">USE_ENGINE_MOCKS</span> to false only once the scanner Worker answers in production — with mocks on, the app is a convincing demo, and the method promises on the marketing site would be false.</p>
+      <div style="background:#FBEDED;border-radius:6px;padding:9px 11px;margin-top:10px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#A62F2F;overflow-wrap:break-word">USE_ENGINE_MOCKS = "false" &nbsp;# blocks a production deploy until set</div>
+      <div style="font:400 11px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:8px">verify → run one real scan; the surface|proxy label matches the source</div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:4px 10px 10px 4px;padding:18px 20px;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0B6151">08 · DEPLOY</div><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">you · 4 min</div></div>
+      <div style="font:600 17px/1.3 'Source Serif 4',serif;margin-top:7px">Gated, then smoke-tested</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:7px 0 0">Preflight runs, build runs, Pages takes it. Then walk the eight smoke checks below on the live domain before you tell anyone the door is open.</p>
+      <div style="background:#EDEFF2;border-radius:6px;padding:9px 11px;margin-top:10px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#141B26;overflow-wrap:break-word">pnpm deploy</div>
+      <div style="font:400 11px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:8px">verify → the smoke list, all eight</div>
+    </div>
+
+  </section>
+
+  <section style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:24px 26px;margin-top:14px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">SMOKE TEST ON THE LIVE DOMAIN · EIGHT PATHS, TEN MINUTES</div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">any failure → rollback, don't patch forward</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 32px;margin-top:16px">
+      <div style="display:flex;gap:11px;align-items:baseline;padding-bottom:10px;border-bottom:1px solid #E2E5EA"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">01</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">Magic link and typed code</span> — one token answers to both; second use is refused.</div></div>
+      <div style="display:flex;gap:11px;align-items:baseline;padding-bottom:10px;border-bottom:1px solid #E2E5EA"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">02</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">Google sign-in</span> — button now visible; a new user lands in onboarding, not an empty dashboard.</div></div>
+      <div style="display:flex;gap:11px;align-items:baseline;padding-bottom:10px;border-bottom:1px solid #E2E5EA"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">03</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">Onboarding crawl</span> — queries arrive labelled <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">crawl</span> and <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">category</span>, not category alone.</div></div>
+      <div style="display:flex;gap:11px;align-items:baseline;padding-bottom:10px;border-bottom:1px solid #E2E5EA"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">04</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">Checkout</span> — one real card on the cheapest plan; the webhook, not the redirect, sets the plan.</div></div>
+      <div style="display:flex;gap:11px;align-items:baseline;padding-bottom:10px;border-bottom:1px solid #E2E5EA"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">05</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">GSC connect</span> — consent, then deny once: both land with plain-words notes.</div></div>
+      <div style="display:flex;gap:11px;align-items:baseline;padding-bottom:10px;border-bottom:1px solid #E2E5EA"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">06</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">PDF twice</span> — the second download must be byte-identical: rendered once, stored forever.</div></div>
+      <div style="display:flex;gap:11px;align-items:baseline"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">07</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">Client role</span> — sign in as <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">client</span>: no billing, no settings, no other workspace.</div></div>
+      <div style="display:flex;gap:11px;align-items:baseline"><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1;flex:none">08</span><div style="font:400 13px/1.5 inherit;color:#5B6472;min-width:0"><span style="color:#141B26">JS off</span> — a report still prints correctly, and <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">/dashboard</span> still renders.</div></div>
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:1.35fr 1fr;gap:14px;margin-top:14px;align-items:start">
+    <div style="background:#141B26;border-radius:10px;padding:24px 26px;color:#F4F5F7">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">GO / NO-GO — THE TWO OPEN ITEMS, AND MY CALL</div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:14px 18px;margin-top:16px;align-items:baseline">
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#35B394">GO</div>
+        <div style="font:400 13px/1.6 inherit;color:#8A93A1"><span style="color:#F4F5F7">2FA enrolment — ship without it.</span> Auth is passwordless already: there is no password to steal, and the session is short-lived for untrusted devices. Enrolment screens buy little at launch and cost a full flow with recovery codes. Revisit when the first agency account asks, which is the honest trigger.</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#E9A44A">GO, FIX FAST</div>
+        <div style="font:400 13px/1.6 inherit;color:#8A93A1"><span style="color:#F4F5F7">Fonts — ship, then copy the four woff2 within the week.</span> Without them the display serif falls back to Georgia: readable, but the verdict sentence loses the voice the brand is built on. It's a file copy, not a decision — the only reason it isn't done is that nobody owned it.</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#F07A6A">NO-GO</div>
+        <div style="font:400 13px/1.6 inherit;color:#8A93A1"><span style="color:#F4F5F7">Mocks on is not a launch.</span> Step 07 is the real gate. Everything else here is plumbing; that one is the difference between a product and a demo, so preflight blocks on it rather than trusting anyone to remember.</div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">IF IT GOES WRONG</div>
+      <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:12px 0 0">Pages keeps every deployment. Roll back to the last good one rather than patching forward under pressure — the database is shared, so a bad app deploy never corrupts the marketing side.</p>
+      <div style="background:#EDEFF2;border-radius:6px;padding:9px 11px;margin-top:12px;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#141B26;overflow-wrap:break-word;word-break:break-all">wrangler pages deployment list --project-name=citerate-app<br>wrangler pages deployment tail</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:12px 0 0">A migration is the exception: 0003 only adds a table, so a rollback of the app is safe with 0003 applied. Never roll a migration back to fix a deploy.</p>
+    </div>
+  </section>
+
+  <div style="display:flex;justify-content:space-between;gap:24px;margin-top:36px;padding-top:16px;border-top:1px solid #E2E5EA;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1;flex-wrap:wrap">
+    <div>phase 11 · citerate-app · configuration → live</div>
+    <div><a href="./Phase 10 - Placeholders Closed.dc.html">← phase 10</a> &nbsp;·&nbsp; <a href="./Phase 9 - UX Package Index.dc.html">phase 9 index</a></div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

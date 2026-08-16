@@ -1,0 +1,161 @@
+// ---------------------------------------------------------------------------
+// Citerate design tokens — the single source of truth.
+// Ported verbatim from tokens.css v1.0. Nothing below depends on a framework.
+// If a value needs to change, it changes here and nowhere else.
+// ---------------------------------------------------------------------------
+
+// --- SCSS-side mirrors (needed at compile time by _bootstrap-map.scss) -----
+$c-paper:        #F4F5F7;
+$c-paper-sunk:   #EDEFF2;
+$c-card:         #FFFFFF;
+$c-ink:          #141B26;
+$c-ink-soft:     #5B6472;
+$c-ink-muted:    #8A93A1;
+$c-line:         #E2E5EA;
+$c-line-strong:  #C6CBD3;
+
+$c-cited:        #0E7C66;
+$c-cited-ink:    #0B6151;
+$c-cited-wash:   #E7F2EF;
+$c-gap:          #C43D3D;
+$c-gap-ink:      #A62F2F;
+$c-gap-wash:     #FBEDED;
+$c-warn:         #D98324;
+$c-warn-ink:     #9A6210;
+$c-warn-wash:    #FDF2E3;
+$c-warn-line:    #F5E3C4;
+$c-tech:         #3E5C8A;
+$c-tech-ink:     #34507A;
+$c-tech-wash:    #EBEFF6;
+$c-neutral:      #8A93A1;
+
+$f-display: "Source Serif 4", ui-serif, Georgia, "Times New Roman", serif;
+$f-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$f-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+$r-sm: 6px;
+$r-md: 10px;
+$r-lg: 14px;
+
+// 4px base. Bootstrap's $spacers map is built from this in _bootstrap-map.scss.
+$s: (1: 4px, 2: 8px, 3: 12px, 4: 16px, 5: 24px, 6: 32px, 7: 48px, 8: 64px, 9: 96px);
+
+// --- Custom properties (runtime, what components actually consume) ---------
+:root {
+  --font-display: #{$f-display};
+  --font-ui: #{$f-ui};
+  --font-mono: #{$f-mono};
+
+  --paper: #{$c-paper};
+  --paper-sunk: #{$c-paper-sunk};
+  --card: #{$c-card};
+  --card-raised: #{$c-card};
+  --ink: #{$c-ink};
+  --ink-soft: #{$c-ink-soft};
+  --ink-muted: #{$c-ink-muted};
+  --line: #{$c-line};
+  --line-strong: #{$c-line-strong};
+  // Ink for text sitting on a dark surface: inverse for full-contrast copy,
+  // on-dark for the softened variety (code blocks, footer links).
+  --ink-inverse: #{$c-card};
+  --ink-on-dark: #{$c-line-strong};
+  --overlay: rgba(20, 27, 38, 0.42);
+
+  --cited: #{$c-cited};
+  --cited-ink: #{$c-cited-ink};
+  --cited-wash: #{$c-cited-wash};
+  --gap: #{$c-gap};
+  --gap-ink: #{$c-gap-ink};
+  --gap-wash: #{$c-gap-wash};
+  --warn: #{$c-warn};
+  --warn-ink: #{$c-warn-ink};
+  --warn-wash: #{$c-warn-wash};
+  --warn-line: #{$c-warn-line};
+  --tech: #{$c-tech};
+  --tech-ink: #{$c-tech-ink};
+  --tech-wash: #{$c-tech-wash};
+  --neutral: #{$c-neutral};
+  --neutral-wash: #F0F2F5;
+
+  --chart-1: var(--gap);
+  --chart-2: var(--warn);
+  --chart-3: var(--tech);
+  --chart-4: var(--neutral);
+  --chart-stripe: repeating-linear-gradient(45deg, #8A93A1 0 4px, #A8AFBA 4px 8px);
+  --chart-track: #E2E5EA;
+  --chart-band: rgba(14, 124, 102, 0.22);
+  --chart-select: var(--ink);
+
+  --lock-blur: 6px;
+  --lock-veil: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(244,245,247,0.92));
+  --lock-line: #D8DCE3;
+  --lock-badge-bg: var(--ink);
+  --lock-badge-ink: #FFFFFF;
+  --upsell-bg: linear-gradient(180deg, #FFFFFF, #F4F5F7);
+
+  --side-bg: #141B26;
+  --side-bg-hover: rgba(255, 255, 255, 0.06);
+  --side-bg-active: rgba(255, 255, 255, 0.10);
+  --side-ink: #F4F5F7;
+  --side-ink-muted: #8A93A1;
+  --side-line: rgba(255, 255, 255, 0.10);
+  --side-cited: #35B394;
+  --side-gap: #F07A6A;
+  --side-warn: #E9A44A;
+  --side-tech: #7FA0D4;
+
+  --focus-ring: 0 0 0 2px #FFFFFF, 0 0 0 4px #3E5C8A;
+  --focus-ring-dark: 0 0 0 2px #141B26, 0 0 0 4px #7FA0D4;
+
+  --shadow-sm: 0 1px 2px rgba(20, 27, 38, 0.05);
+  --shadow-md: 0 2px 8px rgba(20, 27, 38, 0.07);
+  --shadow-lg: 0 12px 32px rgba(20, 27, 38, 0.14);
+
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+
+  --r-sm: #{$r-sm};
+  --r-md: #{$r-md};
+  --r-lg: #{$r-lg};
+  --r-pill: 999px;
+  --bw: 1px;
+  --bw-strong: 2px;
+
+  --side-w: 248px;
+  --side-w-rail: 64px;
+  --topbar-h: 60px;
+  --gutter: 32px;
+  --gutter-md: 20px;
+  --gutter-sm: 16px;
+  --max-app: 1280px;
+  --max-marketing: 1120px;
+  --max-prose: 68ch;
+
+  --t-d1: 600 44px/1.1  var(--font-display);
+  --t-d2: 600 34px/1.15 var(--font-display);
+  --t-d3: 600 26px/1.28 var(--font-display);
+  --t-d4: 600 20px/1.35 var(--font-display);
+  --t-ui-lg: 400 16px/1.55 var(--font-ui);
+  --t-ui:    400 14px/1.55 var(--font-ui);
+  --t-ui-sm: 400 13px/1.5  var(--font-ui);
+  --t-ui-xs: 500 12px/1.45 var(--font-ui);
+  --t-label: 500 10.5px/1 var(--font-mono);
+  --t-data-xl: 500 48px/1  var(--font-mono);
+  --t-data-lg: 500 20px/1.2 var(--font-mono);
+  --t-data:    500 13px/1.4 var(--font-mono);
+  --t-data-sm: 400 11.5px/1.35 var(--font-mono);
+  --t-code:    400 12.5px/1.6 var(--font-mono);
+  --tracking-tight: -0.02em;
+  --tracking-label: 0.12em;
+
+  --dur-1: 90ms;
+  --dur-2: 160ms;
+  --dur-3: 240ms;
+  --dur-4: 420ms;
+  --dur-count: 700ms;
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-settle: cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+
+// Width breakpoints for this file live in 07-responsive/_responsive.scss.

@@ -1,0 +1,20 @@
+/*
+  Dashboard headers. Stricter than the marketing site: the whole app is noindex,
+  nothing is cacheable, and framing is denied outright — a white-labelled
+  dashboard embedded in someone else's page is a clickjacking surface.
+*/
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: private, no-store
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://api.paddle.com; frame-src https://challenges.cloudflare.com https://buy.paddle.com; frame-ancestors 'none'; base-uri 'none'; form-action 'self' https://buy.paddle.com
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

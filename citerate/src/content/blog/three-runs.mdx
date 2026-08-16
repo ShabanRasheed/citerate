@@ -1,0 +1,33 @@
+---
+title: "Why we run every prompt three times"
+dek: "The same question, asked in the same hour, gets different answers. Here is the variance we measured across four engines — and why your citation rate is computed over runs, never over one lucky answer."
+date: 2026-07-08
+author: "Author name · placeholder byline"
+category: "method"
+readingTime: "6 min"
+methodology: "Variance measured on 400 queries across 4 engines, 3 runs per engine per refresh, same 15-minute window, US region, unpersonalized, July 2026. \"Changed\" means the set of cited hostnames differed between runs."
+figure:
+  label: "Fig. 1 — answer variance across 3 runs, by engine"
+  note: "Share of queries where the cited set changed between runs in the same refresh window."
+  rows:
+    - { label: "ChatGPT", value: 31 }
+    - { label: "Perplexity", value: 24 }
+    - { label: "Google AIO", value: 19 }
+    - { label: "Gemini", value: 16 }
+---
+
+## One run is an anecdote
+
+Ask an engine the same question twice and you will often get two different citation sets. Not because anything about your site changed in ninety seconds, but because sampling is part of how these systems generate text.
+
+If a tool reports your citation rate from a single run per query, it is reporting the answer it happened to get. That number will move week to week without anything at your end moving at all, and you will spend meetings explaining noise.
+
+## What three runs buys you
+
+Three is not a magic number, it is a cost-benefit line. It cuts the odds of a single-sample fluke by roughly two-thirds while keeping engine spend low enough that a scan can be free. Every run is stored separately, so your rate is a proportion — 3 of 12 runs, not "not cited".
+
+## What it does not buy you
+
+Three runs bound variance; they do not eliminate it. That is why every trend chart carries a confidence band, and why a week-over-week move inside the band is labeled **within noise** rather than drawn as a change.
+
+The alternative — showing every wobble as a movement — makes a dashboard look responsive and makes its owner look unreliable.

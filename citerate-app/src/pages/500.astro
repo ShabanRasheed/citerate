@@ -1,0 +1,24 @@
+---
+/**
+ * 500. Carries a request id so support can find it, and says plainly that the
+ * failure is ours and the data is intact — Phase 4 screen 31.
+ */
+import Auth from "../layouts/Auth.astro";
+
+const requestId = Astro.request.headers.get("cf-ray")?.split("-")[0] ?? "unknown";
+---
+
+<Auth title="Something broke">
+  <span class="t-data-sm" style="color:var(--ink-muted)">error 500 · req {requestId}</span>
+  <h1 class="auth__title">This page didn't load. Your scans and data are fine.</h1>
+  <p class="auth__sub">
+    Something broke on our side, not yours. We've logged it with the reference above. Reloading usually works; if it
+    doesn't, send us that reference.
+  </p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap">
+    <a class="btn-primary-c" href="/overview">Reload the readout</a>
+    <a class="btn-ghost" href={`${import.meta.env.PUBLIC_SITE_URL ?? ""}/contact?intent=support&ref=${requestId}`}>
+      Tell support
+    </a>
+  </div>
+</Auth>

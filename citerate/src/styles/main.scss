@@ -1,0 +1,38 @@
+// ---------------------------------------------------------------------------
+// The only stylesheet entry point. Order matters: tokens → bootstrap map →
+// bootstrap → base → layout → components → utilities → responsive → print.
+// Nothing is overridden after the fact; Bootstrap compiles against our tokens.
+// No partial above 07 may contain a width media query — they all live in
+// 07-responsive/_responsive.scss, in descending breakpoint order.
+// ---------------------------------------------------------------------------
+
+// 01 settings — tokens first so the custom properties exist for everything after
+@use "01-settings/tokens";
+
+// 02 vendor — Bootstrap, compiled with 01-settings/_bootstrap-map.scss applied
+@use "02-vendor/bootstrap";
+
+// 03 base
+@use "03-base/reset";
+@use "03-base/type";
+
+// 04 layout
+@use "04-layout/section";
+@use "04-layout/header";
+@use "04-layout/footer";
+
+// 05 components — one file per component, no cross-imports
+@use "05-components/buttons";
+@use "05-components/card";
+@use "05-components/forms";
+@use "05-components/charts";
+@use "05-components/pricing";
+
+// 06 utilities — so they win without !important
+@use "06-utilities/utils";
+
+// 07 responsive — every width breakpoint in the repo, largest → smallest
+@use "07-responsive/responsive";
+
+// print last of all, so paper overrides beat every screen breakpoint
+@use "06-utilities/print";

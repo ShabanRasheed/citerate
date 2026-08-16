@@ -1,0 +1,26 @@
+---
+/**
+ * Plan gate. Blurs real structure rather than showing a fake screenshot: the
+ * shape of what you are missing is the honest version of an upsell.
+ */
+interface Props {
+  badge: string;
+  headline: string;
+  detail?: string;
+  cta?: string;
+  href?: string;
+}
+const { badge, headline, detail, cta = "See plans", href = "/settings/billing" } = Astro.props;
+---
+
+<div class="locked">
+  <div class="locked__content" aria-hidden="true">
+    <slot />
+  </div>
+  <div class="locked__veil">
+    <span class="locked__badge">{badge}</span>
+    <span class="t-d4" style="max-width:30ch">{headline}</span>
+    {detail && <span class="chart__note" style="max-width:44ch">{detail}</span>}
+    <a class="btn-primary-c" href={href}>{cta}</a>
+  </div>
+</div>

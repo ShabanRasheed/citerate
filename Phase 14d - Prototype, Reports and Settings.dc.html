@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./citerate-session.js"></script><script src="./citerate-seed.js"></script><script src="./citerate-breakpoints.js"></script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EDEFF2;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+@keyframes proto-skeleton{0%,100%{opacity:.45}50%{opacity:.85}}
+</style></helmet>
+
+<div style="display:grid;grid-template-columns:288px minmax(0,1fr);min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="background:#141B26;color:#F4F5F7;padding:22px 18px;display:flex;flex-direction:column;gap:20px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#35B394">Phase 14d · prototype</div>
+      <div style="font:600 19px/1.3 'Source Serif 4',serif;margin-top:8px">Reports, settings, states</div>
+      <p style="font:400 12px/1.55 inherit;color:#8A93A1;margin:6px 0 0">The parts that make it a product rather than a dashboard: monthly reports, white-labelling, billing, team, and every state a screen can be in.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">viewport</div>
+      <div style="display:flex;gap:6px">
+        <button type="button" onClick="{{ setPhone }}" style="flex:1;min-height:36px;border:1px solid rgba(255,255,255,.14);border-radius:6px;background:{{ phoneBg }};color:#F4F5F7;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Phone 375</button>
+        <button type="button" onClick="{{ setDesktop }}" style="flex:1;min-height:36px;border:1px solid rgba(255,255,255,.14);border-radius:6px;background:{{ deskBg }};color:#F4F5F7;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Desktop</button>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">plan · gates everything below</div>
+      <sc-for list="{{ planPills }}" as="p" hint-placeholder-count="3">
+        <button type="button" onClick="{{ p.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:40px;padding:8px 12px;border:0;border-radius:6px;background:{{ p.bg }};color:#F4F5F7;font:400 12.5px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;text-align:left;cursor:pointer;box-shadow:{{ p.shadow }}">
+          <span>{{ p.label }}</span>
+          <span style="font:400 10.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">{{ p.note }}</span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">walk it</div>
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+        <button type="button" onClick="{{ s.go }}" style="display:flex;align-items:center;gap:10px;text-align:left;width:100%;min-height:44px;padding:8px 10px;border:0;border-radius:6px;background:{{ s.bg }};color:#F4F5F7;cursor:pointer;box-shadow:{{ s.shadow }}">
+          <span style="flex:none;width:18px;height:18px;border-radius:999px;border:1px solid {{ s.dotLine }};background:{{ s.dot }};display:flex;align-items:center;justify-content:center;font:500 9px/1 'JetBrains Mono',monospace;color:#141B26">{{ s.tick }}</span>
+          <span style="min-width:0">
+            <span style="display:block;font:400 12.5px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">{{ s.label }}</span>
+            <span style="display:block;font:400 10.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1;margin-top:2px">{{ s.hint }}</span>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-direction:column;gap:10px">
+      <div style="font:400 11px/1.6 'JetBrains Mono',monospace;color:#8A93A1">state<br>plan <span style="color:#F4F5F7">{{ planState }}</span><br>accent <span style="color:#F4F5F7">{{ accentName }}</span><br>team <span style="color:#F4F5F7">{{ teamState }}</span><br>workspace <span style="color:#F4F5F7">{{ workspace }}</span></div>
+      <button type="button" onClick="{{ reset }}" style="min-height:36px;border:1px solid rgba(255,255,255,.14);border-radius:6px;background:transparent;color:#F4F5F7;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Reset prototype</button>
+    </div>
+  </div>
+
+  <div style="padding:26px 30px 60px;display:flex;flex-direction:column;align-items:center;gap:14px;min-width:0">
+    <div style="width:100%;max-width:1240px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <div style="font:400 12px/1 'JetBrains Mono',monospace;color:#5B6472;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:9px 14px">{{ route }}</div>
+      <div style="font:400 12px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">{{ stageNote }}</div>
+      <sc-if value="{{ toast }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-left:auto;font:400 12px/1.4 'JetBrains Mono',monospace;color:#9A6210;background:#FDF2E3;border:1px solid #F5E3C4;border-radius:6px;padding:8px 12px">{{ toast }}</div>
+      </sc-if>
+    </div>
+
+    <div style="width:100%;max-width:{{ stageMax }};--proto-gut:{{ gut }};--proto-num:{{ vNum }};--proto-d4:{{ vD4 }};--proto-pad:{{ vPad }};--proto-row-dir:{{ vRowDir }};--proto-btn-w:{{ vBtnW }};--proto-min-row:{{ minRow }};--proto-cols-reports:{{ colsReports }};--proto-cols-inv:{{ colsInv }};--proto-cols-team:{{ colsTeam }};--proto-cols-ws:{{ colsWs }};--proto-thead:{{ theadDisplay }};--proto-label:{{ labelDisplay }};background:#F4F5F7;border:1px solid #C6CBD3;border-radius:{{ stageRadius }};overflow:hidden;box-shadow:0 12px 32px rgba(20,27,38,.14);box-sizing:border-box">
+
+      <div style="display:grid;grid-template-columns:{{ shellCols }};min-height:660px">
+
+        <sc-if value="{{ showSide }}" hint-placeholder-val="{{ true }}">
+          <div style="background:#141B26;color:#F4F5F7;padding:24px 16px;display:flex;flex-direction:column;gap:22px;box-sizing:border-box">
+            <div style="display:flex;align-items:center;gap:8px;padding:0 8px;font:500 20px/1.2 'JetBrains Mono',monospace;letter-spacing:-.03em">Cit<span style="color:#35B394">erate</span></div>
+            <button type="button" onClick="{{ goWorkspaces }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:8px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:6px;color:#F4F5F7;text-align:left;cursor:pointer">
+              <span style="font:400 14px/1.3 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ workspace }}</span>
+              <span style="flex:none;font:400 11.5px/1.3 'JetBrains Mono',monospace;color:#8A93A1">switch</span>
+            </button>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1;padding:0 8px 8px">in phase 14c</div>
+              <sc-for list="{{ navPrev }}" as="n" hint-placeholder-count="4">
+                <button type="button" onClick="{{ n.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:40px;padding:0 12px;border:0;border-radius:6px;background:transparent;color:#8A93A1;font:400 13.5px/1.3 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;text-align:left;cursor:pointer">
+                  <span>{{ n.label }}</span><span style="font:400 10.5px/1.3 'JetBrains Mono',monospace">14c</span>
+                </button>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1;padding:0 8px 8px">this phase</div>
+              <sc-for list="{{ navHere }}" as="n" hint-placeholder-count="3">
+                <button type="button" onClick="{{ n.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;padding:0 12px;border:0;border-radius:6px;background:{{ n.bg }};box-shadow:{{ n.shadow }};color:#F4F5F7;font:400 14px/1.3 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;text-align:left;cursor:pointer">
+                  <span>{{ n.label }}</span>
+                  <span style="font:400 11.5px/1.3 'JetBrains Mono',monospace;color:#8A93A1">{{ n.count }}</span>
+                </button>
+              </sc-for>
+            </div>
+            <div style="margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;gap:8px;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1"><span>queries</span><span style="color:#F4F5F7">{{ quotaLabel }}</span></div>
+              <div style="height:6px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden"><div style="width:{{ quotaPct }};height:100%;background:{{ quotaBar }};border-radius:999px"></div></div>
+              <div style="font:400 11px/1.4 'JetBrains Mono',monospace;color:#8A93A1">{{ planLabel }}</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="min-width:0;display:flex;flex-direction:column">
+          <div style="height:60px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 var(--proto-gut,24px);background:#FFFFFF;border-bottom:1px solid #E2E5EA;box-sizing:border-box">
+            <div style="display:flex;align-items:center;gap:10px;min-width:0">
+              <sc-if value="{{ isPhone }}" hint-placeholder-val="{{ true }}">
+                <button type="button" onClick="{{ toggleSide }}" style="flex:none;width:44px;height:44px;border:1px solid #C6CBD3;border-radius:6px;background:#FFFFFF;font:500 14px/1 'JetBrains Mono',monospace;color:#141B26;cursor:pointer">≡</button>
+              </sc-if>
+              <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif;letter-spacing:-.02em;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ title }}</div>
+            </div>
+            <div style="flex:0 1 auto;min-width:0;display:flex;justify-content:flex-end;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ crumb }}</div>
+          </div>
+
+          <div style="flex:1;min-width:0;padding:var(--proto-pad,32px) var(--proto-gut,24px) 48px;display:flex;flex-direction:column;gap:16px;box-sizing:border-box">
+
+            <sc-if value="{{ onReports }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:auto hidden">
+                  <div style="display:var(--proto-thead,grid);grid-template-columns:var(--proto-cols-reports);min-width:var(--proto-min-row,0);gap:12px;padding:11px 20px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472">
+                    <div>month</div><div>rate</div><div>change</div><div>status</div><div></div>
+                  </div>
+                  <sc-for list="{{ reportRows }}" as="r" hint-placeholder-count="4">
+                    <button type="button" onClick="{{ r.go }}" style="display:grid;grid-template-columns:var(--proto-cols-reports);min-width:var(--proto-min-row,0);gap:12px;width:100%;padding:14px 20px;border:0;border-top:1px solid #E2E5EA;background:{{ r.bg }};text-align:left;cursor:pointer;align-items:center;box-sizing:border-box">
+                      <span style="font:400 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">{{ r.month }}</span>
+                      <span style="display:flex;justify-content:space-between;gap:8px;font:500 13px/1.4 'JetBrains Mono',monospace"><span style="display:var(--proto-label,none);font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">rate</span>{{ r.rate }}</span>
+                      <span style="display:flex;justify-content:space-between;gap:8px;font:400 12.5px/1.4 'JetBrains Mono',monospace;color:{{ r.deltaInk }}"><span style="display:var(--proto-label,none);font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">change</span>{{ r.delta }}</span>
+                      <span style="display:flex;justify-content:space-between;gap:8px;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472"><span style="display:var(--proto-label,none);font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">status</span>{{ r.status }}</span>
+                      <span style="text-align:right;font:400 12px/1.4 'JetBrains Mono',monospace;color:#8A93A1">→</span>
+                    </button>
+                  </sc-for>
+                </div>
+                <div style="font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1">Reports are generated on the first of the month from runs that already happened — nothing is recomputed, so an old report never changes after the fact.</div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ onReport }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">{{ reportMonth }} · {{ workspace }}</div>
+                    <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">4 runs · 412 queries</div>
+                  </div>
+                  <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+                    <div style="font:500 var(--proto-num,48px)/1 'JetBrains Mono',monospace;letter-spacing:-.02em">34%</div>
+                    <div style="display:inline-flex;align-items:center;gap:4px;font:500 13px/1.4 'JetBrains Mono',monospace;color:#0B6151;background:#E7F2EF;padding:3px 8px;border-radius:999px">+3.0</div>
+                    <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">from 31% in June</div>
+                  </div>
+                  <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif;text-wrap:pretty">Two fixes landed and one of them moved the number.</div>
+                </div>
+
+                <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+                  <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">What changed</div>
+                  <sc-for list="{{ reportChanges }}" as="c" hint-placeholder-count="3">
+                    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:400 12.5px/1.5 'JetBrains Mono',monospace;color:#5B6472;padding:10px 0;border-top:1px solid #E2E5EA">
+                      <span style="flex:1;min-width:180px;font:400 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">{{ c.what }}</span>
+                      <span>{{ c.before }}</span><span style="color:#8A93A1">→</span>
+                      <span style="color:{{ c.ink }};font-weight:500">{{ c.after }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+
+                <sc-if value="{{ competitorsLocked }}" hint-placeholder-val="{{ true }}">
+                  <div style="position:relative;border:1.5px dashed #D8DCE3;border-radius:14px;overflow:auto hidden">
+                    <div style="filter:blur(6px);padding:24px;pointer-events:none">
+                      <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">Competitor share of citations</div>
+                      <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+                        <div style="display:flex;align-items:center;gap:10px"><div style="width:90px;font:400 11px/1 'JetBrains Mono',monospace;color:#5B6472">competitor-a.com</div><div style="flex:1;height:10px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="width:70%;height:100%;background:#3E5C8A"></div></div></div>
+                        <div style="display:flex;align-items:center;gap:10px"><div style="width:90px;font:400 11px/1 'JetBrains Mono',monospace;color:#0B6151">acmecrm.com</div><div style="flex:1;height:10px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="width:34%;height:100%;background:#0E7C66"></div></div></div>
+                        <div style="display:flex;align-items:center;gap:10px"><div style="width:90px;font:400 11px/1 'JetBrains Mono',monospace;color:#5B6472">competitor-b.com</div><div style="flex:1;height:10px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="width:26%;height:100%;background:#3E5C8A"></div></div></div>
+                      </div>
+                    </div>
+                    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(244,245,247,.92));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px">
+                      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;background:#141B26;color:#FFFFFF;border-radius:999px;padding:5px 10px">growth plan</div>
+                      <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;max-width:44ch">Competitor share needs the Growth plan. Your own rate stays free and is never blurred.</div>
+                      <button type="button" onClick="{{ goBilling }}" style="min-height:44px;border:0;border-radius:6px;background:#0E7C66;color:#FFFFFF;padding:0 18px;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">See plans</button>
+                    </div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ competitorsOpen }}" hint-placeholder-val="{{ true }}">
+                  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+                    <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">Competitor share of citations</div>
+                    <sc-for list="{{ shareRows }}" as="row" hint-placeholder-count="4">
+                      <div style="display:flex;align-items:center;gap:10px">
+                        <div style="width:90px;flex:none;font:400 11px/1.3 'JetBrains Mono',monospace;color:{{ row.ink }};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ row.host }}</div>
+                        <div style="flex:1;min-width:0;height:10px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="width:{{ row.pct }};height:100%;background:{{ row.bar }}"></div></div>
+                        <div style="width:38px;flex:none;text-align:right;font:400 11px/1.3 'JetBrains Mono',monospace;color:#5B6472">{{ row.pct }}</div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+
+                <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+                  <div style="min-width:0">
+                    <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">{{ pdfTitle }}</div>
+                    <div style="font:400 12.5px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;margin-top:4px">{{ pdfNote }}</div>
+                  </div>
+                  <button type="button" onClick="{{ downloadPdf }}" style="min-height:44px;width:var(--proto-btn-w,auto);border:1px solid #C6CBD3;border-radius:6px;background:#FFFFFF;padding:0 18px;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;cursor:pointer">Download PDF</button>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ onSettings }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:16px">
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                  <sc-for list="{{ panes }}" as="p" hint-placeholder-count="6">
+                    <button type="button" onClick="{{ p.go }}" style="min-height:36px;padding:0 14px;border:1px solid {{ p.line }};border-radius:999px;background:{{ p.bg }};color:{{ p.ink }};font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer;white-space:nowrap">{{ p.label }}</button>
+                  </sc-for>
+                </div>
+
+                <sc-if value="{{ paneGeneral }}" hint-placeholder-val="{{ true }}">
+                  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+                    <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">Workspace</div>
+                    <div style="display:flex;flex-direction:column;gap:6px">
+                      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">domain</div>
+                      <input type="text" value="{{ workspace }}" onChange="{{ onWorkspaceName }}" style="min-height:44px;border:1px solid #C6CBD3;border-radius:6px;padding:12px 14px;font:400 14px/1.2 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;box-sizing:border-box">
+                      <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">Changing the domain starts a new baseline; history stays attached to the old one.</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:6px">
+                      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">run day</div>
+                      <div style="display:flex;gap:8px;flex-wrap:wrap">
+                        <sc-for list="{{ runDays }}" as="d" hint-placeholder-count="3">
+                          <button type="button" onClick="{{ d.go }}" style="min-height:36px;padding:0 14px;border:1px solid {{ d.line }};border-radius:999px;background:{{ d.bg }};color:{{ d.ink }};font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">{{ d.label }}</button>
+                        </sc-for>
+                      </div>
+                    </div>
+                    <div style="height:1px;background:#E2E5EA"></div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+                      <div style="min-width:0">
+                        <div style="font:500 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#A62F2F">Delete this workspace</div>
+                        <div style="font:400 12.5px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;margin-top:4px">Runs, reports and history go with it. There is no undo and no soft delete.</div>
+                      </div>
+                      <button type="button" onClick="{{ deleteWorkspace }}" style="min-height:44px;width:var(--proto-btn-w,auto);border:1px solid #C43D3D;border-radius:6px;background:#FFFFFF;padding:0 18px;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#A62F2F;cursor:pointer">Delete</button>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ paneBilling }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;flex-direction:column;gap:14px">
+                    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px">
+                      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                        <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">{{ planLabel }}</div>
+                        <div style="font:500 13px/1.4 'JetBrains Mono',monospace">{{ planPrice }}</div>
+                      </div>
+                      <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">{{ renewNote }}</div>
+                      <div style="height:1px;background:#E2E5EA"></div>
+                      <div style="display:flex;flex-direction:column;gap:8px">
+                        <div style="display:flex;justify-content:space-between;gap:12px;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472"><span>tracked queries</span><span style="color:#141B26">{{ quotaLabel }}</span></div>
+                        <div style="height:6px;border-radius:999px;background:#E2E5EA;overflow:hidden"><div style="width:{{ quotaPct }};height:100%;background:{{ quotaBar }};border-radius:999px"></div></div>
+                        <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:{{ quotaInk }}">{{ quotaNote }}</div>
+                      </div>
+                      <div style="display:flex;flex-direction:var(--proto-row-dir,row);gap:8px">
+                        <button type="button" onClick="{{ upgrade }}" style="flex:1;min-height:44px;border:0;border-radius:6px;background:#0E7C66;color:#FFFFFF;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">{{ upgradeLabel }}</button>
+                        <button type="button" onClick="{{ portal }}" style="flex:1;min-height:44px;border:1px solid #C6CBD3;border-radius:6px;background:#FFFFFF;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;cursor:pointer">Billing portal</button>
+                      </div>
+                    </div>
+                    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:auto hidden">
+                      <div style="display:var(--proto-thead,grid);grid-template-columns:var(--proto-cols-inv);min-width:var(--proto-min-row,0);gap:12px;padding:11px 20px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472">
+                        <div>date</div><div>amount</div><div>invoice</div>
+                      </div>
+                      <sc-for list="{{ invoices }}" as="inv" hint-placeholder-count="3">
+                        <div style="display:grid;grid-template-columns:var(--proto-cols-inv);min-width:var(--proto-min-row,0);gap:12px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 12.5px/1.5 'JetBrains Mono',monospace;color:#5B6472;align-items:center">
+                          <div style="color:#141B26">{{ inv.date }}</div>
+                          <div style="display:flex;justify-content:space-between;gap:8px"><span style="display:var(--proto-label,none);font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase">amount</span>{{ inv.amount }}</div>
+                          <div><button type="button" onClick="{{ inv.open }}" style="border:0;background:none;padding:0;font:inherit;color:#0B6151;cursor:pointer;text-decoration:underline">PDF</button></div>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ paneBrand }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;flex-direction:column;gap:14px">
+                    <sc-if value="{{ brandLocked }}" hint-placeholder-val="{{ true }}">
+                      <div style="background:#FFFFFF;border:1.5px dashed #D8DCE3;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+                        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;background:#141B26;color:#FFFFFF;border-radius:999px;padding:5px 10px">scale plan</div>
+                        <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">White-labelling is a Scale feature</div>
+                        <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;max-width:60ch">Your accent colour replaces ours on exported PDFs. Structural ink, rules and the methodology block stay locked — a report always reads as measurement, not marketing.</div>
+                        <button type="button" onClick="{{ goBilling }}" style="min-height:44px;border:0;border-radius:6px;background:#0E7C66;color:#FFFFFF;padding:0 18px;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">See plans</button>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ brandOpen }}" hint-placeholder-val="{{ true }}">
+                      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+                        <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">Report accent</div>
+                        <div style="display:flex;gap:10px;flex-wrap:wrap">
+                          <sc-for list="{{ accents }}" as="a" hint-placeholder-count="4">
+                            <button type="button" onClick="{{ a.go }}" style="display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px 0 8px;border:1px solid {{ a.line }};border-radius:999px;background:#FFFFFF;font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;cursor:pointer">
+                              <span style="width:22px;height:22px;border-radius:999px;background:{{ a.hex }}"></span>{{ a.name }}
+                            </button>
+                          </sc-for>
+                        </div>
+                        <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">Four tested colours, not a picker. Each one clears 4.5:1 on paper and stays legible in greyscale print.</div>
+                        <div style="height:1px;background:#E2E5EA"></div>
+                        <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">PDF preview</div>
+                        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:22px;display:flex;flex-direction:column;gap:14px;box-shadow:0 2px 8px rgba(20,27,38,.07)">
+                          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-bottom:12px;border-bottom:2px solid {{ accentHex }}">
+                            <div style="font:600 17px/1.3 'Source Serif 4',serif">{{ workspace }} · citation report</div>
+                            <div style="font:400 11px/1.3 'JetBrains Mono',monospace;color:#8A93A1">{{ reportMonth }}</div>
+                          </div>
+                          <div style="display:flex;align-items:baseline;gap:10px">
+                            <div style="font:500 36px/1 'JetBrains Mono',monospace;color:{{ accentHex }}">34%</div>
+                            <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">+3.0 from June</div>
+                          </div>
+                          <div style="display:flex;height:10px;border-radius:999px;overflow:hidden;gap:2px">
+                            <div style="flex:46;background:{{ accentHex }}"></div><div style="flex:28;background:#C6CBD3"></div><div style="flex:18;background:#E2E5EA"></div><div style="flex:8;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></div>
+                          </div>
+                          <div style="font:400 11px/1.5 'JetBrains Mono',monospace;color:#8A93A1;padding-top:10px;border-top:1px solid #E2E5EA">Method: 412 queries, four engines, weekly runs. Rates are computed from raw answers; a method change is flagged, never backfilled.</div>
+                        </div>
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ paneEmail }}" hint-placeholder-val="{{ true }}">
+                  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:6px">
+                    <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif;margin-bottom:8px">What we email you</div>
+                    <sc-for list="{{ emailToggles }}" as="t" hint-placeholder-count="4">
+                      <button type="button" onClick="{{ t.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;min-height:52px;padding:10px 0;border:0;border-top:1px solid #E2E5EA;background:none;text-align:left;cursor:pointer">
+                        <span style="min-width:0">
+                          <span style="display:block;font:400 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">{{ t.label }}</span>
+                          <span style="display:block;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1;margin-top:3px">{{ t.note }}</span>
+                        </span>
+                        <span style="flex:none;width:44px;height:26px;border-radius:999px;background:{{ t.trackBg }};position:relative;transition:background-color .16s cubic-bezier(.22,.61,.36,1)">
+                          <span style="position:absolute;top:3px;left:{{ t.knobLeft }};width:20px;height:20px;border-radius:999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(20,27,38,.2);transition:left .16s cubic-bezier(.22,.61,.36,1)"></span>
+                        </span>
+                      </button>
+                    </sc-for>
+                    <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1;margin-top:12px">No email is sent when nothing changed. A flat week gets no message rather than a message saying nothing happened.</div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ paneTeam }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;flex-direction:column;gap:14px">
+                    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:auto hidden">
+                      <div style="display:var(--proto-thead,grid);grid-template-columns:var(--proto-cols-team);min-width:var(--proto-min-row,0);gap:12px;padding:11px 20px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472">
+                        <div>member</div><div>role</div><div>last seen</div><div></div>
+                      </div>
+                      <sc-for list="{{ members }}" as="m" hint-placeholder-count="3">
+                        <div style="display:grid;grid-template-columns:var(--proto-cols-team);min-width:var(--proto-min-row,0);gap:12px;padding:12px 20px;border-top:1px solid #E2E5EA;align-items:center">
+                          <div style="min-width:0">
+                            <div style="font:400 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ m.email }}</div>
+                            <div style="font:400 11px/1.4 'JetBrains Mono',monospace;color:#8A93A1;margin-top:2px">{{ m.status }}</div>
+                          </div>
+                          <div style="display:flex;justify-content:space-between;gap:8px">
+                            <span style="display:var(--proto-label,none);font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">role</span>
+                            <button type="button" onClick="{{ m.cycleRole }}" style="border:1px solid #E2E5EA;border-radius:999px;background:#FFFFFF;min-height:32px;padding:0 12px;font:400 12px/1 'JetBrains Mono',monospace;color:#5B6472;cursor:pointer">{{ m.role }}</button>
+                          </div>
+                          <div style="display:flex;justify-content:space-between;gap:8px;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472"><span style="display:var(--proto-label,none);font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase">last seen</span>{{ m.seen }}</div>
+                          <div style="text-align:right"><button type="button" onClick="{{ m.remove }}" style="border:0;background:none;padding:4px;font:400 12px/1 'JetBrains Mono',monospace;color:#A62F2F;cursor:pointer">remove</button></div>
+                        </div>
+                      </sc-for>
+                    </div>
+                    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+                      <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">Invite someone</div>
+                      <div style="display:flex;flex-direction:var(--proto-row-dir,row);gap:8px">
+                        <input type="text" value="{{ inviteEmail }}" onChange="{{ onInviteEmail }}" placeholder="teammate@company.com" style="flex:1;min-width:0;min-height:44px;border:1px solid #C6CBD3;border-radius:6px;padding:0 14px;font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;background:#FFFFFF;box-sizing:border-box">
+                        <button type="button" onClick="{{ sendInvite }}" style="min-height:44px;width:var(--proto-btn-w,auto);border:0;border-radius:6px;background:#0E7C66;color:#FFFFFF;padding:0 18px;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Send invite</button>
+                      </div>
+                      <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">Editors own fixes and edit queries. Viewers read. Only owners touch billing.</div>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ paneWorkspaces }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;flex-direction:column;gap:14px">
+                    <sc-if value="{{ agencyLocked }}" hint-placeholder-val="{{ true }}">
+                      <div style="background:#FFFFFF;border:1.5px dashed #D8DCE3;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+                        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;background:#141B26;color:#FFFFFF;border-radius:999px;padding:5px 10px">agency plan</div>
+                        <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">One workspace per client needs the Agency plan</div>
+                        <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;max-width:60ch">Below it there is exactly one workspace, which is the honest shape for a single brand. Mixing two domains into one rate would make the number meaningless.</div>
+                        <button type="button" onClick="{{ goBilling }}" style="min-height:44px;border:0;border-radius:6px;background:#0E7C66;color:#FFFFFF;padding:0 18px;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">See plans</button>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ agencyOpen }}" hint-placeholder-val="{{ true }}">
+                      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:auto hidden">
+                        <div style="display:var(--proto-thead,grid);grid-template-columns:var(--proto-cols-ws);min-width:var(--proto-min-row,0);gap:12px;padding:11px 20px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472">
+                          <div>workspace</div><div>rate</div><div>queries</div><div></div>
+                        </div>
+                        <sc-for list="{{ workspaces }}" as="w" hint-placeholder-count="3">
+                          <div style="display:grid;grid-template-columns:var(--proto-cols-ws);min-width:var(--proto-min-row,0);gap:12px;padding:12px 20px;border-top:1px solid #E2E5EA;align-items:center;background:{{ w.bg }}">
+                            <div style="font:400 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ w.name }}</div>
+                            <div style="display:flex;justify-content:space-between;gap:8px;font:500 13px/1.4 'JetBrains Mono',monospace"><span style="display:var(--proto-label,none);font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">rate</span>{{ w.rate }}</div>
+                            <div style="display:flex;justify-content:space-between;gap:8px;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472"><span style="display:var(--proto-label,none);font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase">queries</span>{{ w.queries }}</div>
+                            <div style="text-align:right"><button type="button" onClick="{{ w.go }}" style="border:0;background:none;padding:4px;font:500 12px/1 'JetBrains Mono',monospace;color:{{ w.actionInk }};cursor:pointer">{{ w.action }}</button></div>
+                          </div>
+                        </sc-for>
+                      </div>
+                      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+                        <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">Add a client workspace</div>
+                        <div style="display:flex;flex-direction:var(--proto-row-dir,row);gap:8px">
+                          <input type="text" value="{{ newWorkspace }}" onChange="{{ onNewWorkspace }}" placeholder="client.com" style="flex:1;min-width:0;min-height:44px;border:1px solid #C6CBD3;border-radius:6px;padding:0 14px;font:400 14px/1 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;box-sizing:border-box">
+                          <button type="button" onClick="{{ addWorkspace }}" style="min-height:44px;width:var(--proto-btn-w,auto);border:0;border-radius:6px;background:#0E7C66;color:#FFFFFF;padding:0 18px;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Add</button>
+                        </div>
+                        <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">Each workspace has its own queries, its own accent and its own report. Nothing is shared except the login and the quota.</div>
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ onStates }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:16px">
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                  <sc-for list="{{ stateTabs }}" as="t" hint-placeholder-count="5">
+                    <button type="button" onClick="{{ t.go }}" style="min-height:36px;padding:0 14px;border:1px solid {{ t.line }};border-radius:999px;background:{{ t.bg }};color:{{ t.ink }};font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">{{ t.label }}</button>
+                  </sc-for>
+                </div>
+
+                <sc-if value="{{ stateEmpty }}" hint-placeholder-val="{{ true }}">
+                  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:48px 24px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
+                    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">no runs yet</div>
+                    <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">The first run is still going</div>
+                    <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;max-width:48ch">Four to nine minutes, and the email arrives when it lands. There is no number to show yet, so we do not show a zero.</div>
+                    <button type="button" onClick="{{ notYet }}" style="min-height:44px;border:1px solid #C6CBD3;border-radius:6px;background:#FFFFFF;padding:0 18px;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;cursor:pointer">Review the queries meanwhile</button>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ stateLoading }}" hint-placeholder-val="{{ true }}">
+                  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px">
+                    <div style="width:140px;height:11px;border-radius:4px;background:#E2E5EA;animation:proto-skeleton 1.4s ease-in-out infinite"></div>
+                    <div style="width:180px;height:38px;border-radius:6px;background:#EDEFF2;animation:proto-skeleton 1.4s ease-in-out .1s infinite"></div>
+                    <div style="height:10px;border-radius:999px;background:#EDEFF2;animation:proto-skeleton 1.4s ease-in-out .2s infinite"></div>
+                    <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+                      <div style="height:74px;border-radius:10px;background:#F4F5F7;animation:proto-skeleton 1.4s ease-in-out .3s infinite"></div>
+                      <div style="height:74px;border-radius:10px;background:#F4F5F7;animation:proto-skeleton 1.4s ease-in-out .35s infinite"></div>
+                      <div style="height:74px;border-radius:10px;background:#F4F5F7;animation:proto-skeleton 1.4s ease-in-out .4s infinite"></div>
+                    </div>
+                    <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">Skeletons match the shape of what is coming, so nothing jumps when the data lands.</div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ stateLocked }}" hint-placeholder-val="{{ true }}">
+                  <div style="position:relative;border:1.5px dashed #D8DCE3;border-radius:14px;overflow:auto hidden">
+                    <div style="filter:blur(6px);padding:24px;pointer-events:none">
+                      <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">Answer text, verbatim</div>
+                      <div style="font:400 12.5px/1.6 'JetBrains Mono',monospace;color:#5B6472;margin-top:12px">Three CRMs come up most often for startups: Competitor A, Competitor B and HubSpot — each has a free or low-cost entry tier.</div>
+                    </div>
+                    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(244,245,247,.92));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px">
+                      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;background:#141B26;color:#FFFFFF;border-radius:999px;padding:5px 10px">growth plan</div>
+                      <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;max-width:44ch">Stored answer text needs the Growth plan. The verdict and the cause are free — the gate is on the evidence, never on the number.</div>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ state404 }}" hint-placeholder-val="{{ true }}">
+                  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:48px 24px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
+                    <div style="font:500 34px/1 'JetBrains Mono',monospace;color:#8A93A1">404</div>
+                    <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">That page is not here</div>
+                    <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;max-width:44ch">If you followed a report link, it may have been for a workspace you no longer have access to.</div>
+                    <button type="button" onClick="{{ goReports }}" style="min-height:44px;border:0;border-radius:6px;background:#0E7C66;color:#FFFFFF;padding:0 18px;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Back to reports</button>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ state500 }}" hint-placeholder-val="{{ true }}">
+                  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #C43D3D;border-radius:14px;padding:48px 24px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
+                    <div style="font:500 34px/1 'JetBrains Mono',monospace;color:#A62F2F">500</div>
+                    <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">Something on our side broke</div>
+                    <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;max-width:48ch">Your runs are unaffected — they happen on a schedule, not on this request. This page ships with inlined styles so it renders even when the stylesheet fails.</div>
+                    <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">reference 8f2a10c4</div>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-if>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="width:100%;max-width:1240px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1">Phase 14d covers reports, all six settings panes and the five states. The remaining marketing pages and playback of all six flows end to end are 14e.</div>
+  </div>
+
+</div>
+<dc-import name="Session Bar" phase="14d" hint-size="620px,44px" style="position:fixed;left:16px;bottom:16px;z-index:80;max-width:calc(100vw - 32px)"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1560}}">
+const FALLBACK_PLAN = { label: "Growth · monthly", price: "$199/mo", quota: 500, used: 412, competitors: true, brand: false, agency: false, note: "seeded" };
+const PLAN_IDS = ["starter", "growth", "scale", "agency"];
+const PLAN_NOTES = { starter: "gated", growth: "seeded", scale: "white label", agency: "many clients" };
+
+// Plans, prices and gates come from src/lib/plans.ts; the meter reading comes
+// from the seeded usage_counters row.
+function plansMap() {
+  const S = window.CiterateSeed;
+  if (!S) return { growth: FALLBACK_PLAN };
+  const used = S.SEED.usage.used;
+  const out = {};
+  PLAN_IDS.forEach(id => {
+    const p = S.PLANS[id];
+    out[id] = {
+      label: p.label + " · monthly",
+      price: "$" + p.monthly + "/mo",
+      quota: p.queries,
+      used: Math.min(used, p.queries),
+      competitors: p.competitorNames,
+      brand: p.pdf === "white_label",
+      agency: p.workspaces > 0,
+      note: PLAN_NOTES[id],
+    };
+  });
+  return out;
+}
+let PLANS = plansMap();
+const ACCENTS = [
+  ["Citerate green", "#0E7C66"],
+  ["Slate blue", "#3E5C8A"],
+  ["Ink", "#141B26"],
+  ["Clay", "#A6522F"],
+];
+const ROLES = ["owner", "editor", "viewer"];
+const REPORTS = [
+  ["July 2026", "34%", "+3.0", "#0B6151", "sent to 3 people"],
+  ["June 2026", "31%", "-1.1", "#A62F2F", "sent to 3 people"],
+  ["May 2026", "32%", "+4.2", "#0B6151", "sent to 2 people"],
+  ["April 2026", "28%", "first", "#5B6472", "baseline"],
+];
+
+class Component extends DCLogic {
+  sess(p) { if (window.CiterateSession) window.CiterateSession.patch(p); }
+  componentDidMount() {
+    const boot = () => {
+      if (!window.CiterateSession) return setTimeout(boot, 40);
+      const S = window.CiterateSession.get();
+      window.CiterateSession.patch({ lastPhase: "14d" });
+      if (!PLANS.growth) PLANS = plansMap();
+      const p = {};
+      if (S.plan && PLANS[S.plan]) p.plan = S.plan;
+      if (S.domain) p.workspace = S.domain;
+      if (Object.keys(p).length) this.setState(p);
+    };
+    boot();
+  }
+  state = {
+    screen: "reports", pane: "general", stateTab: "empty",
+    vw: "desktop", sideOpen: false,
+    plan: "growth", accent: 0, runDay: "mon",
+    workspace: "acmecrm.com", newWorkspace: "",
+    workspaces: [["acmecrm.com", "34%", "412"], ["ledger-client.com", "22%", "140"], ["northsky.io", "41%", "96"]],
+    members: [["demo@citerate.com", 0, "today"], ["omer@acmecrm.com", 1, "yesterday"], ["sara@acmecrm.com", 2, "3 days ago"]],
+    pending: [], inviteEmail: "",
+    emails: { weekly: true, drops: true, fixes: false, monthly: true },
+    visited: {}, accentTouched: false,
+    toast: "",
+  };
+
+  componentWillUnmount() { clearTimeout(this.toastTimer); }
+
+  flash(msg) {
+    this.setState({ toast: msg });
+    clearTimeout(this.toastTimer);
+    this.toastTimer = setTimeout(() => this.setState({ toast: "" }), 2600);
+  }
+
+  go(screen, pane) {
+    this.setState(st => ({
+      screen, pane: pane || st.pane, sideOpen: false,
+      visited: Object.assign({}, st.visited, { [pane ? screen + ":" + pane : screen]: true }),
+    }));
+  }
+
+  renderVals() {
+    const s = this.state;
+    const isPhone = s.vw === "phone";
+    if (!PLANS.growth) PLANS = plansMap();
+    const plan = PLANS[s.plan] || FALLBACK_PLAN;
+    const accent = ACCENTS[s.accent];
+
+    const planPills = Object.keys(PLANS).map(k => ({
+      label: PLANS[k].label.split(" · ")[0], note: PLANS[k].note,
+      go: () => { this.setState({ plan: k }); this.sess({ plan: k }); this.flash("Plan set to " + PLANS[k].label.split(" · ")[0] + " — gates updated."); },
+      bg: s.plan === k ? "rgba(255,255,255,.10)" : "transparent",
+      shadow: s.plan === k ? "inset 2px 0 0 #35B394" : "none",
+    }));
+
+    const reportRows = REPORTS.map((r, i) => ({
+      month: r[0], rate: r[1], delta: r[2], deltaInk: r[3], status: r[4],
+      bg: i % 2 ? "#F4F5F7" : "#FFFFFF",
+      go: () => this.go("report"),
+    }));
+
+    const reportChanges = [
+      { what: "Direct answer block on /pricing", before: "12%", after: "48%", ink: "#0B6151" },
+      { what: "Redirect chain removed on /pricing", before: "0%", after: "22%", ink: "#0B6151" },
+      { what: "Gemini answer format changed Jul 24", before: "31%", after: "24%", ink: "#A62F2F" },
+    ];
+
+    const shareTotals = { "ledger.io": "41%", "billwise.com": "26%", "studioflow.com": "12%" };
+    const shareRows = [{ host: s.workspace, pct: "34%", bar: "#0E7C66", ink: "#0B6151" }]
+      .concat(Object.keys(shareTotals).map(host => ({
+        host, pct: shareTotals[host], bar: "#3E5C8A", ink: "#5B6472",
+      })));
+
+    const panes = [
+      ["general", "Workspace"], ["billing", "Billing"], ["brand", "Brand"],
+      ["email", "Email"], ["team", "Team"], ["workspaces", "Workspaces"],
+    ].map(([k, label]) => ({
+      label, go: () => this.go("settings", k),
+      bg: s.pane === k ? "#141B26" : "transparent",
+      ink: s.pane === k ? "#FFFFFF" : "#5B6472",
+      line: s.pane === k ? "#141B26" : "#E2E5EA",
+    }));
+
+    const runDays = [["mon", "Mondays"], ["wed", "Wednesdays"], ["fri", "Fridays"]].map(([k, label]) => ({
+      label, go: () => { this.setState({ runDay: k }); this.flash("Runs move to " + label.toLowerCase() + " from next week."); },
+      bg: s.runDay === k ? "#141B26" : "transparent",
+      ink: s.runDay === k ? "#FFFFFF" : "#5B6472",
+      line: s.runDay === k ? "#141B26" : "#E2E5EA",
+    }));
+
+    const accents = ACCENTS.map(([name, hex], i) => ({
+      name, hex,
+      line: s.accent === i ? "#141B26" : "#E2E5EA",
+      go: () => { this.setState({ accent: i, accentTouched: true }); this.flash(name + " applied to exported reports."); },
+    }));
+
+    const emailDefs = [
+      ["weekly", "Weekly run summary", "Monday morning, only when a run finished."],
+      ["drops", "Sharp drops", "Sent within an hour when a rate falls outside the band."],
+      ["fixes", "Fix verified", "When a rescan proves a fix moved its queries."],
+      ["monthly", "Monthly report", "The first of the month, with the PDF attached."],
+    ];
+    const emailToggles = emailDefs.map(([k, label, note]) => {
+      const on = !!s.emails[k];
+      return {
+        label, note,
+        trackBg: on ? "#0E7C66" : "#C6CBD3",
+        knobLeft: on ? "21px" : "3px",
+        go: () => this.setState(st => ({ emails: Object.assign({}, st.emails, { [k]: !st.emails[k] }) })),
+      };
+    });
+
+    const members = s.members.map((m, i) => ({
+      email: m[0], role: ROLES[m[1]], seen: m[2], status: "active",
+      cycleRole: () => {
+        if (i === 0) { this.flash("A workspace keeps one owner. Transfer it from the owner's own row."); return; }
+        this.setState(st => {
+          const next = st.members.map((row, j) => j === i ? [row[0], (row[1] + 1) % ROLES.length, row[2]] : row);
+          return { members: next };
+        });
+      },
+      remove: () => {
+        if (i === 0) { this.flash("The owner cannot be removed."); return; }
+        this.setState(st => ({ members: st.members.filter((_, j) => j !== i) }));
+      },
+    })).concat(s.pending.map((email, i) => ({
+      email, role: "editor", seen: "—", status: "invite pending",
+      cycleRole: () => this.flash("Role can change once they accept."),
+      remove: () => this.setState(st => ({ pending: st.pending.filter((_, j) => j !== i) })),
+    })));
+
+    const workspaces = s.workspaces.map(w => {
+      const current = w[0] === s.workspace;
+      return {
+        name: w[0], rate: w[1], queries: w[2],
+        bg: current ? "#E7F2EF" : "#FFFFFF",
+        action: current ? "current" : "switch",
+        actionInk: current ? "#0B6151" : "#5B6472",
+        go: () => {
+          if (current) return;
+          this.setState({ workspace: w[0] });
+          this.flash("Switched to " + w[0] + ".");
+        },
+      };
+    });
+
+    const stateTabs = [["empty", "Empty"], ["loading", "Loading"], ["locked", "Locked"], ["404", "404"], ["500", "500"]]
+      .map(([k, label]) => ({
+        label, go: () => this.setState({ stateTab: k }),
+        bg: s.stateTab === k ? "#141B26" : "transparent",
+        ink: s.stateTab === k ? "#FFFFFF" : "#5B6472",
+        line: s.stateTab === k ? "#141B26" : "#E2E5EA",
+      }));
+
+    const quotaPctNum = Math.round((plan.used / plan.quota) * 100);
+    const near = quotaPctNum >= 80;
+
+    const steps = [
+      ["Read a report", "/reports/[id]", () => this.go("report"), !!s.visited.report],
+      ["Brand the PDF", "settings · brand", () => this.go("settings", "brand"), s.accentTouched],
+      ["Check the quota", "settings · billing", () => this.go("settings", "billing"), !!s.visited["settings:billing"]],
+      ["Invite someone", "settings · team", () => this.go("settings", "team"), s.pending.length > 0],
+      ["See the states", "empty · locked · 500", () => this.go("states"), !!s.visited.states],
+    ].map(([label, hint, go, done]) => ({
+      label, hint, go,
+      bg: false ? "" : "transparent",
+      shadow: "none",
+      dot: done ? "#35B394" : "transparent",
+      dotLine: done ? "#35B394" : "rgba(255,255,255,.22)",
+      tick: done ? "✓" : "",
+    }));
+
+    const navPrev = [["Overview", "overview"], ["Queries", "queries"], ["Competitors", "competitors"], ["Fix queue", "fixes"]]
+      .map(([label]) => ({ label, go: () => this.flash("Those four are live in the Phase 14c file.") }));
+    const navHere = [["reports", "Reports", String(REPORTS.length)], ["settings", "Settings", "6"], ["states", "States", "5"]]
+      .map(([k, label, count]) => ({
+        label, count,
+        go: () => this.go(k === "settings" ? "settings" : k, k === "settings" ? s.pane : null),
+        bg: (s.screen === k || (k === "reports" && s.screen === "report")) ? "rgba(255,255,255,.10)" : "transparent",
+        shadow: (s.screen === k || (k === "reports" && s.screen === "report")) ? "inset 2px 0 0 #35B394" : "none",
+      }));
+
+    const titles = {
+      reports: "Reports", report: "July 2026", states: "States",
+      settings: "Settings · " + (panes.find(p => p.bg === "#141B26") || { label: "Workspace" }).label,
+    };
+    const routes = {
+      reports: "/reports", report: "/reports/2026-07", states: "/states",
+      settings: "/settings/" + (s.pane === "general" ? "" : s.pane),
+    };
+    const notes = {
+      reports: "Click any month to open it. Rows become labelled cards on a phone.",
+      report: "The competitor block is gated by the plan switch in the rail — try Starter.",
+      settings: "Six real panes. Accent, toggles, roles and workspace switching all hold state.",
+      states: "Five states every screen can be in, drawn from the shipped CSS.",
+    };
+
+    return {
+      planPills, steps, navPrev, navHere, panes, runDays, accents, emailToggles,
+      reportRows, reportChanges, shareRows, members, workspaces, stateTabs,
+      invoices: [
+        { date: "2026-07-01", amount: plan.price.replace("/mo", ""), open: () => this.flash("Invoice PDFs come from Paddle, not from us.") },
+        { date: "2026-06-01", amount: plan.price.replace("/mo", ""), open: () => this.flash("Invoice PDFs come from Paddle, not from us.") },
+        { date: "2026-05-01", amount: plan.price.replace("/mo", ""), open: () => this.flash("Invoice PDFs come from Paddle, not from us.") },
+      ],
+
+      route: routes[s.screen], title: titles[s.screen], stageNote: notes[s.screen], toast: s.toast,
+      crumb: s.screen === "report" ? "4 runs · 412 queries" : plan.label,
+      isPhone, isDesktop: !isPhone,
+      showSide: !isPhone || s.sideOpen,
+      shellCols: isPhone ? (s.sideOpen ? "180px minmax(0,1fr)" : "minmax(0,1fr)") : "248px minmax(0,1fr)",
+      toggleSide: () => this.setState({ sideOpen: !s.sideOpen }),
+      ...(window.CiterateBreakpoints ? window.CiterateBreakpoints.protoVars("app", isPhone) : {}),
+      // One property per table: a var() fallback cannot be reached once the
+      // property is set at all, so each desktop template is passed explicitly.
+      // Desktop rows keep a floor and their card scrolls, like .dt__scroll does
+      // in the shipped CSS — squeezing the stage must not overlap columns.
+      minRow: isPhone ? "0" : "520px",
+      colsReports: isPhone ? "minmax(0,1fr)" : "minmax(0,1fr) 90px 90px 110px 28px",
+      colsInv: isPhone ? "minmax(0,1fr)" : "minmax(0,1fr) 100px 100px",
+      colsTeam: isPhone ? "minmax(0,1fr)" : "minmax(0,1fr) 120px 110px 80px",
+      colsWs: isPhone ? "minmax(0,1fr)" : "minmax(0,1fr) 90px 110px 90px",
+      theadDisplay: isPhone ? "none" : "grid",
+      labelDisplay: isPhone ? "inline" : "none",
+      phoneBg: isPhone ? "rgba(255,255,255,.14)" : "transparent",
+      deskBg: isPhone ? "transparent" : "rgba(255,255,255,.14)",
+      setPhone: () => this.setState({ vw: "phone", sideOpen: false }),
+      setDesktop: () => this.setState({ vw: "desktop", sideOpen: false }),
+
+      onReports: s.screen === "reports", onReport: s.screen === "report",
+      onSettings: s.screen === "settings", onStates: s.screen === "states",
+      paneGeneral: s.pane === "general", paneBilling: s.pane === "billing",
+      paneBrand: s.pane === "brand", paneEmail: s.pane === "email",
+      paneTeam: s.pane === "team", paneWorkspaces: s.pane === "workspaces",
+      goReports: () => this.go("reports"),
+      goBilling: () => this.go("settings", "billing"),
+      goWorkspaces: () => this.go("settings", "workspaces"),
+
+      reportMonth: "July 2026",
+      competitorsLocked: !plan.competitors, competitorsOpen: plan.competitors,
+      brandLocked: !plan.brand, brandOpen: plan.brand,
+      agencyLocked: !plan.agency, agencyOpen: plan.agency,
+      accentHex: accent[1], accentName: accent[0],
+      pdfTitle: plan.brand ? "Your report, your accent" : "PDF export",
+      pdfNote: plan.brand
+        ? "Exports carry " + accent[0].toLowerCase() + " as the accent. Structure and the methodology block stay ours."
+        : "Exports carry the Citerate accent on this plan. Scale adds your own.",
+      downloadPdf: () => this.flash("In the build this prints through the browser; locally it falls back to print."),
+
+      planLabel: plan.label, planPrice: plan.price, planState: s.plan,
+      renewNote: "renews 2026-09-01 · Paddle · card ending 4242",
+      quotaLabel: plan.used + " / " + plan.quota,
+      quotaPct: quotaPctNum + "%",
+      quotaBar: near ? "#D98324" : "#0E7C66",
+      quotaInk: near ? "#9A6210" : "#5B6472",
+      quotaNote: near
+        ? quotaPctNum + "% used — the next run will not add new queries."
+        : quotaPctNum + "% used. Room for " + (plan.quota - plan.used) + " more queries.",
+      upgradeLabel: s.plan === "agency" ? "Change plan" : "Upgrade",
+      upgrade: () => this.flash("Paddle's overlay opens here; the plan switch in the rail fakes the result."),
+      portal: () => this.flash("Card, address and invoices live in Paddle's portal, not in our UI."),
+
+      workspace: s.workspace,
+      onWorkspaceName: (e) => this.setState({ workspace: e.target.value }),
+      deleteWorkspace: () => this.flash("Real deletes ask you to type the domain first."),
+      newWorkspace: s.newWorkspace,
+      onNewWorkspace: (e) => this.setState({ newWorkspace: e.target.value }),
+      addWorkspace: () => {
+        const d = (s.newWorkspace || "").trim();
+        if (!/^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$/i.test(d)) { this.flash("Needs a domain, like client.com."); return; }
+        if (s.workspaces.some(w => w[0] === d)) { this.flash("Already a workspace."); return; }
+        this.setState({ workspaces: s.workspaces.concat([[d, "—", "0"]]), newWorkspace: "" });
+        this.flash("Added. Its first run starts tonight.");
+      },
+
+      inviteEmail: s.inviteEmail,
+      onInviteEmail: (e) => this.setState({ inviteEmail: e.target.value }),
+      sendInvite: () => {
+        const e = (s.inviteEmail || "").trim();
+        if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(e)) { this.flash("Needs an email address."); return; }
+        if (s.pending.includes(e) || s.members.some(m => m[0] === e)) { this.flash("Already on the team."); return; }
+        this.setState({ pending: s.pending.concat([e]), inviteEmail: "" });
+        this.flash("Invite sent. It expires in fourteen days.");
+      },
+      teamState: (s.members.length + s.pending.length) + " people",
+
+      stateEmpty: s.stateTab === "empty", stateLoading: s.stateTab === "loading",
+      stateLocked: s.stateTab === "locked", state404: s.stateTab === "404", state500: s.stateTab === "500",
+
+      notYet: () => this.flash("Query review is in the Phase 14b file."),
+      reset: () => this.setState({
+        screen: "reports", pane: "general", stateTab: "empty", plan: "growth", accent: 0, accentTouched: false,
+        runDay: "mon", workspace: "acmecrm.com", newWorkspace: "",
+        workspaces: [["acmecrm.com", "34%", "412"], ["ledger-client.com", "22%", "140"], ["northsky.io", "41%", "96"]],
+        members: [["demo@citerate.com", 0, "today"], ["omer@acmecrm.com", 1, "yesterday"], ["sara@acmecrm.com", 2, "3 days ago"]],
+        pending: [], inviteEmail: "", emails: { weekly: true, drops: true, fixes: false, monthly: true },
+        visited: {}, sideOpen: false, toast: "",
+      }),
+    };
+  }
+}
+</script>
+</body>
+</html>

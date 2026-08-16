@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EDEFF2;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="display:grid;grid-template-columns:300px minmax(0,1fr);min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="background:#141B26;color:#F4F5F7;padding:24px 20px;display:flex;flex-direction:column;gap:22px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#35B394">Phase 17 · preflight</div>
+      <div style="font:600 21px/1.3 'Source Serif 4',serif;margin-top:8px">Deploy gate, both repos</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#8A93A1;margin:8px 0 0">The same checks <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">pnpm deploy</span> runs before it will ship, read here off the committed configs.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">mode</div>
+      <div style="display:flex;gap:6px">
+        <sc-for list="{{ modes }}" as="m" hint-placeholder-count="2">
+          <button type="button" onClick="{{ m.pick }}" style="flex:1;min-height:44px;padding:0 10px;border:1px solid {{ m.line }};border-radius:6px;background:{{ m.bg }};color:{{ m.ink }};font:500 11.5px/1.3 'JetBrains Mono',monospace;cursor:pointer">{{ m.label }}</button>
+        </sc-for>
+      </div>
+      <div style="font:400 11px/1.5 'JetBrains Mono',monospace;color:#8A93A1">{{ modeNote }}</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">verdict</div>
+      <div style="font:500 32px/1 'JetBrains Mono',monospace;color:{{ verdictInk }}">{{ blockCount }}</div>
+      <div style="font:400 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">{{ verdictLine }}</div>
+      <button type="button" onClick="{{ recheck }}" style="min-height:44px;margin-top:4px;border:1px solid rgba(255,255,255,.14);border-radius:6px;background:transparent;color:#F4F5F7;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Re-read the configs</button>
+    </div>
+
+    <div style="margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-direction:column;gap:8px">
+      <a href="Phase 14 - Prototype Launcher.dc.html" style="color:#35B394;font:400 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">← Prototype launcher</a>
+      <a href="Phase 15 - Breakpoint Parity.dc.html" style="color:#35B394;font:400 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Phase 15 · breakpoint parity</a>
+      <a href="Phase 16 - CSS Audit.dc.html" style="color:#35B394;font:400 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Phase 16 · CSS audit</a>
+    </div>
+  </div>
+
+  <div style="padding:34px 40px 64px;display:flex;flex-direction:column;gap:26px;min-width:0">
+
+    <div style="display:flex;flex-direction:column;gap:8px;max-width:80ch">
+      <h1 style="font:600 30px/1.25 'Source Serif 4',serif;margin:0;text-wrap:pretty">What has to be true before a deploy</h1>
+      <p style="font:400 14.5px/1.65 inherit;color:#5B6472;margin:0;text-wrap:pretty">The dashboard already had a gate; the marketing repo did not, and its <span style="font-family:'JetBrains Mono',monospace;font-size:13px">deploy</span> script ran straight to Cloudflare. Both now stop on a blocking line. Four checks are cross-repo, because one database and one price list are shared between them.</p>
+    </div>
+
+    <sc-if value="{{ error }}" hint-placeholder-val="{{ true }}">
+      <div style="background:#FBEDED;border:1px solid #A62F2F;border-radius:12px;padding:18px 20px;font:400 13.5px/1.6 inherit;color:#141B26">{{ error }}</div>
+    </sc-if>
+
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:0">{{ g.title }}</h2>
+          <span style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1;overflow-wrap:anywhere">{{ g.sub }}</span>
+        </div>
+
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+          <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="8">
+            <div style="display:grid;grid-template-columns:74px minmax(0,1fr) minmax(0,2.1fr);gap:14px;padding:12px 20px;border-bottom:1px solid #F0F2F5;background:{{ r.bg }};align-items:baseline">
+              <span style="font:500 10px/1.5 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:{{ r.ink }}">{{ r.level }}</span>
+              <span style="font:400 12.5px/1.5 'JetBrains Mono',monospace;color:#141B26;overflow-wrap:anywhere">{{ r.check }}</span>
+              <span style="font:400 13px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;overflow-wrap:anywhere;text-wrap:pretty">{{ r.msg }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:10px;max-width:80ch">
+      <div style="font:600 16px/1.3 'Source Serif 4',serif">What this page cannot see</div>
+      <div style="font:400 13px/1.65 inherit;color:#5B6472;text-wrap:pretty">Secrets are never in the repo, so a set secret and an unset one look identical from here — those land as NOTE lines with the command that answers them. The local column reads <span style="font-family:'JetBrains Mono',monospace;font-size:12px">.env.example</span>, since a real <span style="font-family:'JetBrains Mono',monospace;font-size:12px">.env</span> is not committed; on your machine <span style="font-family:'JetBrains Mono',monospace;font-size:12px">pnpm preflight:local</span> reads the real one.</div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+const F = {
+  siteToml: "citerate/wrangler.toml",
+  siteEnv: "citerate/.env.example",
+  sitePkg: "citerate/package.json",
+  sitePricing: "citerate/src/data/pricing.json",
+  siteHeaders: "citerate/public/_headers",
+  siteRobots: "citerate/public/robots.txt",
+  scannerToml: "citerate/workers/scanner/wrangler.toml",
+  appToml: "citerate-app/wrangler.toml",
+  appEnv: "citerate-app/.env.example",
+  appPkg: "citerate-app/package.json",
+};
+
+const WORDS = { one: 1, two: 2, three: 3, four: 4, five: 5 };
+
+function tomlVar(src, key) {
+  const m = new RegExp(`^${key}\\s*=\\s*"([\\s\\S]*?)"`, "m").exec(src || "");
+  return m ? m[1].trim() : null;
+}
+function envVar(src, key) {
+  // [ \t] not \s — \s eats the newline, so an empty value would capture the
+  // next line and an unset key would read as set.
+  const m = new RegExp(`^${key}[ \\t]*=[ \\t]*(.*)$`, "m").exec(src || "");
+  if (!m) return null;
+  return m[1].trim().replace(/\s+#.*$/, "").replace(/^["']|["']$/g, "");
+}
+function d1Id(src) {
+  const m = /\[\[d1_databases\]\][\s\S]*?database_id\s*=\s*"([^"]+)"/.exec(src || "");
+  return m ? m[1] : null;
+}
+
+const TEST_KEYS = /^(1x0{20}AA|2x0{20}AB|3x0{20}FF|0x0+2?)$/;
+
+function checks(files, local) {
+  const site = files[F.siteToml] || "";
+  const scanner = files[F.scannerToml] || "";
+  const app = files[F.appToml] || "";
+  const siteEnv = files[F.siteEnv] || "";
+  const appEnv = files[F.appEnv] || "";
+  const val = (toml, env, key) => (local ? envVar(env, key) : tomlVar(toml, key));
+
+  const siteRows = [];
+  const appRows = [];
+  const sharedRows = [];
+  const push = (arr) => (level, check, msg) => arr.push({ level, check, msg });
+  const s = push(siteRows), a = push(appRows), x = push(sharedRows);
+
+  /* --- shared -------------------------------------------------------- */
+  const ids = { "citerate": d1Id(site), "scanner": d1Id(scanner), "citerate-app": d1Id(app) };
+  const present = Object.entries(ids).filter(([, v]) => v);
+  const distinct = [...new Set(present.map(([, v]) => v))];
+  if (distinct.length > 1)
+    x("BLOCK", "shared D1 id", "the three configs disagree: " + present.map(([k, v]) => k + "=" + v).join(", ") + ". A scan would write to a database the dashboard never reads.");
+  else if (distinct.length === 1 && /^REPLACE_WITH_/.test(distinct[0]))
+    x(local ? "WARN" : "BLOCK", "shared D1 id", "all three configs still say " + distinct[0] + " — run wrangler d1 create citerate-db and paste the id into all three.");
+  else if (distinct.length === 1)
+    x("PASS", "shared D1 id", "all " + present.length + " configs name " + distinct[0]);
+
+  const allPlaceholders = [...new Set(
+    [site, scanner, app].join("\n").match(/REPLACE_WITH_[A-Z0-9_]+/g) || []
+  )];
+  if (allPlaceholders.length && !local)
+    x("BLOCK", "binding ids", allPlaceholders.length + " placeholder" + (allPlaceholders.length === 1 ? "" : "s") + " across the three configs: " + allPlaceholders.join(", "));
+  else if (allPlaceholders.length)
+    x("WARN", "binding ids", "placeholders remain, which is expected before the Cloudflare resources exist: " + allPlaceholders.join(", "));
+  else x("PASS", "binding ids", "no REPLACE_WITH_ left anywhere");
+
+  const siteUrlA = val(site, siteEnv, "PUBLIC_SITE_URL");
+  const siteUrlB = val(app, appEnv, "PUBLIC_SITE_URL");
+  const appUrlA = val(site, siteEnv, "PUBLIC_APP_URL");
+  const appUrlB = val(app, appEnv, "PUBLIC_APP_URL");
+  if (siteUrlA && siteUrlB && siteUrlA !== siteUrlB)
+    x("BLOCK", "PUBLIC_SITE_URL", "repos disagree — " + siteUrlA + " vs " + siteUrlB + ". Cross-links and canonicals would point at different origins.");
+  else if (appUrlA && appUrlB && appUrlA !== appUrlB)
+    x("BLOCK", "PUBLIC_APP_URL", "repos disagree — " + appUrlA + " vs " + appUrlB + ".");
+  else if (siteUrlA) x("PASS", "public urls", "both repos agree: " + siteUrlA + " → " + appUrlA);
+
+  const siteMocks = local ? envVar(siteEnv, "USE_ENGINE_MOCKS") : tomlVar(scanner, "USE_ENGINE_MOCKS");
+  const appMocks = val(app, appEnv, "USE_ENGINE_MOCKS");
+  if (siteMocks !== "false" || appMocks !== "false")
+    x(local ? "WARN" : "BLOCK", "USE_ENGINE_MOCKS", "scanner=" + siteMocks + ", app=" + appMocks + " — every number on a deployed screen would be deterministic fake data.");
+  else x("PASS", "USE_ENGINE_MOCKS", "false in both — screens read real engine output");
+
+  /* --- marketing repo ------------------------------------------------ */
+  let pricing = {};
+  try { pricing = JSON.parse(files[F.sitePricing] || "{}"); } catch (e) { pricing = {}; }
+  const freeBody = ((pricing.free || {}).body || "") + " " + ((pricing.free || {}).limits || "");
+  const advQ = (/(\d+)\s+queries/i.exec(freeBody) || [])[1] || null;
+  const advEword = (/(one|two|three|four|five)\s+engines?/i.exec(freeBody) || [])[1] || null;
+  const advE = advEword ? WORDS[advEword.toLowerCase()] : null;
+  const limit = val(site, siteEnv, "FREE_SCAN_QUERY_LIMIT");
+  const engines = val(site, siteEnv, "FREE_SCAN_ENGINES");
+
+  if (!limit) s("BLOCK", "FREE_SCAN_QUERY_LIMIT", "unset — the scan endpoint has no ceiling.");
+  else if (advQ && advQ !== String(limit))
+    s("BLOCK", "free scan limit", "config allows " + limit + " queries, the pricing page advertises " + advQ + ". The page would promise something the endpoint refuses.");
+  else s("PASS", "free scan limit", limit + " queries, matching the pricing page");
+
+  if (!engines) s("BLOCK", "FREE_SCAN_ENGINES", "unset — a free scan would run every engine and spend real money.");
+  else {
+    const n = engines.split(",").filter(Boolean).length;
+    if (advE && advE !== n) s("BLOCK", "free scan engines", "config runs " + n + " (" + engines + "), the pricing page advertises " + advEword + ".");
+    else s("PASS", "free scan engines", n + " — " + engines + ", matching the pricing page");
+  }
+
+  const runsSite = val(site, siteEnv, "RUNS_PER_ENGINE");
+  const runsScanner = tomlVar(scanner, "RUNS_PER_ENGINE");
+  if (runsSite && runsScanner && runsSite !== runsScanner)
+    s("BLOCK", "RUNS_PER_ENGINE", "site says " + runsSite + ", scanner says " + runsScanner + " — the band on the readout would not match how it was sampled.");
+  else if (runsSite) s("PASS", "RUNS_PER_ENGINE", runsSite + ", site and scanner agree");
+
+  const ttl = val(site, siteEnv, "FREE_SCAN_CACHE_TTL_SECONDS");
+  if (ttl && +ttl < 3600) s("WARN", "scan cache TTL", ttl + "s — the decision was one live scan per domain per day (86400).");
+  else if (ttl) s("PASS", "scan cache TTL", ttl + "s, one live scan per domain per day");
+
+  const tsSite = val(site, siteEnv, "PUBLIC_TURNSTILE_SITE_KEY");
+  if (!tsSite) s("BLOCK", "Turnstile", "PUBLIC_TURNSTILE_SITE_KEY unset — the public scan form has no bot gate.");
+  else if (!local && TEST_KEYS.test(tsSite)) s("BLOCK", "Turnstile", "production site key is Cloudflare's test key (" + tsSite + ") — it accepts every bot.");
+  else s("PASS", "Turnstile", local ? "always-passes test key, correct locally" : "real site key");
+
+  const headers = files[F.siteHeaders] || "";
+  if (!headers) s("BLOCK", "public/_headers", "missing — no CSP or cache policy would ship.");
+  else {
+    const miss = ["content-security-policy", "x-content-type-options", "referrer-policy"].filter(h => !new RegExp(h, "i").test(headers));
+    if (miss.length) s("WARN", "public/_headers", "no " + miss.join(", "));
+    else s("PASS", "public/_headers", "CSP, nosniff and referrer policy present");
+  }
+
+  const robots = files[F.siteRobots] || "";
+  if (!robots) s("WARN", "robots.txt", "missing.");
+  else if (/^\s*Disallow:\s*\/\s*$/im.test(robots) && !local) s("BLOCK", "robots.txt", "Disallow: / — the marketing site would be deindexed.");
+  else if (!/sitemap/i.test(robots)) s("WARN", "robots.txt", "no Sitemap line.");
+  else s("PASS", "robots.txt", "crawlable, sitemap declared");
+
+  let sitePkg = {};
+  try { sitePkg = JSON.parse(files[F.sitePkg] || "{}"); } catch (e) {}
+  const sd = (sitePkg.scripts || {}).deploy || "";
+  if (!/preflight/.test(sd)) s("BLOCK", "deploy gate", "the deploy script does not run preflight — a misconfigured deploy would reach Cloudflare before anyone noticed.");
+  else s("PASS", "deploy gate", "deploy runs preflight first; deploy:force is the deliberate bypass");
+  if (!/pagefind/.test((sitePkg.scripts || {}).build || "")) s("WARN", "search index", "build does not run pagefind — on-site search would return nothing.");
+  else s("PASS", "search index", "build runs pagefind over dist");
+
+  const leaked = ["TURNSTILE_SECRET_KEY", "RESEND_API_KEY", "PADDLE_API_KEY", "PADDLE_WEBHOOK_SECRET", "SESSION_SECRET", "OPENAI_API_KEY", "PERPLEXITY_API_KEY", "GEMINI_API_KEY", "SERP_API_KEY"]
+    .filter(k => new RegExp("^\\s*" + k + "\\s*=", "m").test(site + scanner));
+  if (leaked.length) s("BLOCK", "secrets in repo", "assigned in a wrangler.toml: " + leaked.join(", ") + ". Remove and use wrangler secret put.");
+  else s("PASS", "secrets in repo", "no secret assigned in either config");
+  s("NOTE", "scanner cron", "a Pages deploy does not deploy the Worker — pnpm scanner:deploy too, or scans queue and never run.");
+
+  /* --- app repo ------------------------------------------------------ */
+  const raw = val(app, appEnv, "PADDLE_PRICE_IDS");
+  if (!raw) a("BLOCK", "PADDLE_PRICE_IDS", "unset — checkout returns 501 for every plan.");
+  else {
+    let map = null;
+    try { map = JSON.parse(raw); } catch (e) { a("BLOCK", "PADDLE_PRICE_IDS", "not valid JSON — checkout falls back to {} and 501s silently."); }
+    if (map) {
+      const missing = [];
+      ["starter", "growth", "scale", "agency"].forEach(p => ["month", "year"].forEach(i => {
+        if (!((map[p] || {})[i])) missing.push(p + "." + i);
+      }));
+      if (missing.length) a("BLOCK", "PADDLE_PRICE_IDS", "missing " + missing.length + " of 8 plan prices: " + missing.join(", "));
+      else a("PASS", "PADDLE_PRICE_IDS", "8 plan prices present");
+    }
+  }
+
+  const pe = val(app, appEnv, "PADDLE_ENV");
+  if (!local && pe !== "production") a("BLOCK", "PADDLE_ENV", 'is "' + pe + '" — production money would route to Paddle\u2019s sandbox.');
+  else if (local && pe !== "sandbox") a("WARN", "PADDLE_ENV", 'is "' + pe + '" locally — local checkouts would hit live Paddle.');
+  else a("PASS", "PADDLE_ENV", pe);
+
+  const gid = val(app, appEnv, "GOOGLE_CLIENT_ID");
+  if (!gid || /REPLACE_WITH/.test(gid)) a(local ? "WARN" : "BLOCK", "GOOGLE_CLIENT_ID", "unset — Google sign-in is hidden and the Search Console connect reads \u201cunconfigured\u201d.");
+  else if (!/\.apps\.googleusercontent\.com$/.test(gid)) a("WARN", "GOOGLE_CLIENT_ID", "does not end .apps.googleusercontent.com — check it is the client id, not the project id.");
+  else a("PASS", "GOOGLE_CLIENT_ID", "well-formed");
+
+  const ts = val(app, appEnv, "PUBLIC_TURNSTILE_SITE_KEY");
+  if (!local && (!ts || /REPLACE_WITH/.test(ts) || TEST_KEYS.test(ts)))
+    a("BLOCK", "Turnstile", "production site key is " + (ts || "unset") + " — the sign-in form has no working bot gate.");
+  else a("PASS", "Turnstile", local ? "test key locally" : "real site key");
+
+  let appPkg = {};
+  try { appPkg = JSON.parse(files[F.appPkg] || "{}"); } catch (e) {}
+  const scripts = appPkg.scripts || {};
+  if (!/preflight/.test(scripts.deploy || "")) a("BLOCK", "deploy gate", "the deploy script does not run preflight.");
+  else a("PASS", "deploy gate", "deploy runs preflight first");
+
+  // Only wrangler commands carry local D1 state; a node script taking --local
+  // has nothing to persist.
+  const localCmds = Object.entries(scripts).filter(([, v]) => /wrangler[\s\S]*--local/.test(v));
+  const unpersisted = localCmds.filter(([, v]) => !/--persist-to \.\.\/citerate\/\.wrangler\/state/.test(v)).map(([k]) => k);
+  if (unpersisted.length)
+    a("BLOCK", "shared local state", unpersisted.join(", ") + " use --local without --persist-to ../citerate/.wrangler/state — they would create a second, empty local database.");
+  else a("PASS", "shared local state", localCmds.length + " --local command" + (localCmds.length === 1 ? "" : "s") + ", all persisting into ../citerate/.wrangler/state");
+
+  const hasBrowser = /^\s*\[browser\]/m.test(app);
+  const hasPup = !!(appPkg.dependencies || {})["@cloudflare/puppeteer"];
+  if (hasBrowser && !hasPup) a("BLOCK", "PDF renderer", "[browser] binding declared but @cloudflare/puppeteer is not a dependency — the route would throw.");
+  else if (hasBrowser) a("PASS", "PDF renderer", "[browser] binding + @cloudflare/puppeteer present");
+  else a("WARN", "PDF renderer", "no [browser] binding — PDF downloads fall back to the print path.");
+
+  a("NOTE", "secrets", "not visible from the repo by design: wrangler pages secret list --project-name=citerate-app");
+
+  return { siteRows, appRows, sharedRows };
+}
+
+class Component extends DCLogic {
+  state = { files: null, error: "", local: false };
+
+  componentDidMount() { this.read(); }
+
+  read = () => {
+    const keys = Object.values(F);
+    Promise.all(keys.map(p => fetch(p).then(r => (r.ok ? r.text() : "")).then(t => [p, t])))
+      .then(pairs => {
+        const files = {};
+        let n = 0;
+        pairs.forEach(([p, t]) => { files[p] = t; if (t) n++; });
+        if (!n) { this.setState({ error: "Could not read the configs — both repos need to sit next to this file." }); return; }
+        this.setState({ files, error: "" });
+      })
+      .catch(e => this.setState({ error: String(e.message || e) }));
+  };
+
+  renderVals() {
+    const local = this.state.local;
+    const res = this.state.files ? checks(this.state.files, local) : { siteRows: [], appRows: [], sharedRows: [] };
+    const paint = rows => rows.map(r => ({
+      level: r.level, check: r.check, msg: r.msg,
+      ink: r.level === "BLOCK" ? "#A62F2F" : r.level === "WARN" ? "#8A5A16" : r.level === "NOTE" ? "#3E5C8A" : "#0B6151",
+      bg: r.level === "BLOCK" ? "#FBEDED" : r.level === "WARN" ? "#FBF2E3" : "#FFFFFF",
+    }));
+    const order = { BLOCK: 0, WARN: 1, NOTE: 2, PASS: 3 };
+    const sort = rows => rows.slice().sort((x, y) => order[x.level] - order[y.level]);
+
+    const all = [...res.sharedRows, ...res.siteRows, ...res.appRows];
+    const blocks = all.filter(r => r.level === "BLOCK").length;
+    const warns = all.filter(r => r.level === "WARN").length;
+
+    const mode = (label, isLocal) => ({
+      label,
+      pick: () => this.setState({ local: isLocal }),
+      bg: local === isLocal ? "#0E7C66" : "transparent",
+      ink: local === isLocal ? "#FFFFFF" : "#F4F5F7",
+      line: local === isLocal ? "#0E7C66" : "rgba(255,255,255,.14)",
+    });
+
+    return {
+      modes: [mode("production", false), mode("local", true)],
+      modeNote: local
+        ? "reading .env.example, since .env is not committed"
+        : "reading wrangler.toml in both repos and the scanner",
+      groups: [
+        { title: "Shared between the repos", sub: "one database, one price list, one pair of urls", rows: paint(sort(res.sharedRows)) },
+        { title: "Marketing site", sub: "citerate · wrangler.toml + workers/scanner", rows: paint(sort(res.siteRows)) },
+        { title: "Dashboard", sub: "citerate-app · wrangler.toml", rows: paint(sort(res.appRows)) },
+      ],
+      blockCount: String(blocks),
+      verdictInk: blocks ? "#E58B8B" : "#35B394",
+      verdictLine: blocks
+        ? "blocking · " + warns + " open by choice"
+        : "clear to deploy · " + warns + " open by choice",
+      error: this.state.error,
+      recheck: this.read,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

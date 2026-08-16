@@ -1,0 +1,91 @@
+// Type primitives. Every text style on the site is one of these classes or a
+// token font shorthand — no ad-hoc font declarations in components.
+
+h1, .t-d1 { font: var(--t-d1); letter-spacing: var(--tracking-tight); margin: 0; text-wrap: pretty; }
+h2, .t-d2 { font: var(--t-d2); letter-spacing: -0.01em; margin: 0; text-wrap: pretty; }
+h3, .t-d3 { font: var(--t-d3); margin: 0; text-wrap: pretty; }
+h4, .t-d4 { font: var(--t-d4); margin: 0; }
+
+.t-hero { font: 600 56px/1.06 var(--font-display); letter-spacing: var(--tracking-tight); margin: 0; }
+
+.t-lead { font: var(--t-ui-lg); color: var(--ink-soft); margin: 0; max-width: 66ch; }
+.t-body { font: var(--t-ui); color: var(--ink); margin: 0; }
+.t-sm   { font: var(--t-ui-sm); color: var(--ink-soft); margin: 0; }
+
+.t-label {
+  font: var(--t-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.t-label--ink { color: var(--ink-soft); }
+
+.t-data     { font: var(--t-data); }
+.t-data-lg  { font: var(--t-data-lg); }
+.t-data-xl  { font: var(--t-data-xl); letter-spacing: var(--tracking-tight); }
+.t-data-sm  { font: var(--t-data-sm); color: var(--ink-muted); }
+.t-code     { font: var(--t-code); }
+
+// Semantic text colours. --warn is never used for text (2.6:1).
+.tx-cited { color: var(--cited-ink); }
+.tx-gap   { color: var(--gap-ink); }
+.tx-warn  { color: var(--warn-ink); }
+.tx-tech  { color: var(--tech-ink); }
+.tx-soft  { color: var(--ink-soft); }
+.tx-muted { color: var(--ink-muted); }
+
+a { color: var(--cited-ink); text-decoration: none; }
+a:hover { color: var(--cited); text-decoration: underline; }
+
+// Long-form prose (blog, legal, docs, about). 68ch measure, serif body.
+.prose {
+  max-width: var(--max-prose);
+  font: 400 17px/1.75 var(--font-display);
+  color: var(--ink);
+
+  h2 { font: var(--t-d2); margin: 40px 0 0; }
+  h3 { font: var(--t-d3); margin: 36px 0 0; }
+  h4 { font: var(--t-d4); margin: 28px 0 0; }
+  p  { margin: 16px 0 0; }
+  ul, ol { margin: 16px 0 0; padding-left: 24px; }
+  li { margin: 8px 0 0; }
+  strong { font-weight: 600; }
+
+  blockquote {
+    margin: 24px 0 0;
+    padding: 0 0 0 20px;
+    border-left: 2px solid var(--cited);
+    font: 600 20px/1.5 var(--font-display);
+  }
+
+  code {
+    font: var(--t-code);
+    background: var(--paper);
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+
+  pre {
+    margin: 24px 0 0;
+    padding: 20px;
+    background: var(--ink);
+    color: var(--ink-on-dark);
+    border-radius: var(--r-md);
+    overflow-x: auto;
+    font: var(--t-code);
+
+    code { background: none; padding: 0; color: inherit; }
+  }
+
+  hr { margin: 32px 0; border: 0; border-top: 1px solid var(--line); }
+
+  table { width: 100%; border-collapse: collapse; margin: 24px 0 0; font: var(--t-ui-sm); }
+  th { font: var(--t-label); letter-spacing: var(--tracking-label); text-transform: uppercase;
+       color: var(--ink-soft); text-align: left; padding: 10px 16px; background: var(--paper-sunk); }
+  td { padding: 11px 16px; border-top: 1px solid var(--line); }
+}
+
+// Prose sitting on paper wants UI sans for legal density, not serif.
+.prose--legal { font: 400 15px/1.75 var(--font-ui); color: var(--ink-soft); }
+.prose--legal h3 { font: var(--t-d4); color: var(--ink); margin: 28px 0 0; }
+.prose--legal p { margin: 10px 0 0; }

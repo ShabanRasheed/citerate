@@ -1,0 +1,33 @@
+// ---------------------------------------------------------------------------
+// Dashboard stylesheet. Same pipeline as the marketing repo (tokens → bootstrap
+// map → bootstrap → base → layout → components → utilities), but a wider
+// Bootstrap partial list because the app uses Bootstrap's JS components.
+// App-specific partials address tokens through custom properties only.
+// No partial above 07 may contain a width media query — they all live in
+// 07-responsive/_responsive.scss, in descending breakpoint order.
+// ---------------------------------------------------------------------------
+@use "01-settings/tokens";
+@use "02-vendor/bootstrap";
+
+@use "03-base/reset";
+@use "03-base/type";
+
+@use "04-layout/shell";
+
+@use "05-components/buttons";
+@use "05-components/card";
+@use "05-components/forms";
+@use "05-components/score";
+@use "05-components/table";
+@use "05-components/fix";
+@use "05-components/chart";
+@use "05-components/badge";
+@use "05-components/auth";
+
+@use "06-utilities/utils";
+
+// 07 responsive — every width breakpoint in the repo, largest → smallest
+@use "07-responsive/responsive";
+
+// print last of all, so paper overrides beat every screen breakpoint
+@use "06-utilities/print";

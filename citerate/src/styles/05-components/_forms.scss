@@ -1,0 +1,99 @@
+// Free-scan form. The most abusable surface on the site, so it is also the most
+// instrumented: Turnstile, KV rate limit, and a live progress readout.
+.scan-form {
+  display: flex;
+  gap: 10px;
+  max-width: 520px;
+  width: 100%;
+}
+.scan-form__field {
+  flex: 1;
+  min-width: 0;
+  height: 52px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  padding: 0 16px;
+  background: var(--card);
+  font: 400 14px/1 var(--font-mono);
+  color: var(--ink);
+}
+.scan-form__field::placeholder { color: var(--ink-muted); }
+.scan-form__field:focus-visible { border-color: var(--tech); box-shadow: var(--focus-ring); }
+.scan-form__btn { height: 52px; padding: 0 22px; white-space: nowrap; }
+.scan-form__note { font: var(--t-data-sm); color: var(--ink-muted); margin-top: 14px; }
+.scan-form__error {
+  font: var(--t-data-sm);
+  color: var(--gap-ink);
+  background: var(--gap-wash);
+  border-radius: var(--r-sm);
+  padding: 8px 12px;
+  margin-top: 10px;
+}
+.scan-form[data-state="loading"] .scan-form__btn { opacity: 0.72; pointer-events: none; }
+
+
+// On the ink hero the field sits on white, no border needed.
+.section--ink .scan-form__field { border-color: transparent; }
+
+// Live progress readout in the hero instrument card.
+.scan-progress { display: flex; flex-direction: column; gap: 6px; width: 150px; }
+.scan-progress__rail {
+  height: 4px;
+  background: var(--chart-track);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.scan-progress__fill {
+  height: 100%;
+  background: var(--cited);
+  width: 0;
+  transition: width var(--dur-4) var(--ease-settle);
+}
+
+.scan-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font: var(--t-code);
+}
+.scan-row__verdict {
+  font: 500 10.5px/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.scan-row__verdict--cited { color: var(--cited-ink); }
+.scan-row__verdict--gap { color: var(--gap-ink); }
+.scan-row__verdict--pending { color: var(--ink-muted); text-transform: none; letter-spacing: 0; }
+
+// Contact form.
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+.form-field__label {
+  font: var(--t-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.form-field__input,
+.form-field__textarea {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  padding: 12px 14px;
+  font: var(--t-ui);
+  color: var(--ink);
+  background: var(--card);
+  min-height: 44px;
+}
+.form-field__textarea { min-height: 96px; resize: vertical; font-family: var(--font-ui); }
+.form-field__input:focus-visible,
+.form-field__textarea:focus-visible { border-color: var(--tech); box-shadow: var(--focus-ring); }
+.form-field__hint { font: var(--t-data-sm); color: var(--ink-muted); }
+.form-field--error .form-field__input { border-color: var(--gap); }
+
+.turnstile-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: var(--t-data-sm);
+  color: var(--ink-muted);
+}

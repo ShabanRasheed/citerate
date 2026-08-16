@@ -1,0 +1,37 @@
+---
+/**
+ * Auth + onboarding shell: one card on paper, no sidebar, no navigation out.
+ * Deliberately has no workspace switcher — there may not be a workspace yet.
+ */
+import "../styles/main.scss";
+
+interface Props {
+  title: string;
+  wide?: boolean;
+}
+const { title, wide = false } = Astro.props;
+const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://citerate.com";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · Citerate</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#F4F5F7" />
+    <link rel="preload" href="/fonts/jetbrains-mono-500.woff2" as="font" type="font/woff2" crossorigin />
+    <script src="../scripts/auth.js"></script>
+  </head>
+
+  <body>
+    <main class="auth">
+      <div class={`auth__card ${wide ? "onboard" : ""}`}>
+        <a class="auth__brand" href={siteUrl}>cite<em>/</em>rate</a>
+        <slot />
+      </div>
+    </main>
+  </body>
+</html>

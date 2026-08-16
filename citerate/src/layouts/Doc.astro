@@ -1,0 +1,108 @@
+---
+/**
+ * Long-form prose page: blog articles, about, docs concept pages.
+ * 68ch measure, TOC rail, share rail, optional methodology note.
+ */
+import Marketing from "./Marketing.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  kicker?: string;
+  dek?: string;
+  date?: string;
+  readingTime?: string;
+  author?: string;
+  toc?: { id: string; label: string }[];
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  nav?: "blog" | "docs" | null;
+}
+
+const {
+  title,
+  description,
+  ogImage,
+  kicker,
+  dek,
+  date,
+  readingTime,
+  author,
+  toc = [],
+  jsonLd,
+  nav = "blog"
+} = Astro.props;
+---
+
+<Marketing title={title} description={description} ogImage={ogImage} jsonLd={jsonLd} nav={nav}>
+  <div class="section section--flush" style="padding-top:56px">
+    <div class="wrap wrap--wide">
+      <div class="article">
+        <aside class="article__rail" aria-label="On this page">
+          {
+            toc.length > 0 && (
+              <>
+                <span class="t-label">On this page</span>
+                <nav class="article__toc" data-toc>
+                  {toc.map((t) => <a href={`#${t.id}`}>{t.label}</a>)}
+                </nav>
+              </>
+            )
+          }
+        </aside>
+
+        <article>
+          <header class="stack stack--3">
+            {
+              (kicker || date) && (
+                <div class="post-meta">
+                  {kicker && <span class="chip chip--solid">{kicker}</span>}
+                  {date && <span>{date}</span>}
+                  {readingTime && <span>· {readingTime}</span>}
+                </div>
+              )
+            }
+            <h1 class="t-d1">{title}</h1>
+            {dek && <p style="font:400 19px/1.6 var(--font-display);color:var(--ink-soft);margin:0">{dek}</p>}
+            {
+              author && (
+                <div
+                  style="display:flex;align-items:center;gap:12px;margin-top:8px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"
+                >
+                  <span
+                    style="width:34px;height:34px;border-radius:999px;background:var(--paper-sunk);border:1px solid var(--line)"
+                  ></span>
+                  <span class="t-sm">{author}</span>
+                </div>
+              )
+            }
+          </header>
+
+          <div class="prose">
+            <slot />
+          </div>
+
+          <slot name="footer" />
+        </article>
+
+        <aside class="article__rail" aria-label="Share">
+          <span class="t-label">Share</span>
+          <div class="stack stack--2">
+            <button class="btn-ghost" data-copy-link type="button">Copy link</button>
+            <a class="btn-ghost" href="/rss.xml">RSS</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</Marketing>
+
+<script>
+  document.querySelector("[data-copy-link]")?.addEventListener("click", async (e) => {
+    const btn = e.currentTarget as HTMLButtonElement;
+    await navigator.clipboard.writeText(location.href);
+    const original = btn.textContent;
+    btn.textContent = "Copied";
+    setTimeout(() => (btn.textContent = original), 1600);
+  });
+</script>

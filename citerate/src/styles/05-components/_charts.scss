@@ -1,0 +1,66 @@
+// Hand-built SVG/CSS charts. No chart library on marketing pages: they cost
+// nothing, print correctly, and never shift layout.
+
+// Cause-separation bar. Hue is never the only signal — "other" is always striped.
+.cause-bar {
+  display: flex;
+  height: 22px;
+  border-radius: 5px;
+  overflow: hidden;
+  gap: 2px;
+}
+.cause-bar__seg--aio   { background: var(--chart-1); }
+.cause-bar__seg--rank  { background: var(--chart-2); }
+.cause-bar__seg--tech  { background: var(--chart-3); }
+.cause-bar__seg--other { background: var(--chart-stripe); }
+.cause-bar--tall { height: 34px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 10px 16px; }
+.legend__item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font: 400 10.5px/1 var(--font-mono);
+  color: var(--ink-soft);
+}
+.legend__swatch { width: 8px; height: 8px; border-radius: 2px; }
+.legend__swatch--aio { background: var(--chart-1); }
+.legend__swatch--rank { background: var(--chart-2); }
+.legend__swatch--tech { background: var(--chart-3); }
+.legend__swatch--other { background: var(--chart-stripe); }
+
+// Horizontal share-of-citations bars.
+.share-row { display: flex; align-items: center; gap: 10px; }
+.share-row__label { font: 400 11px/1 var(--font-mono); color: var(--ink-soft); width: 92px; flex: none; }
+.share-row__label--you { font-weight: 500; color: var(--cited-ink); }
+.share-row__rail { flex: 1; height: 10px; background: var(--chart-track); border-radius: 999px; overflow: hidden; }
+.share-row__fill { height: 100%; background: var(--tech); }
+.share-row__fill--you { background: var(--cited); }
+.share-row__val { font: 400 11px/1 var(--font-mono); color: var(--ink-soft); width: 38px; text-align: right; }
+
+// Column chart (blog figures).
+.col-chart { display: flex; align-items: flex-end; gap: 14px; height: 150px; }
+.col-chart__col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 7px; height: 100%; }
+.col-chart__bar { background: var(--cited); border-radius: 4px 4px 0 0; }
+.col-chart__bar--tech { background: var(--tech); }
+.col-chart__bar--other { background: var(--chart-stripe); }
+.col-chart__label { font: 400 10.5px/1 var(--font-mono); color: var(--ink-muted); text-align: center; }
+
+// Trend line wrapper — SVG is drawn inline with preserveAspectRatio="none".
+.trend { display: block; width: 100%; }
+.trend__grid { stroke: var(--line); stroke-width: 1; }
+.trend__marker { stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 4 4; }
+.trend__line--impressions { fill: none; stroke: var(--tech); stroke-width: 2.5; }
+.trend__line--clicks { fill: none; stroke: var(--gap); stroke-width: 2.5; }
+.trend__line--citations { fill: none; stroke: var(--cited); stroke-width: 2.5; }
+.trend__band { fill: var(--chart-band); }
+
+// The score unit.
+.score { display: flex; flex-direction: column; gap: 6px; }
+.score__value { font: var(--t-data-xl); letter-spacing: var(--tracking-tight); color: var(--ink); }
+.score__value--hero { font-size: 72px; line-height: 1; }
+.score__unit { font-size: 0.44em; color: var(--ink-muted); }
+.score__caption { font: var(--t-ui-sm); color: var(--ink-soft); }
+
+// Count-up respects reduced motion via the token being set to 0ms.
+.count-up { transition: none; }

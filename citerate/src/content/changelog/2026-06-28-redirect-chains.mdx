@@ -1,0 +1,8 @@
+---
+title: "Redirect chains no longer break citation matching"
+date: 2026-06-28
+kind: "fixed"
+summary: "Matching now follows up to five hops and strips tracking parameters."
+---
+
+Citations pointing at a URL that redirected twice to your domain were being missed. Matching now follows up to five hops and strips tracking parameters before comparison.

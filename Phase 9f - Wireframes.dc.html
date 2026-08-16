@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#F4F5F7;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="max-width:1300px;margin:0 auto;padding:48px 40px 120px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:20px;border-bottom:2px solid #141B26">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Phase 9f · UX package 6 of 8 · 2026-07-29</div>
+      <h1 style="font:600 34px/1.15 'Source Serif 4',serif;letter-spacing:-.015em;margin:10px 0 0">Low-fidelity wireframes</h1>
+      <p style="font:400 14px/1.55 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0;text-wrap:pretty">Twelve frames, deliberately greyscale. No brand colour, no typography, no illustration — so every conversation about these is about hierarchy, sequence and what earns its place. Each frame carries numbered annotations tying it to the story and flow it satisfies.</p>
+    </div>
+    <div style="flex:none;text-align:right;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+      <div>frames &nbsp;&nbsp;&nbsp;&nbsp;12</div>
+      <div>annotations 48</div>
+      <div>greys &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6</div>
+      <div style="color:#8A93A1">colours &nbsp;&nbsp;&nbsp;0</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px">
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">FIDELITY LADDER</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;font:400 12px/1.4 inherit;color:#5B6472">
+        <a href="./Phase 9e - Whiteboard Sketches.dc.html" style="background:#EDEFF2;border-radius:6px;padding:6px 10px;font:500 11px 'JetBrains Mono',monospace">9e sketch</a>
+        <span style="color:#C6CBD3">→</span>
+        <span style="background:#141B26;color:#F4F5F7;border-radius:6px;padding:6px 10px;font:500 11px 'JetBrains Mono',monospace">9f wireframe · you are here</span>
+        <span style="color:#C6CBD3">→</span>
+        <a href="./Phase 4 - App Screens.dc.html" style="background:#EDEFF2;border-radius:6px;padding:6px 10px;font:500 11px 'JetBrains Mono',monospace">hi-fi (Phase 2 &amp; 4)</a>
+        <span style="color:#C6CBD3">→</span>
+        <span style="background:#EDEFF2;border-radius:6px;padding:6px 10px;font:500 11px 'JetBrains Mono',monospace">built (Phase 7 &amp; 8)</span>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">WIREFRAME LANGUAGE</div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:11px;align-items:center;font:400 11.5px/1.4 inherit;color:#5B6472">
+        <span style="display:flex;align-items:center;gap:6px"><span style="width:34px;height:7px;background:#DDDDDD;border-radius:2px"></span> body copy</span>
+        <span style="display:flex;align-items:center;gap:6px"><span style="width:34px;height:12px;background:#666666;border-radius:2px"></span> heading</span>
+        <span style="display:flex;align-items:center;gap:6px"><span style="width:44px;height:18px;background:#333333;border-radius:3px"></span> primary action</span>
+        <span style="display:flex;align-items:center;gap:6px"><span style="width:44px;height:18px;border:1px solid #999999;border-radius:3px"></span> secondary</span>
+        <span style="display:flex;align-items:center;gap:6px"><span style="width:26px;height:18px;background:repeating-linear-gradient(45deg,#DDD 0 4px,#F2F2F2 4px 8px);border:1px dashed #999"></span> locked</span>
+        <span style="display:flex;align-items:center;gap:6px"><span style="width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">1</span> annotation</span>
+      </div>
+    </div>
+  </div>
+
+  <section style="margin-top:48px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:10px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Frame 01 · marketing</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">Home — the hostname field is the whole page</h2>
+      </div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/ · F01 · US-01 US-02</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1.9fr 1fr;gap:20px;margin-top:16px;align-items:start">
+      <div style="background:#FFFFFF;border:1px solid #BBBBBB;border-radius:6px;overflow:hidden">
+        <div style="height:26px;background:#F2F2F2;border-bottom:1px solid #DDDDDD;display:flex;align-items:center;gap:6px;padding:0 10px">
+          <span style="width:7px;height:7px;border-radius:50%;background:#CCC"></span><span style="width:7px;height:7px;border-radius:50%;background:#CCC"></span><span style="width:7px;height:7px;border-radius:50%;background:#CCC"></span>
+          <span style="flex:1;height:12px;background:#E8E8E8;border-radius:2px;margin-left:8px"></span>
+        </div>
+        <div style="padding:14px 20px;border-bottom:1px solid #EEEEEE;display:flex;align-items:center;justify-content:space-between">
+          <div style="width:70px;height:12px;background:#666666;border-radius:2px"></div>
+          <div style="display:flex;gap:14px;align-items:center">
+            <div style="width:42px;height:7px;background:#DDDDDD;border-radius:2px"></div>
+            <div style="width:52px;height:7px;background:#DDDDDD;border-radius:2px"></div>
+            <div style="width:38px;height:7px;background:#DDDDDD;border-radius:2px"></div>
+            <div style="width:64px;height:22px;border:1px solid #999999;border-radius:3px"></div>
+          </div>
+        </div>
+        <div style="padding:52px 20px 44px;display:flex;flex-direction:column;align-items:center;gap:14px;position:relative">
+          <span style="position:absolute;left:14px;top:44px;width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">1</span>
+          <div style="width:62%;height:20px;background:#555555;border-radius:2px"></div>
+          <div style="width:44%;height:20px;background:#555555;border-radius:2px"></div>
+          <div style="width:52%;display:flex;flex-direction:column;gap:6px;align-items:center;margin-top:4px">
+            <div style="width:100%;height:8px;background:#DDDDDD;border-radius:2px"></div>
+            <div style="width:76%;height:8px;background:#DDDDDD;border-radius:2px"></div>
+          </div>
+          <div style="width:60%;display:flex;gap:8px;margin-top:16px;position:relative">
+            <span style="position:absolute;left:-32px;top:9px;width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">2</span>
+            <div style="flex:1;height:40px;border:2px solid #666666;border-radius:4px;display:flex;align-items:center;padding:0 12px"><div style="width:120px;height:8px;background:#DDDDDD;border-radius:2px"></div></div>
+            <div style="width:110px;height:40px;background:#333333;border-radius:4px"></div>
+          </div>
+          <div style="width:34%;height:7px;background:#E6E6E6;border-radius:2px;margin-top:6px"></div>
+        </div>
+        <div style="padding:22px 20px;border-top:1px solid #EEEEEE;background:#FAFAFA;position:relative">
+          <span style="position:absolute;left:14px;top:14px;width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">3</span>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-left:26px">
+            <div style="border:1px solid #DDDDDD;background:#FFFFFF;border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:7px"><div style="width:40%;height:11px;background:#888888;border-radius:2px"></div><div style="width:100%;height:7px;background:#E6E6E6;border-radius:2px"></div><div style="width:88%;height:7px;background:#E6E6E6;border-radius:2px"></div><div style="width:64%;height:7px;background:#E6E6E6;border-radius:2px"></div></div>
+            <div style="border:1px solid #DDDDDD;background:#FFFFFF;border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:7px"><div style="width:52%;height:11px;background:#888888;border-radius:2px"></div><div style="width:100%;height:7px;background:#E6E6E6;border-radius:2px"></div><div style="width:76%;height:7px;background:#E6E6E6;border-radius:2px"></div><div style="width:82%;height:7px;background:#E6E6E6;border-radius:2px"></div></div>
+            <div style="border:1px solid #DDDDDD;background:#FFFFFF;border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:7px"><div style="width:46%;height:11px;background:#888888;border-radius:2px"></div><div style="width:94%;height:7px;background:#E6E6E6;border-radius:2px"></div><div style="width:100%;height:7px;background:#E6E6E6;border-radius:2px"></div><div style="width:58%;height:7px;background:#E6E6E6;border-radius:2px"></div></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;display:flex;gap:10px">
+          <span style="flex:none;width:20px;height:20px;border-radius:50%;background:#141B26;color:#FFF;font:500 11px/20px 'JetBrains Mono',monospace;text-align:center">1</span>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:0">Two lines of headline, two of subhead, then the field. There is <strong>no signup CTA above the field</strong> — the field <em>is</em> the call to action. The hi-fi version sets this in the serif display face because a verdict is a sentence.</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;display:flex;gap:10px">
+          <span style="flex:none;width:20px;height:20px;border-radius:50%;background:#141B26;color:#FFF;font:500 11px/20px 'JetBrains Mono',monospace;text-align:center">2</span>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:0">One input, one button, above the fold on a phone. Errors resolve inline beneath, input preserved. The reassurance line under it carries "no account, no card" — the two objections P2 has.</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;display:flex;gap:10px">
+          <span style="flex:none;width:20px;height:20px;border-radius:50%;background:#141B26;color:#FFF;font:500 11px/20px 'JetBrains Mono',monospace;text-align:center">3</span>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:0">Three explainer cards, not six. Everything below this is a link to <span style="font:400 11.5px 'JetBrains Mono',monospace">/how-it-works</span> — P1 will read the method page, and it must exist <em>before</em> signup (US-03).</p>
+        </div>
+        <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">OPEN QUESTION</div>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:6px 0 0">Does the hero need social proof above the fold, or does that dilute the field? Currently: no. Revisit with real conversion data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:44px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:10px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Frame 02 · marketing</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">Free readout — the blur is the product tour</h2>
+      </div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/scan/[token] · F01 F02 · US-02 US-04</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1.9fr 1fr;gap:20px;margin-top:16px;align-items:start">
+      <div style="background:#FFFFFF;border:1px solid #BBBBBB;border-radius:6px;overflow:hidden">
+        <div style="height:26px;background:#F2F2F2;border-bottom:1px solid #DDDDDD;display:flex;align-items:center;gap:6px;padding:0 10px"><span style="width:7px;height:7px;border-radius:50%;background:#CCC"></span><span style="width:7px;height:7px;border-radius:50%;background:#CCC"></span><span style="width:7px;height:7px;border-radius:50%;background:#CCC"></span><span style="flex:1;height:12px;background:#E8E8E8;border-radius:2px;margin-left:8px"></span></div>
+        <div style="padding:24px 24px 20px;border-bottom:1px solid #EEEEEE;position:relative">
+          <span style="position:absolute;left:6px;top:20px;width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">1</span>
+          <div style="display:flex;flex-direction:column;gap:7px;max-width:70%">
+            <div style="width:100%;height:15px;background:#555555;border-radius:2px"></div>
+            <div style="width:76%;height:15px;background:#555555;border-radius:2px"></div>
+          </div>
+          <div style="display:flex;gap:26px;margin-top:20px;align-items:flex-end;position:relative">
+            <span style="position:absolute;left:-18px;top:16px;width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">2</span>
+            <div style="display:flex;flex-direction:column;gap:5px"><div style="width:60px;height:5px;background:#CCCCCC;border-radius:2px"></div><div style="width:96px;height:34px;background:#444444;border-radius:3px"></div></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+              <div style="width:52px;height:5px;background:#CCCCCC;border-radius:2px"></div>
+              <div style="height:16px;display:flex;border-radius:2px;overflow:hidden"><span style="flex:5;background:#555"></span><span style="flex:2;background:#888"></span><span style="flex:1;background:#B0B0B0"></span><span style="flex:1.4;background:repeating-linear-gradient(45deg,#CCC 0 4px,#EEE 4px 8px)"></span></div>
+              <div style="display:flex;gap:12px">
+                <div style="width:56px;height:5px;background:#E0E0E0;border-radius:2px"></div><div style="width:44px;height:5px;background:#E0E0E0;border-radius:2px"></div><div style="width:50px;height:5px;background:#E0E0E0;border-radius:2px"></div><div style="width:62px;height:5px;background:#E0E0E0;border-radius:2px"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:18px 24px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="width:120px;height:9px;background:#888888;border-radius:2px"></div>
+            <div style="display:flex;gap:8px"><div style="width:48px;height:16px;border:1px solid #CCCCCC;border-radius:999px"></div><div style="width:56px;height:16px;border:1px solid #CCCCCC;border-radius:999px"></div></div>
+          </div>
+          <div style="border:1px solid #DDDDDD;border-radius:4px;overflow:hidden">
+            <div style="display:grid;grid-template-columns:2.4fr 1fr 1fr 1.2fr;gap:10px;padding:9px 12px;background:#F5F5F5;border-bottom:1px solid #E6E6E6"><div style="height:5px;background:#BBBBBB;border-radius:2px"></div><div style="height:5px;background:#BBBBBB;border-radius:2px"></div><div style="height:5px;background:#BBBBBB;border-radius:2px"></div><div style="height:5px;background:#BBBBBB;border-radius:2px"></div></div>
+            <div style="display:grid;grid-template-columns:2.4fr 1fr 1fr 1.2fr;gap:10px;padding:11px 12px;border-bottom:1px solid #F0F0F0"><div style="height:7px;background:#DDDDDD;border-radius:2px"></div><div style="height:7px;width:60%;background:#666;border-radius:2px"></div><div style="height:7px;width:44%;background:#DDDDDD;border-radius:2px"></div><div style="height:7px;width:78%;background:#DDDDDD;border-radius:2px"></div></div>
+            <div style="display:grid;grid-template-columns:2.4fr 1fr 1fr 1.2fr;gap:10px;padding:11px 12px;border-bottom:1px solid #F0F0F0;background:#FAFAFA"><div style="height:7px;background:#DDDDDD;border-radius:2px"></div><div style="height:7px;width:52%;background:#666;border-radius:2px"></div><div style="height:7px;width:40%;background:#DDDDDD;border-radius:2px"></div><div style="height:7px;width:66%;background:#DDDDDD;border-radius:2px"></div></div>
+            <div style="display:grid;grid-template-columns:2.4fr 1fr 1fr 1.2fr;gap:10px;padding:11px 12px"><div style="height:7px;background:#DDDDDD;border-radius:2px"></div><div style="height:7px;width:56%;background:#666;border-radius:2px"></div><div style="height:7px;width:36%;background:#DDDDDD;border-radius:2px"></div><div style="height:7px;width:72%;background:#DDDDDD;border-radius:2px"></div></div>
+          </div>
+          <div style="border:1px dashed #999999;border-radius:4px;padding:16px;background:repeating-linear-gradient(45deg,#EDEDED 0 6px,#F7F7F7 6px 12px);position:relative;margin-top:6px">
+            <span style="position:absolute;left:-30px;top:16px;width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">3</span>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+              <div style="flex:1;display:flex;flex-direction:column;gap:8px;filter:blur(2.4px);opacity:.75">
+                <div style="width:36%;height:9px;background:#999999;border-radius:2px"></div>
+                <div style="display:flex;gap:10px;align-items:center"><div style="width:90px;height:7px;background:#BBBBBB;border-radius:2px"></div><div style="width:40px;height:7px;background:#999999;border-radius:2px"></div></div>
+                <div style="display:flex;gap:10px;align-items:center"><div style="width:104px;height:7px;background:#BBBBBB;border-radius:2px"></div><div style="width:36px;height:7px;background:#999999;border-radius:2px"></div></div>
+                <div style="display:flex;gap:10px;align-items:center"><div style="width:78px;height:7px;background:#BBBBBB;border-radius:2px"></div><div style="width:44px;height:7px;background:#999999;border-radius:2px"></div></div>
+              </div>
+              <div style="flex:none;width:190px;background:#FFFFFF;border:1px solid #CCCCCC;border-radius:4px;padding:12px;display:flex;flex-direction:column;gap:8px">
+                <div style="width:60%;height:9px;background:#777777;border-radius:2px"></div>
+                <div style="width:100%;height:6px;background:#E4E4E4;border-radius:2px"></div>
+                <div style="width:84%;height:6px;background:#E4E4E4;border-radius:2px"></div>
+                <div style="height:30px;border:1px solid #999999;border-radius:3px;margin-top:2px"></div>
+                <div style="height:30px;background:#333333;border-radius:3px"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;display:flex;gap:10px">
+          <span style="flex:none;width:20px;height:20px;border-radius:50%;background:#141B26;color:#FFF;font:500 11px/20px 'JetBrains Mono',monospace;text-align:center">1</span>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:0">The verdict sentence occupies the top two lines and arrives <em>before</em> the numbers finish streaming. It is the only thing P2 reads.</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;display:flex;gap:10px">
+          <span style="flex:none;width:20px;height:20px;border-radius:50%;background:#141B26;color:#FFF;font:500 11px/20px 'JetBrains Mono',monospace;text-align:center">2</span>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:0">Score with its band, then the four-segment cause bar. Note segment four is present and textured even in the wireframe — it is structural, not decorative (board 03).</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;display:flex;gap:10px">
+          <span style="flex:none;width:20px;height:20px;border-radius:50%;background:#141B26;color:#FFF;font:500 11px/20px 'JetBrains Mono',monospace;text-align:center">3</span>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:0">The locked block: dashed border, <em>real</em> data blurred behind it, count stated, and the claim form sitting inside the same block. This single component is the entire conversion mechanism (US-04, US-38).</p>
+        </div>
+        <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">DELIBERATE OMISSION</div>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:6px 0 0">No trend chart. With one scan there is no series, and drawing an empty axis would imply we withheld data we never had.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:44px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:10px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Frames 03–05 · auth &amp; onboarding</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">Three narrow frames, one purpose each</h2>
+      </div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">F03 F04 F06 F07 F08 · US-07 US-11 US-13 US-14</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;align-items:start">
+
+      <div>
+        <div style="background:#FFFFFF;border:1px solid #BBBBBB;border-radius:6px;overflow:hidden">
+          <div style="height:22px;background:#F2F2F2;border-bottom:1px solid #DDDDDD"></div>
+          <div style="padding:36px 26px;display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div style="width:54px;height:11px;background:#666666;border-radius:2px"></div>
+            <div style="width:82%;height:13px;background:#555555;border-radius:2px;margin-top:8px"></div>
+            <div style="width:64%;height:7px;background:#E0E0E0;border-radius:2px"></div>
+            <div style="width:100%;display:flex;flex-direction:column;gap:9px;margin-top:12px">
+              <div style="height:5px;width:42px;background:#CCCCCC;border-radius:2px"></div>
+              <div style="height:52px;border:2px solid #666666;border-radius:4px;display:flex;align-items:center;justify-content:center;gap:7px">
+                <span style="width:16px;height:22px;background:#DDDDDD;border-radius:2px"></span><span style="width:16px;height:22px;background:#DDDDDD;border-radius:2px"></span><span style="width:16px;height:22px;background:#DDDDDD;border-radius:2px"></span><span style="width:8px"></span><span style="width:16px;height:22px;background:#EEEEEE;border-radius:2px"></span><span style="width:16px;height:22px;background:#EEEEEE;border-radius:2px"></span><span style="width:16px;height:22px;background:#EEEEEE;border-radius:2px"></span>
+              </div>
+              <div style="height:36px;background:#333333;border-radius:4px"></div>
+              <div style="display:flex;justify-content:space-between;margin-top:4px"><div style="width:74px;height:6px;background:#E4E4E4;border-radius:2px"></div><div style="width:56px;height:6px;background:#E4E4E4;border-radius:2px"></div></div>
+            </div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;margin-top:10px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">03 · /CHECK-EMAIL</div>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">Six boxes, focused on arrival, paste-friendly, auto-submitting on the sixth character. Below: resend with a visible cooldown, and "wrong address?". This screen exists because the link alone loses P2 on mobile.</p>
+        </div>
+      </div>
+
+      <div>
+        <div style="background:#FFFFFF;border:1px solid #BBBBBB;border-radius:6px;overflow:hidden">
+          <div style="height:22px;background:#F2F2F2;border-bottom:1px solid #DDDDDD"></div>
+          <div style="padding:16px 22px 30px">
+            <div style="display:flex;gap:6px;align-items:center">
+              <span style="flex:1;height:4px;background:#444444;border-radius:2px"></span><span style="flex:1;height:4px;background:#DDDDDD;border-radius:2px"></span><span style="flex:1;height:4px;background:#DDDDDD;border-radius:2px"></span>
+            </div>
+            <div style="width:64px;height:5px;background:#CCCCCC;border-radius:2px;margin-top:10px"></div>
+            <div style="width:76%;height:13px;background:#555555;border-radius:2px;margin-top:14px"></div>
+            <div style="width:100%;height:7px;background:#E0E0E0;border-radius:2px;margin-top:9px"></div>
+            <div style="width:84%;height:7px;background:#E0E0E0;border-radius:2px;margin-top:5px"></div>
+            <div style="height:40px;border:2px solid #666666;border-radius:4px;margin-top:16px;display:flex;align-items:center;padding:0 11px"><div style="width:96px;height:7px;background:#DDDDDD;border-radius:2px"></div></div>
+            <div style="display:flex;flex-direction:column;gap:7px;margin-top:16px">
+              <div style="width:56px;height:5px;background:#CCCCCC;border-radius:2px"></div>
+              <div style="border:1px solid #DDDDDD;border-radius:4px;padding:10px;display:flex;gap:9px;align-items:center"><span style="width:13px;height:13px;border:2px solid #666;border-radius:50%"></span><div style="flex:1;height:7px;background:#DDDDDD;border-radius:2px"></div></div>
+              <div style="border:1px solid #EEEEEE;border-radius:4px;padding:10px;display:flex;gap:9px;align-items:center"><span style="width:13px;height:13px;border:2px solid #CCC;border-radius:50%"></span><div style="flex:1;height:7px;background:#E8E8E8;border-radius:2px"></div></div>
+              <div style="border:1px solid #EEEEEE;border-radius:4px;padding:10px;display:flex;gap:9px;align-items:center"><span style="width:13px;height:13px;border:2px solid #CCC;border-radius:50%"></span><div style="flex:1;height:7px;background:#E8E8E8;border-radius:2px"></div></div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:18px"><div style="flex:1;height:36px;background:#333333;border-radius:4px"></div><div style="width:76px;height:36px;border:1px solid #999999;border-radius:4px"></div></div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;margin-top:10px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">04 · /ONBOARDING/DOMAIN</div>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">A 3-segment progress rail, never a percentage. Three radio-selected proof methods so nobody is blocked by the one they lack. Coming from a free scan, this frame is skipped entirely with the field pre-verified.</p>
+        </div>
+      </div>
+
+      <div>
+        <div style="background:#FFFFFF;border:1px solid #BBBBBB;border-radius:6px;overflow:hidden">
+          <div style="height:22px;background:#F2F2F2;border-bottom:1px solid #DDDDDD"></div>
+          <div style="padding:16px 22px 24px">
+            <div style="display:flex;gap:6px;align-items:center"><span style="flex:1;height:4px;background:#444444;border-radius:2px"></span><span style="flex:1;height:4px;background:#444444;border-radius:2px"></span><span style="flex:1;height:4px;background:#DDDDDD;border-radius:2px"></span></div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:14px"><div style="width:56%;height:13px;background:#555555;border-radius:2px"></div><div style="width:52px;height:16px;border:1px solid #CCCCCC;border-radius:999px"></div></div>
+            <div style="border:1px solid #DDDDDD;border-radius:4px;margin-top:14px;max-height:186px;overflow:hidden">
+              <div style="display:flex;justify-content:space-between;padding:8px 10px;background:#F5F5F5;border-bottom:1px solid #E6E6E6"><div style="width:56px;height:5px;background:#BBBBBB;border-radius:2px"></div><div style="width:38px;height:5px;background:#BBBBBB;border-radius:2px"></div></div>
+              <div style="display:flex;align-items:center;gap:8px;padding:9px 10px;border-bottom:1px solid #F0F0F0"><div style="flex:1;height:7px;background:#DDDDDD;border-radius:2px"></div><div style="width:34px;height:12px;border:1px solid #DDD;border-radius:999px"></div><span style="width:9px;height:9px;background:#E0E0E0"></span></div>
+              <div style="display:flex;align-items:center;gap:8px;padding:9px 10px;border-bottom:1px solid #F0F0F0"><div style="flex:1;height:7px;background:#DDDDDD;border-radius:2px"></div><div style="width:44px;height:12px;border:1px solid #DDD;border-radius:999px"></div><span style="width:9px;height:9px;background:#E0E0E0"></span></div>
+              <div style="display:flex;align-items:center;gap:8px;padding:9px 10px;border-bottom:1px solid #F0F0F0"><div style="flex:1;height:7px;background:#DDDDDD;border-radius:2px"></div><div style="width:34px;height:12px;border:1px solid #DDD;border-radius:999px"></div><span style="width:9px;height:9px;background:#E0E0E0"></span></div>
+              <div style="display:flex;align-items:center;gap:8px;padding:9px 10px;border-bottom:1px solid #F0F0F0"><div style="flex:1;height:7px;background:#DDDDDD;border-radius:2px"></div><div style="width:48px;height:12px;border:1px solid #DDD;border-radius:999px"></div><span style="width:9px;height:9px;background:#E0E0E0"></span></div>
+              <div style="display:flex;align-items:center;gap:8px;padding:9px 10px;border-bottom:1px solid #F0F0F0"><div style="flex:1;height:7px;background:#DDDDDD;border-radius:2px"></div><div style="width:34px;height:12px;border:1px solid #DDD;border-radius:999px"></div><span style="width:9px;height:9px;background:#E0E0E0"></span></div>
+              <div style="display:flex;align-items:center;gap:8px;padding:9px 10px"><div style="flex:1;height:7px;background:#EAEAEA;border-radius:2px"></div><div style="width:40px;height:12px;border:1px solid #EEE;border-radius:999px"></div><span style="width:9px;height:9px;background:#EEEEEE"></span></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><div style="width:120px;height:6px;background:#E0E0E0;border-radius:2px"></div><div style="width:70px;height:6px;background:#E0E0E0;border-radius:2px"></div></div>
+            <div style="display:flex;gap:8px;margin-top:16px"><div style="flex:1;height:36px;background:#333333;border-radius:4px"></div><div style="flex:1;height:36px;background:#666666;border-radius:4px"></div></div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;margin-top:10px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">05 · /ONBOARDING/QUERIES</div>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">Pre-populated, scrollable, each row with a cluster chip and a delete. Counter against the plan limit bottom-left. Note the two buttons at the bottom are <em>both</em> filled — the skip is a real button, per board 05 and US-14.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:44px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:10px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Frame 06 · the app shell</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">Overview — sentence, score, causes, trend. In that order.</h2>
+      </div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/overview · F09 · US-16 US-17 US-18</div>
+    </div>
+    <div style="display:grid;grid-template-columns:2.1fr 1fr;gap:20px;margin-top:16px;align-items:start">
+      <div style="background:#FFFFFF;border:1px solid #BBBBBB;border-radius:6px;overflow:hidden;display:flex">
+        <div style="flex:none;width:150px;background:#3A3A3A;padding:14px 12px;display:flex;flex-direction:column;gap:6px;position:relative">
+          <div style="width:62px;height:11px;background:#777777;border-radius:2px;margin-bottom:10px"></div>
+          <div style="height:26px;background:#555555;border-radius:3px;display:flex;align-items:center;padding:0 9px"><div style="width:56px;height:6px;background:#AAAAAA;border-radius:2px"></div></div>
+          <div style="height:26px;display:flex;align-items:center;padding:0 9px"><div style="width:48px;height:6px;background:#777777;border-radius:2px"></div></div>
+          <div style="height:26px;display:flex;align-items:center;padding:0 9px"><div style="width:36px;height:6px;background:#777777;border-radius:2px"></div></div>
+          <div style="height:26px;display:flex;align-items:center;padding:0 9px"><div style="width:62px;height:6px;background:#777777;border-radius:2px"></div></div>
+          <div style="height:26px;display:flex;align-items:center;padding:0 9px"><div style="width:44px;height:6px;background:#777777;border-radius:2px"></div></div>
+          <div style="flex:1"></div>
+          <div style="height:1px;background:#555555;margin:8px 0"></div>
+          <div style="height:26px;display:flex;align-items:center;padding:0 9px"><div style="width:42px;height:6px;background:#777777;border-radius:2px"></div></div>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="height:40px;border-bottom:1px solid #EEEEEE;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:relative">
+            <span style="position:absolute;left:-1px;top:11px;width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">1</span>
+            <div style="display:flex;gap:8px;align-items:center;margin-left:24px"><div style="width:100px;height:22px;border:1px solid #CCCCCC;border-radius:3px"></div><div style="width:78px;height:22px;border:1px solid #CCCCCC;border-radius:3px"></div></div>
+            <div style="display:flex;gap:8px;align-items:center"><div style="width:60px;height:20px;border:1px solid #CCCCCC;border-radius:3px"></div><span style="width:22px;height:22px;border-radius:50%;background:#DDDDDD"></span></div>
+          </div>
+          <div style="padding:22px 18px 18px;position:relative">
+            <span style="position:absolute;left:-1px;top:20px;width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">2</span>
+            <div style="margin-left:24px;display:flex;flex-direction:column;gap:6px">
+              <div style="width:88%;height:15px;background:#555555;border-radius:2px"></div>
+              <div style="width:58%;height:15px;background:#555555;border-radius:2px"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:150px 1fr;gap:18px;margin-top:20px;margin-left:24px;position:relative">
+              <span style="position:absolute;left:-24px;top:20px;width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">3</span>
+              <div style="border:1px solid #DDDDDD;border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+                <div style="width:52px;height:5px;background:#CCCCCC;border-radius:2px"></div>
+                <div style="width:88px;height:38px;background:#444444;border-radius:3px"></div>
+                <div style="width:62px;height:7px;background:#DDDDDD;border-radius:2px"></div>
+                <div style="width:70px;height:6px;background:#E8E8E8;border-radius:2px"></div>
+              </div>
+              <div style="border:1px solid #DDDDDD;border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:9px">
+                <div style="width:96px;height:5px;background:#CCCCCC;border-radius:2px"></div>
+                <div style="height:22px;display:flex;border-radius:2px;overflow:hidden"><span style="flex:5;background:#555"></span><span style="flex:2.2;background:#888"></span><span style="flex:1.2;background:#B0B0B0"></span><span style="flex:1.6;background:repeating-linear-gradient(45deg,#CCC 0 4px,#EEE 4px 8px)"></span></div>
+                <div style="display:flex;gap:14px;flex-wrap:wrap">
+                  <div style="display:flex;gap:5px;align-items:center"><span style="width:8px;height:8px;background:#555"></span><span style="width:52px;height:5px;background:#E0E0E0;border-radius:2px"></span></div>
+                  <div style="display:flex;gap:5px;align-items:center"><span style="width:8px;height:8px;background:#888"></span><span style="width:46px;height:5px;background:#E0E0E0;border-radius:2px"></span></div>
+                  <div style="display:flex;gap:5px;align-items:center"><span style="width:8px;height:8px;background:#B0B0B0"></span><span style="width:50px;height:5px;background:#E0E0E0;border-radius:2px"></span></div>
+                  <div style="display:flex;gap:5px;align-items:center"><span style="width:8px;height:8px;background:repeating-linear-gradient(45deg,#CCC 0 3px,#EEE 3px 6px)"></span><span style="width:64px;height:5px;background:#E0E0E0;border-radius:2px"></span></div>
+                </div>
+              </div>
+            </div>
+            <div style="border:1px solid #DDDDDD;border-radius:4px;padding:14px;margin-top:14px;margin-left:24px;position:relative">
+              <span style="position:absolute;left:-24px;top:14px;width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">4</span>
+              <div style="display:flex;justify-content:space-between"><div style="width:80px;height:5px;background:#CCCCCC;border-radius:2px"></div><div style="width:110px;height:14px;border:1px solid #DDDDDD;border-radius:999px"></div></div>
+              <div style="height:92px;margin-top:12px;position:relative;border-bottom:1px solid #E6E6E6;border-left:1px solid #E6E6E6">
+                <div style="position:absolute;left:0;right:0;bottom:22px;height:30px;background:#EFEFEF"></div>
+                <svg viewBox="0 0 400 92" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%"><polyline points="10,66 70,58 130,62 190,48 250,52 310,36 370,30" fill="none" stroke="#666666" stroke-width="2"></polyline></svg>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:7px"><div style="width:26px;height:5px;background:#E8E8E8"></div><div style="width:26px;height:5px;background:#E8E8E8"></div><div style="width:26px;height:5px;background:#E8E8E8"></div><div style="width:26px;height:5px;background:#E8E8E8"></div><div style="width:26px;height:5px;background:#E8E8E8"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;display:flex;gap:10px">
+          <span style="flex:none;width:20px;height:20px;border-radius:50%;background:#141B26;color:#FFF;font:500 11px/20px 'JetBrains Mono',monospace;text-align:center">1</span>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:0">Topbar carries the two scope selectors — workspace and domain — because switching them re-scopes everything. For P3 the left one is used 14 times an hour, so it is never buried in settings (US-32).</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;display:flex;gap:10px">
+          <span style="flex:none;width:20px;height:20px;border-radius:50%;background:#141B26;color:#FFF;font:500 11px/20px 'JetBrains Mono',monospace;text-align:center">2</span>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:0">The verdict sentence gets the full column width and the largest type on the page. Nothing sits above it — not a KPI strip, not a welcome banner.</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;display:flex;gap:10px">
+          <span style="flex:none;width:20px;height:20px;border-radius:50%;background:#141B26;color:#FFF;font:500 11px/20px 'JetBrains Mono',monospace;text-align:center">3</span>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:0">Score unit (with band and delta) beside the cause bar. Every segment has a legend entry, and segment four is striped so the chart survives greyscale — which is exactly what this wireframe proves.</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;display:flex;gap:10px">
+          <span style="flex:none;width:20px;height:20px;border-radius:50%;background:#141B26;color:#FFF;font:500 11px/20px 'JetBrains Mono',monospace;text-align:center">4</span>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:0">Trend last, with the confidence band drawn as a filled region behind the line. The band is not an optional overlay — a line without it would fail US-18.</p>
+        </div>
+        <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">FOUR STATES OF THIS FRAME</div>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:6px 0 0"><strong>Scanning:</strong> same layout, sentence reads "measuring…", skeleton in the score slot. <strong>First run:</strong> no trend card, replaced by "your series starts here". <strong>Within noise:</strong> sentence says so and no fix is surfaced. <strong>Partial failure:</strong> per-engine status strip above the score.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:44px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:10px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Frame 07 · the analyst's screen</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">Queries, with the evidence drawer open</h2>
+      </div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/queries · F09 · US-19 US-20</div>
+    </div>
+    <div style="display:grid;grid-template-columns:2.1fr 1fr;gap:20px;margin-top:16px;align-items:start">
+      <div style="background:#FFFFFF;border:1px solid #BBBBBB;border-radius:6px;overflow:hidden;display:flex;position:relative">
+        <div style="flex:none;width:120px;background:#3A3A3A;padding:12px 10px;display:flex;flex-direction:column;gap:5px">
+          <div style="width:52px;height:9px;background:#777777;border-radius:2px;margin-bottom:8px"></div>
+          <div style="height:22px;display:flex;align-items:center;padding:0 8px"><div style="width:46px;height:5px;background:#777777;border-radius:2px"></div></div>
+          <div style="height:22px;background:#555555;border-radius:3px;display:flex;align-items:center;padding:0 8px"><div style="width:40px;height:5px;background:#AAAAAA;border-radius:2px"></div></div>
+          <div style="height:22px;display:flex;align-items:center;padding:0 8px"><div style="width:30px;height:5px;background:#777777;border-radius:2px"></div></div>
+          <div style="height:22px;display:flex;align-items:center;padding:0 8px"><div style="width:52px;height:5px;background:#777777;border-radius:2px"></div></div>
+          <div style="height:22px;display:flex;align-items:center;padding:0 8px"><div style="width:38px;height:5px;background:#777777;border-radius:2px"></div></div>
+        </div>
+        <div style="flex:1;min-width:0;padding:14px 16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;position:relative">
+            <span style="position:absolute;left:-13px;top:3px;width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">1</span>
+            <div style="display:flex;gap:6px;margin-left:14px;flex-wrap:wrap">
+              <div style="width:70px;height:20px;background:#444444;border-radius:999px"></div>
+              <div style="width:58px;height:20px;border:1px solid #CCCCCC;border-radius:999px"></div>
+              <div style="width:66px;height:20px;border:1px solid #CCCCCC;border-radius:999px"></div>
+              <div style="width:44px;height:20px;border:1px solid #CCCCCC;border-radius:999px"></div>
+            </div>
+            <div style="display:flex;gap:6px"><div style="width:74px;height:20px;border:1px solid #999999;border-radius:3px"></div><div style="width:52px;height:20px;border:1px solid #999999;border-radius:3px"></div></div>
+          </div>
+          <div style="border:1px solid #DDDDDD;border-radius:4px;margin-top:12px;overflow:hidden">
+            <div style="display:grid;grid-template-columns:2.6fr .9fr .9fr 1.3fr .7fr;gap:9px;padding:8px 11px;background:#F5F5F5;border-bottom:1px solid #E6E6E6"><div style="height:5px;background:#BBBBBB;border-radius:2px"></div><div style="height:5px;background:#BBBBBB;border-radius:2px"></div><div style="height:5px;background:#BBBBBB;border-radius:2px"></div><div style="height:5px;background:#BBBBBB;border-radius:2px"></div><div style="height:5px;background:#BBBBBB;border-radius:2px"></div></div>
+            <div style="display:grid;grid-template-columns:2.6fr .9fr .9fr 1.3fr .7fr;gap:9px;padding:10px 11px;border-bottom:1px solid #F0F0F0;align-items:center"><div style="height:7px;background:#DDDDDD;border-radius:2px"></div><div style="height:7px;width:70%;background:#666;border-radius:2px"></div><div style="height:7px;width:56%;background:#DDDDDD;border-radius:2px"></div><div style="height:13px;width:88%;background:#EDEDED;border-radius:999px"></div><div style="height:7px;width:50%;background:#DDDDDD;border-radius:2px"></div></div>
+            <div style="border:2px solid #444444;border-bottom:1px solid #F0F0F0;background:#FAFAFA;position:relative">
+              <span style="position:absolute;left:-13px;top:9px;width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">2</span>
+              <div style="display:grid;grid-template-columns:2.6fr .9fr .9fr 1.3fr .7fr;gap:9px;padding:10px 11px;align-items:center"><div style="height:7px;background:#999999;border-radius:2px"></div><div style="height:7px;width:64%;background:#444;border-radius:2px"></div><div style="height:7px;width:52%;background:#BBBBBB;border-radius:2px"></div><div style="height:13px;width:88%;background:#DEDEDE;border-radius:999px"></div><div style="height:7px;width:50%;background:#BBBBBB;border-radius:2px"></div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:2.6fr .9fr .9fr 1.3fr .7fr;gap:9px;padding:10px 11px;border-bottom:1px solid #F0F0F0;align-items:center"><div style="height:7px;background:#DDDDDD;border-radius:2px"></div><div style="height:7px;width:58%;background:#666;border-radius:2px"></div><div style="height:7px;width:44%;background:#DDDDDD;border-radius:2px"></div><div style="height:13px;width:88%;background:#EDEDED;border-radius:999px"></div><div style="height:7px;width:50%;background:#DDDDDD;border-radius:2px"></div></div>
+            <div style="display:grid;grid-template-columns:2.6fr .9fr .9fr 1.3fr .7fr;gap:9px;padding:10px 11px;border-bottom:1px solid #F0F0F0;align-items:center"><div style="height:7px;background:#DDDDDD;border-radius:2px"></div><div style="height:7px;width:74%;background:#666;border-radius:2px"></div><div style="height:7px;width:50%;background:#DDDDDD;border-radius:2px"></div><div style="height:13px;width:88%;background:repeating-linear-gradient(45deg,#DDD 0 4px,#F2F2F2 4px 8px);border-radius:999px"></div><div style="height:7px;width:50%;background:#DDDDDD;border-radius:2px"></div></div>
+            <div style="display:grid;grid-template-columns:2.6fr .9fr .9fr 1.3fr .7fr;gap:9px;padding:10px 11px;align-items:center"><div style="height:7px;background:#DDDDDD;border-radius:2px"></div><div style="height:7px;width:62%;background:#666;border-radius:2px"></div><div style="height:7px;width:48%;background:#DDDDDD;border-radius:2px"></div><div style="height:13px;width:88%;background:#EDEDED;border-radius:999px"></div><div style="height:7px;width:50%;background:#DDDDDD;border-radius:2px"></div></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><div style="width:110px;height:6px;background:#E4E4E4;border-radius:2px"></div><div style="display:flex;gap:5px"><span style="width:20px;height:16px;border:1px solid #DDD;border-radius:2px"></span><span style="width:20px;height:16px;border:1px solid #DDD;border-radius:2px"></span><span style="width:20px;height:16px;border:1px solid #DDD;border-radius:2px"></span></div></div>
+        </div>
+        <div style="flex:none;width:220px;border-left:2px solid #444444;background:#FFFFFF;padding:14px;position:relative">
+          <span style="position:absolute;left:-13px;top:12px;width:18px;height:18px;border-radius:50%;background:#333;color:#FFF;font:500 10px/18px 'JetBrains Mono',monospace;text-align:center">3</span>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="width:70%;height:11px;background:#666666;border-radius:2px"></div><span style="width:16px;height:16px;border:1px solid #CCC;border-radius:2px"></span></div>
+          <div style="width:52%;height:7px;background:#E0E0E0;border-radius:2px;margin-top:8px"></div>
+          <div style="display:flex;gap:8px;margin-top:14px;align-items:flex-end">
+            <div style="width:58px;height:26px;background:#444444;border-radius:3px"></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px"><div style="width:100%;height:5px;background:#DDDDDD;border-radius:2px"></div><div style="width:70%;height:5px;background:#DDDDDD;border-radius:2px"></div></div>
+          </div>
+          <div style="width:60px;height:5px;background:#CCCCCC;border-radius:2px;margin-top:16px"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px">
+            <div style="border:1px solid #DDD;border-radius:3px;padding:7px;display:flex;flex-direction:column;gap:4px"><div style="width:70%;height:5px;background:#BBB;border-radius:2px"></div><div style="width:40%;height:9px;background:#666;border-radius:2px"></div><div style="width:34px;height:8px;background:#EEE;border-radius:999px"></div></div>
+            <div style="border:1px solid #DDD;border-radius:3px;padding:7px;display:flex;flex-direction:column;gap:4px"><div style="width:60%;height:5px;background:#BBB;border-radius:2px"></div><div style="width:44%;height:9px;background:#666;border-radius:2px"></div><div style="width:34px;height:8px;border:1px dashed #BBB;border-radius:999px"></div></div>
+            <div style="border:1px solid #DDD;border-radius:3px;padding:7px;display:flex;flex-direction:column;gap:4px"><div style="width:66%;height:5px;background:#BBB;border-radius:2px"></div><div style="width:38%;height:9px;background:#666;border-radius:2px"></div><div style="width:34px;height:8px;background:#EEE;border-radius:999px"></div></div>
+            <div style="border:1px solid #DDD;border-radius:3px;padding:7px;display:flex;flex-direction:column;gap:4px"><div style="width:58%;height:5px;background:#BBB;border-radius:2px"></div><div style="width:42%;height:9px;background:#666;border-radius:2px"></div><div style="width:34px;height:8px;border:1px dashed #BBB;border-radius:999px"></div></div>
+          </div>
+          <div style="width:80px;height:5px;background:#CCCCCC;border-radius:2px;margin-top:16px"></div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:8px">
+            <div style="display:flex;gap:6px;align-items:center"><span style="width:9px;height:9px;background:#666"></span><div style="flex:1;height:6px;background:#DDDDDD;border-radius:2px"></div><div style="width:22px;height:6px;background:#DDDDDD;border-radius:2px"></div></div>
+            <div style="display:flex;gap:6px;align-items:center"><span style="width:9px;height:9px;background:#999"></span><div style="flex:1;height:6px;background:#DDDDDD;border-radius:2px"></div><div style="width:22px;height:6px;background:#DDDDDD;border-radius:2px"></div></div>
+            <div style="display:flex;gap:6px;align-items:center"><span style="width:9px;height:9px;background:#BBB"></span><div style="flex:1;height:6px;background:#DDDDDD;border-radius:2px"></div><div style="width:22px;height:6px;background:#DDDDDD;border-radius:2px"></div></div>
+          </div>
+          <div style="height:30px;border:1px solid #999999;border-radius:3px;margin-top:16px"></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;display:flex;gap:10px">
+          <span style="flex:none;width:20px;height:20px;border-radius:50%;background:#141B26;color:#FFF;font:500 11px/20px 'JetBrains Mono',monospace;text-align:center">1</span>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:0">Filter chips first (cluster, cause, engine), then save-view and export. Arriving from a cause segment on Overview, the relevant chip is already active — the deep link carries the filter, not just the route.</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;display:flex;gap:10px">
+          <span style="flex:none;width:20px;height:20px;border-radius:50%;background:#141B26;color:#FFF;font:500 11px/20px 'JetBrains Mono',monospace;text-align:center">2</span>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:0">Selected row keeps a persistent outline while the drawer is open, so it is obvious what the drawer is describing. Row four's cause pill is striped: that is <em>unexplained</em>, and it is a legitimate value, not a loading state.</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;display:flex;gap:10px">
+          <span style="flex:none;width:20px;height:20px;border-radius:50%;background:#141B26;color:#FFF;font:500 11px/20px 'JetBrains Mono',monospace;text-align:center">3</span>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:0">The drawer: rate over runs, the engine grid with SURFACE / PROXY marks (solid vs dashed pill here), competitor hosts with counts, then a link to the related fix. It is a focus-trapped dialog that returns focus to the row on close (US-41).</p>
+        </div>
+        <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">WHY A DRAWER, NOT A PAGE</div>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:6px 0 0">P1 opens six to ten of these per session. A route per query would mean six to ten back-navigations, each losing her filter and scroll position. The drawer keeps the app two levels deep, permanently.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:44px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:10px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Frames 08–09 · act &amp; compare</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">Fix queue, and the competitor pane at Starter tier</h2>
+      </div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/fixes /competitors · F10 F11 · US-22 US-23 US-24 US-21</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px;align-items:start">
+
+      <div>
+        <div style="background:#FFFFFF;border:1px solid #BBBBBB;border-radius:6px;overflow:hidden;padding:16px 18px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="width:110px;height:13px;background:#555555;border-radius:2px"></div>
+            <div style="display:flex;gap:6px"><div style="width:56px;height:20px;background:#444444;border-radius:999px"></div><div style="width:52px;height:20px;border:1px solid #CCC;border-radius:999px"></div><div style="width:62px;height:20px;border:1px solid #CCC;border-radius:999px"></div></div>
+          </div>
+          <div style="border:2px solid #666666;border-radius:4px;padding:14px;margin-top:14px">
+            <div style="display:flex;justify-content:space-between;gap:12px">
+              <div style="flex:1">
+                <div style="display:flex;gap:7px;align-items:center"><div style="width:44px;height:14px;background:#DDDDDD;border-radius:999px"></div><div style="width:64px;height:14px;border:1px solid #CCC;border-radius:999px"></div></div>
+                <div style="width:82%;height:12px;background:#555555;border-radius:2px;margin-top:10px"></div>
+                <div style="width:56%;height:7px;background:#E0E0E0;border-radius:2px;margin-top:8px"></div>
+              </div>
+              <div style="flex:none;width:92px;text-align:right;display:flex;flex-direction:column;gap:5px;align-items:flex-end"><div style="width:46px;height:5px;background:#CCC;border-radius:2px"></div><div style="width:70px;height:22px;background:#444444;border-radius:3px"></div><div style="width:56px;height:5px;background:#DDDDDD;border-radius:2px"></div></div>
+            </div>
+            <div style="height:1px;background:#EEEEEE;margin:14px 0"></div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="width:66px;height:5px;background:#CCCCCC;border-radius:2px"></div>
+              <div style="height:26px;background:#F2F2F2;border:1px solid #E4E4E4;border-radius:3px;display:flex;align-items:center;padding:0 9px"><div style="width:60%;height:6px;background:#CFCFCF;border-radius:2px"></div></div>
+              <div style="width:78px;height:5px;background:#CCCCCC;border-radius:2px;margin-top:4px"></div>
+              <div style="width:100%;height:7px;background:#E0E0E0;border-radius:2px"></div>
+              <div style="width:88%;height:7px;background:#E0E0E0;border-radius:2px"></div>
+              <div style="display:flex;gap:5px;margin-top:4px"><div style="width:70px;height:14px;border:1px solid #DDD;border-radius:999px"></div><div style="width:56px;height:14px;border:1px solid #DDD;border-radius:999px"></div><div style="width:64px;height:14px;border:1px solid #DDD;border-radius:999px"></div><div style="width:34px;height:14px;border:1px solid #DDD;border-radius:999px"></div></div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:16px;align-items:center">
+              <div style="width:104px;height:32px;background:#333333;border-radius:4px"></div>
+              <div style="width:92px;height:32px;border:1px solid #999999;border-radius:4px"></div>
+              <div style="flex:1"></div>
+              <div style="width:58px;height:6px;background:#E4E4E4;border-radius:2px"></div>
+            </div>
+            <div style="border:1px dashed #BBBBBB;border-radius:3px;padding:9px;margin-top:12px;background:#FAFAFA"><div style="width:78%;height:6px;background:#D8D8D8;border-radius:2px"></div><div style="width:52%;height:6px;background:#D8D8D8;border-radius:2px;margin-top:5px"></div></div>
+          </div>
+          <div style="border:1px solid #DDDDDD;border-radius:4px;padding:13px;margin-top:9px;display:flex;justify-content:space-between;gap:12px;align-items:center">
+            <div style="flex:1"><div style="width:70%;height:10px;background:#888888;border-radius:2px"></div><div style="width:44%;height:6px;background:#E4E4E4;border-radius:2px;margin-top:7px"></div></div>
+            <div style="width:54px;height:18px;background:#DDDDDD;border-radius:999px"></div>
+          </div>
+          <div style="border:1px solid #DDDDDD;border-radius:4px;padding:13px;margin-top:9px;display:flex;justify-content:space-between;gap:12px;align-items:center">
+            <div style="flex:1"><div style="width:62%;height:10px;background:#888888;border-radius:2px"></div><div style="width:50%;height:6px;background:#E4E4E4;border-radius:2px;margin-top:7px"></div></div>
+            <div style="width:64px;height:18px;border:1px solid #CCC;border-radius:999px"></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:10px">
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px">
+            <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">08 · /FIXES</div>
+            <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">One card expanded, the rest collapsed to a title and a status pill — the queue is a list of one decision at a time, not a wall of options. Estimated recovery sits top-right <em>with its band</em>; effort class beneath it.</p>
+          </div>
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px">
+            <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">THE TWO CONTROLS</div>
+            <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">Filled: <em>mark shipped</em>. Outlined: <em>copy for ticket</em>. The dashed strip below them is the latency disclosure — "verification needs two scans, expect a verdict by the 9th" — visible <em>before</em> the click, not after (US-25).</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="background:#FFFFFF;border:1px solid #BBBBBB;border-radius:6px;overflow:hidden;padding:16px 18px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="width:130px;height:13px;background:#555555;border-radius:2px"></div>
+            <div style="width:64px;height:18px;background:#333333;border-radius:999px"></div>
+          </div>
+          <div style="width:70%;height:7px;background:#E0E0E0;border-radius:2px;margin-top:10px"></div>
+          <div style="border:1px dashed #999999;border-radius:4px;margin-top:14px;padding:16px;background:repeating-linear-gradient(45deg,#EDEDED 0 6px,#F7F7F7 6px 12px);position:relative">
+            <div style="filter:blur(2.8px);opacity:.72;display:flex;flex-direction:column;gap:11px">
+              <div style="display:flex;align-items:center;gap:10px"><div style="width:22px;height:9px;background:#999;border-radius:2px"></div><div style="flex:1;height:9px;background:#BBB;border-radius:2px"></div><div style="width:46px;height:9px;background:#888;border-radius:2px"></div></div>
+              <div style="display:flex;align-items:center;gap:10px"><div style="width:22px;height:9px;background:#999;border-radius:2px"></div><div style="flex:.8;height:9px;background:#BBB;border-radius:2px"></div><div style="width:46px;height:9px;background:#888;border-radius:2px"></div></div>
+              <div style="display:flex;align-items:center;gap:10px"><div style="width:22px;height:9px;background:#999;border-radius:2px"></div><div style="flex:.6;height:9px;background:#BBB;border-radius:2px"></div><div style="width:46px;height:9px;background:#888;border-radius:2px"></div></div>
+              <div style="display:flex;align-items:center;gap:10px"><div style="width:22px;height:9px;background:#999;border-radius:2px"></div><div style="flex:.45;height:9px;background:#BBB;border-radius:2px"></div><div style="width:46px;height:9px;background:#888;border-radius:2px"></div></div>
+              <div style="display:flex;align-items:center;gap:10px"><div style="width:22px;height:9px;background:#999;border-radius:2px"></div><div style="flex:.3;height:9px;background:#BBB;border-radius:2px"></div><div style="width:46px;height:9px;background:#888;border-radius:2px"></div></div>
+            </div>
+            <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:78%;background:#FFFFFF;border:1px solid #999999;border-radius:4px;padding:14px;box-shadow:0 6px 18px rgba(0,0,0,.12)">
+              <div style="display:flex;justify-content:center"><div style="width:56px;height:14px;background:#333333;border-radius:999px"></div></div>
+              <div style="width:84%;height:11px;background:#666666;border-radius:2px;margin:11px auto 0"></div>
+              <div style="width:64%;height:11px;background:#666666;border-radius:2px;margin:5px auto 0"></div>
+              <div style="width:74%;height:6px;background:#E0E0E0;border-radius:2px;margin:10px auto 0"></div>
+              <div style="height:32px;background:#333333;border-radius:4px;margin-top:13px"></div>
+              <div style="width:50%;height:6px;background:#E8E8E8;border-radius:2px;margin:9px auto 0"></div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px">
+            <div style="width:150px;height:6px;background:#E4E4E4;border-radius:2px"></div>
+            <div style="width:88px;height:6px;background:#E4E4E4;border-radius:2px"></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:10px">
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px">
+            <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">09 · /COMPETITORS AT STARTER</div>
+            <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">The most important wireframe in the set commercially. Five rows of <em>the user's real result</em> — correct bar lengths, correct counts — blurred, with the unlock card centred on top. Nothing here is fabricated; hiding the names is the only thing the gate does.</p>
+          </div>
+          <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px">
+            <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">RULE THIS FRAME ENCODES</div>
+            <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:6px 0 0">Locked ≠ hidden, and locked ≠ a marketing page. The upsell copy names the specific unlock in the user's own numbers, and after checkout they return to this exact scroll position, unblurred (US-38).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:44px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:10px;border-bottom:1px solid #C6CBD3">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Frames 10–12 · report, settings, mobile</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">The artefact, the admin, and the surface P2 actually uses</h2>
+      </div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">/reports/[id] /settings/team · digest email · F13 F15 F17</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1.15fr 1.15fr .8fr;gap:16px;margin-top:16px;align-items:start">
+
+      <div>
+        <div style="background:#FFFFFF;border:1px solid #BBBBBB;border-radius:6px;overflow:hidden">
+          <div style="height:22px;background:#F2F2F2;border-bottom:1px solid #DDDDDD"></div>
+          <div style="padding:16px 18px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="display:flex;gap:8px;align-items:center"><div style="width:26px;height:26px;border:1px solid #CCC;border-radius:3px"></div><div style="width:74px;height:9px;background:#888888;border-radius:2px"></div></div>
+              <div style="display:flex;gap:6px"><div style="width:64px;height:22px;background:#333333;border-radius:3px"></div><div style="width:46px;height:22px;border:1px solid #999;border-radius:3px"></div></div>
+            </div>
+            <div style="height:1px;background:#DDDDDD;margin:14px 0"></div>
+            <div style="width:44%;height:5px;background:#CCCCCC;border-radius:2px"></div>
+            <div style="width:80%;height:14px;background:#555555;border-radius:2px;margin-top:9px"></div>
+            <div style="width:60%;height:14px;background:#555555;border-radius:2px;margin-top:5px"></div>
+            <div style="display:flex;gap:14px;margin-top:18px;align-items:flex-end">
+              <div style="width:84px;height:34px;background:#444444;border-radius:3px"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:5px"><div style="width:90%;height:6px;background:#DDD;border-radius:2px"></div><div style="width:62%;height:6px;background:#DDD;border-radius:2px"></div></div>
+            </div>
+            <div style="border:1px solid #DDDDDD;border-radius:4px;padding:12px;margin-top:16px">
+              <div style="width:96px;height:5px;background:#CCCCCC;border-radius:2px"></div>
+              <div style="display:flex;gap:16px;margin-top:12px;align-items:flex-end">
+                <div style="flex:1;display:flex;flex-direction:column;gap:5px;align-items:center"><div style="width:100%;height:44px;background:#DEDEDE;border-radius:2px 2px 0 0"></div><div style="width:40px;height:5px;background:#E4E4E4"></div></div>
+                <div style="flex:none;width:20px;height:1px;border-top:2px dashed #999;margin-bottom:24px"></div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:5px;align-items:center"><div style="width:100%;height:84px;background:#666666;border-radius:2px 2px 0 0"></div><div style="width:40px;height:5px;background:#E4E4E4"></div></div>
+              </div>
+              <div style="width:70%;height:6px;background:#E4E4E4;border-radius:2px;margin-top:12px"></div>
+            </div>
+            <div style="height:1px;background:#EEEEEE;margin:14px 0"></div>
+            <div style="display:flex;justify-content:space-between"><div style="width:130px;height:5px;background:#DDDDDD;border-radius:2px"></div><div style="width:104px;height:5px;background:#DDDDDD;border-radius:2px"></div></div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;margin-top:10px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">10 · /REPORTS/[ID] · FIX-PROOF KIND</div>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">Agency logo top-left, download and share top-right. The before/after pair with the deploy date as a dashed divider between them is the artefact P3 sells. The footer line — period, method version, our one attribution — is not removable.</p>
+        </div>
+      </div>
+
+      <div>
+        <div style="background:#FFFFFF;border:1px solid #BBBBBB;border-radius:6px;overflow:hidden;display:flex">
+          <div style="flex:none;width:96px;background:#3A3A3A;padding:12px 9px;display:flex;flex-direction:column;gap:4px">
+            <div style="width:44px;height:8px;background:#777777;border-radius:2px;margin-bottom:6px"></div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 7px"><div style="width:38px;height:4px;background:#777;border-radius:2px"></div></div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 7px"><div style="width:30px;height:4px;background:#777;border-radius:2px"></div></div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 7px"><div style="width:44px;height:4px;background:#777;border-radius:2px"></div></div>
+            <div style="height:19px;background:#555;border-radius:3px;display:flex;align-items:center;padding:0 7px"><div style="width:34px;height:4px;background:#AAA;border-radius:2px"></div></div>
+          </div>
+          <div style="flex:1;min-width:0;padding:14px 16px">
+            <div style="display:flex;gap:5px;flex-wrap:wrap">
+              <div style="width:44px;height:17px;border-bottom:2px solid #444;display:flex;align-items:center"><div style="width:34px;height:4px;background:#666;border-radius:2px"></div></div>
+              <div style="width:38px;height:17px;display:flex;align-items:center"><div style="width:28px;height:4px;background:#CCC;border-radius:2px"></div></div>
+              <div style="width:42px;height:17px;display:flex;align-items:center"><div style="width:32px;height:4px;background:#CCC;border-radius:2px"></div></div>
+              <div style="width:36px;height:17px;display:flex;align-items:center"><div style="width:26px;height:4px;background:#CCC;border-radius:2px"></div></div>
+              <div style="width:52px;height:17px;display:flex;align-items:center"><div style="width:42px;height:4px;background:#CCC;border-radius:2px"></div></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px"><div style="width:70px;height:11px;background:#666;border-radius:2px"></div><div style="width:74px;height:24px;background:#333;border-radius:3px"></div></div>
+            <div style="border:1px solid #DDD;border-radius:4px;margin-top:12px;overflow:hidden">
+              <div style="display:grid;grid-template-columns:1.6fr .9fr .8fr .5fr;gap:8px;padding:8px 10px;background:#F5F5F5;border-bottom:1px solid #E6E6E6"><div style="height:4px;background:#BBB;border-radius:2px"></div><div style="height:4px;background:#BBB;border-radius:2px"></div><div style="height:4px;background:#BBB;border-radius:2px"></div><div></div></div>
+              <div style="display:grid;grid-template-columns:1.6fr .9fr .8fr .5fr;gap:8px;padding:9px 10px;border-bottom:1px solid #F0F0F0;align-items:center"><div style="height:6px;background:#DDD;border-radius:2px"></div><div style="height:13px;width:70%;background:#EDEDED;border-radius:999px"></div><div style="height:6px;width:60%;background:#DDD;border-radius:2px"></div><div style="height:6px;width:60%;background:#DDD;border-radius:2px"></div></div>
+              <div style="display:grid;grid-template-columns:1.6fr .9fr .8fr .5fr;gap:8px;padding:9px 10px;border-bottom:1px solid #F0F0F0;align-items:center"><div style="height:6px;background:#DDD;border-radius:2px"></div><div style="height:13px;width:60%;background:#EDEDED;border-radius:999px"></div><div style="height:6px;width:56%;background:#DDD;border-radius:2px"></div><div style="height:6px;width:60%;background:#DDD;border-radius:2px"></div></div>
+              <div style="display:grid;grid-template-columns:1.6fr .9fr .8fr .5fr;gap:8px;padding:9px 10px;border-bottom:1px solid #F0F0F0;align-items:center;background:#FAFAFA"><div style="height:6px;background:#DDD;border-radius:2px"></div><div style="height:13px;width:74%;border:1px dashed #BBB;border-radius:999px"></div><div style="height:6px;width:50%;background:#DDD;border-radius:2px"></div><div style="height:6px;width:60%;background:#DDD;border-radius:2px"></div></div>
+              <div style="display:grid;grid-template-columns:1.6fr .9fr .8fr .5fr;gap:8px;padding:9px 10px;align-items:center;background:#FAFAFA"><div style="height:6px;background:#DDD;border-radius:2px"></div><div style="height:13px;width:66%;border:1px dashed #BBB;border-radius:999px"></div><div style="height:6px;width:44%;background:#DDD;border-radius:2px"></div><div style="height:6px;width:60%;background:#DDD;border-radius:2px"></div></div>
+            </div>
+            <div style="border:1px solid #DDD;border-radius:4px;padding:11px;margin-top:12px;background:#FAFAFA">
+              <div style="width:88px;height:4px;background:#BBB;border-radius:2px"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:9px"><div style="flex:1"><div style="width:60%;height:6px;background:#DDD;border-radius:2px"></div><div style="width:80%;height:5px;background:#E8E8E8;border-radius:2px;margin-top:5px"></div></div><div style="display:flex;gap:5px"><div style="width:44px;height:18px;background:#333;border-radius:3px"></div><div style="width:44px;height:18px;border:1px solid #999;border-radius:3px"></div></div></div>
+            </div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;margin-top:10px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">11 · /SETTINGS/TEAM</div>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">Tabs across the top for the six panes. Members list with role, then a distinct grey block below for <em>pending</em> — invites shown as dashed pills, join requests with approve / decline. Access is one screen, never a hunt (US-34).</p>
+        </div>
+      </div>
+
+      <div>
+        <div style="background:#FFFFFF;border:1px solid #BBBBBB;border-radius:22px;overflow:hidden;padding:8px">
+          <div style="height:16px;display:flex;align-items:center;justify-content:center"><div style="width:44px;height:5px;background:#DDD;border-radius:999px"></div></div>
+          <div style="border:1px solid #EEEEEE;border-radius:14px;overflow:hidden">
+            <div style="padding:11px 12px;border-bottom:1px solid #F0F0F0;background:#FAFAFA;display:flex;gap:8px;align-items:center">
+              <div style="width:22px;height:22px;border-radius:50%;background:#DDDDDD"></div>
+              <div style="flex:1"><div style="width:76%;height:6px;background:#BBB;border-radius:2px"></div><div style="width:50%;height:5px;background:#E4E4E4;border-radius:2px;margin-top:4px"></div></div>
+            </div>
+            <div style="padding:14px 12px">
+              <div style="width:56px;height:4px;background:#CCC;border-radius:2px"></div>
+              <div style="width:100%;height:10px;background:#555;border-radius:2px;margin-top:10px"></div>
+              <div style="width:82%;height:10px;background:#555;border-radius:2px;margin-top:4px"></div>
+              <div style="display:flex;gap:9px;align-items:flex-end;margin-top:14px">
+                <div style="width:52px;height:26px;background:#444;border-radius:3px"></div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:4px"><div style="width:90%;height:5px;background:#DDD;border-radius:2px"></div><div style="width:60%;height:5px;background:#DDD;border-radius:2px"></div></div>
+              </div>
+              <div style="height:14px;display:flex;border-radius:2px;overflow:hidden;margin-top:14px"><span style="flex:5;background:#555"></span><span style="flex:2;background:#888"></span><span style="flex:1;background:#B0B0B0"></span><span style="flex:1.4;background:repeating-linear-gradient(45deg,#CCC 0 4px,#EEE 4px 8px)"></span></div>
+              <div style="border:1px solid #DDD;border-radius:4px;padding:11px;margin-top:16px">
+                <div style="width:64px;height:4px;background:#CCC;border-radius:2px"></div>
+                <div style="width:96%;height:8px;background:#888;border-radius:2px;margin-top:8px"></div>
+                <div style="width:70%;height:6px;background:#E4E4E4;border-radius:2px;margin-top:6px"></div>
+                <div style="height:30px;background:#333;border-radius:4px;margin-top:11px"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:14px"><div style="width:60px;height:5px;background:#E8E8E8;border-radius:2px"></div><div style="width:44px;height:5px;background:#E8E8E8;border-radius:2px"></div></div>
+            </div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:13px 16px;margin-top:10px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">12 · MONDAY DIGEST ON A PHONE</div>
+          <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">For P2 this <em>is</em> the product. Verdict sentence, score with band and delta, the cause bar, then exactly <strong>one</strong> fix in a bordered block with one button. One competitor line at the foot. Never a list of three asks (US-36).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:48px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Coverage check</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">What is not wireframed, and why that is fine</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">STRUCTURALLY IDENTICAL</div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0"><span style="font:400 11.5px 'JetBrains Mono',monospace">/settings</span> profile, sessions, email, brand, workspaces and <span style="font:400 11.5px 'JetBrains Mono',monospace">/reports</span> index all reuse frame 11's tab-plus-list shell. Redrawing them would produce five near-identical pictures and zero new decisions.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">CONTENT PAGES</div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">Blog, docs, changelog, legal and compare pages are a single prose template at <span style="font:400 11.5px 'JetBrains Mono',monospace">--max-prose</span> width. They were resolved in Phase 6d as type specimens, which is the right medium for them — a wireframe of a text page tells you nothing.</p>
+      </div>
+      <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">STATES, NOT SCREENS</div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:8px 0 0">Loading, empty, partial, error, locked and over-quota are annotated <em>on</em> the frames they affect rather than drawn as separate pictures — because that is how they are built, and separating them is how teams forget to build them.</p>
+      </div>
+    </div>
+  </section>
+
+  <div style="margin-top:64px;padding-top:20px;border-top:2px solid #141B26;display:flex;justify-content:space-between;align-items:baseline;font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">
+    <span>Phase 9f · 12 frames · greyscale only</span>
+    <span><a href="./Phase 9e - Whiteboard Sketches.dc.html">← 9e</a> &nbsp;·&nbsp; next → <a href="./Phase 9g - Brand 3D Object.html">9g 3D object</a></span>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

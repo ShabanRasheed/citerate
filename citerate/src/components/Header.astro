@@ -1,0 +1,46 @@
+---
+interface Props {
+  current?: "how-it-works" | "pricing" | "agencies" | "blog" | "docs" | null;
+}
+const { current = null } = Astro.props;
+
+const links = [
+  { key: "how-it-works", href: "/how-it-works", label: "How it works" },
+  { key: "pricing", href: "/pricing", label: "Pricing" },
+  { key: "agencies", href: "/for/agencies", label: "For agencies" },
+  { key: "blog", href: "/blog", label: "Blog" },
+  { key: "docs", href: "/docs", label: "Docs", soon: true }
+] as const;
+
+const appUrl = import.meta.env.PUBLIC_APP_URL ?? "/app";
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <div style="display:flex;align-items:center;gap:36px">
+      <a class="brand" href="/" aria-label="Citerate home">
+        <span class="brand__mark" aria-hidden="true"></span>
+        Citerate
+      </a>
+
+      <nav class="nav" data-nav aria-label="Main">
+        {
+          links.map((l) => (
+            <a class="nav__link" href={l.href} aria-current={current === l.key ? "page" : undefined}>
+              {l.label}
+              {"soon" in l && l.soon && <span class="nav__soon">Soon</span>}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+
+    <div class="site-header__actions">
+      <a class="nav__link" href={`${appUrl}/sign-in`}>Sign in</a>
+      <a class="btn-primary-c" href="/#scan" data-cta="header">Run free scan</a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav">
+        Menu
+      </button>
+    </div>
+  </div>
+</header>

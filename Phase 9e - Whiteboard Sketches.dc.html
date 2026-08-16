@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#F4F5F7;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="max-width:1240px;margin:0 auto;padding:48px 40px 120px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:20px;border-bottom:2px solid #141B26">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Phase 9e · UX package 5 of 8 · 2026-07-29</div>
+      <h1 style="font:600 34px/1.15 'Source Serif 4',serif;letter-spacing:-.015em;margin:10px 0 0">Whiteboard sketches — the thinking before the pixels</h1>
+      <p style="font:400 14px/1.55 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0;text-wrap:pretty">Eight annotated boards reconstructing the earliest stage of the process, wrong turns included. Everything crossed out here was genuinely considered and rejected for a stated reason — that record is more useful than a clean deck, because it stops the same idea being re-proposed in six months.</p>
+    </div>
+    <div style="flex:none;text-align:right;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+      <div>boards &nbsp;&nbsp;&nbsp;8</div>
+      <div>ideas killed 14</div>
+      <div>survived &nbsp;9</div>
+      <div style="color:#8A93A1">marker layer only</div>
+    </div>
+  </div>
+
+  <div style="background:#FDF2E3;border:1px solid #F2E0C4;border-radius:10px;padding:14px 18px;margin-top:18px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#9A6210">A NOTE ON THE TYPE</div>
+    <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0;max-width:100ch">The handwriting face on this board is a <em>brainstorm artefact</em>, not part of the brand system. It appears here and nowhere else in the product. Everything shipped uses the two families in the brand guideline — Source Serif 4 for verdicts, JetBrains Mono for data. Captions under each board are set in the real UI face so the two layers never get confused.</p>
+  </div>
+
+  <section style="margin-top:44px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Board 01 · session zero</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">"What are we actually measuring?"</h2>
+      </div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">2 people · 90 min · the only board that mattered</div>
+    </div>
+    <div style="background:#FBFBF8;border:1px solid #E2E5EA;border-radius:10px;padding:32px 34px;margin-top:14px;box-shadow:0 1px 2px rgba(20,27,38,.05);position:relative;overflow:hidden">
+      <div style="position:absolute;top:-40px;right:-30px;width:220px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(62,92,138,.05),transparent 70%)"></div>
+      <div style="font:700 30px/1.2 'Caveat',cursive;color:#141B26;transform:rotate(-.5deg)">traffic is down but rankings are FLAT — why??</div>
+      <div style="display:flex;flex-wrap:wrap;gap:22px;margin-top:26px;align-items:flex-start">
+        <div style="flex:1;min-width:210px;border:2px solid #141B26;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;padding:16px 20px;transform:rotate(-.8deg)">
+          <div style="font:600 22px/1.25 'Caveat',cursive;color:#141B26">count brand mentions?</div>
+          <div style="font:400 19px/1.3 'Caveat',cursive;color:#C43D3D;margin-top:8px;text-decoration:line-through">✕ measures noise. being talked about ≠ being linked</div>
+        </div>
+        <div style="flex:1;min-width:210px;border:2px solid #141B26;border-radius:15px 225px 15px 255px/225px 15px 255px 15px;padding:16px 20px;transform:rotate(.6deg)">
+          <div style="font:600 22px/1.25 'Caveat',cursive;color:#141B26">track rank in the AI answer?</div>
+          <div style="font:400 19px/1.3 'Caveat',cursive;color:#C43D3D;margin-top:8px;text-decoration:line-through">✕ there is no "position 3" in a paragraph</div>
+        </div>
+        <div style="flex:1.2;min-width:230px;border:3px solid #0E7C66;border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:18px 22px;transform:rotate(-.4deg);background:rgba(231,242,239,.5)">
+          <div style="font:700 24px/1.25 'Caveat',cursive;color:#0B6151">count CITATIONS. did the engine hand the user OUR link?</div>
+          <div style="font:400 20px/1.3 'Caveat',cursive;color:#141B26;margin-top:10px">binary. per run. countable. ✓✓</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;margin-top:26px;flex-wrap:wrap">
+        <div style="font:600 26px/1 'Caveat',cursive;color:#3E5C8A;transform:rotate(-2deg)">↳ so the unit is a RUN</div>
+        <div style="font:400 22px/1.3 'Caveat',cursive;color:#141B26">1 query × 1 engine × 1 time = 1 run</div>
+        <div style="font:600 24px/1.3 'Caveat',cursive;color:#C43D3D;transform:rotate(1.5deg)">→ NEVER report a % without the runs!!</div>
+      </div>
+      <div style="display:flex;gap:14px;margin-top:24px;flex-wrap:wrap;align-items:flex-start">
+        <div style="background:#FDF2E3;border:1px solid #EBD9B8;padding:14px 16px;width:190px;transform:rotate(-1.8deg);box-shadow:1px 2px 4px rgba(20,27,38,.08)">
+          <div style="font:600 20px/1.3 'Caveat',cursive;color:#141B26">ask 1 engine 5×, get 5 different answers. so ONE answer proves nothing.</div>
+        </div>
+        <div style="background:#EBEFF6;border:1px solid #D0DAEA;padding:14px 16px;width:190px;transform:rotate(1.4deg);box-shadow:1px 2px 4px rgba(20,27,38,.08)">
+          <div style="font:600 20px/1.3 'Caveat',cursive;color:#141B26">if it's a proportion over trials → we can put a CONFIDENCE INTERVAL on it</div>
+        </div>
+        <div style="background:#E7F2EF;border:1px solid #C6DED6;padding:14px 16px;width:210px;transform:rotate(-.9deg);box-shadow:1px 2px 4px rgba(20,27,38,.08)">
+          <div style="font:600 20px/1.3 'Caveat',cursive;color:#0B6151">that's the whole product. "is this real or is it noise" — nobody else answers that</div>
+        </div>
+        <div style="border:2px dashed #141B26;padding:12px 18px;transform:rotate(2deg);align-self:center">
+          <div style="font:700 22px/1.2 'Caveat',cursive;color:#141B26">DECIDED 👍</div>
+          <div style="font:400 17px/1.2 'Caveat',cursive;color:#5B6472">rate = cited runs / runs</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;margin-top:12px">
+      <div style="flex:1;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">WHAT SURVIVED</div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">The run as the atomic unit, the run-count-with-every-rate rule, and the Wilson interval — all three are now enforced in <span style="font:400 11.5px 'JetBrains Mono',monospace">scoring.ts</span> and in the design system as invariants.</p>
+      </div>
+      <div style="flex:1;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">WHY IT MATTERS LATER</div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">Every hard product decision downstream — the within-noise label, the two-scan fix verification, immutable reports — is a consequence of choosing a countable unit on this board.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:48px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Board 02 · shape of the product</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">Dashboard, or loop?</h2>
+      </div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">the argument that set the whole IA</div>
+    </div>
+    <div style="background:#FBFBF8;border:1px solid #E2E5EA;border-radius:10px;padding:32px 34px;margin-top:14px;box-shadow:0 1px 2px rgba(20,27,38,.05)">
+      <div style="display:flex;gap:34px;flex-wrap:wrap;align-items:flex-start">
+        <div style="flex:1;min-width:280px">
+          <div style="font:600 24px/1.2 'Caveat',cursive;color:#C43D3D;transform:rotate(-1deg)">option A — a dashboard</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;opacity:.65">
+            <div style="border:2px solid #8A93A1;border-radius:225px 15px 255px 15px/15px 255px 15px 225px;height:46px"></div>
+            <div style="border:2px solid #8A93A1;border-radius:15px 225px 15px 255px/225px 15px 255px 15px;height:46px"></div>
+            <div style="border:2px solid #8A93A1;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;height:46px"></div>
+            <div style="border:2px solid #8A93A1;border-radius:15px 255px 15px 225px/255px 15px 225px 15px;height:46px"></div>
+            <div style="border:2px solid #8A93A1;border-radius:225px 15px 255px 15px/15px 255px 15px 225px;height:46px;grid-column:span 2"></div>
+          </div>
+          <div style="font:400 21px/1.3 'Caveat',cursive;color:#C43D3D;margin-top:12px;text-decoration:line-through">✕ 6 widgets = 6 things to interpret. nobody knows what to DO.</div>
+          <div style="font:600 20px/1.3 'Caveat',cursive;color:#C43D3D;margin-top:4px">✕ this is every tool she already ignores</div>
+        </div>
+        <div style="align-self:center;font:700 40px/1 'Caveat',cursive;color:#8A93A1">vs</div>
+        <div style="flex:1.3;min-width:320px">
+          <div style="font:700 26px/1.2 'Caveat',cursive;color:#0B6151;transform:rotate(.5deg)">option B — a LOOP ✓</div>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:16px">
+            <div style="border:2px solid #141B26;border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:10px 15px;font:600 20px/1.1 'Caveat',cursive;transform:rotate(-1deg)">measure</div>
+            <span style="font:700 24px 'Caveat',cursive;color:#3E5C8A">→</span>
+            <div style="border:2px solid #141B26;border-radius:15px 225px 15px 255px/225px 15px 255px 15px;padding:10px 15px;font:600 20px/1.1 'Caveat',cursive;transform:rotate(.8deg)">why?</div>
+            <span style="font:700 24px 'Caveat',cursive;color:#3E5C8A">→</span>
+            <div style="border:2px solid #141B26;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;padding:10px 15px;font:600 20px/1.1 'Caveat',cursive;transform:rotate(-.6deg)">what to fix</div>
+            <span style="font:700 24px 'Caveat',cursive;color:#3E5C8A">→</span>
+            <div style="border:2px solid #141B26;border-radius:15px 255px 15px 225px/255px 15px 225px 15px;padding:10px 15px;font:600 20px/1.1 'Caveat',cursive;transform:rotate(1deg)">ship it</div>
+            <span style="font:700 24px 'Caveat',cursive;color:#3E5C8A">→</span>
+            <div style="border:3px solid #0E7C66;border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:10px 15px;font:700 20px/1.1 'Caveat',cursive;color:#0B6151;background:rgba(231,242,239,.6);transform:rotate(-.5deg)">DID IT WORK?</div>
+          </div>
+          <div style="font:600 24px/1.3 'Caveat',cursive;color:#3E5C8A;margin-top:14px;transform:rotate(-1deg)">⟲ and then straight back to "measure"</div>
+          <div style="font:400 21px/1.35 'Caveat',cursive;color:#141B26;margin-top:10px">the last box is the product. everyone else stops at box 1.</div>
+          <div style="background:#FDF2E3;border:1px solid #EBD9B8;padding:12px 15px;width:250px;transform:rotate(1.2deg);margin-top:16px;box-shadow:1px 2px 4px rgba(20,27,38,.08)">
+            <div style="font:600 19px/1.3 'Caveat',cursive;color:#141B26">if we can't do box 5 we shouldn't build boxes 1–4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;margin-top:12px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">WHAT SURVIVED</div>
+      <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">Five stages, five routes: <span style="font:400 11.5px 'JetBrains Mono',monospace">/overview → /queries → /fixes → mark shipped → /reports</span>. The sidebar is literally this board in order, and it is why <span style="font:400 11.5px 'JetBrains Mono',monospace">/overview</span> opens with a sentence rather than a grid of cards.</p>
+    </div>
+  </section>
+
+  <section style="margin-top:48px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Board 03 · the argument we nearly lost</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">Should "we don't know" be on the chart?</h2>
+      </div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">the most consequential 20 minutes in the project</div>
+    </div>
+    <div style="background:#FBFBF8;border:1px solid #E2E5EA;border-radius:10px;padding:32px 34px;margin-top:14px;box-shadow:0 1px 2px rgba(20,27,38,.05)">
+      <div style="font:700 28px/1.2 'Caveat',cursive;color:#141B26">every uncited query → give it a cause?</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;align-items:center">
+        <div style="border:2px solid #C43D3D;border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:12px 18px;font:600 21px/1.15 'Caveat',cursive;color:#A62F2F;transform:rotate(-1deg)">AI took it</div>
+        <div style="border:2px solid #D98324;border-radius:15px 225px 15px 255px/225px 15px 255px 15px;padding:12px 18px;font:600 21px/1.15 'Caveat',cursive;color:#9A6210;transform:rotate(.7deg)">rank slipped</div>
+        <div style="border:2px solid #3E5C8A;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;padding:12px 18px;font:600 21px/1.15 'Caveat',cursive;color:#34507A;transform:rotate(-.5deg)">page is broken</div>
+        <div style="font:700 30px 'Caveat',cursive;color:#8A93A1">+</div>
+        <div style="border:3px solid #141B26;border-radius:15px 255px 15px 225px/255px 15px 225px 15px;padding:12px 18px;font:700 21px/1.15 'Caveat',cursive;color:#141B26;background:repeating-linear-gradient(45deg,rgba(138,147,161,.18) 0 5px,transparent 5px 10px);transform:rotate(1.2deg)">?? we don't know</div>
+      </div>
+      <div style="display:flex;gap:28px;margin-top:26px;flex-wrap:wrap">
+        <div style="flex:1;min-width:250px;border-left:3px solid #C43D3D;padding-left:16px">
+          <div style="font:600 21px/1.3 'Caveat',cursive;color:#C43D3D">"a 4th slice called 'unknown' looks WEAK. sales will hate it."</div>
+          <div style="font:400 19px/1.35 'Caveat',cursive;color:#5B6472;margin-top:8px">— fair. it does.</div>
+        </div>
+        <div style="flex:1.4;min-width:280px;border-left:3px solid #0E7C66;padding-left:16px">
+          <div style="font:600 22px/1.3 'Caveat',cursive;color:#0B6151">"a tool that ALWAYS has a diagnosis is a horoscope."</div>
+          <div style="font:400 19px/1.35 'Caveat',cursive;color:#141B26;margin-top:8px">if we fake the 4th one, she stops believing the other 3. we lose the only thing we have — being trustworthy.</div>
+          <div style="font:700 22px/1.3 'Caveat',cursive;color:#0B6151;margin-top:10px">the unknown slice is what makes the known slices worth money.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:24px;flex-wrap:wrap;align-items:center">
+        <div style="border:2px dashed #141B26;padding:12px 20px;transform:rotate(-1.5deg)">
+          <div style="font:700 23px/1.15 'Caveat',cursive;color:#141B26">DECIDED — it stays. ALWAYS. even at 0%.</div>
+        </div>
+        <div style="font:600 22px/1.3 'Caveat',cursive;color:#3E5C8A;transform:rotate(1deg)">→ + give it a stripe so it survives b/w printing</div>
+      </div>
+      <div style="display:flex;gap:14px;margin-top:22px;flex-wrap:wrap">
+        <div style="background:#EBEFF6;border:1px solid #D0DAEA;padding:13px 16px;width:230px;transform:rotate(-1.3deg);box-shadow:1px 2px 4px rgba(20,27,38,.08)">
+          <div style="font:600 19px/1.3 'Caveat',cursive;color:#141B26">need a confidence FLOOR — below it, no label. 0.6? try 0.6.</div>
+        </div>
+        <div style="background:#FDF2E3;border:1px solid #EBD9B8;padding:13px 16px;width:230px;transform:rotate(.9deg);box-shadow:1px 2px 4px rgba(20,27,38,.08)">
+          <div style="font:600 19px/1.3 'Caveat',cursive;color:#141B26">check "page is broken" FIRST — if bots can't read it nothing else explains anything</div>
+        </div>
+        <div style="background:#E7F2EF;border:1px solid #C6DED6;padding:13px 16px;width:230px;transform:rotate(-.6deg);box-shadow:1px 2px 4px rgba(20,27,38,.08)">
+          <div style="font:600 19px/1.3 'Caveat',cursive;color:#0B6151">and: no cause → no fix. we never invent work to fill a queue</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;margin-top:12px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">WHAT SURVIVED</div>
+      <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">All of it, unchanged: <span style="font:400 11.5px 'JetBrains Mono',monospace">CONFIDENCE_FLOOR = 0.6</span>, technical decay weighted first at 0.7, the permanently-striped fourth segment, and the rule that unexplained queries never generate a fix. Board 03 is quoted in the brand guideline as one of the four rendering invariants.</p>
+    </div>
+  </section>
+
+  <section style="margin-top:48px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Board 04 · first screen</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">Three tries at Overview</h2>
+      </div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">crazy-8s reduced to the three that were arguable</div>
+    </div>
+    <div style="background:#FBFBF8;border:1px solid #E2E5EA;border-radius:10px;padding:32px 34px;margin-top:14px;box-shadow:0 1px 2px rgba(20,27,38,.05)">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+        <div>
+          <div style="font:600 22px/1.2 'Caveat',cursive;color:#C43D3D">A · big number</div>
+          <div style="border:2px solid #8A93A1;border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:18px;margin-top:12px;height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;opacity:.7">
+            <div style="font:700 52px/1 'Caveat',cursive;color:#141B26">62</div>
+            <div style="width:70%;height:2px;background:#C6CBD3"></div>
+            <div style="width:50%;height:2px;background:#C6CBD3"></div>
+          </div>
+          <div style="font:400 20px/1.3 'Caveat',cursive;color:#C43D3D;margin-top:10px;text-decoration:line-through">✕ 62 out of what? it's a vanity score. this is the thing we said we'd never build</div>
+        </div>
+        <div>
+          <div style="font:600 22px/1.2 'Caveat',cursive;color:#C43D3D">B · the table</div>
+          <div style="border:2px solid #8A93A1;border-radius:15px 225px 15px 255px/225px 15px 255px 15px;padding:14px;margin-top:12px;height:150px;display:flex;flex-direction:column;gap:7px;opacity:.7">
+            <div style="height:2px;background:#C6CBD3"></div><div style="height:2px;background:#C6CBD3"></div><div style="height:2px;background:#C6CBD3"></div><div style="height:2px;background:#C6CBD3"></div><div style="height:2px;background:#C6CBD3"></div><div style="height:2px;background:#C6CBD3"></div><div style="height:2px;background:#C6CBD3"></div><div style="height:2px;background:#C6CBD3"></div>
+          </div>
+          <div style="font:400 20px/1.3 'Caveat',cursive;color:#C43D3D;margin-top:10px;text-decoration:line-through">✕ 500 rows on login. Marco is gone in 4 seconds. (Dana would love it though — keep it, just not FIRST)</div>
+        </div>
+        <div>
+          <div style="font:700 22px/1.2 'Caveat',cursive;color:#0B6151">C · a sentence ✓</div>
+          <div style="border:3px solid #0E7C66;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;padding:16px;margin-top:12px;height:150px;background:rgba(231,242,239,.4)">
+            <div style="font:600 21px/1.25 'Caveat',cursive;color:#141B26">"you were cited in 11 of 60 answers. 9 of the misses look like AI displacement."</div>
+            <div style="display:flex;gap:4px;margin-top:12px;align-items:center">
+              <span style="font:700 22px 'Caveat',cursive;color:#0B6151">62</span>
+              <span style="font:400 18px 'Caveat',cursive;color:#8A93A1">±6</span>
+              <div style="flex:1;height:9px;display:flex;margin-left:8px"><span style="flex:4;background:#C43D3D"></span><span style="flex:2;background:#D98324"></span><span style="flex:1;background:#3E5C8A"></span><span style="flex:1;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></span></div>
+            </div>
+          </div>
+          <div style="font:600 20px/1.3 'Caveat',cursive;color:#0B6151;margin-top:10px">✓ a finding, not a figure. reads on a phone. Dana can still click through to the table.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:24px;flex-wrap:wrap;align-items:center">
+        <div style="border:2px dashed #141B26;padding:12px 20px;transform:rotate(-1deg)">
+          <div style="font:700 22px/1.2 'Caveat',cursive;color:#141B26">ORDER IS LOCKED:</div>
+          <div style="font:600 20px/1.3 'Caveat',cursive;color:#5B6472">sentence → score±band → cause bar → trend</div>
+        </div>
+        <div style="font:600 22px/1.3 'Caveat',cursive;color:#3E5C8A;transform:rotate(1deg)">→ so the display font has to be a SERIF. a verdict is a sentence.</div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;margin-top:12px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">WHAT SURVIVED</div>
+      <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">Sketch C became <span style="font:400 11.5px 'JetBrains Mono',monospace">/overview</span> exactly. Sketch B was not discarded — it became <span style="font:400 11.5px 'JetBrains Mono',monospace">/queries</span>, one click away. And the throwaway line at the bottom of this board is where the entire type system came from: serif for verdicts, mono for data.</p>
+    </div>
+  </section>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px">
+
+    <section>
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Board 05 · onboarding</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">How few steps can we get away with?</h2>
+      </div>
+      <div style="background:#FBFBF8;border:1px solid #E2E5EA;border-radius:10px;padding:26px 28px;margin-top:14px;box-shadow:0 1px 2px rgba(20,27,38,.05)">
+        <div style="font:600 24px/1.2 'Caveat',cursive;color:#141B26">what do we ACTUALLY need before a number?</div>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:16px">
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:700 22px 'Caveat',cursive;color:#0B6151">1.</span><span style="font:600 21px/1.2 'Caveat',cursive;color:#141B26">a domain</span><span style="font:400 19px 'Caveat',cursive;color:#0B6151">← unavoidable</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:700 22px 'Caveat',cursive;color:#D98324">2.</span><span style="font:600 21px/1.2 'Caveat',cursive;color:#141B26">queries</span><span style="font:400 19px 'Caveat',cursive;color:#9A6210">← we can GUESS these</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:700 22px 'Caveat',cursive;color:#D98324">3.</span><span style="font:600 21px/1.2 'Caveat',cursive;color:#141B26">GSC</span><span style="font:400 19px 'Caveat',cursive;color:#9A6210">← nice, not needed</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:700 22px 'Caveat',cursive;color:#C43D3D">4.</span><span style="font:600 21px/1.2 'Caveat',cursive;color:#C43D3D;text-decoration:line-through">competitors list</span><span style="font:400 19px 'Caveat',cursive;color:#C43D3D">← we DISCOVER these. asking is backwards!</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:700 22px 'Caveat',cursive;color:#C43D3D">5.</span><span style="font:600 21px/1.2 'Caveat',cursive;color:#C43D3D;text-decoration:line-through">"what's your industry"</span><span style="font:400 19px 'Caveat',cursive;color:#C43D3D">← read the site</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:700 22px 'Caveat',cursive;color:#C43D3D">6.</span><span style="font:600 21px/1.2 'Caveat',cursive;color:#C43D3D;text-decoration:line-through">password / 2FA setup</span><span style="font:400 19px 'Caveat',cursive;color:#C43D3D">← no passwords at all. email IS the identity</span></div>
+        </div>
+        <div style="border:2px dashed #141B26;padding:12px 16px;margin-top:20px;transform:rotate(-1deg)">
+          <div style="font:700 22px/1.2 'Caveat',cursive;color:#141B26">3 steps. 2 of them skippable.</div>
+          <div style="font:600 19px/1.3 'Caveat',cursive;color:#5B6472;margin-top:4px">and if they came from a free scan → step 1 is ALREADY DONE 🎉</div>
+        </div>
+        <div style="background:#FDF2E3;border:1px solid #EBD9B8;padding:12px 15px;width:82%;transform:rotate(1.2deg);margin-top:18px;box-shadow:1px 2px 4px rgba(20,27,38,.08)">
+          <div style="font:600 19px/1.3 'Caveat',cursive;color:#141B26">the skip button must be a REAL button. a grey link means we don't mean it.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;margin-top:12px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">WHAT SURVIVED</div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">The three-step flow as built, the primary-weight skip on steps 2 and 3, no 2FA enrolment in v1, and the claim path that pre-satisfies step 1 — see F02 and F06 in 9c.</p>
+      </div>
+    </section>
+
+    <section>
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Board 06 · proving a fix</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">"Did it work?" is harder than it looks</h2>
+      </div>
+      <div style="background:#FBFBF8;border:1px solid #E2E5EA;border-radius:10px;padding:26px 28px;margin-top:14px;box-shadow:0 1px 2px rgba(20,27,38,.05)">
+        <div style="font:600 24px/1.2 'Caveat',cursive;color:#141B26">they ship a change. now what?</div>
+        <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px">
+          <div style="border:2px solid #C43D3D;border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:11px 15px;transform:rotate(-.7deg)">
+            <div style="font:600 20px/1.25 'Caveat',cursive;color:#C43D3D;text-decoration:line-through">rescan immediately → green tick</div>
+            <div style="font:400 18px/1.25 'Caveat',cursive;color:#5B6472">✕ one scan can't beat the noise. we'd be lying with a checkmark.</div>
+          </div>
+          <div style="border:2px solid #C43D3D;border-radius:15px 225px 15px 255px/225px 15px 255px 15px;padding:11px 15px;transform:rotate(.6deg)">
+            <div style="font:600 20px/1.25 'Caveat',cursive;color:#C43D3D;text-decoration:line-through">let the user mark it "worked"</div>
+            <div style="font:400 18px/1.25 'Caveat',cursive;color:#5B6472">✕ then the proof is their word, and it's worthless to their boss</div>
+          </div>
+          <div style="border:3px solid #0E7C66;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;padding:13px 16px;background:rgba(231,242,239,.45);transform:rotate(-.4deg)">
+            <div style="font:700 21px/1.25 'Caveat',cursive;color:#0B6151">✓ wait 2 scans. compare the BANDS either side of the deploy date.</div>
+            <div style="font:400 18px/1.25 'Caveat',cursive;color:#141B26;margin-top:5px">bands separate → VERIFIED. bands overlap → "no measurable change"</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap">
+          <div style="background:#EBEFF6;border:1px solid #D0DAEA;padding:12px 14px;width:46%;transform:rotate(-1.4deg);box-shadow:1px 2px 4px rgba(20,27,38,.08)">
+            <div style="font:600 18.5px/1.3 'Caveat',cursive;color:#141B26">the wait is 3–11 days. TELL THEM when they hit "shipped" — don't let them discover it</div>
+          </div>
+          <div style="background:#FDF2E3;border:1px solid #EBD9B8;padding:12px 14px;width:46%;transform:rotate(1.1deg);box-shadow:1px 2px 4px rgba(20,27,38,.08)">
+            <div style="font:600 18.5px/1.3 'Caveat',cursive;color:#141B26">"no measurable change" ≠ FAILED. design that state as carefully as the win.</div>
+          </div>
+        </div>
+        <div style="font:700 23px/1.25 'Caveat',cursive;color:#3E5C8A;margin-top:18px;transform:rotate(-.8deg)">↳ and freeze the before/after as a PDF. THAT is what an agency sells.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;margin-top:12px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">WHAT SURVIVED</div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">The two-scan verification rule, the <span style="font:400 11.5px 'JetBrains Mono',monospace">no measurable change</span> state, up-front latency disclosure (US-25), and the <span style="font:400 11.5px 'JetBrains Mono',monospace">fix_proof</span> snapshot kind in the schema.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px">
+
+    <section>
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Board 07 · the agency problem</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">One person, fourteen clients, ninety minutes</h2>
+      </div>
+      <div style="background:#FBFBF8;border:1px solid #E2E5EA;border-radius:10px;padding:26px 28px;margin-top:14px;box-shadow:0 1px 2px rgba(20,27,38,.05)">
+        <div style="font:600 24px/1.2 'Caveat',cursive;color:#141B26">she does the SAME task 14×. optimise for the switch.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:16px">
+          <div style="border:2px solid #8A93A1;border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:7px 12px;font:600 17px 'Caveat',cursive;transform:rotate(-1deg)">client 1</div>
+          <div style="border:2px solid #8A93A1;border-radius:15px 225px 15px 255px/225px 15px 255px 15px;padding:7px 12px;font:600 17px 'Caveat',cursive;transform:rotate(.8deg)">client 2</div>
+          <div style="border:2px solid #8A93A1;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;padding:7px 12px;font:600 17px 'Caveat',cursive;transform:rotate(-.6deg)">client 3</div>
+          <div style="border:2px solid #8A93A1;border-radius:15px 255px 15px 225px/255px 15px 225px 15px;padding:7px 12px;font:600 17px 'Caveat',cursive;transform:rotate(1deg)">…</div>
+          <div style="border:2px solid #8A93A1;border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:7px 12px;font:600 17px 'Caveat',cursive;transform:rotate(-.9deg)">client 14</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:18px">
+          <div style="font:600 20px/1.3 'Caveat',cursive;color:#C43D3D;text-decoration:line-through">✕ switcher in Settings — that's 14 round trips through a menu</div>
+          <div style="font:600 20px/1.3 'Caveat',cursive;color:#C43D3D;text-decoration:line-through">✕ separate login per client — absurd</div>
+          <div style="font:600 20px/1.3 'Caveat',cursive;color:#C43D3D;text-decoration:line-through">✕ charge per seat — punishes her for having staff. she'll share one login instead</div>
+          <div style="font:700 21px/1.3 'Caveat',cursive;color:#0B6151">✓ switcher lives in the TOPBAR. type-ahead. shows each score inline so she can triage BEFORE clicking</div>
+          <div style="font:700 21px/1.3 'Caveat',cursive;color:#0B6151">✓ switching keeps her on the same route — she's doing the same job 14×</div>
+          <div style="font:700 21px/1.3 'Caveat',cursive;color:#0B6151">✓ seats UNLIMITED on Agency. meter the WORKSPACES instead.</div>
+        </div>
+        <div style="background:#E7F2EF;border:1px solid #C6DED6;padding:12px 15px;width:88%;transform:rotate(-1.1deg);margin-top:18px;box-shadow:1px 2px 4px rgba(20,27,38,.08)">
+          <div style="font:600 19px/1.3 'Caveat',cursive;color:#0B6151">also: her client must NEVER see our machinery. → a 4th role: "client". overview + reports. nothing else.</div>
+        </div>
+        <div style="font:600 21px/1.3 'Caveat',cursive;color:#C43D3D;margin-top:16px;transform:rotate(.7deg)">⚠ and if OUR logo is on her PDF she literally cannot send it</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;margin-top:12px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">WHAT SURVIVED</div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">Topbar switcher (US-32), the <span style="font:400 11.5px 'JetBrains Mono',monospace">client</span> role (US-33), unlimited seats with workspaces as the Agency meter, and white-label PDFs on Scale+ with one non-removable footer line.</p>
+      </div>
+    </section>
+
+    <section>
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Board 08 · gating napkin math</div>
+        <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:7px 0 0">What do we hold back, and what would be cruel to?</h2>
+      </div>
+      <div style="background:#FBFBF8;border:1px solid #E2E5EA;border-radius:10px;padding:26px 28px;margin-top:14px;box-shadow:0 1px 2px rgba(20,27,38,.05)">
+        <div style="font:600 24px/1.2 'Caveat',cursive;color:#141B26">free tier: how much do we give away?</div>
+        <div style="display:flex;gap:22px;margin-top:16px;flex-wrap:wrap">
+          <div style="flex:1;min-width:180px">
+            <div style="font:700 20px/1.2 'Caveat',cursive;color:#0B6151">GIVE (free)</div>
+            <div style="font:400 19.5px/1.5 'Caveat',cursive;color:#141B26;margin-top:8px">the real rate ✓<br>the run counts ✓<br>the cause mix ✓<br>the EVIDENCE ✓<br>25 queries, 2 engines</div>
+          </div>
+          <div style="flex:1;min-width:180px">
+            <div style="font:700 20px/1.2 'Caveat',cursive;color:#C43D3D">HOLD BACK</div>
+            <div style="font:400 19.5px/1.5 'Caveat',cursive;color:#141B26;margin-top:8px">competitor NAMES<br>the fix queue<br>history / trend<br>PDF reports<br>daily refresh</div>
+          </div>
+        </div>
+        <div style="border:2px dashed #141B26;padding:12px 16px;margin-top:18px;transform:rotate(-.9deg)">
+          <div style="font:700 21px/1.25 'Caveat',cursive;color:#141B26">rule: never gate the EVIDENCE. only the NAMES and the REMEDY.</div>
+          <div style="font:600 19px/1.3 'Caveat',cursive;color:#5B6472;margin-top:5px">if they can't verify our numbers for free, why would they pay for more of them?</div>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap">
+          <div style="background:#EBEFF6;border:1px solid #D0DAEA;padding:12px 14px;width:46%;transform:rotate(1.3deg);box-shadow:1px 2px 4px rgba(20,27,38,.08)">
+            <div style="font:600 18.5px/1.3 'Caveat',cursive;color:#141B26">BLUR the locked bit — don't hide it. show their own data through frosted glass. that IS the upsell.</div>
+          </div>
+          <div style="background:#FDF2E3;border:1px solid #EBD9B8;padding:12px 14px;width:46%;transform:rotate(-1.2deg);box-shadow:1px 2px 4px rgba(20,27,38,.08)">
+            <div style="font:600 18.5px/1.3 'Caveat',cursive;color:#141B26">over the limit → DON'T STOP SCANNING. a hole in the series is unrecoverable. bill the overage, keep measuring.</div>
+          </div>
+        </div>
+        <div style="font:600 21px/1.3 'Caveat',cursive;color:#3E5C8A;margin-top:18px;transform:rotate(.6deg)">↳ add-ons buy VOLUME only. never a feature. keeps the tier story honest.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;margin-top:12px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">WHAT SURVIVED</div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:7px 0 0">The whole gating philosophy in <span style="font:400 11.5px 'JetBrains Mono',monospace">plans.ts</span>: 25 free queries with real evidence, competitor names and fix queue from Growth, the blur-not-hide <span style="font:400 11.5px 'JetBrains Mono',monospace">Locked</span> component, overage-not-lockout metering, and volume-only add-ons.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <section style="margin-top:52px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Ledger</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Fourteen ideas we killed, and why they stay dead</h2>
+    <p style="font:400 13.5px/1.6 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0">Keep this list. Most of these will be re-proposed by someone reasonable within a year; the reason column is the answer.</p>
+    <div style="overflow-x:auto;margin-top:18px">
+      <div style="min-width:860px;display:flex;flex-direction:column;gap:2px">
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:11px 18px;background:#141B26;border-radius:10px 10px 2px 2px;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1">
+          <div>Board</div><div>Killed idea</div><div>Reason it stays dead</div><div>Would break</div>
+        </div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">01</div><div>Count brand mentions</div><div style="color:#5B6472">Being named is not being cited. It measures conversation, not traffic recovery.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#A62F2F">the thesis</div></div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">01</div><div>Rank position inside an AI answer</div><div style="color:#5B6472">There is no position 3 in a paragraph. The concept doesn't exist to be measured.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#A62F2F">the thesis</div></div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">02</div><div>Widget dashboard home</div><div style="color:#5B6472">Six widgets are six interpretation tasks. It is the product everyone already ignores.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#A62F2F">P2 retention</div></div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">03</div><div>Always assign a cause</div><div style="color:#5B6472">A tool with a diagnosis for everything is a horoscope. Faking the fourth slice devalues the first three.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#A62F2F">all trust</div></div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">03</div><div>Colour-only chart encoding</div><div style="color:#5B6472">Reports get printed in greyscale and 1 in 12 men has a colour deficiency.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#A62F2F">US-41</div></div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">04</div><div>Big 0–100 score as the hero</div><div style="color:#5B6472">A score with no denominator is the vanity metric we exist to replace.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#A62F2F">P1 credibility</div></div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">04</div><div>Table as the landing view</div><div style="color:#5B6472">Correct for P1, fatal for P2. Kept — but one click in, as <span style="font:400 11px 'JetBrains Mono',monospace">/queries</span>.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#9A6210">P2 activation</div></div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">05</div><div>Ask for a competitor list at signup</div><div style="color:#5B6472">Backwards — discovering who beats you <em>is</em> the product. Asking admits we can't.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#A62F2F">F11 value</div></div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">05</div><div>Passwords, and 2FA at signup</div><div style="color:#5B6472">Email is already the recovery channel, so a password is a second thing to lose. 2FA belongs to the enterprise persona, who hasn't paid yet.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#9A6210">P2 activation</div></div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">06</div><div>Instant green tick after a fix</div><div style="color:#5B6472">One scan cannot beat the noise. A checkmark we can't defend is worse than a wait we can explain.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#A62F2F">the loop</div></div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">06</div><div>User self-marks a fix "worked"</div><div style="color:#5B6472">Then the proof is their word — which is exactly the thing they came to us to replace.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#A62F2F">P3 resale</div></div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">07</div><div>Per-seat pricing for agencies</div><div style="color:#5B6472">Punishes P3 for having staff; she shares one login and we lose the audit trail anyway.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#A62F2F">agency tier</div></div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">07</div><div>Client logs into our UI</div><div style="color:#5B6472">Dilutes the agency's value and exposes our machinery. Hence the <span style="font:400 11px 'JetBrains Mono',monospace">client</span> role and PDF-only as a first-class option.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#9A6210">P3 margin</div></div>
+        <div style="display:grid;grid-template-columns:60px 260px 1fr 90px;gap:14px;padding:12px 18px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:2px 2px 10px 10px;font:400 12.5px/1.5 inherit"><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#8A93A1">08</div><div>Stop scanning at the quota</div><div style="color:#5B6472">A gap in a time series can never be backfilled. Billing convenience is not worth destroying the asset.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#A62F2F">US-37</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div style="margin-top:64px;padding-top:20px;border-top:2px solid #141B26;display:flex;justify-content:space-between;align-items:baseline;font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">
+    <span>Phase 9e · 8 boards · 14 ideas killed with reasons</span>
+    <span><a href="./Phase 9d - User Stories.dc.html">← 9d</a> &nbsp;·&nbsp; next → <a href="./Phase 9f - Wireframes.dc.html">9f wireframes</a></span>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

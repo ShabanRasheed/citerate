@@ -1,0 +1,65 @@
+{
+  "engines": [
+    { "id": "chatgpt", "label": "ChatGPT", "minPlan": "free", "note": "Web-search enabled responses" },
+    { "id": "google_aio", "label": "Google AI Overviews", "minPlan": "free", "note": "Also supplies organic position evidence" },
+    { "id": "perplexity", "label": "Perplexity", "minPlan": "growth", "note": "Citation-first by design" },
+    { "id": "gemini", "label": "Gemini", "minPlan": "growth", "note": "Grounded answers; footnote link block since Jul 2026" },
+    { "id": "copilot", "label": "Copilot", "minPlan": "scale", "note": "Bing-backed" },
+    { "id": "claude", "label": "Claude", "minPlan": "scale", "note": "Web-search enabled responses" }
+  ],
+  "causes": [
+    {
+      "id": "aio_displacement",
+      "label": "AIO displacement",
+      "title": "The answer replaced the click",
+      "body": "You still rank. An AI answer sits above you and cites someone else. Fixed with citable content, not with SEO.",
+      "color": "gap"
+    },
+    {
+      "id": "ranking_decline",
+      "label": "Ranking decline",
+      "title": "You actually slipped",
+      "body": "A plain position loss, hiding inside the same falling line. Your existing SEO playbook applies — and only here.",
+      "color": "warn"
+    },
+    {
+      "id": "technical_decay",
+      "label": "Technical decay",
+      "title": "Engines can't read you",
+      "body": "Broken pages, blocked crawlers, missing structure. Cheap to fix, invisible until something measures it.",
+      "color": "tech"
+    },
+    {
+      "id": "unexplained",
+      "label": "Other / unexplained",
+      "title": "Honestly labeled",
+      "body": "What the model can't attribute stays striped and named \"unexplained\" — never silently folded into a cause.",
+      "color": "neutral"
+    }
+  ],
+  "method": {
+    "version": "1.3",
+    "runsPerEngine": 3,
+    "region": "us",
+    "personalized": false,
+    "confidenceFloor": 0.6,
+    "limitations": [
+      {
+        "label": "Personalization",
+        "body": "A logged-in user with chat history may get a different answer. We measure the unpersonalized baseline — the answer a stranger gets."
+      },
+      {
+        "label": "Geography",
+        "body": "Default is US-region. Answers differ by market; additional regions are a Scale feature, not a silent average."
+      },
+      {
+        "label": "Model drift",
+        "body": "Engines change weights without notice. A sudden industry-wide shift shows as a flagged discontinuity on your chart, not as your failure."
+      },
+      {
+        "label": "Sampling error",
+        "body": "Three runs bound, not eliminate, variance. Charts carry confidence bands; week-over-week moves inside the band are labeled as noise."
+      }
+    ]
+  }
+}

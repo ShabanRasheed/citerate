@@ -1,0 +1,72 @@
+---
+/**
+ * Onboarding 3 of 3 — optional connections, then straight into the readout.
+ * Search Console is optional and says why it helps: without it, ranking decline
+ * is inferred from public SERP data and the confidence is lower.
+ */
+import Auth from "../../layouts/Auth.astro";
+import { activeDomain, latestScan } from "../../lib/data";
+import { one } from "../../lib/db";
+
+const env = Astro.locals.runtime.env;
+const workspace = Astro.locals.workspace!;
+const domain = await activeDomain(env, workspace.workspaceId, null);
+if (!domain) return Astro.redirect("/onboarding/domain", 302);
+const scan = await latestScan(env, domain.id);
+const running = scan?.status === "queued" || scan?.status === "running";
+const gsc = Astro.url.searchParams.get("gsc");
+const gscConnected =
+  gsc === "connected" ||
+  !!(await one(env.DB, `SELECT domain_id FROM gsc_connections WHERE domain_id = ? AND revoked_at IS NULL`, domain.id));
+---
+
+<Auth title="Connect your data" wide={true}>
+  <div class="steps">
+    <span class="steps__dot" data-state="done"></span>
+    <span class="steps__dot" data-state="done"></span>
+    <span class="steps__dot" data-state="current"></span>
+    <span>Step 3 of 3 · optional</span>
+  </div>
+
+  <h1 class="auth__title">
+    {running ? "Your first scan is running" : "You're set up"}
+  </h1>
+  <p class="auth__sub">
+    {
+      running
+        ? `${scan!.queries_done} of ${scan!.queries_total} queries measured. The readout fills in as runs land — you don't need to wait here.`
+        : "The first scan is queued. Two optional connections make the cause attribution sharper."
+    }
+  </p>
+
+  <div class="stack stack--4">
+    <div class="c-card c-card--sunk stack stack--3">
+      <span class="t-label t-label--ink">Search Console <span class="chart__note">recommended</span></span>
+      <span class="chart__note">
+        With it, ranking decline is measured from your own impressions and positions. Without it we infer rank from
+        public SERP data, and those findings carry lower confidence — which the readout will say out loud.
+      </span>
+      {gscConnected ? (
+        <span class="pill">Connected — your top Search Console queries joined the set</span>
+      ) : (
+        <a class="btn-ghost" href={`/api/connect/gsc?domain=${domain.id}`}>Connect Search Console</a>
+      )}
+      {gsc === "unconfigured" && <span class="chart__note">Google OAuth is not configured in this environment (GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET).</span>}
+      {gsc === "denied" && <span class="chart__note">Consent was declined — you can connect any time from Settings.</span>}
+      {gsc === "error" && <span class="chart__note">Google did not complete the handshake. Try again.</span>}
+    </div>
+
+    <div class="c-card c-card--sunk stack stack--3">
+      <span class="t-label t-label--ink">Slack <span class="chart__note">optional</span></span>
+      <span class="chart__note">
+        One message when a fix is verified, one when the rate moves outside the confidence band. Nothing else — a bot
+        that posts every scan gets muted in a week.
+      </span>
+      <a class="btn-ghost" href="/settings#notifications">Set up notifications</a>
+    </div>
+  </div>
+
+  <a class="btn-primary-c btn-primary-c--lg" href="/overview" style="text-align:center">
+    {running ? "Watch the readout fill in" : "Go to the readout"}
+  </a>
+</Auth>

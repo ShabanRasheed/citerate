@@ -1,0 +1,87 @@
+---
+/**
+ * Queries — the dense pane. One row per tracked query with its evidence one
+ * click away. This is where a practitioner spends their Monday, so the table
+ * does the work client-side: no filter costs a round trip.
+ */
+import App from "../layouts/App.astro";
+import QueryTable from "../components/QueryTable.astro";
+import { activeDomain, queryRows, clusters, usage, latestScan } from "../lib/data";
+import { can } from "../lib/rbac";
+import { PLANS, meter, type PlanId } from "../lib/plans";
+
+const env = Astro.locals.runtime.env;
+const workspace = Astro.locals.workspace!;
+const plan = workspace.plan as PlanId;
+
+const domain = await activeDomain(env, workspace.workspaceId, Astro.url.searchParams.get("domain"));
+if (!domain) return Astro.redirect("/onboarding/domain", 302);
+
+const [rows, clusterList, counters, scan] = await Promise.all([
+  queryRows(env, domain.id, { cause: Astro.url.searchParams.get("cause") }),
+  clusters(env, domain.id),
+  usage(env, workspace.workspaceId),
+  latestScan(env, domain.id)
+]);
+
+Astro.locals.usage = counters;
+Astro.locals.lastScanAt = scan?.completed_at ?? null;
+
+const canEdit = can(workspace.role, "edit_queries");
+const m = meter(counters.trackedQueries.used, counters.trackedQueries.included || PLANS[plan].trackedQueries);
+---
+
+<App title="Queries" current="queries" crumb={`${rows.length} tracked`}>
+  {
+    m.state !== "ok" && (
+      <div class="c-card" style={`border-left:3px solid var(--${m.state === "over" ? "gap" : "warn"})`}>
+        <span class="t-d4">
+          {m.state === "over"
+            ? `${m.used} of ${m.included} tracked queries — ${m.overageUnits} overage block${m.overageUnits > 1 ? "s" : ""} this cycle ($${m.overageCost})`
+            : `${m.used} of ${m.included} tracked queries used`}
+        </span>
+        <p class="chart__note">
+          Going over never stops a scan. Overage bills at $19 per 100 queries at the end of the cycle, and you can
+          deactivate queries any time — deactivating frees the slot immediately.
+        </p>
+      </div>
+    )
+  }
+
+  <QueryTable rows={rows} clusters={clusterList} canEdit={canEdit} />
+
+  <!-- Add queries: Bootstrap modal, Alpine for the local list state. -->
+  <div class="modal fade" id="add-queries" tabindex="-1" aria-labelledby="add-queries-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" x-data="{ lines: '', get count() { return this.lines.split('\n').map(l => l.trim()).filter(Boolean).length } }">
+        <form method="post" action="/api/queries" data-lock>
+          <input type="hidden" name="domainId" value={domain.id} />
+          <div class="modal-header">
+            <h2 class="chart__title" id="add-queries-title">Add queries</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body stack stack--4">
+            <label class="form-field">
+              <span class="t-label">One query per line</span>
+              <textarea
+                class="form-field__input"
+                name="queries"
+                rows="8"
+                x-model="lines"
+                placeholder={"best crm for agencies\nhubspot alternatives\ncrm pricing comparison"}
+              ></textarea>
+            </label>
+            <span class="chart__note">
+              <span x-text="count"></span> queries · {m.included - m.used} slots left on {PLANS[plan].label}.
+              Each one is measured 3 times per engine per refresh.
+            </span>
+          </div>
+          <div class="modal-footer">
+            <button class="btn-ghost" type="button" data-bs-dismiss="modal">Cancel</button>
+            <button class="btn-primary-c" type="submit" data-busy="Adding…">Add to tracking</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</App>

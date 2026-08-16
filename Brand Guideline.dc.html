@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#F4F5F7;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+@keyframes cr-shimmer{0%{background-position:-180% 0}100%{background-position:180% 0}}
+@keyframes cr-spin{to{transform:rotate(360deg)}}
+</style></helmet>
+
+<div style="max-width:1180px;margin:0 auto;padding:48px 40px 120px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:20px;border-bottom:2px solid #141B26">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Brand guideline · v1.0 · 2026-07-26</div>
+      <h1 style="font:600 34px/1.15 'Source Serif 4',serif;letter-spacing:-.015em;margin:10px 0 0">CiteRate — Clinical Readout</h1>
+      <p style="font:400 14px/1.55 inherit;color:#5B6472;max-width:76ch;margin:8px 0 0">Serif verdicts, mono data, lab-report palette. The design language of a diagnostic instrument: it states a finding in a sentence, shows its evidence as counted runs, and never hides what it doesn't know.</p>
+    </div>
+    <div style="flex:none;text-align:right;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+      <div>display &nbsp;Source Serif 4 600</div>
+      <div>data &nbsp;&nbsp;&nbsp;&nbsp;JetBrains Mono 400/500</div>
+      <div>ui &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system sans (0 bytes)</div>
+      <div style="color:#8A93A1">2 families · 4 webfont weights</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0">
+    <a href="#foundation" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">01 foundation</a>
+    <a href="#logo" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">02 logo</a>
+    <a href="#color" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">03 color</a>
+    <a href="#type" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">04 type</a>
+    <a href="#grid" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">05 spacing &amp; grid</a>
+    <a href="#components" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">06 components</a>
+    <a href="#motion" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">07 motion</a>
+    <a href="#voice" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">08 voice</a>
+    <a href="#icons" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">09 icons</a>
+    <a href="#tokens" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">10 tokens &amp; flags</a>
+  </div>
+
+  <section id="foundation" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">01 · Foundation</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Why this direction</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:600 20px/1.35 'Source Serif 4',serif">A verdict is a sentence</div>
+        <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:8px 0 0">So the display face is a serif. It carries plain-language diagnosis with the authority of a written opinion — and it structurally prevents the page from opening with a grid of widgets.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:600 20px/1.35 'Source Serif 4',serif">Every number is mono</div>
+        <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:8px 0 0">Kept from the prototype and made absolute: rates, counts, scores, deltas, timestamps, tokens and code are JetBrains Mono. Tabular figures mean columns of rates align without a table layout.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:600 20px/1.35 'Source Serif 4',serif">Chrome costs nothing</div>
+        <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:8px 0 0">UI text uses the system stack, so both webfonts are spent where brand lives. Marketing LCP is a serif headline over flat paper — no hero image, no gradient, no framework.</p>
+      </div>
+    </div>
+    <div style="background:#141B26;border-radius:10px;padding:20px 24px;margin-top:16px;color:#F4F5F7">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">The four invariants this system renders</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:14px;font:400 13px/1.55 inherit">
+        <div><span style="font:500 13px 'JetBrains Mono',monospace;color:#35B394">11/60 — 18%</span><div style="color:#8A93A1;margin-top:4px">Rates carry their run count. A bare percentage is a bug.</div></div>
+        <div><span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.08em;background:#F4F5F7;color:#141B26;padding:2px 6px;border-radius:999px">SURFACE</span> <span style="font:500 9px 'JetBrains Mono',monospace;letter-spacing:.08em;border:1px dashed #8A93A1;color:#8A93A1;padding:1px 6px;border-radius:999px">PROXY</span><div style="color:#8A93A1;margin-top:4px">Every engine discloses how it was measured, everywhere it appears.</div></div>
+        <div><span style="display:inline-block;width:34px;height:10px;border-radius:2px;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></span><div style="color:#8A93A1;margin-top:4px">"Other / unexplained" is a permanent segment with its own texture.</div></div>
+        <div><span style="font:500 13px 'JetBrains Mono',monospace;color:#F4F5F7">62 <span style="color:#8A93A1">±6</span></span><div style="color:#8A93A1;margin-top:4px">An estimate without a band is not shipped.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="logo" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">02 · Logo &amp; wordmark</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 14px">citerate</h2>
+    <sc-if value="{{ isSlash }}" hint-placeholder-val="{{ true }}">
+      <p style="font:400 14px/1.6 inherit;color:#5B6472;max-width:80ch;margin:0 0 16px">Set in JetBrains Mono 500, all lowercase, tracking −0.03em. The slash is the mark: it reads as the division in a rate — <span style="font:500 13px 'JetBrains Mono',monospace;color:#141B26">4/9</span> — which is the one thing the product measures. It is green (<span style="font:500 13px 'JetBrains Mono',monospace">--cited</span>), never red: red is reserved for gaps in data and must never appear decoratively.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:16px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:34px;display:flex;align-items:center;justify-content:center"><span style="font:500 32px 'JetBrains Mono',monospace;letter-spacing:-.03em;color:#141B26">cite<span style="color:#0E7C66">/</span>rate</span></div>
+        <div style="background:#141B26;border:1px solid #141B26;border-radius:10px;padding:34px;display:flex;align-items:center;justify-content:center"><span style="font:500 32px 'JetBrains Mono',monospace;letter-spacing:-.03em;color:#F4F5F7">cite<span style="color:#35B394">/</span>rate</span></div>
+        <div style="display:flex;gap:12px">
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center"><div style="width:52px;height:52px;background:#141B26;border-radius:11px;display:flex;align-items:center;justify-content:center;font:500 19px 'JetBrains Mono',monospace;color:#F4F5F7">c<span style="color:#35B394">/</span>r</div><span style="font:400 9.5px 'JetBrains Mono',monospace;color:#8A93A1">favicon 32→512</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center"><div style="width:52px;height:52px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:11px;display:flex;align-items:center;justify-content:center;font:500 19px 'JetBrains Mono',monospace;color:#141B26">c<span style="color:#0E7C66">/</span>r</div><span style="font:400 9.5px 'JetBrains Mono',monospace;color:#8A93A1">sidebar rail</span></div>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isBracket }}">
+      <p style="font:400 14px/1.6 inherit;color:#5B6472;max-width:80ch;margin:0 0 16px">Bracket variant: the citation bracket wraps the name — <span style="font:500 13px 'JetBrains Mono',monospace;color:#141B26">[citerate]</span>. Reads more academic, slightly less legible at favicon size.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:16px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:34px;display:flex;align-items:center;justify-content:center"><span style="font:500 32px 'JetBrains Mono',monospace;letter-spacing:-.02em;color:#141B26"><span style="color:#0E7C66">[</span>citerate<span style="color:#0E7C66">]</span></span></div>
+        <div style="background:#141B26;border:1px solid #141B26;border-radius:10px;padding:34px;display:flex;align-items:center;justify-content:center"><span style="font:500 32px 'JetBrains Mono',monospace;letter-spacing:-.02em;color:#F4F5F7"><span style="color:#35B394">[</span>citerate<span style="color:#35B394">]</span></span></div>
+        <div style="display:flex;gap:12px">
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center"><div style="width:52px;height:52px;background:#141B26;border-radius:11px;display:flex;align-items:center;justify-content:center;font:500 19px 'JetBrains Mono',monospace;color:#F4F5F7"><span style="color:#35B394">[</span>c<span style="color:#35B394">]</span></div><span style="font:400 9.5px 'JetBrains Mono',monospace;color:#8A93A1">favicon 32→512</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center"><div style="width:52px;height:52px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:11px;display:flex;align-items:center;justify-content:center;font:500 19px 'JetBrains Mono',monospace;color:#141B26"><span style="color:#0E7C66">[</span>c<span style="color:#0E7C66">]</span></div><span style="font:400 9.5px 'JetBrains Mono',monospace;color:#8A93A1">sidebar rail</span></div>
+        </div>
+      </div>
+    </sc-if>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Embed badge</div>
+        <div style="margin-top:12px;display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:8px 12px;box-shadow:0 1px 2px rgba(20,27,38,.05)">
+          <span style="font:500 11px 'JetBrains Mono',monospace;letter-spacing:-.03em;color:#141B26">cite<span style="color:#0E7C66">/</span>rate</span>
+          <span style="width:1px;height:20px;background:#E2E5EA"></span>
+          <span style="font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1;text-transform:uppercase">AI visibility</span>
+          <span style="font:500 18px/1 'JetBrains Mono',monospace;color:#0E7C66">62</span>
+        </div>
+        <p style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin:10px 0 0">Fixed 168×36 light / dark. Score is live; the badge always links to that domain's public methodology note.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">PDF footer (mono, white-label)</div>
+        <div style="margin-top:14px;padding-top:12px;border-top:1px solid #E2E5EA;display:flex;justify-content:space-between;font:400 10.5px 'JetBrains Mono',monospace;color:#5B6472"><span>Prepared for northline.co · 2026-07-24</span><span>measured by cite/rate · methodology p.9</span></div>
+        <p style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin:10px 0 0">In white-label mode our mark drops to this one line at 10.5px ink-soft. It is not removable — it anchors the methodology reference.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Clear space &amp; misuse</div>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-top:12px;font:400 12.5px/1.5 inherit;color:#5B6472">
+          <div>Clear space = the cap-height of the <span style="font:500 12px 'JetBrains Mono',monospace">r</span> on all four sides.</div>
+          <div><span style="color:#A62F2F">✕</span> No capitalisation, no space around the slash, no other typeface.</div>
+          <div><span style="color:#A62F2F">✕</span> No red or amber slash — those hues carry data meaning.</div>
+          <div><span style="color:#A62F2F">✕</span> Minimum wordmark width 88px; below that, use the rail mark.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="color" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">03 · Color</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 4px">Semantic first, decorative never</h2>
+    <p style="font:400 14px/1.6 inherit;color:#5B6472;max-width:84ch;margin:0 0 18px">Four data hues, one neutral, one ink. A hue may only appear where its meaning applies — a green button that isn't about citation is a misuse. Each semantic ships as a triplet: <span style="font:500 13px 'JetBrains Mono',monospace">--x</span> (fills, bars, 3:1 UI), <span style="font:500 13px 'JetBrains Mono',monospace">--x-ink</span> (AA text ≥4.5:1 on white), <span style="font:500 13px 'JetBrains Mono',monospace">--x-wash</span> (chip/row backgrounds).</p>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+        <div style="height:56px;background:#0E7C66"></div>
+        <div style="padding:12px 14px">
+          <div style="font:600 20px/1.35 'Source Serif 4',serif">Cited</div>
+          <div style="font:400 12px/1.7 'JetBrains Mono',monospace;color:#5B6472;margin-top:4px">--cited #0E7C66<br>--cited-ink #0B6151 · 5.9:1<br>--cited-wash #E7F2EF</div>
+          <div style="font:400 11.5px/1.5 inherit;color:#8A93A1;margin-top:8px">Cited, verified, positive delta, primary "fix" CTA.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+        <div style="height:56px;background:#C43D3D"></div>
+        <div style="padding:12px 14px">
+          <div style="font:600 20px/1.35 'Source Serif 4',serif">Gap</div>
+          <div style="font:400 12px/1.7 'JetBrains Mono',monospace;color:#5B6472;margin-top:4px">--gap #C43D3D · 5.0:1<br>--gap-ink #A62F2F · 6.3:1<br>--gap-wash #FBEDED</div>
+          <div style="font:400 11.5px/1.5 inherit;color:#8A93A1;margin-top:8px">Citation gap, invisible status, AIO displacement, destructive.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+        <div style="height:56px;background:#D98324"></div>
+        <div style="padding:12px 14px">
+          <div style="font:600 20px/1.35 'Source Serif 4',serif">Warn</div>
+          <div style="font:400 12px/1.7 'JetBrains Mono',monospace;color:#5B6472;margin-top:4px">--warn #D98324 · 2.6:1 ⚠<br>--warn-ink #9A6210 · 4.9:1<br>--warn-wash #FDF2E3</div>
+          <div style="font:400 11.5px/1.5 inherit;color:#8A93A1;margin-top:8px">Partial citation, ranking decline, quota near limit. Never use --warn for text.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+        <div style="height:56px;background:#3E5C8A"></div>
+        <div style="padding:12px 14px">
+          <div style="font:600 20px/1.35 'Source Serif 4',serif">Tech</div>
+          <div style="font:400 12px/1.7 'JetBrains Mono',monospace;color:#5B6472;margin-top:4px">--tech #3E5C8A · 6.0:1<br>--tech-ink #34507A · 7.1:1<br>--tech-wash #EBEFF6</div>
+          <div style="font:400 11.5px/1.5 inherit;color:#8A93A1;margin-top:8px">Technical decay, competitor bars, focus ring, informational links.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-top:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Surface / ink / line scale</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px">
+          <div style="border:1px solid #E2E5EA;border-radius:6px;overflow:hidden"><div style="height:38px;background:#FFFFFF;border-bottom:1px solid #E2E5EA"></div><div style="padding:7px 9px;font:400 10.5px/1.5 'JetBrains Mono',monospace;color:#5B6472">--card<br>#FFFFFF</div></div>
+          <div style="border:1px solid #E2E5EA;border-radius:6px;overflow:hidden"><div style="height:38px;background:#F4F5F7;border-bottom:1px solid #E2E5EA"></div><div style="padding:7px 9px;font:400 10.5px/1.5 'JetBrains Mono',monospace;color:#5B6472">--paper<br>#F4F5F7</div></div>
+          <div style="border:1px solid #E2E5EA;border-radius:6px;overflow:hidden"><div style="height:38px;background:#EDEFF2;border-bottom:1px solid #E2E5EA"></div><div style="padding:7px 9px;font:400 10.5px/1.5 'JetBrains Mono',monospace;color:#5B6472">--paper-sunk<br>#EDEFF2</div></div>
+          <div style="border:1px solid #E2E5EA;border-radius:6px;overflow:hidden"><div style="height:38px;background:#E2E5EA"></div><div style="padding:7px 9px;font:400 10.5px/1.5 'JetBrains Mono',monospace;color:#5B6472">--line<br>#E2E5EA</div></div>
+          <div style="border:1px solid #E2E5EA;border-radius:6px;overflow:hidden"><div style="height:38px;background:#C6CBD3"></div><div style="padding:7px 9px;font:400 10.5px/1.5 'JetBrains Mono',monospace;color:#5B6472">--line-strong<br>#C6CBD3</div></div>
+          <div style="border:1px solid #E2E5EA;border-radius:6px;overflow:hidden"><div style="height:38px;background:#8A93A1"></div><div style="padding:7px 9px;font:400 10.5px/1.5 'JetBrains Mono',monospace;color:#5B6472">--ink-muted<br>2.9:1 · non-text</div></div>
+          <div style="border:1px solid #E2E5EA;border-radius:6px;overflow:hidden"><div style="height:38px;background:#5B6472"></div><div style="padding:7px 9px;font:400 10.5px/1.5 'JetBrains Mono',monospace;color:#5B6472">--ink-soft<br>6.4:1</div></div>
+          <div style="border:1px solid #E2E5EA;border-radius:6px;overflow:hidden"><div style="height:38px;background:#141B26"></div><div style="padding:7px 9px;font:400 10.5px/1.5 'JetBrains Mono',monospace;color:#5B6472">--ink<br>15.8:1</div></div>
+        </div>
+        <div style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin-top:10px">Cards sit on paper with a 1px hairline, not a shadow. Shadows appear only on things that float: modals, dropdowns, toasts, the sticky mobile CTA.</div>
+      </div>
+      <div style="background:#141B26;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Dark sidebar set</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+          <div style="display:flex;align-items:center;gap:10px"><span style="width:22px;height:22px;border-radius:5px;background:#141B26;border:1px solid rgba(255,255,255,.16)"></span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#F4F5F7">--side-bg #141B26</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="width:22px;height:22px;border-radius:5px;background:rgba(255,255,255,.10)"></span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#F4F5F7">--side-bg-active .10</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="width:22px;height:22px;border-radius:5px;background:#35B394"></span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#F4F5F7">--side-cited #35B394</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="width:22px;height:22px;border-radius:5px;background:#F07A6A"></span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#F4F5F7">--side-gap #F07A6A</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="width:22px;height:22px;border-radius:5px;background:#E9A44A"></span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#F4F5F7">--side-warn #E9A44A</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="width:22px;height:22px;border-radius:5px;background:#7FA0D4"></span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#F4F5F7">--side-tech #7FA0D4</span></div>
+        </div>
+        <div style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin-top:10px">Semantics lift ~2 steps on ink so they clear 4.5:1. These four are the only dark-surface colors in v1.</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Chart palette at 8px — the real test</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px 'JetBrains Mono',monospace;color:#5B6472;width:58px">8px</span><div style="flex:1;display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px"><div style="width:46%;background:#C43D3D"></div><div style="width:22%;background:#D98324"></div><div style="width:14%;background:#3E5C8A"></div><div style="width:18%;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px 'JetBrains Mono',monospace;color:#5B6472;width:58px">grayscale</span><div style="flex:1;display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px;filter:grayscale(1)"><div style="width:46%;background:#C43D3D"></div><div style="width:22%;background:#D98324"></div><div style="width:14%;background:#3E5C8A"></div><div style="width:18%;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px 'JetBrains Mono',monospace;color:#5B6472;width:58px">deuter.</span><div style="flex:1;display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px"><div style="width:46%;background:#8F6134"></div><div style="width:22%;background:#A98A2E"></div><div style="width:14%;background:#4F5A8A"></div><div style="width:18%;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></div></div></div>
+        </div>
+        <div style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin-top:12px">Luminance is staggered (46 / 58 / 38 / 62) so the four segments separate in grayscale and in deuteranopia simulation. "Other" is striped in every rendering, including print. Every bar is also labelled with its own value in mono — hue is a shortcut, never the message.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Locked / blur treatment</div>
+        <div style="position:relative;margin-top:14px;border:1px dashed #D8DCE3;border-radius:8px;padding:14px;overflow:hidden">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px"><span style="font:400 12px inherit;width:92px;filter:blur(6px)">nerdwallet.com</span><div style="flex:1;height:8px;border-radius:4px;background:#E2E5EA"><div style="width:74%;height:8px;border-radius:4px;background:#3E5C8A"></div></div><span style="font:500 11px 'JetBrains Mono',monospace;color:#5B6472">31/42</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><span style="font:400 12px inherit;width:92px;filter:blur(6px)">bankrate.com</span><div style="flex:1;height:8px;border-radius:4px;background:#E2E5EA"><div style="width:52%;height:8px;border-radius:4px;background:#3E5C8A"></div></div><span style="font:500 11px 'JetBrains Mono',monospace;color:#5B6472">22/42</span></div>
+          </div>
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(244,245,247,.92));display:flex;align-items:flex-end;justify-content:center;padding:12px">
+            <span style="font:500 11.5px inherit;color:#FFFFFF;background:#141B26;padding:6px 14px;border-radius:999px">Unlock 2 names — $29/mo</span>
+          </div>
+        </div>
+        <div style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin-top:12px">Rules: blur the <em>identity</em>, never the evidence — rates and bars stay sharp so the value is provable. Dashed border + white veil, no padlock wall, no dimming to gray. One CTA, priced, with the count of what's behind it.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="type" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">04 · Typography</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 14px">Three roles, one rule</h2>
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:110px 130px 1fr;gap:0;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;background:#F4F5F7;border-bottom:1px solid #E2E5EA;padding:9px 20px"><span>token</span><span>spec</span><span>sample</span></div>
+      <div style="display:grid;grid-template-columns:110px 130px 1fr;align-items:baseline;padding:14px 20px;border-bottom:1px solid #E2E5EA"><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">--t-d1</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">44/1.1 600 −.02em</span><span style="font:600 44px/1.1 'Source Serif 4',serif;letter-spacing:-.02em">Impressions holding.</span></div>
+      <div style="display:grid;grid-template-columns:110px 130px 1fr;align-items:baseline;padding:14px 20px;border-bottom:1px solid #E2E5EA"><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">--t-d2</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">34/1.15 600</span><span style="font:600 34px/1.15 'Source Serif 4',serif">Your visibility report</span></div>
+      <div style="display:grid;grid-template-columns:110px 130px 1fr;align-items:baseline;padding:14px 20px;border-bottom:1px solid #E2E5EA"><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">--t-d3</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">26/1.28 600</span><span style="font:600 26px/1.28 'Source Serif 4',serif">You rank top-5 for 14 of 20 queries, but you're cited in only 22% of AI answer runs.</span></div>
+      <div style="display:grid;grid-template-columns:110px 130px 1fr;align-items:baseline;padding:14px 20px;border-bottom:1px solid #E2E5EA"><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">--t-d4</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">20/1.35 600</span><span style="font:600 20px/1.35 'Source Serif 4',serif">Add a comparison table to /best-savings-accounts</span></div>
+      <div style="display:grid;grid-template-columns:110px 130px 1fr;align-items:baseline;padding:14px 20px;border-bottom:1px solid #E2E5EA"><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">--t-ui-lg</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">16/1.55 400 sans</span><span style="font:400 16px/1.55 inherit;color:#5B6472">Marketing body copy and long-form prose sit here at 68ch max.</span></div>
+      <div style="display:grid;grid-template-columns:110px 130px 1fr;align-items:baseline;padding:14px 20px;border-bottom:1px solid #E2E5EA"><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">--t-ui</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">14/1.55 400 sans</span><span style="font:400 14px/1.55 inherit">App base: labels, table cells, explanations, button text at 14px.</span></div>
+      <div style="display:grid;grid-template-columns:110px 130px 1fr;align-items:baseline;padding:14px 20px;border-bottom:1px solid #E2E5EA"><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">--t-ui-sm</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">13/1.5 400 sans</span><span style="font:400 13px/1.5 inherit;color:#5B6472">Dense table rows, helper text, card meta lines.</span></div>
+      <div style="display:grid;grid-template-columns:110px 130px 1fr;align-items:baseline;padding:14px 20px;border-bottom:1px solid #E2E5EA"><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">--t-label</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">10.5 500 mono .12em ↑</span><span style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">ESTIMATED CLICK LOSS · LAST 30 DAYS</span></div>
+      <div style="display:grid;grid-template-columns:110px 130px 1fr;align-items:baseline;padding:14px 20px;border-bottom:1px solid #E2E5EA"><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">--t-data-xl</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">48/1 500 mono</span><span style="font:500 48px/1 'JetBrains Mono',monospace;letter-spacing:-.02em">62<span style="font:500 16px 'JetBrains Mono',monospace;color:#8A93A1"> /100 ±6</span></span></div>
+      <div style="display:grid;grid-template-columns:110px 130px 1fr;align-items:baseline;padding:14px 20px;border-bottom:1px solid #E2E5EA"><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">--t-data</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">13/1.4 500 mono tnum</span><span style="font:500 13px 'JetBrains Mono',monospace">11/60 runs — 18% &nbsp;·&nbsp; −41.2k/mo ±5.3k &nbsp;·&nbsp; 2026-07-24 09:12 UTC</span></div>
+      <div style="display:grid;grid-template-columns:110px 130px 1fr;align-items:baseline;padding:14px 20px"><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">--t-code</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">12.5/1.6 400 mono</span><span style="font:400 12.5px/1.6 'JetBrains Mono',monospace;color:#5B6472">&lt;meta name="robots" content="max-snippet:-1"&gt;</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">When mono is used — exhaustive</div>
+        <div style="font:400 13px/1.75 inherit;color:#5B6472;margin-top:10px">All numerals in a data role · rates and run counts · scores and deltas · currency and click estimates · confidence bands · percentages · dates, times, durations, timezones · engine run IDs · API tokens and code · DNS records · URLs and query strings shown as data · every uppercase microlabel · the wordmark.</div>
+        <div style="font:400 13px/1.75 inherit;color:#141B26;margin-top:10px"><b>Not mono:</b> numerals inside a sentence ("cited in only 22% of runs" — the verdict is serif and keeps its own figures), pricing in marketing headlines, list counts in prose.</div>
+        <div style="font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1;margin-top:10px">font-variant-numeric: tabular-nums on every mono data element.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Responsive display sizes</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+          <div style="border-left:2px solid #E2E5EA;padding-left:10px"><span style="color:#141B26">380–639</span><br>d1 30<br>d2 25<br>d3 21<br>score 40</div>
+          <div style="border-left:2px solid #E2E5EA;padding-left:10px"><span style="color:#141B26">640–1279</span><br>d1 37<br>d2 30<br>d3 23<br>score 44</div>
+          <div style="border-left:2px solid #E2E5EA;padding-left:10px"><span style="color:#141B26">1280+</span><br>d1 44<br>d2 34<br>d3 26<br>score 48</div>
+        </div>
+        <div style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin-top:12px">One step down per breakpoint, clamp() in CSS. Body sizes never shrink below 14px in the app or 16px in prose — P1 reads this worried, on a phone, in a hurry.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="grid" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">05 · Spacing, radii &amp; layout</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 14px">4px base, hairline structure</h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Spacing scale</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px">
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px 'JetBrains Mono',monospace;color:#5B6472;width:74px">--s-1 4</span><span style="height:10px;width:4px;background:#3E5C8A"></span><span style="font:400 11px inherit;color:#8A93A1">icon↔text</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px 'JetBrains Mono',monospace;color:#5B6472;width:74px">--s-2 8</span><span style="height:10px;width:8px;background:#3E5C8A"></span><span style="font:400 11px inherit;color:#8A93A1">chip gap</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px 'JetBrains Mono',monospace;color:#5B6472;width:74px">--s-3 12</span><span style="height:10px;width:12px;background:#3E5C8A"></span><span style="font:400 11px inherit;color:#8A93A1">row padding</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px 'JetBrains Mono',monospace;color:#5B6472;width:74px">--s-4 16</span><span style="height:10px;width:16px;background:#3E5C8A"></span><span style="font:400 11px inherit;color:#8A93A1">card gap</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px 'JetBrains Mono',monospace;color:#5B6472;width:74px">--s-5 24</span><span style="height:10px;width:24px;background:#3E5C8A"></span><span style="font:400 11px inherit;color:#8A93A1">card padding</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px 'JetBrains Mono',monospace;color:#5B6472;width:74px">--s-6 32</span><span style="height:10px;width:32px;background:#3E5C8A"></span><span style="font:400 11px inherit;color:#8A93A1">gutter, section</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px 'JetBrains Mono',monospace;color:#5B6472;width:74px">--s-7 48</span><span style="height:10px;width:48px;background:#3E5C8A"></span><span style="font:400 11px inherit;color:#8A93A1">block rhythm</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px 'JetBrains Mono',monospace;color:#5B6472;width:74px">--s-8 64</span><span style="height:10px;width:64px;background:#3E5C8A"></span><span style="font:400 11px inherit;color:#8A93A1">marketing band</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px 'JetBrains Mono',monospace;color:#5B6472;width:74px">--s-9 96</span><span style="height:10px;width:96px;background:#3E5C8A"></span><span style="font:400 11px inherit;color:#8A93A1">hero</span></div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Radii &amp; borders</div>
+        <div style="display:flex;gap:10px;margin-top:14px;align-items:flex-end">
+          <div style="text-align:center"><div style="width:48px;height:40px;border:1px solid #C6CBD3;border-radius:6px;background:#F4F5F7"></div><div style="font:400 10px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:5px">6 sm</div></div>
+          <div style="text-align:center"><div style="width:48px;height:40px;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7"></div><div style="font:400 10px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:5px">10 md</div></div>
+          <div style="text-align:center"><div style="width:48px;height:40px;border:1px solid #C6CBD3;border-radius:14px;background:#F4F5F7"></div><div style="font:400 10px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:5px">14 lg</div></div>
+          <div style="text-align:center"><div style="width:48px;height:40px;border:1px solid #C6CBD3;border-radius:999px;background:#F4F5F7"></div><div style="font:400 10px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:5px">pill</div></div>
+        </div>
+        <div style="font:400 12.5px/1.7 inherit;color:#5B6472;margin-top:12px">sm — inputs, chips, code blocks, bar caps<br>md — cards, tables, banners<br>lg — modals, score unit, hero panels<br>pill — buttons, status badges, tags</div>
+        <div style="font:400 12.5px/1.7 inherit;color:#5B6472;margin-top:8px">1px hairlines everywhere; 2px only for the selected cause segment, the active nav marker and the focus ring.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Breakpoints</div>
+        <div style="font:400 12.5px/1.8 inherit;color:#5B6472;margin-top:12px">
+          <div><span style="font:500 12px 'JetBrains Mono',monospace;color:#141B26">380–639</span> — 1 col, gutter 16, sidebar off-canvas (hamburger in top bar, slides from left over a scrim), tables become card lists, sticky primary CTA at bottom.</div>
+          <div style="margin-top:6px"><span style="font:500 12px 'JetBrains Mono',monospace;color:#141B26">640–899</span> — 2 col, gutter 16, sidebar still off-canvas.</div>
+          <div style="margin-top:6px"><span style="font:500 12px 'JetBrains Mono',monospace;color:#141B26">900–1279</span> — 64px icon rail with tooltips, gutter 20, 2–3 col.</div>
+          <div style="margin-top:6px"><span style="font:500 12px 'JetBrains Mono',monospace;color:#141B26">1280–1599</span> — 248px sidebar, gutter 32, content max 1280.</div>
+          <div style="margin-top:6px"><span style="font:500 12px 'JetBrains Mono',monospace;color:#141B26">1600+</span> — content stays 1280 and centres; extra space is paper, not more widgets.</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:0;margin-top:14px;overflow:hidden">
+      <div style="display:flex;height:190px">
+        <div style="width:150px;background:#141B26;padding:14px;display:flex;flex-direction:column;gap:8px">
+          <span style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:-.03em;color:#F4F5F7">cite<span style="color:#35B394">/</span>rate</span>
+          <span style="font:400 10px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:6px">248px · --side-w</span>
+          <span style="margin-top:auto;font:400 10px 'JetBrains Mono',monospace;color:#8A93A1">64px rail &lt;1280</span>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column">
+          <div style="height:44px;border-bottom:1px solid #E2E5EA;display:flex;align-items:center;padding:0 16px;font:400 10px 'JetBrains Mono',monospace;color:#8A93A1">top bar · 60px · --topbar-h</div>
+          <div style="flex:1;background:#F4F5F7;padding:16px;display:flex;gap:12px">
+            <div style="flex:2;border:1px dashed #C6CBD3;border-radius:8px;display:flex;align-items:center;justify-content:center;font:400 10px 'JetBrains Mono',monospace;color:#8A93A1">verdict + cause bar · 8 of 12</div>
+            <div style="flex:1;border:1px dashed #C6CBD3;border-radius:8px;display:flex;align-items:center;justify-content:center;font:400 10px 'JetBrains Mono',monospace;color:#8A93A1">score · 4 of 12</div>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #E2E5EA;padding:12px 20px;font:400 11.5px/1.55 inherit;color:#8A93A1">12-column grid inside the content area, 24px columns gap. Marketing pages use the same 12 columns at 1120px max with 68ch prose measure. The dashboard never exceeds two content columns above the fold — density arrives through row-expand, not more cards.</div>
+    </div>
+  </section>
+
+  <section id="components" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">06 · Components</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 14px">Signature units first</h2>
+
+    <div style="display:grid;grid-template-columns:320px 1fr;gap:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:22px 24px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">AI visibility score</div>
+        <div style="display:flex;align-items:center;gap:18px;margin-top:12px">
+          <svg width="132" height="86" viewBox="0 0 132 86" aria-label="AI visibility score 62 of 100, plus or minus 6">
+            <path d="M14 74 A52 52 0 0 1 118 74" fill="none" stroke="#E2E5EA" stroke-width="10" stroke-linecap="round"></path>
+            <path d="M14 74 A52 52 0 0 1 118 74" fill="none" stroke="rgba(14,124,102,.22)" stroke-width="10" stroke-linecap="round" stroke-dasharray="112 164"></path>
+            <path d="M14 74 A52 52 0 0 1 118 74" fill="none" stroke="#0E7C66" stroke-width="10" stroke-linecap="round" stroke-dasharray="101 164"></path>
+            <text x="66" y="66" text-anchor="middle" style="font:500 38px 'JetBrains Mono',monospace" fill="#141B26">62</text>
+          </svg>
+          <div style="font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">/100<br>±6 band<br><span style="color:#0E7C66">+4</span> vs 30d<br>9 runs</div>
+        </div>
+        <div style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin-top:8px">A 240° arc, 10px stroke, round caps. The pale arc is the confidence band and is never omitted. Ownable at every size: 132px card, 44px sidebar, 24px favicon-adjacent, and flattened to a horizontal ruled bar in the PDF.</div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:22px 24px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Cause-separation bar · the signature element</div>
+          <div style="font:500 13px 'JetBrains Mono',monospace">−41.2k clicks/mo <span style="color:#8A93A1">±5.3k</span></div>
+        </div>
+        <sc-if value="{{ barSeparated }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;height:34px;margin-top:14px;border-radius:6px;overflow:hidden;gap:2px">
+            <div style="width:46%;background:#C43D3D;box-shadow:inset 0 0 0 2px #141B26;display:flex;align-items:center;justify-content:center;font:500 11.5px 'JetBrains Mono',monospace;color:#FFFFFF">46%</div>
+            <div style="width:22%;background:#D98324;display:flex;align-items:center;justify-content:center;font:500 11.5px 'JetBrains Mono',monospace;color:#FFFFFF">22%</div>
+            <div style="width:14%;background:#3E5C8A;display:flex;align-items:center;justify-content:center;font:500 11.5px 'JetBrains Mono',monospace;color:#FFFFFF">14%</div>
+            <div style="width:18%;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px);display:flex;align-items:center;justify-content:center;font:500 11.5px 'JetBrains Mono',monospace;color:#141B26">18%</div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ barButted }}">
+          <div style="display:flex;height:34px;margin-top:14px">
+            <div style="width:46%;background:#C43D3D;outline:2px solid #141B26;outline-offset:2px;position:relative;z-index:1;display:flex;align-items:center;justify-content:center;font:500 11.5px 'JetBrains Mono',monospace;color:#FFFFFF">46%</div>
+            <div style="width:22%;background:#D98324;display:flex;align-items:center;justify-content:center;font:500 11.5px 'JetBrains Mono',monospace;color:#FFFFFF">22%</div>
+            <div style="width:14%;background:#3E5C8A;display:flex;align-items:center;justify-content:center;font:500 11.5px 'JetBrains Mono',monospace;color:#FFFFFF">14%</div>
+            <div style="width:18%;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px);display:flex;align-items:center;justify-content:center;font:500 11.5px 'JetBrains Mono',monospace;color:#141B26">18%</div>
+          </div>
+        </sc-if>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+          <span style="display:inline-flex;align-items:center;gap:7px;font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FBEDED;border:1px solid #C43D3D;border-radius:999px;padding:4px 11px"><span style="width:8px;height:8px;border-radius:2px;background:#C43D3D"></span>AIO displacement · 46% · selected</span>
+          <span style="display:inline-flex;align-items:center;gap:7px;font:500 11.5px 'JetBrains Mono',monospace;color:#5B6472;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:4px 11px"><span style="width:8px;height:8px;border-radius:2px;background:#D98324"></span>Ranking decline · 22%</span>
+          <span style="display:inline-flex;align-items:center;gap:7px;font:500 11.5px 'JetBrains Mono',monospace;color:#5B6472;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:4px 11px"><span style="width:8px;height:8px;border-radius:2px;background:#3E5C8A"></span>Technical decay · 14%</span>
+          <span style="display:inline-flex;align-items:center;gap:7px;font:500 11.5px 'JetBrains Mono',monospace;color:#5B6472;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:4px 11px"><span style="width:8px;height:8px;border-radius:2px;background:repeating-linear-gradient(45deg,#8A93A1 0 2px,#A8AFBA 2px 4px)"></span>Other / unexplained · 18%</span>
+        </div>
+        <div style="font:400 12.5px/1.6 inherit;color:#5B6472;margin-top:12px">Selection is a 2px ink ring plus a filled legend chip plus the word "selected" — three signals, so it survives grayscale, colorblindness and screen readers (<span style="font:400 11.5px 'JetBrains Mono',monospace">role="tablist"</span>, segments are <span style="font:400 11.5px 'JetBrains Mono',monospace">aria-pressed</span> buttons). Selecting a cause filters the queries table, the fix queue and the engine strip below, and writes <span style="font:400 11.5px 'JetBrains Mono',monospace">?cause=aio</span> to the URL. Each segment ≥44px tall on mobile; segments under 8% collapse into an "8% in 2 smaller causes" chip rather than becoming untappable slivers.</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Buttons · all states</div>
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:12px 14px;margin-top:14px;align-items:center">
+          <span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">primary</span>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+            <span style="font:500 14px inherit;color:#FFFFFF;background:#141B26;padding:9px 18px;border-radius:999px">Run scan</span>
+            <span style="font:500 14px inherit;color:#FFFFFF;background:#232C3B;padding:9px 18px;border-radius:999px">hover</span>
+            <span style="font:500 14px inherit;color:#FFFFFF;background:#141B26;padding:9px 18px;border-radius:999px;box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #3E5C8A">focus</span>
+            <span style="font:500 14px inherit;color:#FFFFFF;background:#0B1017;padding:9px 18px;border-radius:999px;transform:translateY(1px);display:inline-block">active</span>
+            <span style="font:500 14px inherit;color:#8A93A1;background:#F0F2F5;padding:9px 18px;border-radius:999px">disabled</span>
+            <span style="display:inline-flex;align-items:center;gap:8px;font:500 14px inherit;color:#FFFFFF;background:#141B26;padding:9px 18px;border-radius:999px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" style="animation:cr-spin 800ms linear infinite"><circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,.3)" stroke-width="3"></circle><path d="M21 12a9 9 0 0 0-9-9" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"></path></svg>Scanning…</span>
+          </div>
+          <span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">fix-CTA</span>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+            <span style="font:500 14px inherit;color:#FFFFFF;background:#0E7C66;padding:9px 18px;border-radius:999px">Fix it for me →</span>
+            <span style="font:500 14px inherit;color:#FFFFFF;background:#0B6151;padding:9px 18px;border-radius:999px">hover</span>
+            <span style="font:500 14px inherit;color:#FFFFFF;background:#0E7C66;padding:9px 18px;border-radius:999px;box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #3E5C8A">focus</span>
+            <span style="font:500 14px inherit;color:#8A93A1;background:#F0F2F5;padding:9px 18px;border-radius:999px">disabled</span>
+          </div>
+          <span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">ghost</span>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+            <span style="font:500 14px inherit;color:#141B26;background:#FFFFFF;border:1px solid #C6CBD3;padding:8px 17px;border-radius:999px">Export</span>
+            <span style="font:500 14px inherit;color:#141B26;background:#F4F5F7;border:1px solid #8A93A1;padding:8px 17px;border-radius:999px">hover</span>
+            <span style="font:500 14px inherit;color:#141B26;background:#FFFFFF;border:1px solid #C6CBD3;padding:8px 17px;border-radius:999px;box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #3E5C8A">focus</span>
+            <span style="font:500 14px inherit;color:#8A93A1;background:#FFFFFF;border:1px solid #E2E5EA;padding:8px 17px;border-radius:999px">disabled</span>
+          </div>
+          <span style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">destructive</span>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+            <span style="font:500 14px inherit;color:#A62F2F;background:#FFFFFF;border:1px solid #E9B9B9;padding:8px 17px;border-radius:999px">Delete domain</span>
+            <span style="font:500 14px inherit;color:#FFFFFF;background:#C43D3D;padding:9px 18px;border-radius:999px">hover / confirm</span>
+          </div>
+        </div>
+        <div style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin-top:12px">Heights 40px desktop / 44px mobile. Ink is the workhorse; green is reserved for prescription actions ("Fix", "Verify") so the CTA that makes money is the only green thing on the page.</div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Inputs &amp; validation</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px">
+          <div><label style="font:500 12px inherit;color:#5B6472;display:block;margin-bottom:5px">Domain</label><div style="display:flex;align-items:center;gap:8px;border:1px solid #C6CBD3;border-radius:6px;background:#FFFFFF;padding:10px 12px"><span style="font:400 12.5px 'JetBrains Mono',monospace;color:#8A93A1">https://</span><span style="font:400 14px 'JetBrains Mono',monospace;color:#8A93A1">yoursite.com</span></div><div style="font:400 11.5px inherit;color:#8A93A1;margin-top:5px">default · placeholder in mono, hint below</div></div>
+          <div><div style="display:flex;align-items:center;gap:8px;border:1px solid #3E5C8A;border-radius:6px;background:#FFFFFF;padding:10px 12px;box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px rgba(62,92,138,.35)"><span style="font:400 14px 'JetBrains Mono',monospace;color:#141B26">northline.co</span><span style="width:1px;height:16px;background:#141B26;animation:cr-shimmer 1s steps(2) infinite"></span></div><div style="font:400 11.5px inherit;color:#8A93A1;margin-top:5px">focus · 2px tech ring, never removed on mouse input</div></div>
+          <div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #C43D3D;border-radius:6px;background:#FFFFFF;padding:10px 12px"><span style="font:400 14px 'JetBrains Mono',monospace;color:#141B26">northline</span><span style="color:#C43D3D">⚠</span></div><div id="dom-err" style="font:400 11.5px/1.5 inherit;color:#A62F2F;margin-top:5px">Add the domain ending — northline.co or northline.com. We scan one domain at a time.</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:3px">error · aria-describedby="dom-err" aria-invalid="true"</div></div>
+          <div style="display:flex;gap:10px"><div style="flex:1"><div style="display:flex;align-items:center;justify-content:space-between;border:1px solid #0E7C66;border-radius:6px;background:#FFFFFF;padding:10px 12px"><span style="font:400 14px 'JetBrains Mono',monospace;color:#141B26">northline.co</span><span style="color:#0E7C66">✓</span></div><div style="font:400 11.5px inherit;color:#0B6151;margin-top:5px">valid</div></div><div style="flex:1"><div style="border:1px solid #E2E5EA;border-radius:6px;background:#F0F2F5;padding:10px 12px"><span style="font:400 14px 'JetBrains Mono',monospace;color:#8A93A1">northline.co</span></div><div style="font:400 11.5px inherit;color:#8A93A1;margin-top:5px">disabled / locked by plan</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Status pills · surface/proxy tags · sparkline</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#0B6151;background:#E7F2EF;border:1px solid rgba(14,124,102,.35);border-radius:999px;padding:3px 11px">● Cited</span>
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#9A6210;background:#FDF2E3;border:1px solid rgba(217,131,36,.4);border-radius:999px;padding:3px 11px">◐ Partial</span>
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#A62F2F;background:#FBEDED;border:1px solid rgba(196,61,61,.35);border-radius:999px;padding:3px 11px">○ Invisible</span>
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#5B6472;background:#F0F2F5;border:1px solid #E2E5EA;border-radius:999px;padding:3px 11px">— Not tested</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center">
+          <span style="font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#FFFFFF;background:#141B26;border-radius:999px;padding:3px 8px">SURFACE</span>
+          <span style="font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#5B6472;border:1px dashed #8A93A1;border-radius:999px;padding:2px 8px">PROXY</span>
+          <span style="font:400 11.5px inherit;color:#8A93A1">solid = the consumer product itself; dashed = API proxy, with a tooltip naming the model and date</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:14px">
+          <svg width="120" height="30" viewBox="0 0 120 30"><polyline points="2,22 17,20 32,23 47,16 62,18 77,11 92,13 107,7 118,6" fill="none" stroke="#0E7C66" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"></polyline><circle cx="118" cy="6" r="2.5" fill="#0E7C66"></circle></svg>
+          <svg width="120" height="30" viewBox="0 0 120 30"><polyline points="2,7 17,9 32,8 47,14 62,13 77,19 92,17 107,23 118,25" fill="none" stroke="#C43D3D" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"></polyline><circle cx="118" cy="25" r="2.5" fill="#C43D3D"></circle></svg>
+          <span style="font:400 11.5px/1.5 inherit;color:#8A93A1">30-day rate, 1.5px stroke, no axes, no fill, terminal dot. Direction is also stated in mono beside it (<span style="font:500 11.5px 'JetBrains Mono',monospace;color:#0B6151">+6</span> / <span style="font:500 11.5px 'JetBrains Mono',monospace;color:#A62F2F">−9</span>).</span>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Scan progress · 2–4 min dwell</div>
+        <div style="margin-top:14px;border:1px solid #E2E5EA;border-radius:8px;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid #E2E5EA"><span style="color:#0E7C66">✓</span><span style="font:400 13px inherit;flex:1">Crawled 42 pages</span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">0:18</span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid #E2E5EA"><span style="color:#0E7C66">✓</span><span style="font:400 13px inherit;flex:1">Matched 20 queries to Search Console</span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">0:41</span></div>
+          <div style="padding:11px 14px;border-bottom:1px solid #E2E5EA;background:#F4F5F7">
+            <div style="display:flex;align-items:center;gap:10px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="animation:cr-spin 900ms linear infinite"><circle cx="12" cy="12" r="9" stroke="#E2E5EA" stroke-width="3"></circle><path d="M21 12a9 9 0 0 0-9-9" stroke="#141B26" stroke-width="3" stroke-linecap="round"></path></svg><span style="font:400 13px inherit;flex:1">Testing Google AI Overviews — <span style="font:500 13px 'JetBrains Mono',monospace">run 3/9</span></span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">1:52</span></div>
+            <div style="height:4px;border-radius:2px;background:#E2E5EA;margin-top:9px"><div style="width:38%;height:4px;border-radius:2px;background:#141B26"></div></div>
+            <div style="font:400 11.5px inherit;color:#5B6472;margin-top:7px">Repeating each query 9 times — AI answers change between runs, so one look isn't an answer.</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;color:#8A93A1"><span style="width:14px;text-align:center">○</span><span style="font:400 13px inherit;flex:1">Perplexity, ChatGPT <span style="font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em;border:1px dashed #8A93A1;border-radius:999px;padding:1px 6px">PROXY</span>, Gemini</span></div>
+        </div>
+        <div style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin-top:10px">Each completed stage reveals a real finding, so the wait earns trust instead of spending it. Polling every 3s; steps animate in at 240ms; the elapsed clock is the only always-moving element.</div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden;margin-top:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid #E2E5EA">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Table with expandable rows · desktop</div>
+        <div style="font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">20 queries · sorted by est. clicks exposed</div>
+      </div>
+      <div style="display:grid;grid-template-columns:2.4fr .7fr .8fr 1.1fr 1fr .9fr 28px;gap:12px;padding:9px 20px;background:#F4F5F7;border-bottom:1px solid #E2E5EA;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1"><span>query</span><span>rank</span><span>aio</span><span>citation rate</span><span>exposed</span><span>30d</span><span></span></div>
+      <div style="display:grid;grid-template-columns:2.4fr .7fr .8fr 1.1fr 1fr .9fr 28px;gap:12px;padding:12px 20px;border-bottom:1px solid #E2E5EA;align-items:center;font:400 13px inherit">
+        <span>best high-yield savings accounts</span><span style="font:500 13px 'JetBrains Mono',monospace">3</span><span style="font:500 12px 'JetBrains Mono',monospace;color:#A62F2F">yes</span><span style="font:500 13px 'JetBrains Mono',monospace">1/9 — 11%</span><span style="font:500 13px 'JetBrains Mono',monospace;color:#A62F2F">−8.4k</span><svg width="52" height="18" viewBox="0 0 52 18"><polyline points="1,4 11,6 21,7 31,11 41,12 50,15" fill="none" stroke="#C43D3D" stroke-width="1.5"></polyline></svg><span style="color:#8A93A1;text-align:center">⌄</span>
+      </div>
+      <div style="background:#F4F5F7;border-bottom:1px solid #E2E5EA;padding:16px 20px">
+        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:20px">
+          <div>
+            <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Per-engine detail</div>
+            <div style="display:flex;flex-direction:column;gap:7px;margin-top:10px;font:400 13px inherit">
+              <div style="display:flex;justify-content:space-between;align-items:center"><span>Google AI Overviews <span style="font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#FFFFFF;background:#141B26;border-radius:999px;padding:2px 7px">SURFACE</span></span><span style="font:500 13px 'JetBrains Mono',monospace">0/9 — 0%</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center"><span>Perplexity <span style="font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#FFFFFF;background:#141B26;border-radius:999px;padding:2px 7px">SURFACE</span></span><span style="font:500 13px 'JetBrains Mono',monospace">1/9 — 11%</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center"><span>ChatGPT <span style="font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#5B6472;border:1px dashed #8A93A1;border-radius:999px;padding:1px 7px">PROXY</span></span><span style="font:500 13px 'JetBrains Mono',monospace">0/9 — 0%</span></div>
+            </div>
+          </div>
+          <div>
+            <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">How you were framed</div>
+            <blockquote style="margin:10px 0 0;padding:10px 12px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;font:600 14px/1.5 'Source Serif 4',serif">"…for a budget option, Northline offers basic rates, while <span style="background:#FDF2E3">Bankrate</span> and <span style="background:#FDF2E3">NerdWallet</span> list higher APYs."</blockquote>
+            <div style="display:flex;gap:14px;margin-top:8px;font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1"><span>run 4 · 2026-07-24 09:12</span><a href="#components">view snapshot →</a></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:2.4fr .7fr .8fr 1.1fr 1fr .9fr 28px;gap:12px;padding:12px 20px;align-items:center;font:400 13px inherit;border-bottom:1px solid #E2E5EA">
+        <span>savings account interest rates 2026</span><span style="font:500 13px 'JetBrains Mono',monospace">5</span><span style="font:500 12px 'JetBrains Mono',monospace;color:#A62F2F">yes</span><span style="font:500 13px 'JetBrains Mono',monospace">4/9 — 44%</span><span style="font:500 13px 'JetBrains Mono',monospace;color:#A62F2F">−5.1k</span><svg width="52" height="18" viewBox="0 0 52 18"><polyline points="1,10 11,9 21,11 31,8 41,9 50,7" fill="none" stroke="#0E7C66" stroke-width="1.5"></polyline></svg><span style="color:#8A93A1;text-align:center">⌄</span>
+      </div>
+      <div style="display:grid;grid-template-columns:2.4fr .7fr .8fr 1.1fr 1fr .9fr 28px;gap:12px;padding:12px 20px;align-items:center;font:400 13px inherit;background:#FFFFFF">
+        <span>how to open a savings account</span><span style="font:500 13px 'JetBrains Mono',monospace">2</span><span style="font:500 12px 'JetBrains Mono',monospace;color:#5B6472">no</span><span style="font:500 13px 'JetBrains Mono',monospace">7/9 — 78%</span><span style="font:500 13px 'JetBrains Mono',monospace;color:#5B6472">−0.3k</span><svg width="52" height="18" viewBox="0 0 52 18"><polyline points="1,9 11,8 21,8 31,6 41,5 50,4" fill="none" stroke="#0E7C66" stroke-width="1.5"></polyline></svg><span style="color:#8A93A1;text-align:center">⌄</span>
+      </div>
+      <div style="padding:12px 20px;font:400 11.5px/1.55 inherit;color:#8A93A1;border-top:1px solid #E2E5EA">Rows are 44px, zebra-free (hairlines only), hover = <span style="font:400 11px 'JetBrains Mono',monospace">--paper</span> fill, one row expands at a time, 240ms height transition, chevron rotates 180°. Header is sticky under the top bar. Keyboard: ↑↓ moves, Enter expands, Esc collapses.</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:300px 1fr 1fr;gap:14px;margin-top:14px;align-items:start">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Mobile: table → card list</div>
+        <div style="margin-top:12px;border:1px solid #E2E5EA;border-radius:8px;padding:12px 14px">
+          <div style="font:400 14px/1.4 inherit">best high-yield savings accounts</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:9px">
+            <span style="font:500 11.5px 'JetBrains Mono',monospace;color:#A62F2F;background:#FBEDED;border:1px solid rgba(196,61,61,.35);border-radius:999px;padding:2px 9px">○ 1/9 — 11%</span>
+            <span style="font:500 11.5px 'JetBrains Mono',monospace;color:#5B6472">rank 3</span>
+            <span style="font:500 11.5px 'JetBrains Mono',monospace;color:#A62F2F">−8.4k</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid #E2E5EA"><svg width="60" height="18" viewBox="0 0 60 18"><polyline points="1,4 13,6 25,7 37,11 49,12 58,15" fill="none" stroke="#C43D3D" stroke-width="1.5"></polyline></svg><span style="font:500 12px inherit;color:#0B6151">Details →</span></div>
+        </div>
+        <div style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin-top:10px">Below 640px each row becomes a card: query as the title, then rate pill / rank / exposed clicks as a chip row, sparkline + "Details →" opening a full-screen drawer. Sort control moves into a sticky filter bar. No horizontal scrolling, ever.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Fix card + code block + status workflow</div>
+        <div style="margin-top:12px;border:1px solid #E2E5EA;border-radius:8px;padding:14px 16px">
+          <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">
+            <div style="font:600 20px/1.35 'Source Serif 4',serif">Add a comparison table to /best-savings-accounts</div>
+            <span style="flex:none;font:500 11.5px 'JetBrains Mono',monospace;color:#A62F2F;background:#FBEDED;border:1px solid rgba(196,61,61,.35);border-radius:999px;padding:3px 10px">High impact</span>
+          </div>
+          <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:8px 0 0">AI answers quote tables. Yours is prose, so the engine paraphrases a competitor's table instead of citing your numbers.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;font:500 11.5px 'JetBrains Mono',monospace;color:#5B6472">
+            <span style="border:1px solid #E2E5EA;border-radius:999px;padding:3px 10px">effort: 2h</span>
+            <span style="border:1px solid #E2E5EA;border-radius:999px;padding:3px 10px">affects 6 queries</span>
+            <span style="border:1px solid #E2E5EA;border-radius:999px;padding:3px 10px">cause: AIO displacement</span>
+          </div>
+          <div style="background:#141B26;border-radius:6px;padding:11px 13px;margin-top:11px;font:400 12.5px/1.6 'JetBrains Mono',monospace;color:#F4F5F7;overflow:auto"><span style="color:#8A93A1">&lt;!-- put the rates in a real table --&gt;</span><br>&lt;table&gt;&lt;caption&gt;<span style="color:#35B394">APY by account</span>&lt;/caption&gt;</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap">
+            <span style="font:500 11.5px 'JetBrains Mono',monospace;color:#5B6472;background:#F0F2F5;border-radius:999px;padding:4px 10px">To do</span><span style="color:#8A93A1">→</span>
+            <span style="font:500 11.5px 'JetBrains Mono',monospace;color:#9A6210;background:#FDF2E3;border-radius:999px;padding:4px 10px">In progress</span><span style="color:#8A93A1">→</span>
+            <span style="font:500 11.5px 'JetBrains Mono',monospace;color:#5B6472;background:#F0F2F5;border-radius:999px;padding:4px 10px">Done</span><span style="color:#8A93A1">→</span>
+            <span style="font:500 11.5px 'JetBrains Mono',monospace;color:#FFFFFF;background:#0E7C66;border-radius:999px;padding:4px 10px">Verified ✓ 1/9 → 5/9</span>
+          </div>
+        </div>
+        <div style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin-top:10px">Verified is the only place a filled green pill appears in a data context — it is the product's proof, so it gets the loudest treatment on the page and drives the "+X pts" retention email.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Upgrade banner &amp; quota meter</div>
+          <div style="margin-top:12px;border:1px solid #E2E5EA;border-radius:8px;background:linear-gradient(180deg,#FFFFFF,#F4F5F7);padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+            <div><div style="font:600 20px/1.3 'Source Serif 4',serif">See who is being cited instead</div><div style="font:400 12.5px inherit;color:#5B6472;margin-top:3px">2 competitors out-cited you across 42 runs.</div></div>
+            <span style="flex:none;font:500 13px inherit;color:#FFFFFF;background:#141B26;padding:9px 16px;border-radius:999px">Unlock — $29/mo</span>
+          </div>
+          <div style="margin-top:12px">
+            <div style="display:flex;justify-content:space-between;font:500 11.5px 'JetBrains Mono',monospace;color:#5B6472"><span>QUERIES TRACKED</span><span>18/20</span></div>
+            <div style="height:6px;border-radius:3px;background:#E2E5EA;margin-top:6px"><div style="width:90%;height:6px;border-radius:3px;background:#D98324"></div></div>
+            <div style="font:400 11.5px inherit;color:#9A6210;margin-top:5px">2 slots left. Adding more moves you to Growth.</div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Toasts</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+            <div style="display:flex;align-items:center;gap:10px;background:#141B26;color:#F4F5F7;border-radius:8px;padding:10px 14px;box-shadow:0 12px 32px rgba(20,27,38,.14)"><span style="color:#35B394">✓</span><span style="font:400 13px inherit;flex:1">Scan scheduled for Mondays, 06:00 UTC</span><span style="color:#8A93A1">✕</span></div>
+            <div style="display:flex;align-items:center;gap:10px;background:#141B26;color:#F4F5F7;border-radius:8px;padding:10px 14px;box-shadow:0 12px 32px rgba(20,27,38,.14)"><span style="color:#F07A6A">⚠</span><span style="font:400 13px inherit;flex:1">Search Console token expired — reconnect to keep query data current</span><span style="font:500 12px inherit;color:#35B394">Reconnect</span></div>
+          </div>
+          <div style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin-top:10px">Bottom-left, ink ground, 5s auto-dismiss (errors persist), max 2 stacked, <span style="font:400 11px 'JetBrains Mono',monospace">role="status"</span>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:260px 1fr 1fr;gap:14px;margin-top:14px;align-items:start">
+      <div style="background:#141B26;border-radius:10px;padding:16px 0;overflow:hidden">
+        <div style="padding:0 16px 12px;display:flex;align-items:center;justify-content:space-between"><span style="font:500 15px 'JetBrains Mono',monospace;letter-spacing:-.03em;color:#F4F5F7">cite<span style="color:#35B394">/</span>rate</span><span style="font:400 10px 'JetBrains Mono',monospace;color:#8A93A1">sidebar</span></div>
+        <div style="display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;gap:10px;padding:9px 16px;background:rgba(255,255,255,.10);border-left:2px solid #35B394;color:#F4F5F7;font:500 13.5px inherit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#35B394" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>Overview</div>
+          <div style="display:flex;align-items:center;gap:10px;padding:9px 16px;color:#8A93A1;font:400 13.5px inherit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A93A1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"></path></svg>Queries <span style="margin-left:auto;font:400 11.5px 'JetBrains Mono',monospace">20</span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:9px 16px;color:#F4F5F7;background:rgba(255,255,255,.06);font:400 13.5px inherit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A93A1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v3M12 18v3M3 12h3M18 12h3"></path></svg>Engines <span style="margin-left:auto;font:400 10px 'JetBrains Mono',monospace;color:#8A93A1">hover</span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:9px 16px;color:#8A93A1;font:400 13.5px inherit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A93A1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Competitors <span style="margin-left:auto"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8A93A1" stroke-width="1.8"><rect x="4" y="11" width="16" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:9px 16px;color:#8A93A1;font:400 13.5px inherit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A93A1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l-1 6h5l-8 12 1-7H6z"></path></svg>Fix queue <span style="margin-left:auto;font:500 10.5px 'JetBrains Mono',monospace;color:#141B26;background:#35B394;border-radius:999px;padding:1px 7px">7</span></div>
+        </div>
+        <div style="margin-top:12px;padding:12px 16px 0;border-top:1px solid rgba(255,255,255,.10);font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1">Free plan<br><span style="color:#F4F5F7">1 scan left this month</span></div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Top bar with domain switcher</div>
+        <div style="margin-top:12px;border:1px solid #E2E5EA;border-radius:8px;display:flex;align-items:center;gap:12px;padding:11px 14px">
+          <span style="display:inline-flex;align-items:center;gap:8px;font:500 13px inherit;border:1px solid #C6CBD3;border-radius:999px;padding:5px 12px">northline.co <span style="color:#8A93A1">⌄</span></span>
+          <span style="font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">last scan 2026-07-24 09:12 UTC</span>
+          <span style="margin-left:auto;display:flex;gap:8px"><span style="font:500 13px inherit;color:#141B26;border:1px solid #C6CBD3;border-radius:999px;padding:6px 14px">Export</span><span style="font:500 13px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:7px 15px">Run scan</span></span>
+        </div>
+        <div style="margin-top:10px;border:1px solid #E2E5EA;border-radius:8px;box-shadow:0 12px 32px rgba(20,27,38,.14);overflow:hidden;max-width:280px">
+          <div style="padding:8px 12px;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;border-bottom:1px solid #E2E5EA">3 domains · agency</div>
+          <div style="display:flex;justify-content:space-between;padding:9px 12px;font:400 13px inherit;background:#F4F5F7">northline.co <span style="font:500 12px 'JetBrains Mono',monospace;color:#0B6151">62</span></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 12px;font:400 13px inherit">harborlend.com <span style="font:500 12px 'JetBrains Mono',monospace;color:#9A6210">48</span></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 12px;font:400 13px inherit;border-bottom:1px solid #E2E5EA">peakcredit.io <span style="font:500 12px 'JetBrains Mono',monospace;color:#A62F2F">31</span></div>
+          <div style="padding:9px 12px;font:500 13px inherit;color:#0B6151">+ Add domain</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Empty state</div>
+          <div style="margin-top:12px;border:1px dashed #C6CBD3;border-radius:8px;padding:20px;text-align:center">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8A93A1" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+            <div style="font:600 20px/1.35 'Source Serif 4',serif;margin-top:8px">No scans yet</div>
+            <div style="font:400 13px/1.55 inherit;color:#5B6472;margin-top:4px;max-width:38ch;margin-left:auto;margin-right:auto">Your first scan takes about three minutes and tests 20 queries across four engines.</div>
+            <span style="display:inline-block;font:500 13px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:8px 16px;margin-top:12px">Run first scan</span>
+          </div>
+          <div style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin-top:10px">Empty states state what will happen and how long it takes. No illustrations, no exclamation marks.</div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Modal</div>
+          <div style="margin-top:12px;background:#EDEFF2;border-radius:8px;padding:14px">
+            <div style="background:#FFFFFF;border-radius:14px;box-shadow:0 12px 32px rgba(20,27,38,.14);padding:18px 20px">
+              <div style="font:600 20px/1.3 'Source Serif 4',serif">Run a scan now?</div>
+              <div style="font:400 13px/1.55 inherit;color:#5B6472;margin-top:6px">This uses 1 of your 2 remaining scans this month.</div>
+              <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><span style="font:500 13px inherit;border:1px solid #C6CBD3;border-radius:999px;padding:7px 14px">Cancel</span><span style="font:500 13px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:8px 15px">Run scan</span></div>
+            </div>
+          </div>
+          <div style="font:400 11.5px/1.55 inherit;color:#8A93A1;margin-top:10px">560px max, radius 14, scrim <span style="font:400 11px 'JetBrains Mono',monospace">rgba(20,27,38,.42)</span>, focus trapped, Esc closes, opens 240ms with a 4px rise.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="motion" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">07 · Motion</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 4px">Motion explains sequence, never decorates</h2>
+    <p style="font:400 14px/1.6 inherit;color:#5B6472;max-width:84ch;margin:0 0 14px">One rule governs the dashboard load: <b style="color:#141B26">the verdict settles first.</b> Nothing else moves until the sentence is readable — the user's question is "what's wrong", and the answer arrives before the evidence.</p>
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:1.5fr .8fr .9fr 2.2fr;gap:12px;padding:9px 20px;background:#F4F5F7;border-bottom:1px solid #E2E5EA;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1"><span>moment</span><span>duration</span><span>easing</span><span>behaviour</span></div>
+      <div style="display:grid;grid-template-columns:1.5fr .8fr .9fr 2.2fr;gap:12px;padding:11px 20px;border-bottom:1px solid #E2E5EA;font:400 13px/1.5 inherit"><span>Dashboard load</span><span style="font:500 12.5px 'JetBrains Mono',monospace">420ms</span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">settle</span><span>Verdict fades up 6px (0ms) → score count-up (120ms) → cause bar segments draw left-to-right, 40ms stagger (200ms) → cards fade in (320ms). Total under 1s.</span></div>
+      <div style="display:grid;grid-template-columns:1.5fr .8fr .9fr 2.2fr;gap:12px;padding:11px 20px;border-bottom:1px solid #E2E5EA;font:400 13px/1.5 inherit"><span>Score count-up</span><span style="font:500 12.5px 'JetBrains Mono',monospace">700ms</span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">out</span><span>0 → 62 with the arc sweeping in sync; band arc appears at the end so the estimate never looks more precise than it is. Once per session only.</span></div>
+      <div style="display:grid;grid-template-columns:1.5fr .8fr .9fr 2.2fr;gap:12px;padding:11px 20px;border-bottom:1px solid #E2E5EA;font:400 13px/1.5 inherit"><span>Cause segment select</span><span style="font:500 12.5px 'JetBrains Mono',monospace">160ms</span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">out</span><span>Ring draws on the segment; unrelated table rows drop to 40% opacity, then the filtered set re-flows. No layout jump — heights are reserved.</span></div>
+      <div style="display:grid;grid-template-columns:1.5fr .8fr .9fr 2.2fr;gap:12px;padding:11px 20px;border-bottom:1px solid #E2E5EA;font:400 13px/1.5 inherit"><span>Row expand</span><span style="font:500 12.5px 'JetBrains Mono',monospace">240ms</span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">in-out</span><span>grid-template-rows 0fr→1fr, chevron rotates 180°, content fades at 60% of the way. Only one row open.</span></div>
+      <div style="display:grid;grid-template-columns:1.5fr .8fr .9fr 2.2fr;gap:12px;padding:11px 20px;border-bottom:1px solid #E2E5EA;font:400 13px/1.5 inherit"><span>Scan progress</span><span style="font:500 12.5px 'JetBrains Mono',monospace">240ms/step</span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">out</span><span>Completed step slides up 4px with its ✓; the run counter ticks in mono; the elapsed clock is the only continuous motion in the product.</span></div>
+      <div style="display:grid;grid-template-columns:1.5fr .8fr .9fr 2.2fr;gap:12px;padding:11px 20px;border-bottom:1px solid #E2E5EA;font:400 13px/1.5 inherit"><span>Hover / press</span><span style="font:500 12.5px 'JetBrains Mono',monospace">90ms</span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">out</span><span>Background and border only. Press translates 1px down. Nothing scales, nothing lifts.</span></div>
+      <div style="display:grid;grid-template-columns:1.5fr .8fr .9fr 2.2fr;gap:12px;padding:11px 20px;font:400 13px/1.5 inherit"><span>reduced-motion</span><span style="font:500 12.5px 'JetBrains Mono',monospace">0ms</span><span style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472">—</span><span>All durations collapse to 0; the count-up prints the final number; bars appear drawn. Every state change still lands — no feature is motion-dependent.</span></div>
+    </div>
+  </section>
+
+  <section id="voice" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">08 · Voice</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 14px">Calm, specific, and never louder than the data</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#0B6151">Write this</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
+          <div style="font:600 16px/1.45 'Source Serif 4',serif">You rank top-5 for 14 of 20 queries, but you're cited in only 22% of AI answer runs.</div>
+          <div style="font:400 13px/1.55 inherit;color:#5B6472">Add the domain ending — northline.co or northline.com. We scan one domain at a time.</div>
+          <div style="font:400 13px/1.55 inherit;color:#5B6472">The scan stopped at run 6 of 9. We saved what we have and will finish it tonight — your report will arrive by email.</div>
+          <div style="font:400 13px/1.55 inherit;color:#5B6472">AI answers quote tables. Yours is prose, so the engine paraphrases a competitor's table instead of citing your numbers.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#A62F2F">Not this</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px;color:#8A93A1">
+          <div style="font:600 16px/1.45 'Source Serif 4',serif;text-decoration:line-through">Your AI visibility is critically low! 🚨</div>
+          <div style="font:400 13px/1.55 inherit;text-decoration:line-through">Invalid input.</div>
+          <div style="font:400 13px/1.55 inherit;text-decoration:line-through">Oops! Something went wrong. Please try again later.</div>
+          <div style="font:400 13px/1.55 inherit;text-decoration:line-through">Unlock the full power of AI-driven insights today!</div>
+        </div>
+        <div style="font:400 11.5px/1.6 inherit;color:#8A93A1;margin-top:14px;padding-top:12px;border-top:1px solid #E2E5EA">Rules: sentence case everywhere including buttons · active verbs · name the number and its run count · errors state what happened, what we did, and the one next step · no emoji, no "!", no "simply", no "powerful", no apology without a fact · say "we" for our actions, "you" for theirs · uncertainty is stated plainly ("we can't measure ChatGPT directly — we test the API and label it PROXY").</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="icons" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">09 · Iconography</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 4px">One set, 1.6px, round caps, 24px grid</h2>
+    <p style="font:400 14px/1.6 inherit;color:#5B6472;max-width:84ch;margin:0 0 14px">Geometric line icons on a 24px grid, 1.6px stroke, round caps and joins, no fills except the verified check. Rendered at 16px (nav, chips) and 20px (empty states, stage lists). Icons never carry meaning alone — every one is paired with a label.</p>
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;display:grid;grid-template-columns:repeat(8,1fr);gap:18px;text-align:center">
+      <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#141B26" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:6px">scan</div></div>
+      <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#141B26" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"></path></svg><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:6px">engine</div></div>
+      <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#141B26" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l-1 6h5l-8 12 1-7H6z"></path></svg><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:6px">fix</div></div>
+      <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0E7C66" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M8 12.4l2.6 2.6L16 9.6"></path></svg><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:6px">verified</div></div>
+      <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#141B26" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="9.5" rx="2"></rect><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"></path></svg><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:6px">locked</div></div>
+      <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#141B26" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V11M10 20V4M16 20v-6M22 20H2"></path></svg><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:6px">competitor</div></div>
+      <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#141B26" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 5-7"></path><path d="M14 8h4v4"></path></svg><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:6px">trend</div></div>
+      <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#141B26" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="7" height="8" rx="2"></rect><rect x="14" y="8" width="7" height="8" rx="2"></rect><path d="M10 12h4"></path></svg><div style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:6px">integration</div></div>
+    </div>
+  </section>
+
+  <section id="tokens" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">10 · Tokens &amp; flags</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 14px">Ship file &amp; open questions</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Deliverable</div>
+        <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:10px 0 0"><a href="tokens.css">tokens.css</a> — every value on this page as CSS custom properties, ready to drop into the Worker's base stylesheet. Includes the reduced-motion block, the responsive gutter/sidebar overrides and a print block that flattens paper to white for the PDF. Dark mode is namespaced but not designed, per §6.</p>
+        <div style="background:#141B26;border-radius:6px;padding:12px 14px;margin-top:12px;font:400 12px/1.65 'JetBrains Mono',monospace;color:#F4F5F7;overflow:auto"><span style="color:#8A93A1">/* 2 families · 4 webfont weights */</span><br>--font-display: "Source Serif 4", ui-serif, Georgia, serif;<br>--font-ui: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;<br>--font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;<br><span style="color:#35B394">--cited</span>: #0E7C66; <span style="color:#F07A6A">--gap</span>: #C43D3D; <span style="color:#E9A44A">--warn</span>: #D98324; <span style="color:#7FA0D4">--tech</span>: #3E5C8A;</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#9A6210">Flags — decisions I need from you</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;font:400 13px/1.55 inherit;color:#5B6472">
+          <div><b style="color:#141B26">Amber is not AA as text.</b> #D98324 is 2.6:1 on white, so "Partial" pills use #9A6210 text on a wash. The bar fill stays #D98324 (3:1 for graphics is met). No invariant broken — flagging because the prototype used amber for label text.</div>
+          <div><b style="color:#141B26">Serif at 380px.</b> Display drops to 30px on mobile; a 3-line verdict is normal there. If you'd rather cap the verdict at two lines, we shorten the sentence pattern, not the type.</div>
+          <div><b style="color:#141B26">Score arc vs. ruled bar.</b> The arc is the on-screen unit; the PDF flattens it to a ruled horizontal bar because arcs print poorly at small sizes and white-label accents distort them. Two renderings of one number — confirm that's acceptable.</div>
+          <div><b style="color:#141B26">Sidebar under 900px.</b> Off-canvas drawer, not a bottom tab bar — the app has 9 destinations and tabs would hide the fix queue badge. Say the word if you want tabs for the top 4.</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding:16px 20px;background:#141B26;border-radius:10px;display:flex;justify-content:space-between;align-items:center;gap:20px">
+      <div style="font:400 13px/1.55 inherit;color:#8A93A1;max-width:70ch">Next, Phase 2 — the core four: <span style="color:#F4F5F7">Home</span>, <span style="color:#F4F5F7">Teaser results</span>, <span style="color:#F4F5F7">Dashboard Overview</span>, <span style="color:#F4F5F7">Fix Queue</span>, desktop + mobile, with loading / empty / locked states.</div>
+      <span style="flex:none;font:500 13px 'JetBrains Mono',monospace;letter-spacing:-.03em;color:#F4F5F7">cite<span style="color:#35B394">/</span>rate</span>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;logoMark&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;slash&quot;,&quot;bracket&quot;],&quot;default&quot;:&quot;slash&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Brand&quot;},&quot;causeBarStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;separated&quot;,&quot;butted&quot;],&quot;default&quot;:&quot;separated&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Signature element&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const mark = this.props.logoMark ?? "slash";
+    const bar = this.props.causeBarStyle ?? "separated";
+    return {
+      isSlash: mark === "slash",
+      isBracket: mark === "bracket",
+      barSeparated: bar === "separated",
+      barButted: bar === "butted"
+    };
+  }
+}
+</script>
+</body>
+</html>

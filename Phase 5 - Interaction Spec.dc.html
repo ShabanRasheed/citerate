@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EBE9E4;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+@keyframes ph-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes ph-shimmer{from{background-position:-180px 0}to{background-position:220px 0}}
+@keyframes ph-spin{to{transform:rotate(360deg)}}
+@keyframes ph-toast{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:1ms !important;transition-duration:1ms !important}}
+</style></helmet>
+
+<section style="padding:40px 44px 64px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+<div style="max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:14px">
+  <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Citerate · Phase 5</span>
+    <span style="width:1px;height:12px;background:#C6CBD3"></span>
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">27 Jul 2026</span>
+  </div>
+  <h1 style="margin:0;font:600 44px/1.1 'Source Serif 4',Georgia,serif;letter-spacing:-0.02em;max-width:20ch">Interaction spec</h1>
+  <p style="margin:0;font:400 16px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;max-width:68ch">Every motion, state, and feedback rule for the screens shipped in phases 2–4. The demos below are live and run on the real token values — hover them, click them, break them. Anything not specified here should not move.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:2px">
+    <span style="font:500 12px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#34507A;background:#EBEFF6;border:1px solid #D6DEEC;border-radius:999px;padding:5px 11px">5 durations · 3 easings</span>
+    <span style="font:500 12px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#34507A;background:#EBEFF6;border:1px solid #D6DEEC;border-radius:999px;padding:5px 11px">transform + opacity only</span>
+    <span style="font:500 12px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#34507A;background:#EBEFF6;border:1px solid #D6DEEC;border-radius:999px;padding:5px 11px">no spring, no bounce, no parallax</span>
+  </div>
+</div>
+
+<!-- ══ 01 MOTION LADDER ══ -->
+<div style="max-width:1180px;margin:56px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap">
+  <div style="display:flex;align-items:baseline;gap:14px">
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">01</span>
+    <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">The duration ladder</h2>
+  </div>
+  <button onClick="{{ replayLadder }}" style="font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;background:#FFFFFF;border:1px solid #C6CBD3;border-radius:6px;padding:9px 14px;cursor:pointer;transition:background 90ms cubic-bezier(.22,.61,.36,1),transform 90ms cubic-bezier(.22,.61,.36,1)" style-hover="background:#EDEFF2" style-active="transform:translateY(1px)">Replay ↻</button>
+</div>
+<div style="max-width:1180px;margin:18px auto 0;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:24px 28px 26px;display:flex;flex-direction:column;gap:0">
+
+  <div style="display:grid;grid-template-columns:120px 1fr 220px;gap:20px;align-items:center;padding:13px 0;border-bottom:1px solid #E2E5EA">
+    <div style="display:flex;flex-direction:column;gap:3px"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">90ms</span><span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">--dur-1</span></div>
+    <div style="height:8px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="height:100%;background:#141B26;border-radius:999px;width:{{ p1 }}%"></div></div>
+    <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Hover, press, checkbox tick, sidebar highlight</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:120px 1fr 220px;gap:20px;align-items:center;padding:13px 0;border-bottom:1px solid #E2E5EA">
+    <div style="display:flex;flex-direction:column;gap:3px"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">160ms</span><span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">--dur-2</span></div>
+    <div style="height:8px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="height:100%;background:#141B26;border-radius:999px;width:{{ p2 }}%"></div></div>
+    <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Chip select, tab underline, toast in, tooltip</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:120px 1fr 220px;gap:20px;align-items:center;padding:13px 0;border-bottom:1px solid #E2E5EA">
+    <div style="display:flex;flex-direction:column;gap:3px"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">240ms</span><span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">--dur-3</span></div>
+    <div style="height:8px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="height:100%;background:#141B26;border-radius:999px;width:{{ p3 }}%"></div></div>
+    <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Row expand, drawer, modal, sheet</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:120px 1fr 220px;gap:20px;align-items:center;padding:13px 0;border-bottom:1px solid #E2E5EA">
+    <div style="display:flex;flex-direction:column;gap:3px"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">420ms</span><span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">--dur-4</span></div>
+    <div style="height:8px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="height:100%;background:#0E7C66;border-radius:999px;width:{{ p4 }}%"></div></div>
+    <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Verdict settle, cause bar draw — things that <em>land</em></span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:120px 1fr 220px;gap:20px;align-items:center;padding:13px 0">
+    <div style="display:flex;flex-direction:column;gap:3px"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">700ms</span><span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">--dur-count</span></div>
+    <div style="height:8px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="height:100%;background:#0E7C66;border-radius:999px;width:{{ p5 }}%"></div></div>
+    <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Score count-up — once per session, never on refilter</span>
+  </div>
+</div>
+
+<div style="max-width:1180px;margin:14px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+    <div style="font:500 13px/1.4 'JetBrains Mono',monospace;margin-bottom:6px">ease-out</div>
+    <div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1;margin-bottom:9px">cubic-bezier(.22,.61,.36,1)</div>
+    <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Default. Anything entering or responding to a pointer.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+    <div style="font:500 13px/1.4 'JetBrains Mono',monospace;margin-bottom:6px">ease-in-out</div>
+    <div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1;margin-bottom:9px">cubic-bezier(.4,0,.2,1)</div>
+    <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Reversible pairs only — expand/collapse, drawer open/close.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+    <div style="font:500 13px/1.4 'JetBrains Mono',monospace;margin-bottom:6px">ease-settle</div>
+    <div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1;margin-bottom:9px">cubic-bezier(.16,.84,.44,1)</div>
+    <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Data arriving at rest. Fast start, long tail, no overshoot.</div>
+  </div>
+</div>
+
+<!-- ══ 02 STATE MATRIX ══ -->
+<div style="max-width:1180px;margin:56px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">02</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">State matrix</h2>
+  <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#8A93A1">live — hover and tab through</span>
+</div>
+<div style="max-width:1180px;margin:18px auto 0;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+  <div style="display:grid;grid-template-columns:180px 1fr 1.25fr;gap:20px;padding:12px 24px;background:#EDEFF2;border-bottom:1px solid #E2E5EA">
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Component</span>
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Live</span>
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Rest → hover → focus → active → disabled</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:180px 1fr 1.25fr;gap:20px;padding:18px 24px;border-bottom:1px solid #E2E5EA;align-items:center">
+    <span style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Primary button</span>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#0E7C66;border:0;border-radius:6px;padding:11px 18px;cursor:pointer;transition:background 90ms cubic-bezier(.22,.61,.36,1),transform 90ms cubic-bezier(.22,.61,.36,1),box-shadow 90ms cubic-bezier(.22,.61,.36,1);outline:none" style-hover="background:#0B6151" style-active="transform:translateY(1px);background:#0A574A" style-focus="box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #3E5C8A">Run scan</button>
+      <button disabled="{{ true }}" style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#8A93A1;border:0;border-radius:6px;padding:11px 18px;cursor:not-allowed">Run scan</button>
+    </div>
+    <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">#0E7C66 → #0B6151 → 2px #3E5C8A ring outside a white gap → 1px down + #0A574A → #8A93A1, cursor not-allowed, no hover. Busy state swaps the label for a 14px spinner and keeps the button's measured width.</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:180px 1fr 1.25fr;gap:20px;padding:18px 24px;border-bottom:1px solid #E2E5EA;align-items:center">
+    <span style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Secondary / ghost</span>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;background:#FFFFFF;border:1px solid #C6CBD3;border-radius:6px;padding:10px 17px;cursor:pointer;transition:background 90ms cubic-bezier(.22,.61,.36,1),border-color 90ms cubic-bezier(.22,.61,.36,1);outline:none" style-hover="background:#EDEFF2;border-color:#8A93A1" style-focus="box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #3E5C8A">Export CSV</button>
+      <button style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#A62F2F;background:transparent;border:1px solid transparent;border-radius:6px;padding:10px 13px;cursor:pointer;transition:background 90ms cubic-bezier(.22,.61,.36,1);outline:none" style-hover="background:#FBEDED" style-focus="box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #3E5C8A">Delete</button>
+    </div>
+    <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Border darkens to #8A93A1 on hover; fill only ever moves one step (#FFF → #EDEFF2). Destructive ghost tints to --gap-wash, never fills solid red until the confirm modal.</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:180px 1fr 1.25fr;gap:20px;padding:18px 24px;border-bottom:1px solid #E2E5EA;align-items:center">
+    <span style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Text input</span>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <input value="{{ email }}" onChange="{{ onEmail }}" onBlur="{{ blurEmail }}" placeholder="you@company.com" style="font:400 14px/1.4 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #C6CBD3;border-radius:6px;padding:11px 12px;width:100%;box-sizing:border-box;outline:none;transition:border-color 90ms cubic-bezier(.22,.61,.36,1),box-shadow 90ms cubic-bezier(.22,.61,.36,1)" style-hover="border-color:#8A93A1" style-focus="border-color:#3E5C8A;box-shadow:0 0 0 3px rgba(62,92,138,.16)">
+      <sc-if value="{{ emailErr }}" hint-placeholder-val="{{ false }}"><span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#A62F2F">{{ emailErr }}</span></sc-if>
+    </div>
+    <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Validate on <strong>blur</strong>, never per keystroke. Once a field has errored it re-validates on every keystroke so the error clears the moment it's fixed. Error text replaces the hint in place — the field never shifts the layout below it.</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:180px 1fr 1.25fr;gap:20px;padding:18px 24px;border-bottom:1px solid #E2E5EA;align-items:center">
+    <span style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Filter chips</span>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button onClick="{{ tAio }}" style="font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;border-radius:999px;padding:8px 13px;cursor:pointer;transition:background 160ms cubic-bezier(.22,.61,.36,1),color 160ms cubic-bezier(.22,.61,.36,1),border-color 160ms cubic-bezier(.22,.61,.36,1);outline:none;background:{{ cAio.bg }};color:{{ cAio.fg }};border:1px solid {{ cAio.bd }}" style-focus="box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #3E5C8A">AIO displacement</button>
+      <button onClick="{{ tRank }}" style="font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;border-radius:999px;padding:8px 13px;cursor:pointer;transition:background 160ms cubic-bezier(.22,.61,.36,1),color 160ms cubic-bezier(.22,.61,.36,1),border-color 160ms cubic-bezier(.22,.61,.36,1);outline:none;background:{{ cRank.bg }};color:{{ cRank.fg }};border:1px solid {{ cRank.bd }}" style-focus="box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #3E5C8A">Ranking</button>
+      <button onClick="{{ tTech }}" style="font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;border-radius:999px;padding:8px 13px;cursor:pointer;transition:background 160ms cubic-bezier(.22,.61,.36,1),color 160ms cubic-bezier(.22,.61,.36,1),border-color 160ms cubic-bezier(.22,.61,.36,1);outline:none;background:{{ cTech.bg }};color:{{ cTech.fg }};border:1px solid {{ cTech.bd }}" style-focus="box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #3E5C8A">Technical</button>
+    </div>
+    <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Multi-select, additive, applied immediately — no Apply button. ← → move between chips, Space toggles. Selected = ink fill. Deselecting the last chip restores "all", it never lands on an empty result.</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:180px 1fr 1.25fr;gap:20px;padding:18px 24px;align-items:center">
+    <span style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Table row</span>
+    <div style="border:1px solid #E2E5EA;border-radius:6px;overflow:hidden">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 13px;cursor:pointer;transition:background 90ms cubic-bezier(.22,.61,.36,1);border-left:2px solid transparent" style-hover="background:#EDEFF2;border-left-color:#141B26"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">best crm for startups</span><span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#A62F2F">not cited</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 13px;cursor:pointer;background:#F4F5F7;transition:background 90ms cubic-bezier(.22,.61,.36,1);border-left:2px solid transparent" style-hover="background:#EDEFF2;border-left-color:#141B26"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">crm pricing comparison</span><span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#0B6151">cited · #2</span></div>
+    </div>
+    <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Whole row is the hit target. Hover fills --paper-sunk and grows a 2px ink rule on the leading edge; zebra stays visible underneath. Click opens the drawer; keyboard j/k moves the same highlight.</span>
+  </div>
+</div>
+
+<!-- ══ 03 SIGNATURE INTERACTIONS ══ -->
+<div style="max-width:1180px;margin:56px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">03</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">Signature interactions</h2>
+</div>
+
+<div style="max-width:1180px;margin:18px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+
+  <!-- A. readout -->
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px 24px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+      <div><div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Score arrival</div><div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">Overview · Teaser · Report p.1</div></div>
+      <button onClick="{{ replayRead }}" style="font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;background:#FFFFFF;border:1px solid #C6CBD3;border-radius:6px;padding:8px 12px;cursor:pointer;transition:background 90ms cubic-bezier(.22,.61,.36,1)" style-hover="background:#EDEFF2">Replay ↻</button>
+    </div>
+    <div style="background:#F4F5F7;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:flex-end;gap:10px">
+        <span style="font:500 48px/1 'JetBrains Mono',monospace;letter-spacing:-0.02em;font-variant-numeric:tabular-nums">{{ score }}</span>
+        <span style="font:500 20px/1.2 'JetBrains Mono',monospace;color:#8A93A1;padding-bottom:5px">/100</span>
+        <span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#0B6151;padding-bottom:9px;margin-left:4px;opacity:{{ deltaOp }}">▲ 4 vs last week</span>
+      </div>
+      <div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif;opacity:{{ vOp }};transform:translateY({{ vY }}px)">You're cited in 38% of the 212 queries we track. AIO displacement explains most of the gap.</div>
+      <div style="display:flex;flex-direction:column;gap:7px;padding-top:4px">
+        <div style="display:flex;height:10px;border-radius:999px;overflow:hidden;background:#E2E5EA">
+          <div style="background:#C43D3D;width:{{ b1 }}%"></div>
+          <div style="background:#D98324;width:{{ b2 }}%"></div>
+          <div style="background:#3E5C8A;width:{{ b3 }}%"></div>
+          <div style="background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px);width:{{ b4 }}%"></div>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#5B6472">AIO 46%</span>
+          <span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#5B6472">Ranking 24%</span>
+          <span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#5B6472">Technical 18%</span>
+          <span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#5B6472">Other 12%</span>
+        </div>
+      </div>
+    </div>
+    <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Order is fixed: number counts up (700ms, tabular-nums so nothing reflows) → verdict fades and rises 6px at +300ms (420ms, ease-settle) → cause bars draw left-to-right, 60ms stagger, capped at 4 → delta chip last. Fires <strong>once</strong>, on first paint of a session, when the card is ≥50% in view. Refilter and date changes update values with no animation at all.</div>
+  </div>
+
+  <!-- B. progress -->
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px 24px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+      <div><div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Scan progress</div><div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">Home · Onboarding · Queries re-run</div></div>
+      <button onClick="{{ startScan }}" style="font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;background:#FFFFFF;border:1px solid #C6CBD3;border-radius:6px;padding:8px 12px;cursor:pointer;transition:background 90ms cubic-bezier(.22,.61,.36,1)" style-hover="background:#EDEFF2">Run ↻</button>
+    </div>
+    <div style="background:#F4F5F7;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">{{ scanLabel }}</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#8A93A1;font-variant-numeric:tabular-nums">{{ scanPct }}%</span></div>
+      <div style="height:6px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="height:100%;background:#0E7C66;border-radius:999px;transition:width 900ms linear;width:{{ scanPct }}%"></div></div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#5B6472">{{ scanLog1 }}</span>
+        <span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">{{ scanLog2 }}</span>
+      </div>
+    </div>
+    <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">A scan takes 40–90s, so it gets named stages, not a spinner: <em>queued → querying engines → matching citations → attributing causes → done</em>. The bar only ever moves forward and never sits at one value longer than 12s — if the backend stalls, copy changes to "still working, engines are slow right now". Two log lines maximum; older lines drop, they don't scroll. Leaving the page is safe: the result is emailed and the tab picks it up on return.</div>
+  </div>
+
+  <!-- C. expand -->
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px 24px;display:flex;flex-direction:column;gap:16px">
+    <div><div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Row expand</div><div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">Fix Queue · Findings · FAQ</div></div>
+    <div style="border:1px solid #E2E5EA;border-radius:8px;overflow:hidden">
+      <button onClick="{{ tRow1 }}" style="width:100%;box-sizing:border-box;display:flex;align-items:center;gap:12px;text-align:left;background:#FFFFFF;border:0;border-bottom:1px solid #E2E5EA;padding:14px 16px;cursor:pointer;transition:background 90ms cubic-bezier(.22,.61,.36,1);outline:none" style-hover="background:#EDEFF2" style-focus="box-shadow:inset 0 0 0 2px #3E5C8A">
+        <span style="font:500 12px/1 'JetBrains Mono',monospace;color:#8A93A1;transition:transform 240ms cubic-bezier(.4,0,.2,1);transform:rotate({{ deg1 }}deg)">▶</span>
+        <span style="font:600 20px/1.35 'Source Serif 4',Georgia,serif;flex:1">Add a pricing comparison table</span>
+        <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#A62F2F;background:#FBEDED;border-radius:999px;padding:5px 9px;white-space:nowrap">high</span>
+      </button>
+      <div style="display:grid;transition:grid-template-rows 240ms cubic-bezier(.4,0,.2,1);grid-template-rows:{{ r1 }}">
+        <div style="overflow:hidden">
+          <div style="padding:16px;background:#F4F5F7;display:flex;flex-direction:column;gap:10px">
+            <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">14 queries in this cluster ask for prices. Your page states none, so engines cite three competitors instead.</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap"><button style="font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#0E7C66;border:0;border-radius:6px;padding:9px 13px;cursor:pointer">Mark done</button><button style="font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;background:#FFFFFF;border:1px solid #C6CBD3;border-radius:6px;padding:9px 13px;cursor:pointer">Snooze 30d</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">240ms ease-in-out on <code style="font:400 12.5px/1.6 'JetBrains Mono',monospace;background:#F4F5F7;padding:1px 5px;border-radius:4px">grid-template-rows: 0fr → 1fr</code> — real height, no max-height guess, no clipped text. Accordion is <strong>not</strong> exclusive: several fixes stay open while you work. Open state persists per row in the URL so a shared link opens the same one.</div>
+  </div>
+
+  <!-- D. lock -->
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px 24px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+      <div><div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Gated reveal</div><div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">Teaser · Competitors · Engines</div></div>
+      <button onClick="{{ tLock }}" style="font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;background:#FFFFFF;border:1px solid #C6CBD3;border-radius:6px;padding:8px 12px;cursor:pointer;transition:background 90ms cubic-bezier(.22,.61,.36,1)" style-hover="background:#EDEFF2">{{ lockBtn }}</button>
+    </div>
+    <div style="position:relative;border:1px dashed #D8DCE3;border-radius:8px;padding:16px;background:#FFFFFF">
+      <div style="display:flex;flex-direction:column;gap:10px;filter:blur({{ lockBlur }});transition:filter 240ms cubic-bezier(.4,0,.2,1)">
+        <div style="display:flex;justify-content:space-between"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">hubspot.com</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">cited 61×</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">pipedrive.com</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">cited 44×</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">attio.com</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">cited 29×</span></div>
+      </div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(244,245,247,.92));border-radius:8px;transition:opacity 240ms cubic-bezier(.4,0,.2,1);opacity:{{ veilOp }};pointer-events:{{ veilPE }}">
+        <button style="font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#141B26;border:0;border-radius:999px;padding:9px 15px;cursor:pointer;transition:transform 90ms cubic-bezier(.22,.61,.36,1)" style-hover="transform:translateY(-1px)">Growth · see 3 competitors</button>
+      </div>
+    </div>
+    <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Locked content is real, rendered, and blurred 6px behind a veil — the shape of the answer is honest, the answer isn't readable and isn't in the DOM as plain text. Hover raises the badge 1px; that's the only motion. On upgrade the veil fades and blur releases over 240ms in the same position — no reload, no route change, no confetti.</div>
+  </div>
+
+  <!-- E. optimistic -->
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px 24px;display:flex;flex-direction:column;gap:16px">
+    <div><div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Optimistic action + undo</div><div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">Fix Queue · Queries · Competitors</div></div>
+    <div style="position:relative;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;align-items:center;gap:12px;border:1px solid #E2E5EA;border-radius:8px;padding:13px 15px;background:#FFFFFF;transition:opacity 160ms cubic-bezier(.22,.61,.36,1);opacity:{{ f1op }}">
+        <span style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;flex:1;text-decoration:{{ f1line }}">Add FAQ schema to /pricing</span>
+        <button onClick="{{ doneF1 }}" style="font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#0B6151;background:#E7F2EF;border:1px solid #CBE3DC;border-radius:6px;padding:8px 12px;cursor:pointer;white-space:nowrap;transition:background 90ms cubic-bezier(.22,.61,.36,1)" style-hover="background:#DCEBE6">{{ f1btn }}</button>
+      </div>
+      <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:14px;background:#141B26;border-radius:8px;padding:12px 14px;animation:ph-toast 160ms cubic-bezier(.22,.61,.36,1) both">
+          <span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#F4F5F7;flex:1">{{ toast }}</span>
+          <button onClick="{{ undo }}" style="font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#35B394;background:transparent;border:0;padding:0;cursor:pointer;text-decoration:underline;white-space:nowrap">Undo ⌘Z</button>
+        </div>
+      </sc-if>
+    </div>
+    <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">The row updates instantly and the request goes out behind it. The item dims to 55% and stays in place for the life of the toast — 5s, one action, ⌘Z bound while visible — then leaves the list on the next natural render, never mid-read. If the write fails the row snaps back and the toast turns into a --gap-wash banner that persists. Optimistic: done, snooze, star, filter. Never optimistic: billing, invites, domain verification, deletes.</div>
+  </div>
+
+  <!-- F. loading -->
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px 24px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+      <div><div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Loading &amp; latency</div><div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">every table and chart</div></div>
+      <button onClick="{{ tLoad }}" style="font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;background:#FFFFFF;border:1px solid #C6CBD3;border-radius:6px;padding:8px 12px;cursor:pointer;transition:background 90ms cubic-bezier(.22,.61,.36,1)" style-hover="background:#EDEFF2">{{ loadBtn }}</button>
+    </div>
+    <div style="border:1px solid #E2E5EA;border-radius:8px;overflow:hidden">
+      <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;padding:14px 15px;border-bottom:1px solid #E2E5EA"><span style="display:block;height:11px;width:52%;border-radius:4px;background:linear-gradient(90deg,#EDEFF2 0,#E2E5EA 40%,#EDEFF2 80%);background-size:220px 100%;animation:ph-shimmer 1100ms linear infinite"></span><span style="display:block;height:11px;width:16%;border-radius:4px;background:#EDEFF2"></span></div>
+          <div style="display:flex;justify-content:space-between;padding:14px 15px;border-bottom:1px solid #E2E5EA"><span style="display:block;height:11px;width:38%;border-radius:4px;background:linear-gradient(90deg,#EDEFF2 0,#E2E5EA 40%,#EDEFF2 80%);background-size:220px 100%;animation:ph-shimmer 1100ms linear infinite"></span><span style="display:block;height:11px;width:16%;border-radius:4px;background:#EDEFF2"></span></div>
+          <div style="display:flex;justify-content:space-between;padding:14px 15px"><span style="display:block;height:11px;width:61%;border-radius:4px;background:linear-gradient(90deg,#EDEFF2 0,#E2E5EA 40%,#EDEFF2 80%);background-size:220px 100%;animation:ph-shimmer 1100ms linear infinite"></span><span style="display:block;height:11px;width:16%;border-radius:4px;background:#EDEFF2"></span></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ loaded }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;padding:14px 15px;border-bottom:1px solid #E2E5EA;animation:ph-rise 240ms cubic-bezier(.22,.61,.36,1) both"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">best crm for startups</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#A62F2F">not cited</span></div>
+          <div style="display:flex;justify-content:space-between;padding:14px 15px;border-bottom:1px solid #E2E5EA;animation:ph-rise 240ms cubic-bezier(.22,.61,.36,1) 60ms both"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">crm for small teams</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#0B6151">cited · #3</span></div>
+          <div style="display:flex;justify-content:space-between;padding:14px 15px;animation:ph-rise 240ms cubic-bezier(.22,.61,.36,1) 120ms both"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">hubspot alternatives</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#9A6210">partial</span></div>
+        </div>
+      </sc-if>
+    </div>
+    <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Thresholds: under 100ms show nothing; 100–800ms disable the control and show a 14px spinner inside it; over 800ms show skeletons shaped like the real rows (same count, same heights, real column widths). Rows fade in with a 60ms stagger, first three only. Refetching data you already have keeps the old values on screen at 60% opacity — never a skeleton over content the user was reading.</div>
+  </div>
+</div>
+
+<!-- ══ 04 KEYBOARD ══ -->
+<div style="max-width:1180px;margin:56px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">04</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">Keyboard &amp; focus</h2>
+</div>
+<div style="max-width:1180px;margin:18px auto 0;display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:start">
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;padding:12px 22px;background:#EDEFF2;border-bottom:1px solid #E2E5EA"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Key</span><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Action</span></div>
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;padding:11px 22px;border-bottom:1px solid #E2E5EA"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">⌘K</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Command palette — any query, engine, competitor or fix</span></div>
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;padding:11px 22px;border-bottom:1px solid #E2E5EA"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">/</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Focus the search field of the current table</span></div>
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;padding:11px 22px;border-bottom:1px solid #E2E5EA"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">j / k</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Move row highlight down / up (Queries, Fix Queue, Findings)</span></div>
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;padding:11px 22px;border-bottom:1px solid #E2E5EA"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">Enter</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Open the highlighted row's drawer</span></div>
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;padding:11px 22px;border-bottom:1px solid #E2E5EA"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">Space</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Toggle row checkbox · toggle focused chip</span></div>
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;padding:11px 22px;border-bottom:1px solid #E2E5EA"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">x / s</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Mark done / snooze the highlighted fix</span></div>
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;padding:11px 22px;border-bottom:1px solid #E2E5EA"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">⌘Z</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Undo the last optimistic action, while its toast is up</span></div>
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;padding:11px 22px;border-bottom:1px solid #E2E5EA"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">⌘↵</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Submit the current form from any field</span></div>
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;padding:11px 22px;border-bottom:1px solid #E2E5EA"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">Esc</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Close palette / modal / drawer; again to clear selection</span></div>
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;padding:11px 22px"><span style="font:500 13px/1.4 'JetBrains Mono',monospace">?</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Shortcut sheet (this table, as a modal)</span></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:10px">
+      <div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Focus order</div>
+      <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Skip-link → sidebar nav → topbar (workspace, search, account) → page h1 → primary action → filters → table. Tab never enters a chart's data points; charts expose one tab stop plus arrow-key stepping with a live-region readout.</div>
+      <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Modals trap focus and return it to the trigger. Drawers focus their heading and return to the row. Toasts are <code style="font:400 12.5px/1.6 'JetBrains Mono',monospace;background:#F4F5F7;padding:1px 5px;border-radius:4px">aria-live="polite"</code> and never steal focus.</div>
+      <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Focus is only ever shown with <code style="font:400 12.5px/1.6 'JetBrains Mono',monospace;background:#F4F5F7;padding:1px 5px;border-radius:4px">:focus-visible</code>, never suppressed, and always the same 4px #3E5C8A ring outside a 2px white gap (#7FA0D4 on the ink sidebar).</div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:10px">
+      <div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Feedback taxonomy</div>
+      <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472"><strong>Inline</strong> — anything about one field. Replaces the hint, red text, no icon soup.</div>
+      <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472"><strong>Toast</strong> — transient success that may need undo. 5s, one action, one at a time, bottom-left, above the sidebar.</div>
+      <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472"><strong>Banner</strong> — screen-level truth that outlives a moment: quota reached, scan failed, domain unverified, card expiring. Persistent, dismissible only if it's informational.</div>
+      <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472"><strong>Modal</strong> — destructive or billing confirmation only. Typed confirmation for workspace delete and domain change.</div>
+      <div style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#A62F2F">Never a toast for an error the user has to act on.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 05 PER-SCREEN INVENTORY ══ -->
+<div style="max-width:1180px;margin:56px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">05</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">Per-screen inventory</h2>
+</div>
+<div style="max-width:1180px;margin:18px auto 0;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:12px 24px;background:#EDEFF2;border-bottom:1px solid #E2E5EA">
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Screen</span>
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Interactions</span>
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Feedback on completion</span>
+  </div>
+
+  <div style="padding:9px 24px;background:#F4F5F7;border-bottom:1px solid #E2E5EA"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Marketing</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Home</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Domain field validates on blur and strips protocol/path silently · ⌘↵ submits · button goes busy with measured width · scan streams named stages in place, hero doesn't jump</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Route to teaser; score arrival plays once</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Teaser</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Score arrival on 50% in-view · locked competitor rows hover to raise the unlock badge · copy share link · email-to-claim field</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">"Link copied" toast · claim → magic-link sent screen</span></div>
+
+  <div style="padding:9px 24px;background:#F4F5F7;border-bottom:1px solid #E2E5EA"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Auth &amp; onboarding</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Code entry</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">6 boxes, auto-advance, backspace steps back, a pasted code fills all six and submits itself · resend disabled behind a 30s tabular countdown · wrong code shakes nothing — it clears the boxes and refocuses box 1</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Inline error under the group; lockout banner after 5 tries</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">2FA · recovery</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Trust-device checkbox remembered per browser · recovery codes copy-all and download, and the "I've saved them" button stays disabled until one of the two happens</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Copied tick for 1.5s; code list dims once used</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Domain verify</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">TXT record copy · polls every 5s for 10 min then stops and offers "Check now" · GSC connect opens a popup and returns to the same step with state intact · Skip asks once</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Row flips to a --cited tick and advances the stepper</span></div>
+
+  <div style="padding:9px 24px;background:#F4F5F7;border-bottom:1px solid #E2E5EA"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">App</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Overview</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Score arrival · click a cause segment to filter findings below and write it into the URL · date range applies on close, not per click · sparkline hover shows a crosshair with tabular values, arrows step the cursor</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Findings list swaps with no animation; filter shows as a removable chip</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Fix Queue</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Row expand (non-exclusive, URL-persisted) · mark done / snooze optimistic with undo · multi-select for bulk done · impact sort only, no drag ordering</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Toast + count in the sidebar decrements immediately</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Queries</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Virtualised rows, sticky header, sort by column (one active sort, arrow shows direction) · / to search, debounce 200ms · row → drawer with the citation excerpt · CSV export</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Result count updates live; export → download toast</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Engines</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Engine tabs keep the active filters and date range · per-engine coverage bars draw once on first view of the tab</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Underline slides 160ms; content swaps instantly</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Competitors</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Gated reveal on Starter · compare up to 3, the 4th checkbox disables with a reason · hovering a name highlights that series everywhere on the page</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Upgrade releases blur in place</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Trends</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Drag to brush a range, double-click to reset · annotation markers open on hover and pin on click · one tab stop, arrows step days, live region reads the value</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Range becomes the page's date filter</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Integrations</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Connect → OAuth popup · Test connection returns an inline pass/fail line under the card · webhook secret reveals once, then only rotates · disconnect confirms</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Card state changes to Connected with last-sync time</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Settings</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Autosave on blur, no Save button · plan change opens a proration summary before charging · destructive actions need the workspace name typed · invites send optimistically only after the address validates</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">"Saved" tick beside the field for 1.5s</span></div>
+
+  <div style="padding:9px 24px;background:#F4F5F7;border-bottom:1px solid #E2E5EA"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Reports &amp; email</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Report builder</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Page thumbnails select a spread · white-label accent updates the live preview immediately (accent only — structure is locked) · generate shows staged progress and can be left</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Download toast + a copy in Reports history</span></div>
+  <div style="display:grid;grid-template-columns:170px 1.4fr 1fr;gap:18px;padding:14px 24px"><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Emails</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">No JS, no hover-dependent meaning, one primary link per email, everything legible with images off</span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Deep link lands on the exact screen, already authenticated</span></div>
+</div>
+
+<!-- ══ 06 RULES ══ -->
+<div style="max-width:1180px;margin:56px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">06</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">Standing rules</h2>
+</div>
+<div style="max-width:1180px;margin:18px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:2px solid #0E7C66;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:11px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#0B6151">Always</div>
+    <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Animate <strong>transform</strong> and <strong>opacity</strong>. The one exception is the expand's grid-template-rows.</div>
+    <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Reserve space before content arrives — skeletons match the real row height, numbers use tabular-nums, busy buttons keep their width.</div>
+    <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Put filters, sort, date range, open row and selected cause in the URL. A pasted link reproduces the screen.</div>
+    <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Give every destructive or paid action a confirm, and every reversible one an undo.</div>
+    <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Honour <code style="font:400 12.5px/1.6 'JetBrains Mono',monospace;background:#F4F5F7;padding:1px 5px;border-radius:4px">prefers-reduced-motion</code> by cutting duration to ~0 while keeping the end state — no feature disappears.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:2px solid #C43D3D;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:11px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#A62F2F">Never</div>
+    <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Replay the score arrival on refilter, tab change, or route return. Data that's already known appears instantly.</div>
+    <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Hover-only meaning, hover-only actions, or a tooltip carrying information that isn't elsewhere.</div>
+    <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Spinners over content the user is already reading, or a skeleton on a refetch of data you have.</div>
+    <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Two toasts at once, a toast for an actionable error, or a banner that auto-dismisses.</div>
+    <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Springs, bounces, parallax, scroll-jacking, celebratory animation on a number that means lost traffic.</div>
+  </div>
+</div>
+
+<div style="max-width:1180px;margin:34px auto 0;font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#8A93A1;border-top:1px solid #E2E5EA;padding-top:16px">Open flags: virtualised rows plus j/k highlight need one owner in code, or the highlight will drift out of the rendered window on fast scroll. The command palette (⌘K) has no screen yet — it's specified here but not designed. Chart brushing on touch conflicts with page scroll; mobile Trends falls back to a range dropdown.</div>
+
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280},&quot;motionScale&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.25,&quot;max&quot;:4,&quot;step&quot;:0.25,&quot;unit&quot;:&quot;×&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Demos&quot;,&quot;label&quot;:&quot;Motion scale&quot;},&quot;loopDemos&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demos&quot;}}">
+class Component extends DCLogic {
+  state = {
+    tLad: 0, tRead: 0, open1: true, unlocked: false,
+    chips: { aio: true, rank: false, tech: true },
+    f1done: false, toast: null,
+    scan: -1, loading: true,
+    email: "", emailErr: "", emailTouched: false
+  };
+
+  componentDidMount() {
+    this.play("tLad", 1500);
+    this.t0 = setTimeout(() => this.play("tRead", 1600), 350);
+    this.loadT = setTimeout(() => this.setState({ loading: false }), 1400 * this.scale());
+    if (this.props.loopDemos) {
+      this.loop = setInterval(() => { this.play("tLad", 1500); this.play("tRead", 1600); }, 3200);
+    }
+  }
+  componentWillUnmount() {
+    clearTimeout(this.t0); clearTimeout(this.toastT); clearTimeout(this.loadT);
+    clearInterval(this.loop); clearInterval(this.scanT);
+    cancelAnimationFrame(this.rafLad); cancelAnimationFrame(this.rafRead);
+  }
+
+  scale() { const s = Number(this.props.motionScale); return s > 0 ? s : 1; }
+
+  play(field, total) {
+    const raf = field === "tLad" ? "rafLad" : "rafRead";
+    cancelAnimationFrame(this[raf]);
+    const k = this.scale(), t0 = performance.now();
+    const tick = () => {
+      const design = (performance.now() - t0) / k;
+      this.setState({ [field]: Math.min(design, total) });
+      if (design < total) this[raf] = requestAnimationFrame(tick);
+    };
+    this.setState({ [field]: 0 });
+    this[raf] = requestAnimationFrame(tick);
+  }
+
+  clamp(t, start, dur) { return Math.max(0, Math.min(1, (t - start) / dur)); }
+  easeOut(x) { return 1 - Math.pow(1 - x, 3); }
+  easeSettle(x) { return 1 - Math.pow(1 - x, 2.4); }
+
+  toggleChip(k) {
+    this.setState(s => {
+      const next = Object.assign({}, s.chips);
+      next[k] = !next[k];
+      if (!next.aio && !next.rank && !next.tech) return { chips: { aio: true, rank: true, tech: true } };
+      return { chips: next };
+    });
+  }
+  chip(on) {
+    return on
+      ? { bg: "#141B26", fg: "#FFFFFF", bd: "#141B26" }
+      : { bg: "#FFFFFF", fg: "#5B6472", bd: "#C6CBD3" };
+  }
+
+  markDone() {
+    clearTimeout(this.toastT);
+    this.setState({ f1done: true, toast: "Marked done · FAQ schema on /pricing" });
+    this.toastT = setTimeout(() => this.setState({ toast: null }), 5000 * this.scale());
+  }
+  undo() { clearTimeout(this.toastT); this.setState({ f1done: false, toast: null }); }
+
+  startScan() {
+    clearInterval(this.scanT);
+    this.setState({ scan: 0 });
+    this.scanT = setInterval(() => {
+      this.setState(s => {
+        if (s.scan >= 4) { clearInterval(this.scanT); return { scan: 4 }; }
+        return { scan: s.scan + 1 };
+      });
+    }, 900 * this.scale());
+  }
+
+  toggleLoad() {
+    clearTimeout(this.loadT);
+    if (this.state.loading) { this.setState({ loading: false }); }
+    else {
+      this.setState({ loading: true });
+      this.loadT = setTimeout(() => this.setState({ loading: false }), 1200 * this.scale());
+    }
+  }
+
+  validate(v) {
+    if (!v) return "Enter a work email";
+    return /^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(v) ? "" : "That address is missing a domain — try you@company.com";
+  }
+
+  renderVals() {
+    const st = this.state, L = st.tLad, R = st.tRead;
+    const scans = [
+      ["Queued", 4, "Reserving 212 query slots", ""],
+      ["Querying engines", 28, "ChatGPT · 212 queries", "Perplexity · queued"],
+      ["Matching citations", 61, "Perplexity · 212 queries", "ChatGPT · 212 done"],
+      ["Attributing causes", 86, "Separating AIO from ranking loss", "Google AIO · 212 done"],
+      ["Done", 100, "212 queries · 81 citations found", "Report ready"]
+    ];
+    const s = scans[Math.max(0, st.scan)] || scans[0];
+    const idle = st.scan < 0;
+
+    return {
+      replayLadder: () => this.play("tLad", 1500),
+      replayRead: () => this.play("tRead", 1600),
+      p1: this.easeOut(this.clamp(L, 0, 90)) * 100,
+      p2: this.easeOut(this.clamp(L, 0, 160)) * 100,
+      p3: this.easeOut(this.clamp(L, 0, 240)) * 100,
+      p4: this.easeSettle(this.clamp(L, 0, 420)) * 100,
+      p5: this.easeOut(this.clamp(L, 0, 700)) * 100,
+
+      score: Math.round(this.easeOut(this.clamp(R, 0, 700)) * 62),
+      vOp: this.clamp(R, 300, 420).toFixed(2),
+      vY: (6 * (1 - this.easeSettle(this.clamp(R, 300, 420)))).toFixed(1),
+      deltaOp: this.clamp(R, 1180, 240).toFixed(2),
+      b1: this.easeSettle(this.clamp(R, 760, 420)) * 46,
+      b2: this.easeSettle(this.clamp(R, 820, 420)) * 24,
+      b3: this.easeSettle(this.clamp(R, 880, 420)) * 18,
+      b4: this.easeSettle(this.clamp(R, 940, 420)) * 12,
+
+      tRow1: () => this.setState(x => ({ open1: !x.open1 })),
+      r1: st.open1 ? "1fr" : "0fr",
+      deg1: st.open1 ? 90 : 0,
+
+      tLock: () => this.setState(x => ({ unlocked: !x.unlocked })),
+      lockBtn: st.unlocked ? "Re-lock" : "Upgrade",
+      lockBlur: st.unlocked ? "0px" : "6px",
+      veilOp: st.unlocked ? 0 : 1,
+      veilPE: st.unlocked ? "none" : "auto",
+
+      cAio: this.chip(st.chips.aio),
+      cRank: this.chip(st.chips.rank),
+      cTech: this.chip(st.chips.tech),
+      tAio: () => this.toggleChip("aio"),
+      tRank: () => this.toggleChip("rank"),
+      tTech: () => this.toggleChip("tech"),
+
+      doneF1: () => (st.f1done ? this.undo() : this.markDone()),
+      undo: () => this.undo(),
+      f1btn: st.f1done ? "Done ✓" : "Mark done",
+      f1op: st.f1done ? 0.55 : 1,
+      f1line: st.f1done ? "line-through" : "none",
+      toast: st.toast,
+
+      startScan: () => this.startScan(),
+      scanLabel: idle ? "Ready to scan" : s[0],
+      scanPct: idle ? 0 : s[1],
+      scanLog1: idle ? "—" : s[2],
+      scanLog2: idle ? "" : s[3],
+
+      tLoad: () => this.toggleLoad(),
+      loadBtn: st.loading ? "Skip →" : "Reload ↻",
+      loading: st.loading,
+      loaded: !st.loading,
+
+      email: st.email,
+      emailErr: st.emailErr,
+      onEmail: e => {
+        const v = e.target.value;
+        this.setState({ email: v, emailErr: st.emailTouched ? this.validate(v) : "" });
+      },
+      blurEmail: e => this.setState({ emailTouched: true, emailErr: this.validate(e.target.value) })
+    };
+  }
+}
+</script>
+</body>
+</html>

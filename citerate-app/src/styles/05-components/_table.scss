@@ -1,0 +1,114 @@
+// Dense data table: one row per query, 44px rows, sticky head, no zebra below
+// 640px because the table becomes cards there.
+
+.dt {
+  background: var(--card);
+  border: var(--bw) solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+
+.dt__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-4) var(--s-5);
+  border-bottom: var(--bw) solid var(--line);
+  flex-wrap: wrap;
+}
+
+.dt__tools { display: flex; align-items: center; gap: var(--s-2); flex-wrap: wrap; }
+
+.dt__scroll { overflow-x: auto; }
+
+.dt table {
+  width: 100%;
+  border-collapse: collapse;
+  font: var(--t-ui);
+}
+
+.dt thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--paper-sunk);
+  font: var(--t-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-align: left;
+  padding: var(--s-3) var(--s-4);
+  white-space: nowrap;
+  border-bottom: var(--bw) solid var(--line);
+}
+
+.dt th[aria-sort] { cursor: pointer; user-select: none; }
+.dt th[aria-sort="ascending"]::after  { content: " ↑"; color: var(--ink); }
+.dt th[aria-sort="descending"]::after { content: " ↓"; color: var(--ink); }
+
+.dt tbody td {
+  height: 44px;
+  padding: var(--s-2) var(--s-4);
+  border-bottom: var(--bw) solid var(--line);
+  vertical-align: middle;
+}
+
+.dt tbody tr:last-child td { border-bottom: 0; }
+.dt tbody tr:nth-child(even) { background: var(--paper); }
+.dt tbody tr:hover { background: var(--cited-wash); }
+.dt tbody tr[data-open="true"] { background: var(--paper-sunk); }
+
+.dt__q {
+  display: block;
+  max-width: 46ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.dt__num {
+  font: var(--t-data);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.dt__spark { width: 60px; height: 18px; display: block; }
+
+// Row detail: expands in place on desktop, full-screen offcanvas on mobile.
+.dt__detail td {
+  height: auto;
+  background: var(--paper-sunk);
+  padding: var(--s-4) var(--s-5) var(--s-5);
+}
+
+.evidence {
+  display: grid;
+  gap: var(--s-3);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.evidence__item {
+  background: var(--card);
+  border: var(--bw) solid var(--line);
+  border-radius: var(--r-sm);
+  padding: var(--s-3) var(--s-4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.answer {
+  font: var(--t-code);
+  color: var(--ink-soft);
+  background: var(--card);
+  border: var(--bw) solid var(--line);
+  border-left: 3px solid var(--tech);
+  border-radius: var(--r-sm);
+  padding: var(--s-3) var(--s-4);
+  white-space: pre-wrap;
+}
+
+// The 639px table-to-cards transform lives in 07-responsive/_responsive.scss.

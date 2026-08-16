@@ -1,0 +1,112 @@
+// Pricing cards + comparison table + FAQ.
+.plan {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 26px 26px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+.plan--featured { border: 2px solid var(--cited); }
+.plan__flag {
+  position: absolute;
+  top: -11px;
+  left: 26px;
+  font: 500 10.5px/1 var(--font-mono);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-inverse);
+  background: var(--cited);
+  border-radius: 999px;
+  padding: 6px 11px;
+}
+.plan__price { display: flex; align-items: flex-end; gap: 6px; }
+.plan__amount { font: var(--t-data-xl); letter-spacing: var(--tracking-tight); }
+.plan__per { font: var(--t-data); color: var(--ink-muted); padding-bottom: 8px; }
+.plan__rule { height: 1px; background: var(--line); }
+.plan__features { display: flex; flex-direction: column; gap: 8px; }
+.plan__feature { font: var(--t-ui-sm); color: var(--ink); }
+.plan__feature--locked { color: var(--ink-muted); }
+.plan__feature--unlock { color: var(--cited-ink); }
+.plan__cta { margin-top: auto; }
+
+// Free-scan strip above the cards.
+.free-strip {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 20px 24px;
+}
+.free-strip__body { flex: 1; min-width: 320px; font: var(--t-ui-sm); color: var(--ink-soft); }
+
+// FAQ. Uses Bootstrap accordion JS on mobile, plain two-column list above 900px.
+.faq { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 40px; }
+.faq__item {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+.faq__q { font: 600 16px/1.4 var(--font-display); }
+.faq__a { font: var(--t-ui-sm); color: var(--ink-soft); }
+
+// Docs shell.
+.docs { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 720px; }
+.docs__side { border-right: 1px solid var(--line); padding: 28px 24px; display: flex; flex-direction: column; gap: 20px; }
+.docs__group { display: flex; flex-direction: column; gap: 9px; }
+.docs__link { font: var(--t-ui-sm); color: var(--ink-soft); }
+.docs__link[aria-current="page"] { color: var(--cited-ink); font-weight: 500; }
+.docs__link--disabled { color: var(--ink-muted); pointer-events: none; }
+.docs__body { padding: 64px 56px; }
+.docs__notice {
+  margin-top: auto;
+  background: var(--warn-wash);
+  border: 1px solid var(--warn-line);
+  border-radius: var(--r-sm);
+  padding: 14px;
+  font: var(--t-ui-xs);
+  color: var(--warn-ink);
+}
+
+// Blog + changelog + article rails.
+.post-meta { display: flex; align-items: center; gap: 10px; font: var(--t-data-sm); color: var(--ink-muted); }
+
+.article {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 68ch) 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.article__rail { position: sticky; top: 88px; display: flex; flex-direction: column; gap: 12px; }
+.article__toc { display: flex; flex-direction: column; gap: 9px; border-left: 1px solid var(--line); padding-left: 14px; }
+.article__toc a { font: var(--t-ui-xs); color: var(--ink-soft); }
+.article__toc a[aria-current="true"] { color: var(--cited-ink); font-weight: 500; }
+
+.changelog__entry {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 28px;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--line);
+}
+.changelog__entry:last-child { border-bottom: 0; }
+
+// Inline CTA band, used mid-article and at section ends.
+.cta-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  border-radius: var(--r-md);
+  padding: 24px 26px;
+}
+.cta-band--ink { background: var(--ink); color: var(--side-ink); }
+.cta-band--card { background: var(--card); border: 1px solid var(--line); border-left: 2px solid var(--cited); }

@@ -1,0 +1,60 @@
+---
+import { getCollection } from "astro:content";
+import Doc from "../../layouts/Doc.astro";
+import CtaBand from "../../components/CtaBand.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id.replace(/\.mdx?$/, "") }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await post.render();
+const d = post.data;
+
+const toc = headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, label: h.text }));
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: d.title,
+  description: d.dek,
+  datePublished: d.date.toISOString(),
+  author: { "@type": "Person", name: d.author },
+  publisher: { "@type": "Organization", name: "Citerate" }
+};
+
+const fmt = d.date.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" });
+---
+
+<Doc
+  title={d.title}
+  description={d.dek}
+  kicker={d.category}
+  dek={d.dek}
+  date={fmt}
+  readingTime={d.readingTime}
+  author={d.author}
+  toc={toc}
+  jsonLd={jsonLd}
+>
+  <Content />
+
+  <div slot="footer" class="stack stack--5" style="margin-top:32px">
+    <CtaBand
+      kicker="Free · no signup"
+      headline={d.ctaHeadline ?? "Is your domain in the pattern this post describes?"}
+      body="25 queries · two engines · about 90 seconds · no account"
+      event={`article_${post.id}`}
+    />
+
+    {
+      d.methodology && (
+        <div class="c-card c-card--accent-tech methodology">
+          <span class="t-label" style="color:var(--tech-ink)">Methodology note</span>
+          <span class="t-body tx-soft" style="line-height:1.65">{d.methodology}</span>
+        </div>
+      )
+    }
+  </div>
+</Doc>

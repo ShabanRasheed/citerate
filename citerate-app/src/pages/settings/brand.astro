@@ -1,0 +1,115 @@
+---
+/**
+ * Branding / white label. The agency's accent replaces --cited as the accent in
+ * PDFs only — structural ink, hairlines, paper, the surface|proxy marks, and the
+ * methodology block are locked by design. That restriction is a feature: a
+ * re-skinned methodology note is what makes the number defensible.
+ */
+import App from "../../layouts/App.astro";
+import Locked from "../../components/Locked.astro";
+import { usage } from "../../lib/data";
+import { PLANS, type PlanId } from "../../lib/plans";
+import { can } from "../../lib/rbac";
+
+const env = Astro.locals.runtime.env;
+const workspace = Astro.locals.workspace!;
+const limits = PLANS[workspace.plan as PlanId];
+const counters = await usage(env, workspace.workspaceId);
+Astro.locals.usage = counters;
+
+const allowed = limits.pdfReports === "white_label";
+const canManage = can(workspace.role, "manage_brand");
+const accents = ["#0E7C66", "#3E5C8A", "#7A4CA0", "#B4531F"];
+---
+
+<App title="Branding" current="settings">
+  <nav class="seg" role="tablist" aria-label="Settings">
+    <a class="seg__btn" href="/settings" aria-pressed="false">Account</a>
+    <a class="seg__btn" href="/settings/team" aria-pressed="false">Team</a>
+    <a class="seg__btn" href="/settings/billing" aria-pressed="false">Plan &amp; billing</a>
+    <a class="seg__btn" href="/settings/brand" aria-pressed="true">Branding</a>
+  </nav>
+
+  {
+    !allowed ? (
+      <Locked
+        badge="Scale"
+        headline="White label the report, the dashboard, and the login domain"
+        detail="Your logo, your accent, reports.youragency.com. Client seats stay free and read-only."
+      >
+        <div class="c-card stack stack--4">
+          <span class="t-label t-label--ink">Logo</span>
+          <div style="height:64px;background:var(--paper);border-radius:var(--r-sm)"></div>
+          <span class="t-label t-label--ink">Accent</span>
+          <div style="display:flex;gap:8px">
+            {accents.map((c) => <span style={`width:32px;height:32px;border-radius:999px;background:${c}`}></span>)}
+          </div>
+        </div>
+      </Locked>
+    ) : (
+      <div class="grid-app">
+        <div class="col-7">
+          <form class="c-card stack stack--5" method="post" action="/api/settings/brand" enctype="multipart/form-data" data-lock>
+            <div class="stack stack--2">
+              <span class="t-label t-label--ink">Logo</span>
+              <span class="chart__note">SVG or PNG, at least 240px wide. Sits top-left on the dashboard and on page 1 of every PDF.</span>
+            </div>
+            <input class="form-field__input" type="file" name="logo" accept="image/svg+xml,image/png" disabled={!canManage} />
+
+            <div class="stack stack--2">
+              <span class="t-label t-label--ink">Accent colour</span>
+              <span class="chart__note">
+                Replaces the cited/positive accent in reports. Ink, hairlines, paper, and the cause palette stay as they
+                are — a client needs to read your report the same way they read anyone's.
+              </span>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              {accents.map((c) => (
+                <label style="display:flex;align-items:center;gap:8px">
+                  <input type="radio" name="accent" value={c} checked={workspace.brandAccent === c} disabled={!canManage} />
+                  <span style={`width:28px;height:28px;border-radius:999px;background:${c};display:inline-block`}></span>
+                </label>
+              ))}
+              <label class="form-field" style="min-width:160px">
+                <span class="t-label">Custom hex</span>
+                <input class="form-field__input" name="accentCustom" type="text" placeholder="#0E7C66" value={workspace.brandAccent ?? ""} disabled={!canManage} />
+              </label>
+            </div>
+
+            <label class="form-field">
+              <span class="t-label">Report domain</span>
+              <input class="form-field__input" name="brandDomain" type="text" placeholder="reports.youragency.com" value={workspace.brandDomain ?? ""} disabled={!canManage} />
+              <span class="chart__note">
+                Add a CNAME to app.citerate.com, then we issue the certificate. The client never sees our domain, including at login.
+              </span>
+            </label>
+
+            {canManage ? (
+              <button class="btn-primary-c" type="submit" data-busy="Saving…">Save branding</button>
+            ) : (
+              <span class="chart__note">Your role cannot change branding.</span>
+            )}
+          </form>
+        </div>
+
+        <div class="col-5">
+          <section class="c-card stack stack--4">
+            <span class="t-label t-label--ink">What stays ours</span>
+            {
+              [
+                ["The methodology note", "Every report states runs per engine, the citation rule, and the confidence floor. It is not removable — it is the reason the number holds up in a board meeting."],
+                ["Cause colours and textures", "Red/amber/blue/striped are paired with textures so hue is never the only signal. Re-mapping them would break accessibility and comparability."],
+                ["The discontinuity flag", "If the method changes, affected history is flagged in your report too."]
+              ].map(([title, body]) => (
+                <div class="stack stack--1">
+                  <span style="color:var(--ink)">{title}</span>
+                  <span class="chart__note">{body}</span>
+                </div>
+              ))
+            }
+          </section>
+        </div>
+      </div>
+    )
+  }
+</App>

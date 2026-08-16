@@ -1,0 +1,33 @@
+// Utilities we actually need, on the 4px scale. Bootstrap's utilities API
+// already generated spacing/display/flex from our $spacers map — these are the
+// Citerate-specific extras only.
+
+.u-mono { font-family: var(--font-mono); }
+.u-serif { font-family: var(--font-display); }
+.u-nowrap { white-space: nowrap; }
+.u-pretty { text-wrap: pretty; }
+.u-balance { text-wrap: balance; }
+.u-mw-20 { max-width: 20ch; }
+.u-mw-26 { max-width: 26ch; }
+.u-mw-46 { max-width: 46ch; }
+.u-mw-56 { max-width: 56ch; }
+.u-mw-66 { max-width: 66ch; }
+.u-rule { height: 1px; background: var(--line); border: 0; margin: 0; }
+.u-rule--strong { background: var(--line-strong); }
+.u-vrule { width: 1px; height: 12px; background: var(--line-strong); }
+.u-auto { margin-left: auto; }
+.u-fill { flex: 1; min-width: 0; }
+.u-sticky-top { position: sticky; top: 88px; }
+
+// Reveal-on-scroll. JS adds .is-in; without JS everything is visible.
+[data-reveal] { opacity: 1; }
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--dur-4) var(--ease-out), transform var(--dur-4) var(--ease-out);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+// Tabpanels hidden without JS would hide content from crawlers, so panels are
+// visually stacked until JS upgrades them.
+.js [data-panel][hidden] { display: none; }

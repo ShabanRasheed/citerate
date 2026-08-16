@@ -1,0 +1,50 @@
+[
+  {
+    "q": "What exactly is a tracked query?",
+    "a": "One prompt a buyer would ask, checked on every engine in your plan, at your plan's refresh rate. 100 queries on Starter means 100 prompts — engines and frequency don't multiply the count."
+  },
+  {
+    "q": "Which engines do you check?",
+    "a": "ChatGPT and Google AI Overviews on every plan; Perplexity and Gemini from Growth; Copilot and Claude on Scale and above. Coverage changes are flagged in the changelog."
+  },
+  {
+    "q": "Where do the queries come from?",
+    "a": "We propose a set from your site, your Search Console data if connected, and your category. You edit everything — swap, add, or retire queries whenever you like."
+  },
+  {
+    "q": "Is there a trial?",
+    "a": "The free scan is the trial — a real reading on your real domain, no account. Paid plans start with your scan history intact, so nothing is measured twice."
+  },
+  {
+    "q": "What happens when I hit my limit?",
+    "a": "Scans keep running. You see a banner, and the overage block ($19 per 100 queries) is billed at the end of the cycle. We never stop measuring mid-month."
+  },
+  {
+    "q": "Why are competitor names locked on Starter?",
+    "a": "Starter answers \"do I have a problem.\" Naming who benefits is the analysis layer, and it's the honest line between the two plans — not an artificial crippling of the data."
+  },
+  {
+    "q": "Can I cancel or downgrade anytime?",
+    "a": "Yes, from billing settings, effective at the end of the cycle. Your history is exportable for 90 days after cancellation."
+  },
+  {
+    "q": "How is the citation rate calculated?",
+    "a": "Cited answer runs divided by total answer runs, per query, per engine. Citations are matched by resolved URL. The method page shows one query end to end."
+  },
+  {
+    "q": "Do competitors know I track them?",
+    "a": "No. We read public engine answers; we never touch competitor properties. They appear because engines cite them, not because we crawled them."
+  },
+  {
+    "q": "Can I pay by invoice?",
+    "a": "Card on all self-serve plans, handled by our merchant of record with VAT and sales tax included. Invoicing is available on Enterprise."
+  },
+  {
+    "q": "What about my data?",
+    "a": "Your query set and results are yours; we never train on them or show them to anyone else. DPA and subprocessor list are on the legal pages, signed DPA on Enterprise."
+  },
+  {
+    "q": "Do you support non-English markets?",
+    "a": "Queries can be in any language the engines answer. Cause attribution currently performs best in English; we say so rather than pretend otherwise."
+  }
+]

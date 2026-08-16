@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EBE9E4;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<section style="padding:40px 44px 80px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+<div style="max-width:1240px;display:flex;flex-direction:column;gap:14px">
+  <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Citerate · Phase 6b</span>
+    <span style="width:1px;height:12px;background:#C6CBD3"></span>
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Home + pricing, full length</span>
+  </div>
+  <h1 style="margin:0;font:600 44px/1.1 'Source Serif 4',Georgia,serif;letter-spacing:-0.02em;max-width:24ch">The two pages that carry the funnel</h1>
+  <p style="margin:0;font:400 16px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;max-width:76ch">Home follows <strong style="font-weight:600;color:#141B26">2a, instrument first</strong> — the readout arrives before any argument. Method sections tease <strong style="font-weight:600;color:#141B26">1b, one query followed</strong>, which gets its full page in 6c. Two open decisions are closed as recommended: docs ship behind a coming-soon state, and free scans are cached in KV — one live scan per domain per day, repeat visitors get the cached result. Both are reversible; say so if you want them different.</p>
+  <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">Pricing toggle and role tabs are live on both frames. Prices follow the toggle everywhere.</div>
+</div>
+
+<div style="margin-top:44px;display:flex;gap:88px;align-items:flex-start">
+
+<!-- ============================================================ HOME -->
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;gap:10px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#FFFFFF;background:#141B26;border-radius:999px;padding:6px 10px">/</span><span style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Home</span><span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">ten sections · primary action: run free scan</span></div>
+<div data-screen-label="Home" style="width:1440px;background:#F4F5F7;border:1px solid #C6CBD3;border-radius:14px;overflow:hidden;box-shadow:0 12px 32px rgba(20,27,38,0.14)">
+
+  <!-- nav -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E2E5EA;background:#F4F5F7">
+    <div style="display:flex;align-items:center;gap:36px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="width:12px;height:12px;background:#0E7C66;border-radius:3px"></span><span style="font:600 20px/1 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em">Citerate</span></div>
+      <div style="display:flex;gap:26px">
+        <span style="font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">How it works</span>
+        <span style="font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Pricing</span>
+        <span style="font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">For agencies</span>
+        <span style="font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Blog</span>
+        <span style="display:flex;align-items:center;gap:6px;font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Docs <span style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#9A6210;background:#FDF2E3;border-radius:999px;padding:3px 6px">Soon</span></span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:18px">
+      <span style="font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Sign in</span>
+      <span style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#0E7C66;border-radius:6px;padding:11px 16px">Run free scan</span>
+    </div>
+  </div>
+
+  <!-- 01 hero, dark -->
+  <div style="background:#141B26;padding:88px 48px 76px">
+    <div style="max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">AI visibility diagnostics</div>
+        <h2 style="margin:16px 0 0;font:600 56px/1.06 'Source Serif 4',Georgia,serif;letter-spacing:-0.02em;color:#F4F5F7">Impressions holding.<br>Clicks falling.</h2>
+        <p style="margin:18px 0 0;font:400 17px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#8A93A1;max-width:50ch">Your ranking didn't break — the answer above the links did. Citerate asks the AI engines your buyers' questions, measures how often you're cited, and separates the causes when you're not.</p>
+        <div style="margin-top:30px;display:flex;gap:10px;max-width:520px">
+          <div style="flex:1;display:flex;align-items:center;background:#FFFFFF;border-radius:6px;padding:0 16px;height:52px"><span style="font:400 14px/1 'JetBrains Mono',monospace;color:#8A93A1">yourdomain.com</span></div>
+          <span style="display:flex;align-items:center;font:500 15px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#0E7C66;border-radius:6px;padding:0 22px;height:52px;white-space:nowrap">Run free scan</span>
+        </div>
+        <div style="margin-top:14px;font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">25 queries · ChatGPT + Google AI Overviews · no signup · about 90 seconds</div>
+      </div>
+      <!-- hero instrument: live scan card -->
+      <div style="background:#F4F5F7;border-radius:14px;padding:24px 26px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Scan in progress</span><span style="font:400 11.5px/1 'JetBrains Mono',monospace;color:#8A93A1">acmecrm.com</span></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between"><span style="font:400 12.5px/1.4 'JetBrains Mono',monospace;color:#141B26">"best crm for startups"</span><span style="font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#A62F2F">Not cited</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="font:400 12.5px/1.4 'JetBrains Mono',monospace;color:#141B26">"crm with free tier"</span><span style="font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#0B6151">Cited</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="font:400 12.5px/1.4 'JetBrains Mono',monospace;color:#141B26">"hubspot alternatives"</span><span style="font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#A62F2F">Not cited</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="font:400 12.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">"crm for a 10 person team"</span><span style="font:400 10.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">Checking…</span></div>
+        </div>
+        <div style="height:1px;background:#E2E5EA"></div>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between">
+          <div style="display:flex;flex-direction:column;gap:4px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Citation rate so far</span><span style="font:500 48px/1 'JetBrains Mono',monospace;letter-spacing:-0.02em;color:#141B26">34<span style="font-size:22px;color:#8A93A1">%</span></span></div>
+          <div style="display:flex;flex-direction:column;gap:6px;width:150px"><span style="font:400 10.5px/1 'JetBrains Mono',monospace;color:#8A93A1">17 of 25 checked</span><div style="height:4px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="width:68%;height:100%;background:#0E7C66"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 the readout -->
+  <div style="padding:76px 48px;border-bottom:1px solid #E2E5EA">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;align-items:baseline;gap:14px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">01</span><h3 style="margin:0;font:600 34px/1.15 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em">This is what you get in ninety seconds.</h3></div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:32px 36px;display:grid;grid-template-columns:280px 1fr;gap:44px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;flex-direction:column;gap:6px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Citation rate · acmecrm.com</span><span style="font:500 72px/1 'JetBrains Mono',monospace;letter-spacing:-0.02em">34<span style="font-size:30px;color:#8A93A1">%</span></span><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">of AI answer runs cite you on your 25 queries</span></div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;height:22px;border-radius:5px;overflow:hidden;gap:2px">
+              <div style="width:46%;background:#C43D3D"></div><div style="width:27%;background:#D98324"></div><div style="width:17%;background:#3E5C8A"></div><div style="width:10%;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:10px">
+              <span style="display:flex;align-items:center;gap:5px;font:400 10.5px/1 'JetBrains Mono',monospace;color:#5B6472"><span style="width:8px;height:8px;background:#C43D3D;border-radius:2px"></span>AIO displacement</span>
+              <span style="display:flex;align-items:center;gap:5px;font:400 10.5px/1 'JetBrains Mono',monospace;color:#5B6472"><span style="width:8px;height:8px;background:#D98324;border-radius:2px"></span>Ranking</span>
+              <span style="display:flex;align-items:center;gap:5px;font:400 10.5px/1 'JetBrains Mono',monospace;color:#5B6472"><span style="width:8px;height:8px;background:#3E5C8A;border-radius:2px"></span>Technical</span>
+              <span style="display:flex;align-items:center;gap:5px;font:400 10.5px/1 'JetBrains Mono',monospace;color:#5B6472"><span style="width:8px;height:8px;background:repeating-linear-gradient(45deg,#8A93A1 0 2px,#A8AFBA 2px 4px);border-radius:2px"></span>Other</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font:600 26px/1.35 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em;max-width:46ch">Acme ranks top-5 for 16 of 25 queries — but is cited in only 34% of AI answer runs. The largest cause is AIO displacement: the answer cites three sources, and none are Acme.</div>
+          <div style="display:flex;flex-direction:column;gap:0;border:1px solid #E2E5EA;border-radius:8px;overflow:hidden">
+            <div style="display:grid;grid-template-columns:1fr 170px 90px;gap:14px;padding:10px 16px;background:#EDEFF2"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Top fixes</span><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Cause addressed</span><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Impact</span></div>
+            <div style="display:grid;grid-template-columns:1fr 170px 90px;gap:14px;padding:12px 16px;border-bottom:1px solid #E2E5EA;align-items:center"><span style="font:400 13.5px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Publish a comparison page answering "hubspot alternatives" directly</span><span style="font:400 11.5px/1 'JetBrains Mono',monospace;color:#A62F2F">AIO displacement</span><span style="font:500 11.5px/1 'JetBrains Mono',monospace;color:#0B6151">High</span></div>
+            <div style="display:grid;grid-template-columns:1fr 170px 90px;gap:14px;padding:12px 16px;border-bottom:1px solid #E2E5EA;align-items:center"><span style="font:400 13.5px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Add per-plan pricing detail — engines cite pages that state numbers</span><span style="font:400 11.5px/1 'JetBrains Mono',monospace;color:#A62F2F">AIO displacement</span><span style="font:500 11.5px/1 'JetBrains Mono',monospace;color:#0B6151">High</span></div>
+            <div style="display:grid;grid-template-columns:1fr 170px 90px;gap:14px;padding:12px 16px;align-items:center"><span style="font:400 13.5px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Fix soft-404s on 3 of your most-asked documentation URLs</span><span style="font:400 11.5px/1 'JetBrains Mono',monospace;color:#34507A">Technical decay</span><span style="font:500 11.5px/1 'JetBrains Mono',monospace;color:#9A6210">Medium</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">Fig. 01 — a free scan readout. Real structure, demonstration data. Yours takes about 90 seconds and no account.</div>
+    </div>
+  </div>
+
+  <!-- 03 the problem, measured -->
+  <div style="padding:76px 48px;border-bottom:1px solid #E2E5EA;background:#FFFFFF">
+    <div style="max-width:1120px;margin:0 auto;display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:baseline;gap:14px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">02</span><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">The problem, measured</span></div>
+        <h3 style="margin:0;font:600 34px/1.15 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em">Your rank tracker says nothing changed. Your analytics disagrees.</h3>
+        <p style="margin:0;font:400 15px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">When an AI answer sits above the links, the query still fires an impression — the click just never comes. Position trackers can't see it, because your position didn't move. The gap between those two lines is the thing Citerate measures.</p>
+      </div>
+      <div style="background:#F4F5F7;border:1px solid #E2E5EA;border-radius:14px;padding:26px 28px;display:flex;flex-direction:column;gap:14px">
+        <svg width="100%" height="230" viewBox="0 0 640 230" preserveAspectRatio="none">
+          <line x1="0" y1="46" x2="640" y2="46" stroke="#E2E5EA" stroke-width="1"></line>
+          <line x1="0" y1="92" x2="640" y2="92" stroke="#E2E5EA" stroke-width="1"></line>
+          <line x1="0" y1="138" x2="640" y2="138" stroke="#E2E5EA" stroke-width="1"></line>
+          <line x1="0" y1="184" x2="640" y2="184" stroke="#E2E5EA" stroke-width="1"></line>
+          <line x1="236" y1="18" x2="236" y2="212" stroke="#C6CBD3" stroke-width="1" stroke-dasharray="4 4"></line>
+          <path d="M0,64 C60,60 110,66 160,62 C210,58 260,64 320,60 C380,56 440,62 520,58 C570,56 610,60 640,58" fill="none" stroke="#3E5C8A" stroke-width="2.5"></path>
+          <path d="M0,84 C50,86 110,82 170,86 C210,90 240,98 280,112 C330,130 380,146 440,160 C500,172 570,180 640,186" fill="none" stroke="#C43D3D" stroke-width="2.5"></path>
+        </svg>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="display:flex;gap:16px">
+            <span style="display:flex;align-items:center;gap:6px;font:400 11.5px/1 'JetBrains Mono',monospace;color:#34507A"><span style="width:14px;height:2.5px;background:#3E5C8A"></span>Impressions</span>
+            <span style="display:flex;align-items:center;gap:6px;font:400 11.5px/1 'JetBrains Mono',monospace;color:#A62F2F"><span style="width:14px;height:2.5px;background:#C43D3D"></span>Organic clicks</span>
+          </div>
+          <span style="font:400 10.5px/1 'JetBrains Mono',monospace;color:#8A93A1">dashed line: AI Overviews expand on your queries</span>
+        </div>
+        <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">Fig. 02 — the divergence pattern, 12 months, typical affected domain. Illustrative shape.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 four causes -->
+  <div style="padding:76px 48px;border-bottom:1px solid #E2E5EA">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:26px">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:64ch">
+        <div style="display:flex;align-items:baseline;gap:14px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">03</span><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Cause separation</span></div>
+        <h3 style="margin:0;font:600 34px/1.15 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em">Not all lost clicks have the same cause. The fix depends on which one is yours.</h3>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #C43D3D;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:9px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#A62F2F">AIO displacement</span>
+          <span style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">The answer replaced the click</span>
+          <span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">You still rank. An AI answer sits above you and cites someone else. Fixed with citable content, not with SEO.</span>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #D98324;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:9px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#9A6210">Ranking decline</span>
+          <span style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">You actually slipped</span>
+          <span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">A plain position loss, hiding inside the same falling line. Your existing SEO playbook applies — and only here.</span>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #3E5C8A;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:9px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#34507A">Technical decay</span>
+          <span style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Engines can't read you</span>
+          <span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Broken pages, blocked crawlers, missing structure. Cheap to fix, invisible until something measures it.</span>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #8A93A1;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:9px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Other / unexplained</span>
+          <span style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Honestly labeled</span>
+          <span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">What the model can't attribute stays striped and named "unexplained" — never silently folded into a cause.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 method teaser -->
+  <div style="padding:76px 48px;border-bottom:1px solid #E2E5EA;background:#FFFFFF">
+    <div style="max-width:1120px;margin:0 auto;display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:baseline;gap:14px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">04</span><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Method</span></div>
+        <h3 style="margin:0;font:600 34px/1.15 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em">A number you can defend in the meeting where someone asks how it's calculated.</h3>
+        <p style="margin:0;font:400 15px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Every query is asked on every engine, every run. Citations are matched to your domain by resolved URL, not string similarity. Causes are attributed per query, and anything below confidence stays "unexplained." The method page follows one real query end to end.</p>
+        <a href="#" style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#0B6151">Read the full method →</a>
+      </div>
+      <div style="background:#F4F5F7;border:1px solid #E2E5EA;border-radius:14px;padding:26px 28px;display:flex;flex-direction:column;gap:12px">
+        <div style="font:400 13px/1.4 'JetBrains Mono',monospace;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:11px 14px">"best crm for startups"</div>
+        <div style="display:flex;gap:8px">
+          <div style="flex:1;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:4px"><span style="font:400 10.5px/1 'JetBrains Mono',monospace;color:#8A93A1">ChatGPT</span><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#A62F2F">Not cited</span></div>
+          <div style="flex:1;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:4px"><span style="font:400 10.5px/1 'JetBrains Mono',monospace;color:#8A93A1">Google AIO</span><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#A62F2F">Not cited</span></div>
+          <div style="flex:1;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:4px"><span style="font:400 10.5px/1 'JetBrains Mono',monospace;color:#8A93A1">Perplexity</span><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#0B6151">Cited</span></div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:12px 14px;font:400 12px/1.7 'JetBrains Mono',monospace;color:#5B6472">…for early-stage teams, <span style="background:#FBEDED;color:#A62F2F;border-radius:3px;padding:1px 4px">competitor-a.com</span> and <span style="background:#FBEDED;color:#A62F2F;border-radius:3px;padding:1px 4px">competitor-b.com</span> are most often recommended for their free tiers…</div>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <span style="font:500 11.5px/1 'JetBrains Mono',monospace;color:#A62F2F">Cause: AIO displacement · confidence 0.86</span>
+          <span style="font:400 10.5px/1 'JetBrains Mono',monospace;color:#8A93A1">1 of 25 queries</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 product -->
+  <div style="padding:76px 48px;border-bottom:1px solid #E2E5EA">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:26px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:12px;max-width:56ch">
+          <div style="display:flex;align-items:baseline;gap:14px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">05</span><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">After the diagnosis</span></div>
+          <h3 style="margin:0;font:600 34px/1.15 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em">Then it tells you what to do, in what order, and whether it worked.</h3>
+        </div>
+        <a href="#" style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;border:1px solid #C6CBD3;border-radius:999px;padding:11px 18px;white-space:nowrap">See how it works →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch">
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Fix Queue</span>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;justify-content:space-between;background:#F4F5F7;border-radius:6px;padding:9px 12px"><span style="font:400 12px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Comparison page for 3 queries</span><span style="font:500 10px/1 'JetBrains Mono',monospace;color:#0B6151">HIGH</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;background:#F4F5F7;border-radius:6px;padding:9px 12px"><span style="font:400 12px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">State pricing on /plans</span><span style="font:500 10px/1 'JetBrains Mono',monospace;color:#0B6151">HIGH</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;background:#F4F5F7;border-radius:6px;padding:9px 12px"><span style="font:400 12px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Fix soft-404 on /docs/api</span><span style="font:500 10px/1 'JetBrains Mono',monospace;color:#9A6210">MED</span></div>
+          </div>
+          <span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;margin-top:auto">Every finding becomes a ranked task with an owner — not a chart you admire.</span>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Before / after</span>
+          <svg width="100%" height="96" viewBox="0 0 300 96" preserveAspectRatio="none">
+            <line x1="150" y1="8" x2="150" y2="88" stroke="#C6CBD3" stroke-width="1" stroke-dasharray="4 4"></line>
+            <path d="M0,62 C30,64 60,60 90,63 C110,65 130,62 150,63 C180,58 210,46 240,38 C270,32 290,28 300,26" fill="none" stroke="#0E7C66" stroke-width="2.5"></path>
+          </svg>
+          <div style="display:flex;justify-content:space-between"><span style="font:400 10.5px/1 'JetBrains Mono',monospace;color:#8A93A1">fix shipped ↑</span><span style="font:500 11.5px/1 'JetBrains Mono',monospace;color:#0B6151">citation rate, per query</span></div>
+          <span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;margin-top:auto">Each fix gets a before/after delta on its own queries. The work is provable.</span>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+          <span style="display:flex;align-items:center;gap:8px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Share of citations</span><span style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#FFFFFF;background:#141B26;border-radius:999px;padding:3px 7px">Growth</span></span>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px/1 'JetBrains Mono',monospace;color:#5B6472;width:86px">competitor-a</span><div style="flex:1;height:10px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="width:41%;height:100%;background:#3E5C8A"></div></div><span style="font:400 11px/1 'JetBrains Mono',monospace;color:#5B6472">41%</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><span style="font:500 11px/1 'JetBrains Mono',monospace;color:#0B6151;width:86px">you</span><div style="flex:1;height:10px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="width:34%;height:100%;background:#0E7C66"></div></div><span style="font:500 11px/1 'JetBrains Mono',monospace;color:#0B6151">34%</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><span style="font:400 11px/1 'JetBrains Mono',monospace;color:#5B6472;width:86px">competitor-b</span><div style="flex:1;height:10px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="width:18%;height:100%;background:#3E5C8A"></div></div><span style="font:400 11px/1 'JetBrains Mono',monospace;color:#5B6472">18%</span></div>
+          </div>
+          <span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;margin-top:auto">Who the engines cite instead of you, named — and how the share moves.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 roles -->
+  <div style="padding:76px 48px;border-bottom:1px solid #E2E5EA;background:#FFFFFF">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:26px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:baseline;gap:14px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">06</span><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Who it's for</span></div>
+          <h3 style="margin:0;font:600 34px/1.15 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em">Same instrument, three jobs.</h3>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button onClick="{{ setRole0 }}" style="font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;border-radius:999px;padding:10px 16px;cursor:pointer;transition:background 160ms cubic-bezier(.22,.61,.36,1);background:{{ t0.bg }};color:{{ t0.fg }};border:1px solid {{ t0.bd }}">In-house SEO</button>
+          <button onClick="{{ setRole1 }}" style="font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;border-radius:999px;padding:10px 16px;cursor:pointer;transition:background 160ms cubic-bezier(.22,.61,.36,1);background:{{ t1.bg }};color:{{ t1.fg }};border:1px solid {{ t1.bd }}">Leadership</button>
+          <button onClick="{{ setRole2 }}" style="font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;border-radius:999px;padding:10px 16px;cursor:pointer;transition:background 160ms cubic-bezier(.22,.61,.36,1);background:{{ t2.bg }};color:{{ t2.fg }};border:1px solid {{ t2.bd }}">Agency</button>
+        </div>
+      </div>
+      <div style="background:#F4F5F7;border:1px solid #E2E5EA;border-radius:14px;padding:32px 36px;display:grid;grid-template-columns:1fr 240px;gap:44px;align-items:center">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="font:600 26px/1.3 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em">{{ roleHead }}</div>
+          <div style="font:400 15px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;max-width:64ch">{{ roleBody }}</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+            <div style="display:flex;align-items:baseline;gap:10px"><span style="font:500 11px/1.5 'JetBrains Mono',monospace;color:#0B6151">—</span><span style="font:400 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">{{ roleB1 }}</span></div>
+            <div style="display:flex;align-items:baseline;gap:10px"><span style="font:500 11px/1.5 'JetBrains Mono',monospace;color:#0B6151">—</span><span style="font:400 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">{{ roleB2 }}</span></div>
+            <div style="display:flex;align-items:baseline;gap:10px"><span style="font:500 11px/1.5 'JetBrains Mono',monospace;color:#0B6151">—</span><span style="font:400 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">{{ roleB3 }}</span></div>
+          </div>
+          <a href="#" style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#0B6151;margin-top:6px">{{ roleLink }}</a>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:8px;align-self:start">
+          <span style="font:500 44px/1 'JetBrains Mono',monospace;letter-spacing:-0.02em;color:#141B26">{{ roleStat }}</span>
+          <span style="font:400 12.5px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">{{ roleStatCap }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 proof, placeholdered -->
+  <div style="padding:76px 48px;border-bottom:1px solid #E2E5EA">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:26px">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:64ch">
+        <div style="display:flex;align-items:baseline;gap:14px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">07</span><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Proof</span></div>
+        <h3 style="margin:0;font:600 34px/1.15 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em">Teams measuring their AI visibility with Citerate</h3>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div style="border:1.5px dashed #D8DCE3;border-radius:10px;padding:24px 26px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,#FFFFFF,#F4F5F7)">
+          <span style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#9A6210;background:#FDF2E3;border-radius:999px;padding:5px 9px;align-self:flex-start">Placeholder — do not ship</span>
+          <span style="font:600 20px/1.4 'Source Serif 4',Georgia,serif;color:#8A93A1">"Customer quote about proving the citation-rate recovery to their leadership goes here, with a real name and a real number."</span>
+          <span style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">Name, role, company — awaiting first named customer</span>
+        </div>
+        <div style="border:1.5px dashed #D8DCE3;border-radius:10px;padding:24px 26px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,#FFFFFF,#F4F5F7)">
+          <span style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#9A6210;background:#FDF2E3;border-radius:999px;padding:5px 9px;align-self:flex-start">Placeholder — do not ship</span>
+          <span style="font:600 20px/1.4 'Source Serif 4',Georgia,serif;color:#8A93A1">"Agency quote about billing GEO as a retainer line and white-labeling the Monday report goes here."</span>
+          <span style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">Name, role, agency — awaiting first named customer</span>
+        </div>
+      </div>
+      <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">Section stays unpublished until one customer agrees to be named. Nothing fake ships. Until then, the section below carries the honesty line instead.</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:2px solid #0E7C66;border-radius:10px;padding:22px 26px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+        <span style="font:600 20px/1.4 'Source Serif 4',Georgia,serif;max-width:52ch">We're new, and the product is a measurement. So don't take our word — take a reading.</span>
+        <span style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#0E7C66;border-radius:6px;padding:12px 18px;white-space:nowrap">Run the free scan</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 pricing preview -->
+  <div style="padding:76px 48px;border-bottom:1px solid #E2E5EA;background:#FFFFFF">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:26px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:baseline;gap:14px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">08</span><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Pricing</span></div>
+          <h3 style="margin:0;font:600 34px/1.15 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em">Diagnosis is free. The prescription is paid.</h3>
+        </div>
+        <a href="#" style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;border:1px solid #C6CBD3;border-radius:999px;padding:11px 18px;white-space:nowrap">Compare all plans →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div style="background:#F4F5F7;border:1px solid #E2E5EA;border-radius:10px;padding:24px 26px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Starter</span>
+          <div style="display:flex;align-items:flex-end;gap:5px"><span style="font:500 36px/1 'JetBrains Mono',monospace;letter-spacing:-0.02em">{{ pStarter }}</span><span style="font:400 12px/1.3 'JetBrains Mono',monospace;color:#8A93A1;padding-bottom:4px">{{ per }}</span></div>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">100 queries, 2 engines, weekly. Answers whether you have a problem.</span>
+        </div>
+        <div style="background:#F4F5F7;border:2px solid #0E7C66;border-radius:10px;padding:24px 26px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#0B6151">Growth · most teams</span>
+          <div style="display:flex;align-items:flex-end;gap:5px"><span style="font:500 36px/1 'JetBrains Mono',monospace;letter-spacing:-0.02em">{{ pGrowth }}</span><span style="font:400 12px/1.3 'JetBrains Mono',monospace;color:#8A93A1;padding-bottom:4px">{{ per }}</span></div>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">500 queries, 4 engines, daily — and competitor names. Who's winning, not just that you're losing.</span>
+        </div>
+        <div style="background:#F4F5F7;border:1px solid #E2E5EA;border-radius:10px;padding:24px 26px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Scale</span>
+          <div style="display:flex;align-items:flex-end;gap:5px"><span style="font:500 36px/1 'JetBrains Mono',monospace;letter-spacing:-0.02em">{{ pScale }}</span><span style="font:400 12px/1.3 'JetBrains Mono',monospace;color:#8A93A1;padding-bottom:4px">{{ per }}</span></div>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">2,000 queries, all engines, white-label reporting. For portfolios and monthly reporting upward.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 final CTA + footer -->
+  <div style="background:#141B26;padding:88px 48px 0">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:0">
+      <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start;padding-bottom:76px;border-bottom:1px solid rgba(255,255,255,0.10)">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Free · no signup</div>
+        <div style="font:600 44px/1.1 'Source Serif 4',Georgia,serif;letter-spacing:-0.02em;color:#F4F5F7;max-width:24ch">Get your number. Then decide.</div>
+        <div style="display:flex;gap:10px;width:520px;max-width:100%">
+          <div style="flex:1;display:flex;align-items:center;background:#FFFFFF;border-radius:6px;padding:0 16px;height:52px"><span style="font:400 14px/1 'JetBrains Mono',monospace;color:#8A93A1">yourdomain.com</span></div>
+          <span style="display:flex;align-items:center;font:500 15px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#0E7C66;border-radius:6px;padding:0 22px;height:52px;white-space:nowrap">Run free scan</span>
+        </div>
+        <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">One scan per domain per day. Results are shareable by link.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1fr;gap:32px;padding:44px 0">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;gap:9px"><span style="width:12px;height:12px;background:#0E7C66;border-radius:3px"></span><span style="font:600 18px/1 'Source Serif 4',Georgia,serif;color:#F4F5F7">Citerate</span></div>
+          <span style="font:400 12.5px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#8A93A1;max-width:26ch">AI visibility, measured like an instrument, not argued like an ad.</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Product</span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">How it works</span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">Pricing</span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">Compare</span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">Changelog</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Solutions</span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">For in-house teams</span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">For agencies</span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">Customers</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Resources</span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">Blog</span>
+          <span style="display:flex;align-items:center;gap:6px;font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">Docs &amp; API <span style="font:500 8.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#E9A44A;border:1px solid rgba(233,164,74,.4);border-radius:999px;padding:2px 6px">Soon</span></span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">Security</span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">Contact</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Legal</span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">Privacy</span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">Terms</span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">DPA</span>
+          <span style="font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#C6CBD3">Subprocessors</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 0 22px;border-top:1px solid rgba(255,255,255,0.10)">
+        <span style="font:400 11px/1 'JetBrains Mono',monospace;color:#5B6472">© 2026 Citerate</span>
+        <span style="display:flex;align-items:center;gap:7px;font:400 11px/1 'JetBrains Mono',monospace;color:#8A93A1"><span style="width:7px;height:7px;background:#35B394;border-radius:999px"></span>All engines operational</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ PRICING -->
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;gap:10px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#FFFFFF;background:#141B26;border-radius:999px;padding:6px 10px">/pricing</span><span style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Pricing</span><span style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">cards · table · metering in plain words · 12 FAQs</span></div>
+<div data-screen-label="Pricing" style="width:1440px;background:#F4F5F7;border:1px solid #C6CBD3;border-radius:14px;overflow:hidden;box-shadow:0 12px 32px rgba(20,27,38,0.14)">
+
+  <!-- nav -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E2E5EA;background:#F4F5F7">
+    <div style="display:flex;align-items:center;gap:36px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="width:12px;height:12px;background:#0E7C66;border-radius:3px"></span><span style="font:600 20px/1 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em">Citerate</span></div>
+      <div style="display:flex;gap:26px">
+        <span style="font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">How it works</span>
+        <span style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;border-bottom:2px solid #0E7C66;padding-bottom:22px;margin-bottom:-24px">Pricing</span>
+        <span style="font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">For agencies</span>
+        <span style="font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Blog</span>
+        <span style="display:flex;align-items:center;gap:6px;font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Docs <span style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#9A6210;background:#FDF2E3;border-radius:999px;padding:3px 6px">Soon</span></span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:18px">
+      <span style="font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Sign in</span>
+      <span style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#0E7C66;border-radius:6px;padding:11px 16px">Run free scan</span>
+    </div>
+  </div>
+
+  <!-- header -->
+  <div style="padding:72px 48px 40px">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Pricing</div>
+      <h2 style="margin:0;font:600 44px/1.1 'Source Serif 4',Georgia,serif;letter-spacing:-0.02em;max-width:22ch">Diagnosis is free. The prescription is paid.</h2>
+      <p style="margin:0;font:400 16px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;max-width:60ch">One meter: tracked queries. Engines and refresh frequency come with the plan — we don't count them against you. No feature is sold twice.</p>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+        <button onClick="{{ setMonthly }}" style="font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;border-radius:999px;padding:10px 16px;cursor:pointer;transition:background 160ms cubic-bezier(.22,.61,.36,1);background:{{ mo.bg }};color:{{ mo.fg }};border:1px solid {{ mo.bd }}">Monthly</button>
+        <button onClick="{{ setAnnual }}" style="font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;border-radius:999px;padding:10px 16px;cursor:pointer;transition:background 160ms cubic-bezier(.22,.61,.36,1);background:{{ yr.bg }};color:{{ yr.fg }};border:1px solid {{ yr.bd }}">Yearly · two months free</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- free strip -->
+  <div style="padding:0 48px">
+    <div style="max-width:1120px;margin:0 auto;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:4px;min-width:170px"><span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#0B6151">Free scan</span><span style="font:500 22px/1.2 'JetBrains Mono',monospace">$0 · no account</span></div>
+      <div style="flex:1;min-width:320px;font:400 13.5px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">One domain, 25 queries, two engines. Your citation rate, the cause split, and your top three fixes — in about 90 seconds. Email only to save it.</div>
+      <span style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;border:1px solid #C6CBD3;border-radius:6px;padding:12px 18px;white-space:nowrap">Run it now</span>
+    </div>
+  </div>
+
+  <!-- three cards -->
+  <div style="padding:20px 48px 0">
+    <div style="max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:26px 26px 28px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Starter</span>
+          <div style="display:flex;align-items:flex-end;gap:6px"><span style="font:500 48px/1 'JetBrains Mono',monospace;letter-spacing:-0.02em">{{ pStarter }}</span><span style="font:500 13px/1.4 'JetBrains Mono',monospace;color:#8A93A1;padding-bottom:8px">{{ per }}</span></div>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">One brand, one person, weekly rhythm. Answers whether you have a problem.</span>
+        </div>
+        <div style="height:1px;background:#E2E5EA"></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">100 tracked queries</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">2 engines, weekly refresh</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Score, causes, 90 day history</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Top 10 fixes</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">1 seat, CSV export</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#8A93A1">Competitor names locked</span>
+        </div>
+        <button style="margin-top:auto;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;background:#FFFFFF;border:1px solid #C6CBD3;border-radius:6px;padding:12px 18px;cursor:pointer;transition:background 90ms cubic-bezier(.22,.61,.36,1)" style-hover="background:#EDEFF2">Start with a free scan</button>
+      </div>
+      <div style="background:#FFFFFF;border:2px solid #0E7C66;border-radius:10px;padding:26px 26px 28px;display:flex;flex-direction:column;gap:16px;position:relative">
+        <span style="position:absolute;top:-11px;left:26px;font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#FFFFFF;background:#0E7C66;border-radius:999px;padding:6px 11px">Most teams land here</span>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#0B6151">Growth</span>
+          <div style="display:flex;align-items:flex-end;gap:6px"><span style="font:500 48px/1 'JetBrains Mono',monospace;letter-spacing:-0.02em">{{ pGrowth }}</span><span style="font:500 13px/1.4 'JetBrains Mono',monospace;color:#8A93A1;padding-bottom:8px">{{ per }}</span></div>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">The first plan that tells you who is winning instead of just that you are losing.</span>
+        </div>
+        <div style="height:1px;background:#E2E5EA"></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">500 tracked queries, 3 domains</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">4 engines, daily refresh</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#0B6151">Competitor names and share of citations</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Full Fix Queue with owners</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">12 month history, PDF reports</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">5 seats, Slack, Search Console, read API</span>
+        </div>
+        <button style="margin-top:auto;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#0E7C66;border:0;border-radius:6px;padding:13px 18px;cursor:pointer;transition:background 90ms cubic-bezier(.22,.61,.36,1)" style-hover="background:#0B6151">Start with a free scan</button>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:26px 26px 28px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Scale</span>
+          <div style="display:flex;align-items:flex-end;gap:6px"><span style="font:500 48px/1 'JetBrains Mono',monospace;letter-spacing:-0.02em">{{ pScale }}</span><span style="font:500 13px/1.4 'JetBrains Mono',monospace;color:#8A93A1;padding-bottom:8px">{{ per }}</span></div>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Several brands, several markets, and someone who reports upward every month.</span>
+        </div>
+        <div style="height:1px;background:#E2E5EA"></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">2,000 tracked queries, 10 domains</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">All engines, daily plus on demand</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Unlimited history and exports</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">White label PDF, webhooks, write API</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">15 seats, Google Workspace sign in</span>
+          <span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Same day support</span>
+        </div>
+        <button style="margin-top:auto;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;background:#FFFFFF;border:1px solid #C6CBD3;border-radius:6px;padding:12px 18px;cursor:pointer;transition:background 90ms cubic-bezier(.22,.61,.36,1)" style-hover="background:#EDEFF2">Start with a free scan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- agency / enterprise -->
+  <div style="padding:16px 48px 0">
+    <div style="max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Agency</span><span style="font:500 20px/1.2 'JetBrains Mono',monospace">{{ pAgency }} {{ per }}</span></div>
+        <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">25 client workspaces, 5,000 pooled queries, white label on every surface including the login domain. Client seats read-only and free. Reseller billing hides your cost. Extra workspace $29. Sold annually only.</div>
+        <a href="#" style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#0B6151">Book an agency demo →</a>
+      </div>
+      <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Enterprise</span><span style="font:500 20px/1.2 'JetBrains Mono',monospace">Talk to us</span></div>
+        <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">SAML SSO, audit log export, data residency, signed DPA and MSA, invoicing, custom engines and prompt sets, security review, uptime commitment.</div>
+        <a href="#" style="font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#0B6151">Talk to us →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- metering plain words -->
+  <div style="padding:56px 48px 0">
+    <div style="max-width:1120px;margin:0 auto;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:26px 28px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">The only meter</div>
+        <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">A tracked query is one prompt, checked on every engine in your plan, on every refresh in your plan. Engines and frequency are never billed separately.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Going over</div>
+        <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Nothing stops. You see a banner, the scan finishes, and the overage block (100 queries, $19) lands on the next invoice. No surprise mid-cycle lockouts.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Add-ons buy volume only</div>
+        <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Extra domain $39. Rescan pack of 10, $15. 90-day backfill $99 once. Seat $12 on Growth. No add-on unlocks a gated feature — features live in tiers.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- comparison table -->
+  <div style="padding:56px 48px 0">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:14px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Full comparison</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:240px repeat(5,1fr);gap:12px;padding:12px 24px;background:#EDEFF2;border-bottom:1px solid #E2E5EA">
+          <span></span>
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Free</span>
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Starter</span>
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#0B6151">Growth</span>
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Scale</span>
+          <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">Agency</span>
+        </div>
+        <div style="display:grid;grid-template-columns:240px repeat(5,1fr);gap:12px;padding:12px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Tracked queries</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">25</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">100</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace">500</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">2,000</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">5,000 pooled</span></div>
+        <div style="display:grid;grid-template-columns:240px repeat(5,1fr);gap:12px;padding:12px 24px;border-bottom:1px solid #E2E5EA;background:#F4F5F7"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Engines</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">2</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">2</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace">4</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">All</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">All</span></div>
+        <div style="display:grid;grid-template-columns:240px repeat(5,1fr);gap:12px;padding:12px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Refresh</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">Once</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">Weekly</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Daily</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">Daily + on demand</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">Daily + on demand</span></div>
+        <div style="display:grid;grid-template-columns:240px repeat(5,1fr);gap:12px;padding:12px 24px;border-bottom:1px solid #E2E5EA;background:#F4F5F7"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Competitor names</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#8A93A1">Locked</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#8A93A1">Locked</span><span style="font:500 13px/1.4 'JetBrains Mono',monospace;color:#0B6151">Yes</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">Yes</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">Yes</span></div>
+        <div style="display:grid;grid-template-columns:240px repeat(5,1fr);gap:12px;padding:12px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">History</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">None</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">90 days</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace">12 months</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">Unlimited</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">Unlimited</span></div>
+        <div style="display:grid;grid-template-columns:240px repeat(5,1fr);gap:12px;padding:12px 24px;border-bottom:1px solid #E2E5EA;background:#F4F5F7"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Reports</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">Share link</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">CSV</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace">PDF, scheduled</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">White label PDF</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">White label all</span></div>
+        <div style="display:grid;grid-template-columns:240px repeat(5,1fr);gap:12px;padding:12px 24px;border-bottom:1px solid #E2E5EA"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Seats</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">1</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">1</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace">5</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">15</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">Unlimited</span></div>
+        <div style="display:grid;grid-template-columns:240px repeat(5,1fr);gap:12px;padding:12px 24px"><span style="font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">API and webhooks</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">No</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">No</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace">Read</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">Read + write</span><span style="font:400 13px/1.4 'JetBrains Mono',monospace;color:#5B6472">Read + write</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div style="padding:64px 48px 0">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:22px">
+      <h3 style="margin:0;font:600 34px/1.15 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em">Twelve reasons people stall, answered.</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px 40px">
+        <div style="display:flex;flex-direction:column;gap:7px;border-top:1px solid #E2E5EA;padding-top:16px"><span style="font:600 16px/1.4 'Source Serif 4',Georgia,serif">What exactly is a tracked query?</span><span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">One prompt a buyer would ask, checked on every engine in your plan, at your plan's refresh rate. 100 queries on Starter means 100 prompts — engines and frequency don't multiply the count.</span></div>
+        <div style="display:flex;flex-direction:column;gap:7px;border-top:1px solid #E2E5EA;padding-top:16px"><span style="font:600 16px/1.4 'Source Serif 4',Georgia,serif">Which engines do you check?</span><span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">ChatGPT and Google AI Overviews on every plan; Perplexity and Gemini from Growth; Copilot and Claude on Scale and above. Coverage changes are flagged in the changelog.</span></div>
+        <div style="display:flex;flex-direction:column;gap:7px;border-top:1px solid #E2E5EA;padding-top:16px"><span style="font:600 16px/1.4 'Source Serif 4',Georgia,serif">Where do the queries come from?</span><span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">We propose a set from your site, your Search Console data if connected, and your category. You edit everything — swap, add, or retire queries whenever you like.</span></div>
+        <div style="display:flex;flex-direction:column;gap:7px;border-top:1px solid #E2E5EA;padding-top:16px"><span style="font:600 16px/1.4 'Source Serif 4',Georgia,serif">Is there a trial?</span><span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">The free scan is the trial — a real reading on your real domain, no account. Paid plans start with your scan history intact, so nothing is measured twice.</span></div>
+        <div style="display:flex;flex-direction:column;gap:7px;border-top:1px solid #E2E5EA;padding-top:16px"><span style="font:600 16px/1.4 'Source Serif 4',Georgia,serif">What happens when I hit my limit?</span><span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Scans keep running. You see a banner, and the overage block ($19 per 100 queries) is billed at the end of the cycle. We never stop measuring mid-month.</span></div>
+        <div style="display:flex;flex-direction:column;gap:7px;border-top:1px solid #E2E5EA;padding-top:16px"><span style="font:600 16px/1.4 'Source Serif 4',Georgia,serif">Why are competitor names locked on Starter?</span><span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Starter answers "do I have a problem." Naming who benefits is the analysis layer, and it's the honest line between the two plans — not an artificial crippling of the data.</span></div>
+        <div style="display:flex;flex-direction:column;gap:7px;border-top:1px solid #E2E5EA;padding-top:16px"><span style="font:600 16px/1.4 'Source Serif 4',Georgia,serif">Can I cancel or downgrade anytime?</span><span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Yes, from billing settings, effective at the end of the cycle. Your history is exportable for 90 days after cancellation.</span></div>
+        <div style="display:flex;flex-direction:column;gap:7px;border-top:1px solid #E2E5EA;padding-top:16px"><span style="font:600 16px/1.4 'Source Serif 4',Georgia,serif">How is the citation rate calculated?</span><span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Cited answer runs divided by total answer runs, per query, per engine. Citations are matched by resolved URL. The method page shows one query end to end.</span></div>
+        <div style="display:flex;flex-direction:column;gap:7px;border-top:1px solid #E2E5EA;padding-top:16px"><span style="font:600 16px/1.4 'Source Serif 4',Georgia,serif">Do competitors know I track them?</span><span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">No. We read public engine answers; we never touch competitor properties. They appear because engines cite them, not because we crawled them.</span></div>
+        <div style="display:flex;flex-direction:column;gap:7px;border-top:1px solid #E2E5EA;padding-top:16px"><span style="font:600 16px/1.4 'Source Serif 4',Georgia,serif">Can I pay by invoice?</span><span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Card on all self-serve plans, handled by our merchant of record with VAT and sales tax included. Invoicing is available on Enterprise.</span></div>
+        <div style="display:flex;flex-direction:column;gap:7px;border-top:1px solid #E2E5EA;padding-top:16px"><span style="font:600 16px/1.4 'Source Serif 4',Georgia,serif">What about my data?</span><span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Your query set and results are yours; we never train on them or show them to anyone else. DPA and subprocessor list are on the legal pages, signed DPA on Enterprise.</span></div>
+        <div style="display:flex;flex-direction:column;gap:7px;border-top:1px solid #E2E5EA;padding-top:16px"><span style="font:600 16px/1.4 'Source Serif 4',Georgia,serif">Do you support non-English markets?</span><span style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Queries can be in any language the engines answer. Cause attribution currently performs best in English; we say so rather than pretend otherwise.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA + footer -->
+  <div style="margin-top:72px;background:#141B26;padding:64px 48px 0">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,0.10)">
+        <div style="font:600 34px/1.15 'Source Serif 4',Georgia,serif;letter-spacing:-0.01em;color:#F4F5F7;max-width:26ch">Still deciding? The scan is free and takes ninety seconds.</div>
+        <span style="font:500 15px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#0E7C66;border-radius:6px;padding:16px 24px;white-space:nowrap">Run free scan</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 0 22px">
+        <span style="font:400 11px/1 'JetBrains Mono',monospace;color:#5B6472">© 2026 Citerate</span>
+        <span style="font:400 11px/1 'JetBrains Mono',monospace;color:#8A93A1">Privacy · Terms · DPA</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:3100},&quot;billing&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;monthly&quot;,&quot;annual&quot;],&quot;default&quot;:&quot;monthly&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pricing&quot;,&quot;label&quot;:&quot;Default billing period&quot;},&quot;defaultRole&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;in-house&quot;,&quot;leadership&quot;,&quot;agency&quot;],&quot;default&quot;:&quot;in-house&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Home&quot;,&quot;label&quot;:&quot;Default role tab&quot;}}">
+class Component extends DCLogic {
+  state = { annual: false, role: 0 };
+  componentDidMount() {
+    if ((this.props.billing || "monthly") === "annual") this.setState({ annual: true });
+    const r = { "in-house": 0, leadership: 1, agency: 2 }[this.props.defaultRole];
+    if (r) this.setState({ role: r });
+  }
+  pill(on) {
+    return on
+      ? { bg: "#141B26", fg: "#FFFFFF", bd: "#141B26" }
+      : { bg: "#FFFFFF", fg: "#5B6472", bd: "#C6CBD3" };
+  }
+  renderVals() {
+    const a = this.state.annual;
+    const roles = [
+      {
+        head: "Prove the work landed.",
+        body: "You shipped the content, fixed the pages, and did the schema work. Citerate ties each fix to citation-rate movement on its own queries, so the Monday update carries a delta instead of a hope.",
+        b1: "Fixes ranked by impact on your queries, not generic checklists",
+        b2: "Before/after deltas per fix, per engine",
+        b3: "One number your weekly report can carry without a footnote war",
+        link: "How in-house teams use Citerate →",
+        stat: "Daily",
+        statCap: "refresh on every tracked query, from the Growth plan"
+      },
+      {
+        head: "One number for the board slide.",
+        body: "You don't need another dashboard, you need a defensible figure with its causes attached. The scheduled PDF arrives Monday morning with the trend, the cause split, and what changed — readable in ninety seconds.",
+        b1: "Scheduled PDF report, auto-sent to whoever reports upward",
+        b2: "Trend with causes, so \"why\" is answered before it's asked",
+        b3: "Methodology note on every report — the number survives scrutiny",
+        link: "See a sample report →",
+        stat: "1 page",
+        statCap: "the Monday summary your leadership actually reads"
+      },
+      {
+        head: "A new retainer line, white labeled.",
+        body: "GEO is the service your clients are starting to ask about. Run every client from one account, put your logo on every surface including the domain they log into, and bill it as yours.",
+        b1: "25 client workspaces on one bill, pooled query budget",
+        b2: "White-label reports, dashboard, and login domain",
+        b3: "Read-only client seats are free and unlimited",
+        link: "For agencies →",
+        stat: "25",
+        statCap: "client workspaces on the Agency plan, extra ones $29"
+      }
+    ];
+    const r = roles[this.state.role];
+    return {
+      setMonthly: () => this.setState({ annual: false }),
+      setAnnual: () => this.setState({ annual: true }),
+      mo: this.pill(!a),
+      yr: this.pill(a),
+      per: a ? "/mo billed yearly" : "/mo",
+      pStarter: a ? "$41" : "$49",
+      pGrowth: a ? "$166" : "$199",
+      pScale: a ? "$416" : "$499",
+      pAgency: a ? "$666" : "$799",
+      setRole0: () => this.setState({ role: 0 }),
+      setRole1: () => this.setState({ role: 1 }),
+      setRole2: () => this.setState({ role: 2 }),
+      t0: this.pill(this.state.role === 0),
+      t1: this.pill(this.state.role === 1),
+      t2: this.pill(this.state.role === 2),
+      roleHead: r.head, roleBody: r.body, roleB1: r.b1, roleB2: r.b2, roleB3: r.b3,
+      roleLink: r.link, roleStat: r.stat, roleStatCap: r.statCap
+    };
+  }
+}
+</script>
+</body>
+</html>

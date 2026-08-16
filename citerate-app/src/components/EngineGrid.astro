@@ -1,0 +1,49 @@
+---
+/**
+ * Engine matrix. Small multiples, one per engine, sharing a y axis — the point
+ * is that engines disagree, and that a single "AI visibility score" would hide
+ * exactly the thing you can act on.
+ */
+import { pct, engineLabel, delta as fmtDelta } from "../lib/format";
+import type { EngineRate } from "../lib/data";
+
+interface Props {
+  engines: EngineRate[];
+  locked?: number;
+}
+const { engines, locked = 0 } = Astro.props;
+---
+
+<section class="chart">
+  <div class="chart__head">
+    <h2 class="chart__title">Per engine</h2>
+    <span class="chart__note">Same queries, same week. Engines disagree — that is the signal.</span>
+  </div>
+
+  <div class="engines">
+    {
+      engines.map((e) => {
+        const d = fmtDelta(e.citation_rate, e.previous_rate);
+        return (
+          <div class="engine">
+            <span class="engine__name">{engineLabel(e.engine)}</span>
+            <span class="engine__rate">{pct(e.citation_rate)}</span>
+            <span class={`delta delta--${d.tone}`}>{d.text}</span>
+            <span class="chart__note">{e.runs} runs</span>
+          </div>
+        );
+      })
+    }
+
+    {
+      locked > 0 && (
+        <div class="engine locked" style="align-items:center;justify-content:center">
+          <span class="locked__badge">+{locked} on Growth</span>
+          <span class="chart__note" style="text-align:center">
+            Gemini and Google AIO unlock with the plan, not as an add-on.
+          </span>
+        </div>
+      )
+    }
+  </div>
+</section>

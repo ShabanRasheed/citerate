@@ -1,0 +1,57 @@
+#:schema node_modules/wrangler/config-schema.json
+# ---------------------------------------------------------------------------
+# Cloudflare Pages project (marketing site + server routes + API endpoints).
+# The scan consumer is a separate Worker: workers/scanner/wrangler.toml
+# ---------------------------------------------------------------------------
+name = "citerate"
+compatibility_date = "2026-07-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "./dist"
+
+# --- Bindings -------------------------------------------------------------
+# Create once, then paste the ids here:
+#   wrangler d1 create citerate-db
+#   wrangler kv namespace create SCAN_CACHE
+#   wrangler kv namespace create RATE_LIMIT
+#   wrangler r2 bucket create citerate-artifacts
+
+[[d1_databases]]
+binding = "DB"
+database_name = "citerate-db"
+database_id = "REPLACE_WITH_D1_ID"
+migrations_dir = "migrations"
+
+[[kv_namespaces]]
+binding = "SCAN_CACHE"          # free-scan results by domain hash (decision: 24h cache)
+id = "REPLACE_WITH_KV_ID"
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT"          # ip+domain buckets for the public scan form
+id = "REPLACE_WITH_KV_ID_2"
+
+[[r2_buckets]]
+binding = "ARTIFACTS"           # generated PDFs, OG images, raw engine answer text
+bucket_name = "citerate-artifacts"
+
+[vars]
+PUBLIC_SITE_URL = "https://citerate.com"
+PUBLIC_APP_URL = "https://app.citerate.com"
+PUBLIC_TURNSTILE_SITE_KEY = "0x0000000000000000000000"
+FREE_SCAN_QUERY_LIMIT = "25"
+FREE_SCAN_ENGINES = "chatgpt,google_aio"
+FREE_SCAN_CACHE_TTL_SECONDS = "86400"   # one live scan per domain per day
+RUNS_PER_ENGINE = "3"
+
+# --- Secrets (never in this file) ----------------------------------------
+# wrangler pages secret put TURNSTILE_SECRET_KEY
+# wrangler pages secret put RESEND_API_KEY
+# wrangler pages secret put PADDLE_API_KEY
+# wrangler pages secret put PADDLE_WEBHOOK_SECRET
+# wrangler pages secret put SESSION_SECRET
+# wrangler pages secret put OPENAI_API_KEY
+# wrangler pages secret put PERPLEXITY_API_KEY
+# wrangler pages secret put GEMINI_API_KEY
+# wrangler pages secret put SERP_API_KEY
+
+[env.preview.vars]
+PUBLIC_SITE_URL = "https://preview.citerate.com"

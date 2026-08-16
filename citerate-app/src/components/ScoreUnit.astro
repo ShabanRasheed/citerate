@@ -1,0 +1,52 @@
+---
+/**
+ * The score unit. One number, its confidence band, its delta, and a verdict
+ * sentence written in plain language. If the delta sits inside the band we say
+ * "within noise" instead of drawing an arrow — that rule is the product.
+ */
+import { pct, band, delta as fmtDelta } from "../lib/format";
+import type { Headline } from "../lib/data";
+
+interface Props {
+  headline: Headline;
+  hostname: string;
+  engineCount: number;
+}
+const { headline, hostname, engineCount } = Astro.props;
+const d = fmtDelta(headline.rate, headline.previousRate);
+const verdict = (() => {
+  if (headline.rate === null) return "No completed scan yet. The first readout lands within the hour.";
+  if (headline.rate >= 0.6) return `${hostname} is cited in most answers about its category.`;
+  if (headline.rate >= 0.3) return `${hostname} is cited in some answers, and named without a link in more.`;
+  return `${hostname} is largely invisible in AI answers about its category.`;
+})();
+---
+
+<section class="score" aria-label="Citation rate">
+  <span class="score__label">Citation rate · {engineCount} engines · 3 runs each</span>
+
+  <div class="score__row">
+    <span class="score__value" data-count={headline.rate ?? 0}>{pct(headline.rate)}</span>
+    {
+      headline.withinNoise ? (
+        <span class="noise">within noise</span>
+      ) : (
+        <span class={`delta delta--${d.tone}`}>{d.text} vs last week</span>
+      )
+    }
+    <span class="score__band">{band(headline.bandLow, headline.bandHigh)} · {headline.runs} runs</span>
+  </div>
+
+  <p class="score__verdict">{verdict}</p>
+
+  {
+    headline.discontinuity && (
+      <span class="discontinuity">
+        ⚠ Method changed on this range —
+        <a href={`${import.meta.env.PUBLIC_SITE_URL ?? ""}/changelog#${headline.discontinuity}`}>
+          see what changed
+        </a>
+      </span>
+    )
+  }
+</section>

@@ -1,0 +1,120 @@
+---
+/**
+ * Sidebar. Nav is grouped by what you do, not by data model: the readout, the
+ * work, the money. Counts come from the request context so a badge is never a
+ * client-side fetch.
+ */
+import { ROLE_LABEL } from "../lib/rbac";
+import { PLANS, meter, type PlanId } from "../lib/plans";
+import { pct } from "../lib/format";
+
+interface Props {
+  current: string;
+  mobile?: boolean;
+}
+const { current, mobile = false } = Astro.props;
+const { workspace, user, domains } = Astro.locals;
+
+const plan = (workspace?.plan ?? "free") as PlanId;
+const limits = PLANS[plan];
+const usage = Astro.locals.usage ?? null;
+const q = usage?.trackedQueries ?? { used: 0, included: limits.trackedQueries };
+const m = meter(q.used, q.included);
+
+const nav = [
+  { key: "overview", href: "/overview", label: "Overview" },
+  { key: "queries", href: "/queries", label: "Queries" },
+  { key: "fixes", href: "/fixes", label: "Fix Queue", locked: !limits.fixQueue },
+  { key: "competitors", href: "/competitors", label: "Competitors", locked: !limits.competitorNames },
+  { key: "reports", href: "/reports", label: "Reports", locked: !limits.pdfReports }
+];
+---
+
+<nav class="side" aria-label="Main" data-mobile={mobile ? "true" : "false"}>
+  <a class="side__brand" href="/overview">cite<em>/</em>rate</a>
+
+  <div class="side__group">
+    <button
+      class="wsw"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+      aria-label="Switch workspace"
+    >
+      <span style="display:flex;flex-direction:column;gap:2px;min-width:0">
+        <span class="wsw__name">{workspace?.name ?? "No workspace"}</span>
+        <span class="wsw__meta">{limits.label} · {ROLE_LABEL[workspace?.role ?? "viewer"]}</span>
+      </span>
+      <span aria-hidden="true" style="color:var(--side-ink-muted)">⌄</span>
+    </button>
+    <ul class="dropdown-menu" data-workspace-menu>
+      <li><a class="dropdown-item" href="/settings/workspaces">All workspaces</a></li>
+      <li><a class="dropdown-item" href="/settings/team">Invite a teammate</a></li>
+    </ul>
+  </div>
+
+  {
+    domains && domains.length > 1 && (
+      <div class="side__group">
+        <span class="side__label">Domain</span>
+        {domains.map((d) => (
+          <a
+            class="side__link"
+            href={`/overview?domain=${d.id}`}
+            aria-current={Astro.url.searchParams.get("domain") === d.id ? "page" : undefined}
+          >
+            <span>{d.label ?? d.hostname}</span>
+          </a>
+        ))}
+      </div>
+    )
+  }
+
+  <div class="side__group">
+    <span class="side__label">Readout</span>
+    {
+      nav.map((item) => (
+        <a
+          class="side__link"
+          href={item.href}
+          aria-current={current === item.key ? "page" : undefined}
+        >
+          <span>{item.label}</span>
+          {item.locked && <span class="side__count">upgrade</span>}
+        </a>
+      ))
+    }
+  </div>
+
+  <div class="side__foot">
+    <div class="quota">
+      <span class="side__label" style="padding:0">Tracked queries</span>
+      <div class="quota__rail">
+        <div
+          class="quota__fill"
+          data-state={m.state}
+          style={`width:${Math.min(100, m.pct)}%`}
+          role="progressbar"
+          aria-valuenow={q.used}
+          aria-valuemin="0"
+          aria-valuemax={q.included}
+        ></div>
+      </div>
+      <span class="side__count">
+        {q.used} of {q.included}
+        {m.over > 0 && ` · ${m.overageUnits} overage block${m.overageUnits > 1 ? "s" : ""}`}
+      </span>
+    </div>
+
+    <a class="side__link side__link--muted" href="/settings">
+      <span>{user?.name ?? user?.email ?? "Account"}</span>
+    </a>
+    <a class="side__link side__link--muted" href="/settings/billing">
+      <span>Plan &amp; billing</span>
+      <span class="side__count">{pct(m.used / Math.max(1, m.included))}</span>
+    </a>
+    <a class="side__link side__link--muted" href="/sign-out">
+      <span>Sign out</span>
+    </a>
+  </div>
+</nav>

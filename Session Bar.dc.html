@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./citerate-session.js"></script><style>
+body{margin:0;background:#EDEFF2}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 12px;border:1px solid #D3D8DF;border-radius:8px;background:#FFFFFFEE;backdrop-filter:blur(6px);box-shadow:0 6px 20px rgba(20,27,38,.14);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+  <span style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">session</span>
+  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+    <sc-for list="{{ chips }}" as="c" hint-placeholder-count="5">
+      <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border:1px solid {{ c.line }};border-radius:999px;background:{{ c.bg }};font:400 11px/1.2 'JetBrains Mono',monospace;color:{{ c.ink }}">{{ c.label }}</span>
+    </sc-for>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
+    <a href="Phase 14 - Prototype Launcher.dc.html" style="font:400 11.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Launcher</a>
+    <button type="button" onClick="{{ reset }}" style="min-height:28px;padding:0 10px;border:1px solid #D3D8DF;border-radius:6px;background:#F4F5F7;color:#141B26;font:400 11.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer" style-hover="background:#E7EAEF">Reset</button>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:760,&quot;height&quot;:80},&quot;phase&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;14a&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { s: null };
+
+  componentDidMount() {
+    const boot = () => {
+      if (!window.CiterateSession) return setTimeout(boot, 40);
+      this.setState({ s: window.CiterateSession.get() });
+      this.off = window.CiterateSession.subscribe(s => this.setState({ s }));
+    };
+    boot();
+  }
+  componentWillUnmount() { if (this.off) this.off(); }
+
+  renderVals() {
+    const s = this.state.s || {};
+    const chip = (label, on) => ({
+      label,
+      bg: on ? "#E6F4F0" : "#F4F5F7",
+      line: on ? "#9FD3C6" : "#D3D8DF",
+      ink: on ? "#0B6151" : "#8A93A1",
+    });
+    return {
+      chips: [
+        chip(s.domain ? s.domain : "no domain", !!s.domain),
+        chip(s.claimed ? "claimed" : "unclaimed", !!s.claimed),
+        chip(s.verified ? (s.email || "verified") : "not signed in", !!s.verified),
+        chip(s.onboarded ? "onboarded" : "onboarding open", !!s.onboarded),
+        chip("plan · " + (s.plan || "free"), (s.plan || "free") !== "free"),
+      ],
+      reset: () => { if (window.CiterateSession) window.CiterateSession.reset(); },
+    };
+  }
+}
+
+</script>
+</body>
+</html>

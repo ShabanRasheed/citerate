@@ -1,0 +1,80 @@
+---
+/**
+ * Onboarding 2 of 3 — the queries. The seeded set is shown as editable chips,
+ * because the fastest way to lose trust is to measure 25 queries nobody asked
+ * for. Deactivating here frees the slot before the first scan runs.
+ */
+import Auth from "../../layouts/Auth.astro";
+import { activeDomain, queryRows } from "../../lib/data";
+import { PLANS, type PlanId } from "../../lib/plans";
+
+const env = Astro.locals.runtime.env;
+const workspace = Astro.locals.workspace!;
+const limits = PLANS[workspace.plan as PlanId];
+
+const domain = await activeDomain(env, workspace.workspaceId, Astro.url.searchParams.get("domain"));
+if (!domain) return Astro.redirect("/onboarding/domain", 302);
+
+const rows = await queryRows(env, domain.id, { limit: 60 });
+const clusters = [...new Set(rows.map((r) => r.cluster ?? "uncategorised"))];
+---
+
+<Auth title="Review your queries" wide={true}>
+  <div class="steps">
+    <span class="steps__dot" data-state="done"></span>
+    <span class="steps__dot" data-state="current"></span>
+    <span class="steps__dot"></span>
+    <span>Step 2 of 3 · queries</span>
+  </div>
+
+  <h1 class="auth__title">These are the questions we'll ask</h1>
+  <p class="auth__sub">
+    {rows.length} queries seeded from {domain.hostname} and its category, grouped into {clusters.length} clusters.
+    Remove anything irrelevant — each query costs a slot, and {limits.trackedQueries} come with {limits.label}.
+  </p>
+
+  <form class="stack stack--5" method="post" action="/api/onboarding/queries" data-lock>
+    <input type="hidden" name="domainId" value={domain.id} />
+
+    {
+      clusters.map((cluster) => (
+        <div class="stack stack--3">
+          <span class="t-label t-label--ink">{cluster}</span>
+          <div class="chips">
+            {rows
+              .filter((r) => (r.cluster ?? "uncategorised") === cluster)
+              .map((r) => (
+                <label class="chip" data-active="true">
+                  <input type="checkbox" name="active" value={r.id} checked class="visually-hidden" />
+                  {r.text}
+                  <span class="chip__x" aria-hidden="true">×</span>
+                </label>
+              ))}
+          </div>
+        </div>
+      ))
+    }
+
+    <label class="form-field">
+      <span class="t-label">Add your own <span class="chart__note">(one per line)</span></span>
+      <textarea class="form-field__input" name="extra" rows="3" placeholder="best crm for agencies"></textarea>
+    </label>
+
+    <div class="row-between">
+      <a class="btn-quiet" href="/onboarding/connect">Skip — use the seeded set</a>
+      <button class="btn-primary-c btn-primary-c--lg" type="submit" data-busy="Saving…">Save and continue</button>
+    </div>
+  </form>
+
+  <script is:inline>
+    // Chip toggle: label + hidden checkbox, so the form still works without JS.
+    document.querySelectorAll(".chip").forEach((chip) => {
+      const box = chip.querySelector("input");
+      const sync = () => chip.dataset.active = String(box.checked);
+      chip.addEventListener("click", (e) => {
+        if (e.target.tagName !== "INPUT") { box.checked = !box.checked; sync(); }
+      });
+      sync();
+    });
+  </script>
+</Auth>

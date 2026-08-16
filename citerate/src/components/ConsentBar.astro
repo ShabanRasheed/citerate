@@ -1,0 +1,20 @@
+---
+/**
+ * One-time informational notice. Cloudflare Web Analytics is cookieless, so
+ * this is not a consent gate — it never blocks the funnel.
+ */
+---
+
+<div
+  hidden
+  data-consent
+  role="region"
+  aria-label="Privacy notice"
+  style="position:fixed;bottom:16px;left:16px;right:16px;z-index:50;max-width:560px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-md);padding:16px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap"
+>
+  <p class="t-sm" style="margin:0;flex:1;min-width:260px">
+    We use cookieless analytics — no tracking profile, nothing to opt out of. Details in the
+    <a href="/legal/cookies">cookie policy</a>.
+  </p>
+  <button class="btn-ghost" type="button" data-consent-dismiss>Got it</button>
+</div>

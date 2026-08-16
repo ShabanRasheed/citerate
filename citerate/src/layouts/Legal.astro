@@ -1,0 +1,90 @@
+---
+/**
+ * Legal / policy shell. One layout for privacy, terms, DPA, subprocessors,
+ * cookies, and the security overview. Last-updated date and version are
+ * mandatory props — a policy without a date is not a policy.
+ */
+import Marketing from "./Marketing.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  updated: string;
+  version: string;
+  summary?: string;
+  draft?: boolean;
+  history?: string[];
+}
+
+const { title, description, updated, version, summary, draft = false, history = [] } = Astro.props;
+
+const pages = [
+  { href: "/legal/privacy", label: "Privacy policy" },
+  { href: "/legal/terms", label: "Terms of service" },
+  { href: "/legal/dpa", label: "Data processing (DPA)" },
+  { href: "/legal/subprocessors", label: "Subprocessors" },
+  { href: "/legal/cookies", label: "Cookie policy" },
+  { href: "/security", label: "Security overview" }
+];
+const path = Astro.url.pathname.replace(/\/$/, "");
+---
+
+<Marketing title={title} description={description} noindex={false}>
+  <div class="section section--flush" style="padding-top:56px">
+    <div class="wrap" style="max-width:1000px">
+      <div style="display:grid;grid-template-columns:190px minmax(0,1fr);gap:56px;align-items:start">
+        <aside class="u-sticky-top stack stack--3">
+          <span class="t-label">Legal</span>
+          <nav class="article__toc">
+            {
+              pages.map((p) => (
+                <a href={p.href} aria-current={path === p.href ? "true" : "false"}>
+                  {p.label}
+                </a>
+              ))
+            }
+          </nav>
+          {
+            draft && (
+              <div class="docs__notice" style="margin-top:8px">
+                Draft copy. Needs counsel review before launch.
+              </div>
+            )
+          }
+        </aside>
+
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span class="t-label">{title}</span>
+            <span class="u-vrule"></span>
+            <span class="t-data-sm">Last updated {updated}</span>
+            <span class="u-vrule"></span>
+            <span class="t-data-sm">Version {version}</span>
+          </div>
+
+          <h1 class="t-d2" style="margin-top:14px">{title}</h1>
+
+          {
+            summary && (
+              <div class="c-card" style="margin-top:20px">
+                <span class="t-label t-label--ink">The short version</span>
+                <p class="t-body tx-soft" style="font-size:14.5px;line-height:1.7">{summary}</p>
+              </div>
+            )
+          }
+
+          <div class="prose prose--legal" style="margin-top:14px">
+            <slot />
+          </div>
+
+          <div
+            style="margin-top:36px;padding-top:20px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap"
+          >
+            {history.length > 0 && <span class="t-data-sm">Previous versions: {history.join(" · ")}</span>}
+            <span class="t-data-sm">Questions: privacy@citerate.com</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Marketing>

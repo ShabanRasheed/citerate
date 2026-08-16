@@ -1,0 +1,67 @@
+---
+/**
+ * Chart shell. Server-renders the title, legend, methodology note, and a table
+ * fallback; ECharts hydrates the canvas from the JSON payload. If JS never
+ * arrives, the numbers are still readable and still print.
+ */
+import { pct, shortDay } from "../lib/format";
+import type { RollupRow } from "../lib/data";
+
+interface Props {
+  title: string;
+  rows: RollupRow[];
+  height?: "short" | "default" | "tall";
+  note?: string;
+  id?: string;
+}
+const { title, rows, height = "default", note, id = "trend" } = Astro.props;
+
+const series = rows.map((r) => ({
+  day: r.day,
+  rate: r.citation_rate,
+  low: r.band_low,
+  high: r.band_high,
+  runs: r.runs,
+  flag: r.discontinuity
+}));
+const flagged = rows.filter((r) => r.discontinuity);
+---
+
+<figure class="chart" data-chart={id}>
+  <div class="chart__head">
+    <h2 class="chart__title">{title}</h2>
+    <div class="seg" role="group" aria-label="Range">
+      <button class="seg__btn" type="button" data-range="30" aria-pressed="false">30d</button>
+      <button class="seg__btn" type="button" data-range="90" aria-pressed="true">90d</button>
+      <button class="seg__btn" type="button" data-range="365" aria-pressed="false">1y</button>
+    </div>
+  </div>
+
+  <div
+    class={`chart__canvas ${height === "short" ? "chart__canvas--short" : height === "tall" ? "chart__canvas--tall" : ""}`}
+    data-chart-canvas
+    role="img"
+    aria-label={`${title}. ${series.length} days plotted.`}
+  ></div>
+
+  <div class="chart__legend">
+    <span class="noise">confidence band (Wilson, 95%)</span>
+    {flagged.length > 0 && <span class="discontinuity">⚠ {flagged.length} method flag{flagged.length > 1 ? "s" : ""} on this range</span>}
+  </div>
+
+  {note && <figcaption class="chart__note">{note}</figcaption>}
+
+  <!-- No-JS and print fallback: the last eight readings as text. -->
+  <noscript>
+    <table class="table">
+      <thead><tr><th>Day</th><th>Rate</th><th>Runs</th></tr></thead>
+      <tbody>
+        {series.slice(-8).map((s) => (
+          <tr><td>{shortDay(s.day)}</td><td>{pct(s.rate)}</td><td>{s.runs}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </noscript>
+
+  <script type="application/json" data-chart-data set:html={JSON.stringify(series)} />
+</figure>

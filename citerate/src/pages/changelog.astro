@@ -1,0 +1,89 @@
+---
+import { getCollection } from "astro:content";
+import Marketing from "../layouts/Marketing.astro";
+
+const raw = (await getCollection("changelog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+// Render each MDX body up front — never inside the template.
+const entries = await Promise.all(
+  raw.map(async (entry) => {
+    const { Content } = await entry.render();
+    return { data: entry.data, Content };
+  })
+);
+
+const KIND_CHIP: Record<string, string> = {
+  "engine-coverage": "chip--gap",
+  new: "chip--cited",
+  improved: "chip--warn",
+  fixed: "chip--tech"
+};
+const KIND_LABEL: Record<string, string> = {
+  "engine-coverage": "Engine coverage",
+  new: "New",
+  improved: "Improved",
+  fixed: "Fixed"
+};
+---
+
+<Marketing
+  title="Changelog"
+  description="What shipped, and what it changes in your data. Engine coverage changes are flagged, and recomputed history shows as a discontinuity rather than a silent correction."
+>
+  <section class="section section--flush" style="padding-top:64px;padding-bottom:72px">
+    <div class="wrap" style="max-width:900px">
+      <div class="stack stack--6">
+        <div class="row-between" style="align-items:flex-end">
+          <div class="stack stack--3">
+            <span class="t-label">Changelog</span>
+            <h1 class="t-d1">What shipped, and what it changes in your data</h1>
+          </div>
+          <div style="display:flex;gap:8px">
+            <a class="btn-ghost" href="/rss.xml">RSS</a>
+            <a class="btn-ghost" href="/contact?intent=sales">Subscribe</a>
+          </div>
+        </div>
+
+        <div
+          class="c-card"
+          style="flex-direction:row;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap"
+        >
+          <span class="status-dot" style="color:var(--ink)">All engines operational</span>
+          <span class="t-data-sm">scan queue: 41s median · last incident: none in 30 days</span>
+        </div>
+
+        <div>
+          {
+            entries.map(({ data, Content }) => (
+              <div class="changelog__entry">
+                <div class="stack stack--1">
+                  <span class="t-data">
+                    {data.date.toLocaleDateString("en-US", { month: "short", day: "2-digit" })}
+                  </span>
+                  <span class="t-data-sm">{data.date.getFullYear()}</span>
+                </div>
+                <div class="stack stack--3">
+                  <div class="post-meta">
+                    <span class={`chip ${KIND_CHIP[data.kind] ?? "chip--tech"}`}>
+                      {KIND_LABEL[data.kind] ?? data.kind}
+                    </span>
+                    {data.affectsHistory && <span>affects your history</span>}
+                  </div>
+                  <h2 class="t-d3">{data.title}</h2>
+                  <div
+                    class="prose"
+                    style="font-size:14.5px;line-height:1.7;font-family:var(--font-ui);color:var(--ink-soft);max-width:none"
+                  >
+                    <Content />
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Marketing>

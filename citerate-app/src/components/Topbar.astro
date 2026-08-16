@@ -1,0 +1,49 @@
+---
+/**
+ * Topbar. Title, freshness, and the two actions that matter on every pane:
+ * rescan and export. Everything else lives in the pane itself.
+ */
+import { relative } from "../lib/format";
+import { can } from "../lib/rbac";
+
+interface Props {
+  title: string;
+  crumb?: string;
+}
+const { title, crumb } = Astro.props;
+const { workspace, domains } = Astro.locals;
+const lastScanAt = Astro.locals.lastScanAt ?? null;
+const role = workspace?.role ?? "viewer";
+const host = domains?.[0]?.hostname ?? "";
+---
+
+<header class="topbar">
+  <div class="topbar__left">
+    <button
+      class="side-toggle"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#side-offcanvas"
+      aria-label="Open navigation"
+    >
+      ☰
+    </button>
+    <h1 class="topbar__title">{title}</h1>
+    {crumb && <span class="topbar__crumb">{crumb}</span>}
+  </div>
+
+  <div class="topbar__right">
+    <span class="topbar__crumb">
+      {host && <span>{host}</span>}
+      {lastScanAt && <span> · measured {relative(lastScanAt)}</span>}
+    </span>
+    <slot />
+    {
+      can(role, "run_rescan") && (
+        <button class="btn-ghost" type="button" data-rescan data-domain={domains?.[0]?.id}>
+          Rescan
+        </button>
+      )
+    }
+  </div>
+</header>

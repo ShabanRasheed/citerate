@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EDEFF2;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="display:grid;grid-template-columns:300px minmax(0,1fr);min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="background:#141B26;color:#F4F5F7;padding:24px 20px;display:flex;flex-direction:column;gap:22px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#35B394">Phase 16 · audit</div>
+      <div style="font:600 21px/1.3 'Source Serif 4',serif;margin-top:8px">Stylesheet audit, both repos</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#8A93A1;margin:8px 0 0">Reads every SCSS partial in both repos off disk and runs six checks over the source. Findings carry a file and a line, so each one is a place to go, not a score.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">totals</div>
+      <div style="display:flex;align-items:baseline;gap:10px">
+        <div style="font:500 32px/1 'JetBrains Mono',monospace;color:{{ failInk }}">{{ failCount }}</div>
+        <div style="font:400 12px/1.4 'JetBrains Mono',monospace;color:#8A93A1">must fix</div>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:10px">
+        <div style="font:500 22px/1 'JetBrains Mono',monospace;color:#E9A44A">{{ reviewCount }}</div>
+        <div style="font:400 12px/1.4 'JetBrains Mono',monospace;color:#8A93A1">to look at</div>
+      </div>
+      <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">{{ fileLine }}</div>
+      <button type="button" onClick="{{ recheck }}" style="min-height:38px;margin-top:4px;border:1px solid rgba(255,255,255,.14);border-radius:6px;background:transparent;color:#F4F5F7;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Re-read the repos</button>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">checks</div>
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="6">
+        <a href="{{ n.href }}" style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;color:#F4F5F7;font:400 12px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;text-decoration:none">
+          <span style="min-width:0">{{ n.name }}</span>
+          <span style="flex:none;font:500 11px/1.4 'JetBrains Mono',monospace;color:{{ n.ink }}">{{ n.count }}</span>
+        </a>
+      </sc-for>
+    </div>
+
+    <div style="margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-direction:column;gap:8px">
+      <a href="Phase 14 - Prototype Launcher.dc.html" style="color:#35B394;font:400 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">← Prototype launcher</a>
+      <a href="Phase 15 - Breakpoint Parity.dc.html" style="color:#35B394;font:400 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Phase 15 · breakpoint parity</a>
+    </div>
+  </div>
+
+  <div style="padding:34px 40px 64px;display:flex;flex-direction:column;gap:28px;min-width:0">
+
+    <div style="display:flex;flex-direction:column;gap:8px;max-width:80ch">
+      <h1 style="font:600 30px/1.25 'Source Serif 4',serif;margin:0;text-wrap:pretty">What the stylesheets say about themselves</h1>
+      <p style="font:400 14.5px/1.65 inherit;color:#5B6472;margin:0;text-wrap:pretty">Two of these checks are rules the project decided on: every width query lives in one file, and colour comes from the token file. The rest are floors worth holding — 44px hit targets, no type under 12px, a matching breakpoint ladder in both repos, reduced motion honoured.</p>
+    </div>
+
+    <sc-if value="{{ error }}" hint-placeholder-val="{{ true }}">
+      <div style="background:#FBEDED;border:1px solid #A62F2F;border-radius:12px;padding:18px 20px;font:400 13.5px/1.6 inherit;color:#141B26">{{ error }}</div>
+    </sc-if>
+
+    <sc-for list="{{ checks }}" as="c" hint-placeholder-count="6">
+      <div id="{{ c.id }}" style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+        <div style="padding:18px 22px;display:flex;flex-direction:column;gap:6px;border-bottom:1px solid #E2E5EA">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+            <div style="font:600 18px/1.3 'Source Serif 4',serif">{{ c.name }}</div>
+            <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:{{ c.ink }};background:{{ c.bg }};border-radius:999px;padding:5px 10px">{{ c.verdict }}</div>
+          </div>
+          <div style="font:400 13px/1.6 inherit;color:#5B6472;max-width:82ch;text-wrap:pretty">{{ c.rule }}</div>
+        </div>
+
+        <sc-for list="{{ c.findings }}" as="f" hint-placeholder-count="3">
+          <div style="display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.5fr);gap:16px;padding:12px 22px;border-bottom:1px solid #F0F2F5;align-items:baseline">
+            <span style="font:400 12px/1.5 'JetBrains Mono',monospace;color:#0B6151;overflow-wrap:anywhere">{{ f.where }}</span>
+            <span style="font:400 12.5px/1.5 'JetBrains Mono',monospace;color:#5B6472;overflow-wrap:anywhere">{{ f.text }}</span>
+          </div>
+        </sc-for>
+
+        <sc-if value="{{ c.clean }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:14px 22px;font:400 12.5px/1.5 'JetBrains Mono',monospace;color:#0B6151">{{ c.cleanNote }}</div>
+        </sc-if>
+      </div>
+    </sc-for>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+const REPOS = {
+  site: {
+    root: "citerate/src/styles/",
+    files: ["01-settings/_bootstrap-map.scss", "01-settings/_tokens.scss", "03-base/_reset.scss", "03-base/_type.scss",
+      "04-layout/_footer.scss", "04-layout/_header.scss", "04-layout/_section.scss",
+      "05-components/_buttons.scss", "05-components/_card.scss", "05-components/_charts.scss",
+      "05-components/_forms.scss", "05-components/_pricing.scss",
+      "06-utilities/_print.scss", "06-utilities/_utils.scss", "07-responsive/_responsive.scss", "main.scss"],
+  },
+  app: {
+    root: "citerate-app/src/styles/",
+    files: ["01-settings/_bootstrap-map.scss", "01-settings/_tokens.scss", "03-base/_reset.scss", "03-base/_type.scss",
+      "04-layout/_shell.scss",
+      "05-components/_auth.scss", "05-components/_badge.scss", "05-components/_buttons.scss", "05-components/_card.scss",
+      "05-components/_chart.scss", "05-components/_fix.scss", "05-components/_forms.scss",
+      "05-components/_score.scss", "05-components/_table.scss",
+      "06-utilities/_print.scss", "06-utilities/_utils.scss", "07-responsive/_responsive.scss", "main.scss"],
+  },
+};
+
+const SHARED_STEPS = ["1279", "899", "599", "375"];
+const INTERACTIVE = /(button|\.btn|\.pill|\.seg__btn|\.chip|\.nav__link|\.nav-toggle|\.side-toggle|input|select|textarea|\.tab|\.otp)/i;
+
+function lines(src) { return src.split("\n"); }
+
+// Nearest selector above a line, for reporting context.
+function selectorAbove(ls, i) {
+  for (let j = i; j >= 0 && j > i - 14; j--) {
+    const m = /^\s*([.#a-zA-Z][^{@]*)\{/.exec(ls[j]);
+    if (m) return m[1].trim().replace(/\s+/g, " ");
+  }
+  return "";
+}
+
+function runChecks(loaded) {
+  const out = [];
+  const all = [];
+  Object.keys(loaded).forEach(repo => {
+    Object.keys(loaded[repo]).forEach(rel => all.push({ repo, rel, src: loaded[repo][rel] }));
+  });
+
+  // 1 — width queries live in one file only.
+  const strays = [];
+  all.forEach(f => {
+    if (f.rel.indexOf("07-responsive/") === 0) return;
+    lines(f.src).forEach((l, i) => {
+      if (/@media[^{]*\((min|max)-width/.test(l)) strays.push({ where: f.repo + " · " + f.rel + ":" + (i + 1), text: l.trim() });
+    });
+  });
+  out.push({
+    id: "queries", name: "Width queries in one file", severity: "fail",
+    rule: "Both repos declare that every width-based media query lives in 07-responsive/_responsive.scss. A query anywhere else breaks the descending order and hides a breakpoint from review.",
+    findings: strays, cleanNote: "No width query outside 07-responsive in either repo.",
+  });
+
+  // 2 — hit targets. A dense pointer control counts as resolved when the
+  // responsive file raises the same selector to 44px at a phone width.
+  const raised = {};
+  Object.keys(loaded).forEach(repo => {
+    const src = loaded[repo]["07-responsive/_responsive.scss"] || "";
+    const phone = src.slice(src.search(/@media\s*\(max-width:\s*(599|375)px\)/));
+    const re = /([^{}]+)\{[^}]*min-height\s*:\s*(4[4-9]|[5-9]\d|\d{3})px/g;
+    let m;
+    while ((m = re.exec(phone))) {
+      m[1].split(",").forEach(sel => {
+        (sel.match(/\.[a-z0-9_-]+/gi) || []).forEach(cls => { raised[repo + "|" + cls] = true; });
+      });
+    }
+  });
+  const small = [];
+  all.forEach(f => {
+    const ls = lines(f.src);
+    ls.forEach((l, i) => {
+      const m = /(min-height|height)\s*:\s*(\d+)px/.exec(l);
+      if (!m || +m[2] >= 44) return;
+      const sel = selectorAbove(ls, i);
+      if (!INTERACTIVE.test(sel + " " + l)) return;
+      const resolved = (sel.match(/\.[a-z0-9_-]+/gi) || []).some(cls => raised[f.repo + "|" + cls]);
+      if (resolved) return;
+      small.push({ where: f.repo + " · " + f.rel + ":" + (i + 1), text: (sel || "?") + " → " + m[0] });
+    });
+  });
+  out.push({
+    id: "targets", name: "44px hit targets", severity: "review",
+    rule: "Anything a finger has to hit wants 44px. Some of these are deliberate — a dense filter pill inside a toolbar reads fine at 34px on a desktop and is not a primary target. Each one is a decision to make, not an automatic fix.",
+    findings: small, cleanNote: "Every interactive rule sits at 44px or above.",
+  });
+
+  // 3 — colour comes from tokens.
+  const hexes = [];
+  all.forEach(f => {
+    // Print sets literal paper and ink on purpose: a PDF is not themed.
+    if (f.rel.indexOf("01-settings/") === 0 || f.rel.indexOf("06-utilities/_print") === 0) return;
+    lines(f.src).forEach((l, i) => {
+      if (/^\s*\/\//.test(l)) return;
+      const m = /#[0-9A-Fa-f]{3,8}\b/.exec(l);
+      if (!m) return;
+      hexes.push({ where: f.repo + " · " + f.rel + ":" + (i + 1), text: selectorAbove(lines(f.src), i) + " → " + m[0] });
+    });
+  });
+  out.push({
+    id: "colour", name: "Colour from the token file", severity: "review",
+    rule: "Hex literals outside 01-settings sidestep the palette. The print stylesheet is excluded — a PDF is not themed, so it sets paper and ink literally on purpose.",
+    findings: hexes, cleanNote: "No hex literals outside the token files.",
+  });
+
+  // 4 — type floor.
+  const tiny = [];
+  all.forEach(f => {
+    lines(f.src).forEach((l, i) => {
+      if (/^\s*\/\//.test(l)) return;
+      const m = /font(?:-size)?\s*:[^;]*?(\d+(?:\.\d+)?)px/.exec(l);
+      if (!m || parseFloat(m[1]) >= 12) return;
+      tiny.push({ where: f.repo + " · " + f.rel + ":" + (i + 1), text: l.trim().slice(0, 90) });
+    });
+  });
+  out.push({
+    id: "type", name: "No type under 12px", severity: "review",
+    rule: "Labels are the only thing that ever wants to be small, and 12px is the floor at which they stay legible on a phone at arm's length.",
+    findings: tiny, cleanNote: "Nothing below 12px in either repo.",
+  });
+
+  // 5 — the two ladders agree on the shared steps.
+  const ladderProblems = [];
+  const ladders = {};
+  Object.keys(loaded).forEach(repo => {
+    const src = loaded[repo]["07-responsive/_responsive.scss"] || "";
+    const steps = [];
+    const re = /@media\s*\(max-width:\s*(\d+)px\)/g;
+    let m;
+    while ((m = re.exec(src))) steps.push(m[1]);
+    ladders[repo] = steps;
+    SHARED_STEPS.forEach(s => {
+      if (steps.indexOf(s) < 0) ladderProblems.push({ where: repo + " · 07-responsive/_responsive.scss", text: "missing the shared " + s + "px step" });
+    });
+    const sorted = steps.slice().sort((a, b) => b - a).join(",");
+    if (sorted !== steps.join(",")) ladderProblems.push({ where: repo + " · 07-responsive/_responsive.scss", text: "queries are not in descending order: " + steps.join(" · ") });
+  });
+  out.push({
+    id: "ladder", name: "Matching breakpoint ladders", severity: "fail",
+    rule: "The four shared steps — 1279, 899, 599 and 375 — have to exist in both repos, in descending order, or the marketing site and the dashboard change shape at different widths.",
+    findings: ladderProblems,
+    cleanNote: "site " + (ladders.site || []).join(" · ") + "   ·   app " + (ladders.app || []).join(" · "),
+  });
+
+  // 6 — reduced motion.
+  const motion = [];
+  Object.keys(loaded).forEach(repo => {
+    const src = loaded[repo]["07-responsive/_responsive.scss"] || "";
+    if (!/prefers-reduced-motion/.test(src)) motion.push({ where: repo + " · 07-responsive/_responsive.scss", text: "no prefers-reduced-motion block" });
+  });
+  out.push({
+    id: "motion", name: "Reduced motion honoured", severity: "fail",
+    rule: "Both stylesheets end with a prefers-reduced-motion block that zeroes the duration tokens and neutralises the reveal animations.",
+    findings: motion, cleanNote: "Both repos zero their motion tokens under prefers-reduced-motion.",
+  });
+
+  return out;
+}
+
+class Component extends DCLogic {
+  state = { checks: null, error: "", fileCount: 0 };
+
+  componentDidMount() { this.read(); }
+
+  read = () => {
+    const jobs = [];
+    Object.keys(REPOS).forEach(repo => {
+      REPOS[repo].files.forEach(rel => {
+        jobs.push(fetch(REPOS[repo].root + rel)
+          .then(r => (r.ok ? r.text() : ""))
+          .then(src => ({ repo, rel, src })));
+      });
+    });
+    Promise.all(jobs).then(res => {
+      const loaded = { site: {}, app: {} };
+      let n = 0;
+      res.forEach(({ repo, rel, src }) => { if (src) { loaded[repo][rel] = src; n++; } });
+      if (!n) { this.setState({ error: "Could not read the stylesheets — both repos need to sit next to this file." }); return; }
+      this.setState({ checks: runChecks(loaded), fileCount: n, error: "" });
+    }).catch(e => this.setState({ error: String(e.message || e) }));
+  };
+
+  renderVals() {
+    const checks = this.state.checks || [];
+    let failCount = 0, reviewCount = 0;
+    const shaped = checks.map(c => {
+      const n = c.findings.length;
+      if (c.severity === "fail") failCount += n; else reviewCount += n;
+      const clean = n === 0;
+      const ink = clean ? "#0B6151" : c.severity === "fail" ? "#A62F2F" : "#8A5A16";
+      const bg = clean ? "#E6F4F0" : c.severity === "fail" ? "#FBEDED" : "#FBF2E3";
+      return {
+        id: c.id, name: c.name, rule: c.rule, findings: c.findings,
+        verdict: clean ? "clean" : n + (c.severity === "fail" ? " to fix" : " to look at"),
+        ink, bg, clean, cleanNote: c.cleanNote,
+      };
+    });
+
+    return {
+      checks: shaped,
+      nav: shaped.map(c => ({
+        name: c.name, href: "#" + c.id,
+        count: c.findings.length ? String(c.findings.length) : "clean",
+        ink: c.findings.length ? (c.ink === "#A62F2F" ? "#E58B8B" : "#E9A44A") : "#35B394",
+      })),
+      failCount: String(failCount),
+      failInk: failCount ? "#E58B8B" : "#35B394",
+      reviewCount: String(reviewCount),
+      fileLine: this.state.fileCount ? this.state.fileCount + " files read" : "reading the repos",
+      error: this.state.error,
+      recheck: this.read,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

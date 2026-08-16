@@ -1,0 +1,61 @@
+---
+/**
+ * Customers index. Built now, filled later — every placeholder is visibly
+ * marked so nothing fake ships by accident. Kept out of the main nav until at
+ * least one named customer exists.
+ */
+import Marketing from "../layouts/Marketing.astro";
+import CtaBand from "../components/CtaBand.astro";
+---
+
+<Marketing
+  title="Customers"
+  description="Case studies from teams measuring their AI visibility with Citerate."
+  noindex={true}
+>
+  <section class="section">
+    <div class="wrap">
+      <div class="stack stack--4 u-mw-66">
+        <span class="t-label">Customers</span>
+        <h1 class="t-d1">Teams measuring their AI visibility with Citerate</h1>
+        <p class="t-lead">
+          Case study template is built. It stays unpublished until a customer agrees to be named, with a real
+          number attached.
+        </p>
+      </div>
+
+      <div class="grid grid--3" style="margin-top:26px">
+        {
+          [
+            "In-house SEO team, SaaS — recovered citation rate after a comparison-page rewrite",
+            "Agency — GEO retainer line across 18 clients",
+            "Marketplace — technical decay found on 40 documentation URLs"
+          ].map((label) => (
+            <div class="c-placeholder">
+              <span class="c-placeholder__flag">Placeholder — do not ship</span>
+              <span class="t-d4" style="color:var(--ink-muted)">{label}</span>
+              <span class="t-sm">
+                Structure: the situation, the reading, what they changed, the delta 60 days later, and one quote.
+                No case study publishes without a number the customer approves.
+              </span>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="figcap">
+        This page is noindex and unlinked from the main navigation until the first study is real.
+      </p>
+
+      <div style="margin-top:22px">
+        <CtaBand
+          variant="card"
+          headline="Want to be the first named case study? We'll do the measurement work."
+          cta="Talk to us"
+          href="/contact?intent=sales"
+          event="customers_placeholder"
+        />
+      </div>
+    </div>
+  </section>
+</Marketing>

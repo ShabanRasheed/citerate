@@ -1,0 +1,352 @@
+---
+/**
+ * Method page — direction 1b: one real query followed from prompt to verdict.
+ * The only page (with /for/agencies) allowed to load GSAP, and only ≥900px with
+ * motion enabled: scrollNarrative={true}.
+ */
+import Marketing from "../layouts/Marketing.astro";
+import Figure from "../components/Figure.astro";
+import CtaBand from "../components/CtaBand.astro";
+import engines from "../data/engines.json";
+
+const FOLLOWED = '"best crm for startups"';
+
+const stages = [
+  { n: 1, id: "prompt-set", label: "Build the prompt set" },
+  { n: 2, id: "ask-engines", label: "Ask every engine" },
+  { n: 3, id: "match-citations", label: "Match citations" },
+  { n: 4, id: "attribute-cause", label: "Attribute the cause" }
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  headline: "How Citerate measures AI citation rate",
+  description:
+    "One query followed end to end through the four stages of every scan, plus what the method cannot see.",
+  author: { "@type": "Organization", name: "Citerate" }
+};
+---
+
+<Marketing
+  title="How it works"
+  description="One query, followed all the way down: how prompts are built, how engines are asked, how citations are matched by resolved URL, how causes are attributed — and what the score cannot see."
+  nav="how-it-works"
+  scrollNarrative={true}
+  jsonLd={jsonLd}
+>
+  <section class="section">
+    <div class="wrap" style="max-width:920px">
+      <div class="stack stack--4">
+        <span class="t-label">Method</span>
+        <h1 class="t-hero u-mw-20">One query, followed all the way down.</h1>
+        <p class="t-lead">
+          A score you can't explain is a score you can't defend. So instead of listing features, this page
+          follows a single real query — <code class="t-code" style="background:var(--card);border:1px solid var(--line);border-radius:4px;padding:2px 7px">{FOLLOWED}</code>
+          — through the four stages of every scan, showing the actual rule applied at each step. At the end:
+          what the method cannot see, stated plainly.
+        </p>
+        <nav style="display:flex;gap:24px;margin-top:6px;flex-wrap:wrap" aria-label="Stages">
+          {
+            stages.map((s) => (
+              <a
+                href={`#${s.id}`}
+                data-stage-dot
+                style="display:flex;align-items:center;gap:8px;font:400 12px/1 var(--font-mono);color:var(--ink-soft)"
+              >
+                <span
+                  style={`width:20px;height:20px;border-radius:999px;background:var(--${s.n === 4 ? "cited" : "ink"});color:#fff;font:500 10.5px/20px var(--font-mono);text-align:center`}
+                >
+                  {s.n}
+                </span>
+                {s.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 1 -->
+  <section class="section section--card" id="prompt-set" data-stage="1">
+    <div class="wrap">
+      <div class="grid grid--split" style="align-items:start">
+        <div class="stack stack--4">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="width:26px;height:26px;border-radius:999px;background:var(--ink);color:#fff;font:500 12px/26px var(--font-mono);text-align:center">1</span>
+            <span class="t-label">Stage one</span>
+          </div>
+          <h2 class="t-d2">Build the prompt set</h2>
+          <p class="t-body tx-soft" style="font-size:15px;line-height:1.6">
+            Buyers don't search keywords at AI engines — they ask questions. We propose a set from three
+            sources: your site's pages, your Search Console queries if connected, and question patterns from
+            your category. Each prompt gets an intent and a cluster label; clusters are what the Fix Queue
+            later groups on.
+          </p>
+          <p class="t-body tx-soft" style="font-size:15px;line-height:1.6">
+            You edit everything. A tool that writes its own exam and grades itself proves nothing — the set is
+            yours, and it stays visible on every report.
+          </p>
+        </div>
+
+        <div class="c-table" data-stage-figure>
+          <div class="c-table__row c-table__row--head" style="grid-template-columns:minmax(0,1fr) 110px 150px 120px">
+            <span class="t-label">Prompt</span><span class="t-label">Intent</span>
+            <span class="t-label">Cluster</span><span class="t-label">Source</span>
+          </div>
+          <div class="c-table__row c-table__row--marked" style="grid-template-columns:minmax(0,1fr) 110px 150px 120px">
+            <span class="t-data">{FOLLOWED}</span><span class="t-data-sm">commercial</span>
+            <span class="t-data-sm tx-tech">category-pick</span><span class="t-data-sm">category</span>
+          </div>
+          <div class="c-table__row" style="grid-template-columns:minmax(0,1fr) 110px 150px 120px">
+            <span class="t-data tx-soft" style="font-weight:400">"hubspot alternatives"</span><span class="t-data-sm">commercial</span>
+            <span class="t-data-sm tx-tech">alternatives</span><span class="t-data-sm">search console</span>
+          </div>
+          <div class="c-table__row" style="grid-template-columns:minmax(0,1fr) 110px 150px 120px">
+            <span class="t-data tx-soft" style="font-weight:400">"crm with free tier"</span><span class="t-data-sm">commercial</span>
+            <span class="t-data-sm tx-tech">pricing</span><span class="t-data-sm">your site</span>
+          </div>
+          <div class="c-table__row" style="grid-template-columns:minmax(0,1fr) 110px 150px 120px">
+            <span class="t-data tx-soft" style="font-weight:400">"how to migrate crm data"</span><span class="t-data-sm">informational</span>
+            <span class="t-data-sm tx-tech">migration</span><span class="t-data-sm">your site</span>
+          </div>
+          <div class="c-table__row c-table__row--head" style="grid-template-columns:1fr">
+            <span class="figcap" style="margin:0">
+              Fig. M1 — the followed query enters the set with 24 others. The green edge marks it through every
+              figure below.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 2 -->
+  <section class="section" id="ask-engines" data-stage="2">
+    <div class="wrap">
+      <div class="grid grid--split" style="align-items:start">
+        <div class="stack stack--4">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="width:26px;height:26px;border-radius:999px;background:var(--ink);color:#fff;font:500 12px/26px var(--font-mono);text-align:center">2</span>
+            <span class="t-label">Stage two</span>
+          </div>
+          <h2 class="t-d2">Ask every engine, more than once</h2>
+          <p class="t-body tx-soft" style="font-size:15px;line-height:1.6">
+            The same question gets different answers on different days — sometimes in the same hour. One run is
+            an anecdote. Each refresh asks every engine the same prompt three times and records the runs
+            separately; the citation rate is computed over runs, never over a single lucky answer.
+          </p>
+          <p class="t-body tx-soft" style="font-size:15px;line-height:1.6">
+            Prompts are fixed-wording, unpersonalized, US-region by default. Raw answer text is stored, so
+            every number on your dashboard can show its receipts.
+          </p>
+        </div>
+
+        <div class="c-table" data-stage-figure>
+          <div class="c-table__row c-table__row--marked" style="grid-template-columns:minmax(0,1fr) auto">
+            <span class="t-data">{FOLLOWED}</span>
+            <span class="t-data-sm">refresh of Jul 27 · 3 runs per engine</span>
+          </div>
+          <div class="c-table__row c-table__row--head" style="grid-template-columns:130px repeat(3,1fr) 110px">
+            <span class="t-label">Engine</span><span class="t-label">Run 1</span>
+            <span class="t-label">Run 2</span><span class="t-label">Run 3</span><span class="t-label">Rate</span>
+          </div>
+          <div class="c-table__row" style="grid-template-columns:130px repeat(3,1fr) 110px">
+            <span class="t-data" style="font-weight:400">ChatGPT</span>
+            <span class="scan-row__verdict scan-row__verdict--gap">Not cited</span>
+            <span class="scan-row__verdict scan-row__verdict--gap">Not cited</span>
+            <span class="scan-row__verdict scan-row__verdict--cited">Cited</span>
+            <span class="t-data">1/3</span>
+          </div>
+          <div class="c-table__row c-table__row--zebra" style="grid-template-columns:130px repeat(3,1fr) 110px">
+            <span class="t-data" style="font-weight:400">Google AIO</span>
+            <span class="scan-row__verdict scan-row__verdict--gap">Not cited</span>
+            <span class="scan-row__verdict scan-row__verdict--gap">Not cited</span>
+            <span class="scan-row__verdict scan-row__verdict--gap">Not cited</span>
+            <span class="t-data">0/3</span>
+          </div>
+          <div class="c-table__row" style="grid-template-columns:130px repeat(3,1fr) 110px">
+            <span class="t-data" style="font-weight:400">Perplexity</span>
+            <span class="scan-row__verdict scan-row__verdict--cited">Cited</span>
+            <span class="scan-row__verdict scan-row__verdict--cited">Cited</span>
+            <span class="scan-row__verdict scan-row__verdict--gap">Not cited</span>
+            <span class="t-data">2/3</span>
+          </div>
+          <div class="c-table__row c-table__row--zebra" style="grid-template-columns:130px repeat(3,1fr) 110px">
+            <span class="t-data" style="font-weight:400">Gemini</span>
+            <span class="scan-row__verdict scan-row__verdict--gap">Not cited</span>
+            <span class="scan-row__verdict scan-row__verdict--gap">Not cited</span>
+            <span class="scan-row__verdict scan-row__verdict--gap">Not cited</span>
+            <span class="t-data">0/3</span>
+          </div>
+          <div class="c-table__row c-table__row--head" style="grid-template-columns:1fr">
+            <span class="figcap" style="margin:0">
+              Fig. M2 — this query's rate for the refresh: 3 of 12 runs. Variance is the finding, not noise to
+              hide.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 3 -->
+  <section class="section section--card" id="match-citations" data-stage="3">
+    <div class="wrap">
+      <div class="grid grid--split" style="align-items:start">
+        <div class="stack stack--4">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="width:26px;height:26px;border-radius:999px;background:var(--ink);color:#fff;font:500 12px/26px var(--font-mono);text-align:center">3</span>
+            <span class="t-label">Stage three</span>
+          </div>
+          <h2 class="t-d2">Match citations by URL, not by vibes</h2>
+          <p class="t-body tx-soft" style="font-size:15px;line-height:1.6">
+            A citation counts when the answer links a URL that resolves to your domain — redirects followed,
+            subdomains included, UTM stripped. A brand mention without a link is recorded as a
+            <em>mention</em>, tracked separately, never inflated into the citation rate.
+          </p>
+          <div class="stack stack--2">
+            <div style="display:flex;align-items:baseline;gap:10px">
+              <span class="t-data tx-cited">✓</span>
+              <span class="t-body">Linked URL resolving to your domain — <strong>citation</strong></span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:10px">
+              <span class="t-data tx-warn">◐</span>
+              <span class="t-body">Brand named, no link — <strong>mention</strong>, separate metric</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:10px">
+              <span class="t-data tx-gap">✗</span>
+              <span class="t-body">Third-party page about you — <strong>their</strong> citation, not yours</span>
+            </div>
+          </div>
+        </div>
+
+        <div data-stage-figure>
+          <Figure
+            label="ChatGPT · run 3 · answer text"
+            caption="Fig. M3 — the g2.com link is about Acme but is not Acme. It never counts. This rule is why the number holds up."
+            tone="sunk"
+            marked={true}
+          >
+            <div class="c-card" style="padding:16px 18px">
+              <span class="t-code tx-soft" style="line-height:1.9">
+                For startups, the most commonly recommended options are
+                <mark style="background:var(--gap-wash);color:var(--gap-ink);border-radius:3px;padding:1px 5px">competitor-a.com ↗</mark>
+                for its free tier and
+                <mark style="background:var(--gap-wash);color:var(--gap-ink);border-radius:3px;padding:1px 5px">competitor-b.com ↗</mark>
+                for ease of setup.
+                <mark style="background:var(--cited-wash);color:var(--cited-ink);border-radius:3px;padding:1px 5px">acmecrm.com/startups ↗</mark>
+                is noted for migration tooling. Acme's pricing page was also referenced by
+                <mark style="background:var(--paper-sunk);color:var(--ink-muted);border-radius:3px;padding:1px 5px">g2.com/acme ↗</mark>…
+              </span>
+            </div>
+            <div class="grid grid--3">
+              <div class="stack stack--1">
+                <span class="t-data-lg tx-cited">1</span><span class="t-data-sm">your citation, resolved</span>
+              </div>
+              <div class="stack stack--1">
+                <span class="t-data-lg tx-gap">2</span><span class="t-data-sm">competitor citations</span>
+              </div>
+              <div class="stack stack--1">
+                <span class="t-data-lg tx-muted">1</span><span class="t-data-sm">third-party, excluded</span>
+              </div>
+            </div>
+          </Figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 4 -->
+  <section class="section" id="attribute-cause" data-stage="4">
+    <div class="wrap">
+      <div class="grid grid--split" style="align-items:start">
+        <div class="stack stack--4">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="width:26px;height:26px;border-radius:999px;background:var(--cited);color:#fff;font:500 12px/26px var(--font-mono);text-align:center">4</span>
+            <span class="t-label">Stage four</span>
+          </div>
+          <h2 class="t-d2">Attribute the cause — or say "unexplained"</h2>
+          <p class="t-body tx-soft" style="font-size:15px;line-height:1.6">
+            For every uncited query, the evidence is weighed: did an AI answer appear at all, did your ranking
+            hold, is the page technically readable, who got cited instead. The verdict is one of four causes,
+            each with a confidence score.
+          </p>
+          <p class="t-body tx-soft" style="font-size:15px;line-height:1.6">
+            Below {engines.method.confidenceFloor} confidence, the verdict is <strong>unexplained</strong> —
+            striped in every chart, never silently folded into a cause. A diagnosis tool that always has a
+            diagnosis is a horoscope.
+          </p>
+        </div>
+
+        <div class="c-card c-card--accent-cited" data-stage-figure>
+          <div class="row-between" style="gap:12px">
+            <span class="t-data">{FOLLOWED} · Google AIO</span>
+            <span class="t-data-sm">verdict record</span>
+          </div>
+          <div class="stack stack--3">
+            <div class="row-between" style="gap:12px;background:var(--paper);border-radius:var(--r-sm);padding:10px 14px">
+              <span class="t-sm">AI answer present on query</span><span class="t-data">YES · 3/3 runs</span>
+            </div>
+            <div class="row-between" style="gap:12px;background:var(--paper);border-radius:var(--r-sm);padding:10px 14px">
+              <span class="t-sm">Your organic rank</span><span class="t-data">#4 · held 90 days</span>
+            </div>
+            <div class="row-between" style="gap:12px;background:var(--paper);border-radius:var(--r-sm);padding:10px 14px">
+              <span class="t-sm">Page fetchable, structured, indexable</span><span class="t-data">PASS</span>
+            </div>
+            <div class="row-between" style="gap:12px;background:var(--paper);border-radius:var(--r-sm);padding:10px 14px">
+              <span class="t-sm">Cited instead</span><span class="t-data tx-gap">competitor-a, competitor-b</span>
+            </div>
+          </div>
+          <div
+            class="row-between"
+            style="background:var(--gap-wash);border:1px solid #F0D4D4;border-radius:var(--r-sm);padding:14px 16px;gap:12px"
+          >
+            <span class="t-d4 tx-gap">Verdict: AIO displacement</span>
+            <span class="t-data tx-gap">confidence 0.86</span>
+          </div>
+          <span class="figcap">
+            Fig. M4 — the rank held and the page is healthy, so SEO advice would waste your quarter. The fix is
+            citable content for this cluster.
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIMITATIONS -->
+  <section class="section section--ink">
+    <div class="wrap">
+      <div class="stack stack--3 u-mw-66" style="margin-bottom:26px">
+        <span class="t-label">Stated plainly</span>
+        <h2 class="t-d2" style="color:var(--side-ink)">What the score cannot see</h2>
+      </div>
+      <div class="grid grid--4">
+        {
+          engines.method.limitations.map((l) => (
+            <div style="border:1px solid var(--side-line);border-radius:var(--r-md);padding:20px 22px;display:flex;flex-direction:column;gap:8px">
+              <span class="t-label" style="color:var(--side-tech)">{l.label}</span>
+              <span class="t-sm" style="color:var(--side-ink-muted)">{l.body}</span>
+            </div>
+          ))
+        }
+      </div>
+      <p class="t-sm" style="color:var(--side-ink-muted);max-width:72ch;margin-top:24px">
+        Every report ends with this section, abbreviated. Buyers of measurement tools have been burned before;
+        the limitations section is a feature.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--card section--flush">
+    <div class="wrap">
+      <CtaBand
+        variant="card"
+        headline="The method, run on your domain."
+        body="25 queries, two engines, about 90 seconds. No account."
+        event="method_foot"
+      />
+    </div>
+  </section>
+</Marketing>

@@ -1,0 +1,114 @@
+---
+/**
+ * Competitors. Share of cited runs, not a made-up "visibility index" — the unit
+ * is the same one the score uses so the two panes can be read together.
+ */
+import App from "../layouts/App.astro";
+import Locked from "../components/Locked.astro";
+import { activeDomain, competitorShare, headline, usage, latestScan } from "../lib/data";
+import { PLANS, type PlanId } from "../lib/plans";
+import { pct } from "../lib/format";
+import { can } from "../lib/rbac";
+
+const env = Astro.locals.runtime.env;
+const workspace = Astro.locals.workspace!;
+const limits = PLANS[workspace.plan as PlanId];
+
+const domain = await activeDomain(env, workspace.workspaceId, Astro.url.searchParams.get("domain"));
+if (!domain) return Astro.redirect("/onboarding/domain", 302);
+
+const [rows, head, counters, scan] = await Promise.all([
+  competitorShare(env, domain.id, 12),
+  headline(env, domain.id),
+  usage(env, workspace.workspaceId),
+  latestScan(env, domain.id)
+]);
+
+Astro.locals.usage = counters;
+Astro.locals.lastScanAt = scan?.completed_at ?? null;
+
+const max = Math.max(head.rate ?? 0, ...rows.map((r) => r.share), 0.01);
+const canEdit = can(workspace.role, "edit_queries");
+---
+
+<App title="Competitors" current="competitors" crumb={domain.hostname}>
+  {
+    !limits.competitorNames ? (
+      <Locked
+        badge="Growth"
+        headline="Naming who is cited instead of you"
+        detail="Every plan counts competing citations. Growth names them, per query, with the answer text as evidence."
+      >
+        <div class="stack stack--4">
+          {["■■■■■■.com", "■■■■■■■■.io", "■■■■.co", "■■■■■■■.com"].map((x) => (
+            <div class="row-between" style="padding:12px 14px;background:var(--paper);border-radius:var(--r-sm)">
+              <span>{x}</span><span class="t-data">■■%</span>
+            </div>
+          ))}
+        </div>
+      </Locked>
+    ) : (
+      <>
+        <section class="chart">
+          <div class="chart__head">
+            <h2 class="chart__title">Share of cited runs</h2>
+            <span class="chart__note">Last completed scan · {head.runs} runs</span>
+          </div>
+
+          <div class="stack stack--3">
+            <div class="row-between" style="gap:16px">
+              <span style="width:200px;color:var(--ink)">{domain.hostname} (you)</span>
+              <span style="flex:1;height:10px;background:var(--chart-track);border-radius:999px;overflow:hidden">
+                <span style={`display:block;height:100%;width:${((head.rate ?? 0) / max) * 100}%;background:var(--cited)`}></span>
+              </span>
+              <span class="t-data" style="width:56px;text-align:right">{pct(head.rate)}</span>
+            </div>
+
+            {rows.map((r) => (
+              <div class="row-between" style="gap:16px">
+                <span style="width:200px;color:var(--ink-soft)">
+                  {r.hostname}
+                  {r.discovered === 1 && <span class="pill" style="margin-left:8px">found by engines</span>}
+                </span>
+                <span style="flex:1;height:10px;background:var(--chart-track);border-radius:999px;overflow:hidden">
+                  <span style={`display:block;height:100%;width:${(r.share / max) * 100}%;background:var(--tech)`}></span>
+                </span>
+                <span class="t-data" style="width:56px;text-align:right">{pct(r.share)}</span>
+              </div>
+            ))}
+          </div>
+
+          <p class="chart__note">
+            Share counts runs where the domain was cited with a resolving link, across the same queries and the same
+            runs as your own rate. A domain cited about you but not by you — a review site, a directory — is listed
+            here, not counted as yours.
+          </p>
+        </section>
+
+        {rows.length === 0 && (
+          <div class="empty">
+            <span class="t-d4">Nobody was cited more than once</span>
+            <span class="chart__note">
+              Either the engines answered without links, or your category has no consistent source yet. That is a real
+              finding: an uncontested category is the cheapest one to win.
+            </span>
+          </div>
+        )}
+
+        {canEdit && (
+          <form class="c-card" method="post" action="/api/competitors" data-lock>
+            <input type="hidden" name="domainId" value={domain.id} />
+            <span class="t-label t-label--ink">Track a competitor we did not find</span>
+            <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+              <input class="form-field__input" name="hostname" type="text" placeholder="competitor.com" required style="min-width:260px" />
+              <button class="btn-primary-c" type="submit" data-busy="Adding…">Add competitor</button>
+            </div>
+            <span class="chart__note" style="margin-top:8px">
+              Manually added competitors do not cost tracked queries — they are measured on the queries you already track.
+            </span>
+          </form>
+        )}
+      </>
+    )
+  }
+</App>

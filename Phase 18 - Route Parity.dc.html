@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EDEFF2;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="display:grid;grid-template-columns:300px minmax(0,1fr);min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="background:#141B26;color:#F4F5F7;padding:24px 20px;display:flex;flex-direction:column;gap:22px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#35B394">Phase 18 · routes</div>
+      <div style="font:600 21px/1.3 'Source Serif 4',serif;margin-top:8px">Does the route exist?</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#8A93A1;margin:8px 0 0">Every route the prototype claims, resolved against the actual page files in both repos. A claimed route with no file behind it is a screen nobody can reach.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">verdict</div>
+      <div style="font:500 32px/1 'JetBrains Mono',monospace;color:{{ verdictInk }}">{{ verdictNum }}</div>
+      <div style="font:400 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">{{ verdictLine }}</div>
+      <button type="button" onClick="{{ recheck }}" style="min-height:44px;margin-top:4px;border:1px solid rgba(255,255,255,.14);border-radius:6px;background:transparent;color:#F4F5F7;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Re-probe the repos</button>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">groups</div>
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="8">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;font:400 12px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#F4F5F7">
+          <span style="min-width:0">{{ n.name }}</span>
+          <span style="flex:none;font:500 11px/1.4 'JetBrains Mono',monospace;color:{{ n.ink }}">{{ n.count }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-direction:column;gap:8px">
+      <a href="Phase 14 - Prototype Launcher.dc.html" style="color:#35B394;font:400 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">← Prototype launcher</a>
+      <a href="Phase 17 - Deploy Preflight.dc.html" style="color:#35B394;font:400 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Phase 17 · deploy preflight</a>
+    </div>
+  </div>
+
+  <div style="padding:34px 40px 64px;display:flex;flex-direction:column;gap:26px;min-width:0">
+
+    <div style="display:flex;flex-direction:column;gap:8px;max-width:80ch">
+      <h1 style="font:600 30px/1.25 'Source Serif 4',serif;margin:0;text-wrap:pretty">The prototype's routes, checked against the repos</h1>
+      <p style="font:400 14.5px/1.65 inherit;color:#5B6472;margin:0;text-wrap:pretty">Each route is resolved the way Astro would resolve it — a literal file, an <span style="font-family:'JetBrains Mono',monospace;font-size:13px">index</span> inside a folder, or a <span style="font-family:'JetBrains Mono',monospace;font-size:13px">[param]</span> file one level up — then fetched to confirm the file is really there. Nothing is transcribed, so this cannot go stale.</p>
+    </div>
+
+    <sc-if value="{{ error }}" hint-placeholder-val="{{ true }}">
+      <div style="background:#FBEDED;border:1px solid #A62F2F;border-radius:12px;padding:18px 20px;font:400 13.5px/1.6 inherit;color:#141B26">{{ error }}</div>
+    </sc-if>
+
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="8">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">{{ g.name }}</h2>
+          <span style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">{{ g.repo }} · {{ g.summary }}</span>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) 96px;gap:14px;padding:11px 20px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472">
+            <span>claimed route</span><span>resolves to</span><span style="text-align:right">state</span>
+          </div>
+          <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) 96px;gap:14px;padding:11px 20px;border-top:1px solid #E2E5EA;background:{{ r.bg }};font:400 12.5px/1.5 'JetBrains Mono',monospace;align-items:baseline">
+              <span style="color:#141B26;overflow-wrap:anywhere">{{ r.route }}</span>
+              <span style="color:#5B6472;overflow-wrap:anywhere">{{ r.resolved }}</span>
+              <span style="text-align:right;color:{{ r.ink }}">{{ r.state }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:10px;max-width:80ch">
+      <div style="font:600 16px/1.3 'Source Serif 4',serif">How a miss gets read</div>
+      <div style="font:400 13px/1.65 inherit;color:#5B6472;text-wrap:pretty">A row marked <span style="font-family:'JetBrains Mono',monospace;font-size:12px">served by</span> is a prototype screen with no page of its own that an existing route already covers — a share view rendered by the report route, an onboarding step that finishes into the overview. A row marked <span style="font-family:'JetBrains Mono',monospace;font-size:12px">no page</span> is a screen the prototype demonstrates and the product does not have yet, which is a scoping question rather than a bug.</div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+// The launcher's route map, corrected in Phase 18 to the names the repos use.
+// The prototype-only rows below stay in the list on purpose: a screen the
+// prototype demonstrates with no page behind it is the thing worth seeing.
+const CLAIMED = [
+  ["Scan funnel", "14a", "site", ["/", "/api/scan", "/api/scan/[token]", "/scan/[token]", "/api/claim", "/scan/[token]/share"]],
+  ["Auth", "14b", "app", ["/sign-up", "/sign-in", "/check-email", "/verify", "/sign-out", "/invite/[token]", "/claim/[token]"]],
+  ["Onboarding", "14b", "app", ["/onboarding/domain", "/onboarding/connect", "/onboarding/queries", "/api/onboarding/domain", "/api/onboarding/queries", "/onboarding/run", "/onboarding/done"]],
+  ["Dashboard", "14c", "app", ["/overview", "/queries", "/fixes", "/competitors", "/api/queries/[id]/evidence", "/api/rescan", "/verify-fix"]],
+  ["Reports", "14d", "app", ["/reports", "/reports/[id]", "/api/reports", "/api/reports/[id]/pdf", "/reports/share/[token]"]],
+  ["Settings and billing", "14d", "app", ["/settings", "/settings/brand", "/settings/email", "/settings/team", "/settings/workspaces", "/settings/billing", "/api/billing/checkout", "/settings/queries", "/settings/schedule"]],
+  ["Marketing", "14e", "site", ["/pricing", "/how-it-works", "/for/agencies", "/for/in-house", "/customers", "/security", "/about", "/changelog", "/contact"]],
+  ["Content and legal", "14e", "site", ["/blog", "/blog/[slug]", "/compare/[slug]", "/docs", "/legal/[slug]", "/rss.xml"]],
+];
+
+const ROOTS = { site: "citerate/src/pages", app: "citerate-app/src/pages" };
+const EXT = [".astro", ".ts"];
+
+// Astro resolution order for one route, as candidate file paths.
+function candidates(root, route) {
+  const clean = route.replace(/^\/+|\/+$/g, "");
+  const segs = clean ? clean.split("/") : [];
+  const out = [];
+  if (!segs.length) { EXT.forEach(e => out.push(root + "/index" + e)); return out; }
+
+  const literal = segs.join("/");
+  EXT.forEach(e => out.push(root + "/" + literal + e));
+  EXT.forEach(e => out.push(root + "/" + literal + "/index" + e));
+
+  // A [param] file standing in for the last literal segment.
+  const parent = segs.slice(0, -1).join("/");
+  const last = segs[segs.length - 1];
+  const bracket = /^\[.*\]$/.test(last) ? last : "[" + last.replace(/[[\]]/g, "") + "]";
+  const base = root + (parent ? "/" + parent : "");
+  EXT.forEach(e => out.push(base + "/" + bracket + e));
+  if (/^\[.*\]$/.test(last)) EXT.forEach(e => out.push(base + "/[slug]" + e, base + "/[token]" + e, base + "/[id]" + e));
+  return out;
+}
+
+// Where a prototype-only screen has no page of its own but is served by an
+// existing route, name it, so the row says what to point the prototype at.
+const RENAMES = {
+  "/scan/[token]/share": "/scan/[token]",
+  "/onboarding/run": "/onboarding/queries",
+  "/onboarding/done": "/overview",
+  "/verify-fix": "/fixes",
+  "/reports/share/[token]": "/reports/[id]",
+  "/settings/queries": "/queries",
+  "/settings/schedule": "/settings",
+};
+
+class Component extends DCLogic {
+  state = { probed: null, error: "" };
+
+  componentDidMount() { this.probe(); }
+
+  probe = () => {
+    // One HEAD-ish fetch per candidate; the browser caches, so a re-probe is cheap.
+    const seen = new Map();
+    const exists = (path) => {
+      if (seen.has(path)) return seen.get(path);
+      const p = fetch(path).then(r => r.ok).catch(() => false);
+      seen.set(path, p);
+      return p;
+    };
+
+    const jobs = [];
+    CLAIMED.forEach(([group, phase, repo, routes]) => {
+      routes.forEach(route => {
+        const root = ROOTS[repo];
+        const cands = candidates(root, route);
+        const alt = RENAMES[route];
+        const altCands = alt && alt !== route ? candidates(root, alt) : [];
+        jobs.push(
+          Promise.all([...cands, ...altCands].map(exists)).then(hits => {
+            const hitIdx = hits.findIndex((ok, i) => ok && i < cands.length);
+            const altIdx = hits.findIndex((ok, i) => ok && i >= cands.length);
+            return {
+              group, phase, repo, route,
+              file: hitIdx >= 0 ? cands[hitIdx] : null,
+              altRoute: hitIdx < 0 && altIdx >= 0 ? alt : null,
+              altFile: hitIdx < 0 && altIdx >= 0 ? [...cands, ...altCands][altIdx] : null,
+            };
+          })
+        );
+      });
+    });
+
+    Promise.all(jobs)
+      .then(rows => {
+        if (!rows.some(r => r.file || r.altFile))
+          return this.setState({ error: "Could not read either repo's pages — both need to sit next to this file." });
+        this.setState({ probed: rows, error: "" });
+      })
+      .catch(e => this.setState({ error: String(e.message || e) }));
+  };
+
+  renderVals() {
+    const rows = this.state.probed || [];
+    // Until the probe lands nothing is known, so nothing may claim to exist.
+    const probing = this.state.probed === null && !this.state.error;
+    const short = (p) => (p ? p.replace(/^citerate(-app)?\/src\/pages/, m => (m.indexOf("-app") > 0 ? "app:" : "site:")) : "");
+
+    const groups = CLAIMED.map(([name, phase, repo, routes]) => {
+      if (probing) return {
+        name, repo: repo === "site" ? "marketing" : "dashboard",
+        summary: "probing " + routes.length + " routes",
+        rows: routes.map(route => ({ route, resolved: "checking src/pages", state: "…", ink: "#8A93A1", bg: "#FFFFFF" })),
+        ok: 0, renamed: 0, gone: 0, probing: true,
+      };
+      const mine = rows.filter(r => r.group === name);
+      const shaped = mine.map(r => {
+        if (r.file) return { route: r.route, resolved: short(r.file), state: "exists", ink: "#0B6151", bg: "#FFFFFF" };
+        if (r.altFile) return { route: r.route, resolved: r.altRoute + "  →  " + short(r.altFile), state: "served by", ink: "#8A5A16", bg: "#FBF2E3" };
+        return { route: r.route, resolved: "prototype only", state: "no page", ink: "#A62F2F", bg: "#FBEDED" };
+      });
+      const ok = shaped.filter(r => r.state === "exists").length;
+      const renamed = shaped.filter(r => r.state === "served by").length;
+      const gone = shaped.filter(r => r.state === "no page").length;
+      return {
+        name, repo: repo === "site" ? "marketing" : "dashboard", rows: shaped,
+        summary: ok + " exist" + (renamed ? " · " + renamed + " served by another route" : "") + (gone ? " · " + gone + " prototype only" : ""),
+        ok, renamed, gone,
+      };
+    });
+
+    const total = rows.length;
+    const exact = groups.reduce((n, g) => n + g.ok, 0);
+    const renamed = groups.reduce((n, g) => n + g.renamed, 0);
+    const gone = groups.reduce((n, g) => n + g.gone, 0);
+
+    return {
+      groups,
+      nav: groups.map(g => ({
+        name: g.name,
+        count: g.probing ? "…" : g.gone ? g.gone + " prototype only" : g.renamed ? g.renamed + " served by" : "all exist",
+        ink: g.probing ? "#8A93A1" : g.gone ? "#E58B8B" : g.renamed ? "#E9A44A" : "#35B394",
+      })),
+      verdictNum: total ? exact + "/" + total : "—",
+      verdictLine: total
+        ? (renamed ? renamed + " served by another route · " : "") + (gone ? gone + " prototype only · " : "") + "probed live"
+        : "probing the repos",
+      verdictInk: gone ? "#E58B8B" : renamed ? "#E9A44A" : "#35B394",
+      error: this.state.error,
+      recheck: this.probe,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

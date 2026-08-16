@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#F4F5F7;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="max-width:1240px;margin:0 auto;padding:48px 40px 120px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;box-sizing:border-box">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:20px;border-bottom:2px solid #141B26">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Phase 13 · responsive · 2026-08-03</div>
+      <h1 style="font:600 34px/1.15 'Source Serif 4',serif;letter-spacing:-.015em;margin:10px 0 0">Every breakpoint in one file, every screen at every size</h1>
+      <p style="font:400 14px/1.55 inherit;color:#5B6472;max-width:86ch;margin:8px 0 0;text-wrap:pretty">Two jobs. First, the CSS was reorganised: no partial contains a width media query any more — they all sit in one <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px">_responsive.scss</span> per repo, in descending order, with a new 375px step for small phones. Second, this board is the proof: all 38 routes with their layout state at four widths, the six end-to-end flows, and thirteen screens drawn at actual 375px.</p>
+    </div>
+    <div style="flex:none;text-align:right;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+      <div>routes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;38</div>
+      <div>flows &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6</div>
+      <div>breakpoints &nbsp;7</div>
+      <div style="color:#0B6151">new · 375px &nbsp;1</div>
+    </div>
+  </div>
+
+  <section style="margin-top:32px">
+    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:16px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">01</div>
+      <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:0">What moved, and where it lives now</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">BEFORE · SCATTERED</div>
+        <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:10px 0 14px">Sixteen media queries lived inside nine component partials, two of them nested inside SCSS selectors where they were easy to miss.</p>
+        <div style="font:400 11.5px/1.9 'JetBrains Mono',monospace;color:#5B6472">
+          <div>_tokens.scss <span style="color:#C43D3D">· 1279, 899</span></div>
+          <div>_type.scss <span style="color:#C43D3D">· 899</span></div>
+          <div>_section.scss <span style="color:#C43D3D">· 1099, 899 ×2</span></div>
+          <div>_header.scss <span style="color:#C43D3D">· 991</span></div>
+          <div>_footer.scss <span style="color:#C43D3D">· 991</span></div>
+          <div>_card.scss <span style="color:#C43D3D">· 899</span></div>
+          <div>_forms.scss <span style="color:#C43D3D">· 599</span></div>
+          <div>_pricing.scss <span style="color:#C43D3D">· 1199, 991, 899 ×2</span></div>
+          <div>_shell.scss <span style="color:#C43D3D">· 899 ×2, 1023 (nested)</span></div>
+          <div>_table.scss <span style="color:#C43D3D">· 639</span></div>
+        </div>
+      </div>
+
+      <div style="background:#141B26;border-radius:10px;padding:22px 24px;color:#F4F5F7">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">AFTER · ONE FILE PER REPO</div>
+        <p style="font:400 13px/1.6 inherit;color:#8A93A1;margin:10px 0 14px">Partials are desktop-first and query-free. The responsive file is imported second-to-last; only print follows it, so paper still wins over screen.</p>
+        <div style="background:#0D131C;border-radius:8px;padding:14px 16px;font:400 11.5px/1.9 'JetBrains Mono',monospace">
+          <div style="color:#5B6472">// main.scss tail, both repos</div>
+          <div>@use "06-utilities/utils";</div>
+          <div style="color:#35B394">@use "07-responsive/responsive";</div>
+          <div>@use "06-utilities/print";</div>
+        </div>
+        <p style="font:400 12.5px/1.6 inherit;color:#8A93A1;margin:14px 0 0">Inside that file: width queries in descending order under banner headings, then a single <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#F4F5F7">prefers-reduced-motion</span> block at the very bottom. Adding a breakpoint means inserting it in sequence, never appending.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:36px">
+    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:16px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">02</div>
+      <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:0">The ladder</h2>
+      <div style="font:400 12.5px/1.5 inherit;color:#5B6472;margin-left:auto">Marketing site keeps seven steps, the dashboard six. Both share the same numbers.</div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:92px 96px 1fr 1fr;gap:16px;padding:11px 22px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472">
+        <div>max-width</div><div>repos</div><div>marketing site</div><div>dashboard</div>
+      </div>
+      <div style="display:grid;grid-template-columns:92px 96px 1fr 1fr;gap:16px;padding:13px 22px;border-top:1px solid #E2E5EA;font:400 12.5px/1.5 inherit;color:#5B6472;align-items:baseline">
+        <div style="font:500 13px 'JetBrains Mono',monospace;color:#141B26">1279px</div>
+        <div style="font:400 11px 'JetBrains Mono',monospace">both</div>
+        <div>Gutter 32 → 20px</div>
+        <div>Gutter 32 → 20px</div>
+      </div>
+      <div style="display:grid;grid-template-columns:92px 96px 1fr 1fr;gap:16px;padding:13px 22px;border-top:1px solid #E2E5EA;font:400 12.5px/1.5 inherit;color:#5B6472;align-items:baseline">
+        <div style="font:500 13px 'JetBrains Mono',monospace;color:#141B26">1199px</div>
+        <div style="font:400 11px 'JetBrains Mono',monospace">marketing</div>
+        <div>Article TOC rail folds under the prose column and stops sticking</div>
+        <div style="color:#8A93A1">—</div>
+      </div>
+      <div style="display:grid;grid-template-columns:92px 96px 1fr 1fr;gap:16px;padding:13px 22px;border-top:1px solid #E2E5EA;font:400 12.5px/1.5 inherit;color:#5B6472;align-items:baseline">
+        <div style="font:500 13px 'JetBrains Mono',monospace;color:#141B26">1099px</div>
+        <div style="font:400 11px 'JetBrains Mono',monospace">marketing</div>
+        <div>Four-up grids become two-up</div>
+        <div style="color:#8A93A1">—</div>
+      </div>
+      <div style="display:grid;grid-template-columns:92px 96px 1fr 1fr;gap:16px;padding:13px 22px;border-top:1px solid #E2E5EA;font:400 12.5px/1.5 inherit;color:#5B6472;align-items:baseline">
+        <div style="font:500 13px 'JetBrains Mono',monospace;color:#141B26">1023px</div>
+        <div style="font:400 11px 'JetBrains Mono',monospace">app</div>
+        <div style="color:#8A93A1">—</div>
+        <div>The 12-column pane grid stops splitting; every column spans 12</div>
+      </div>
+      <div style="display:grid;grid-template-columns:92px 96px 1fr 1fr;gap:16px;padding:13px 22px;border-top:1px solid #E2E5EA;font:400 12.5px/1.5 inherit;color:#5B6472;align-items:baseline">
+        <div style="font:500 13px 'JetBrains Mono',monospace;color:#141B26">991px</div>
+        <div style="font:400 11px 'JetBrains Mono',monospace">marketing</div>
+        <div>Nav collapses to a drawer, footer halves to two columns, docs rail unstacks</div>
+        <div style="color:#8A93A1">—</div>
+      </div>
+      <div style="display:grid;grid-template-columns:92px 96px 1fr 1fr;gap:16px;padding:13px 22px;border-top:1px solid #E2E5EA;font:400 12.5px/1.5 inherit;color:#5B6472;align-items:baseline">
+        <div style="font:500 13px 'JetBrains Mono',monospace;color:#141B26">899px</div>
+        <div style="font:400 11px 'JetBrains Mono',monospace">both</div>
+        <div>Sections tighten to 48px, every grid single-column, hero 56 → 34px, wide tables scroll</div>
+        <div>Sidebar → offcanvas, toggle appears in the topbar, well padding drops</div>
+      </div>
+      <div style="display:grid;grid-template-columns:92px 96px 1fr 1fr;gap:16px;padding:13px 22px;border-top:1px solid #E2E5EA;font:400 12.5px/1.5 inherit;color:#5B6472;align-items:baseline">
+        <div style="font:500 13px 'JetBrains Mono',monospace;color:#141B26">639px</div>
+        <div style="font:400 11px 'JetBrains Mono',monospace">app</div>
+        <div style="color:#8A93A1">—</div>
+        <div>The data table stops being a table: each row becomes a labelled card</div>
+      </div>
+      <div style="display:grid;grid-template-columns:92px 96px 1fr 1fr;gap:16px;padding:13px 22px;border-top:1px solid #E2E5EA;font:400 12.5px/1.5 inherit;color:#5B6472;align-items:baseline">
+        <div style="font:500 13px 'JetBrains Mono',monospace;color:#141B26">599px</div>
+        <div style="font:400 11px 'JetBrains Mono',monospace">both</div>
+        <div>Scan form stacks, MDX tables scroll instead of reflowing, free-strip copy floor released</div>
+        <div>OTP boxes share the row instead of overflowing, evidence and engine grids single-column</div>
+      </div>
+      <div style="display:grid;grid-template-columns:92px 96px 1fr 1fr;gap:16px;padding:13px 22px;border-top:1px solid #E2E5EA;background:#E7F2EF;font:400 12.5px/1.5 inherit;color:#5B6472;align-items:baseline">
+        <div>
+          <div style="font:500 13px 'JetBrains Mono',monospace;color:#141B26">375px</div>
+          <sc-if value="{{ highlightNew }}" hint-placeholder-val="{{ true }}"><div style="display:inline-block;margin-top:5px;font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#FFFFFF;background:#0E7C66;border-radius:999px;padding:4px 7px">new</div></sc-if>
+        </div>
+        <div style="font:400 11px 'JetBrains Mono',monospace">both</div>
+        <div>Gutter 16 → 14px, display type steps down (hero 28px, H1 30px, big numbers 36px), card and plan padding tightens</div>
+        <div>Topbar 60 → 56px, well padding to 16px, chart canvas 280 → 190px, auth card and OTP boxes shrink to fit 375</div>
+      </div>
+    </div>
+    <p style="font:400 12.5px/1.6 inherit;color:#8A93A1;margin:12px 0 0">Why 375 and not 320: 375 is the floor of every phone still in warranty support (SE 2022, 12/13 mini). Below it the layout holds but type is no longer comfortable — nothing breaks, it just gets tight.</p>
+  </section>
+
+  <section style="margin-top:36px">
+    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">03</div>
+      <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:0">All 38 routes, four widths</h2>
+      <div style="font:400 12.5px/1.5 inherit;color:#5B6472;margin-left:auto">Showing <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#141B26">{{ shownCount }}</span> of 38 · scope <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#141B26">{{ scopeLabel }}</span></div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:1.5fr .62fr .62fr .62fr .68fr 1.6fr;gap:14px;padding:11px 22px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472">
+        <div>route</div><div>1440</div><div>1024</div><div>768</div><div>375</div><div>mobile treatment</div>
+      </div>
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
+        <div style="display:grid;grid-template-columns:1.5fr .62fr .62fr .62fr .68fr 1.6fr;gap:14px;padding:12px 22px;border-top:1px solid #E2E5EA;font:400 11.5px/1.45 'JetBrains Mono',monospace;color:#5B6472;align-items:baseline">
+          <div>
+            <div style="color:#141B26">{{ r.route }}</div>
+            <div style="font:400 11px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#8A93A1;margin-top:2px">{{ r.name }}</div>
+          </div>
+          <div>{{ r.a }}</div>
+          <div>{{ r.b }}</div>
+          <div>{{ r.c }}</div>
+          <div style="color:#0B6151">{{ r.d }}</div>
+          <div style="font:400 11.5px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">{{ r.note }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="margin-top:36px">
+    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:16px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">04</div>
+      <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:0">Six flows, walked at 375px</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:4px 10px 10px 4px;padding:18px 20px">
+        <div style="font:600 15px/1.35 'Source Serif 4',serif">Free scan → claim</div>
+        <div style="font:400 11.5px/1.8 'JetBrains Mono',monospace;color:#5B6472;margin-top:8px">home → form → progress → /scan/[token] → claim</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">Field and button stack at 599. Progress readout keeps its 150px rail. Result table scrolls sideways; the claim CTA is a full-width 48px target.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:4px 10px 10px 4px;padding:18px 20px">
+        <div style="font:600 15px/1.35 'Source Serif 4',serif">Sign-up → onboarding → overview</div>
+        <div style="font:400 11.5px/1.8 'JetBrains Mono',monospace;color:#5B6472;margin-top:8px">/sign-up → /check-email → domain → connect → queries → /overview</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">The one real bug this pass found: six fixed 48px OTP boxes overflowed every phone. They now share the row fluidly at 599 and shrink to 44px at 375.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:4px 10px 10px 4px;padding:18px 20px">
+        <div style="font:600 15px/1.35 'Source Serif 4',serif">Gap → fix → verify</div>
+        <div style="font:400 11.5px/1.8 'JetBrains Mono',monospace;color:#5B6472;margin-top:8px">/queries → row detail → /fixes → owner → rescan → proof</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">Row detail opens in place as a card. Fix actions go full-width and split the row evenly at 375; the before → after proof block wraps rather than clipping.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:4px 10px 10px 4px;padding:18px 20px">
+        <div style="font:600 15px/1.35 'Source Serif 4',serif">Invite a teammate</div>
+        <div style="font:400 11.5px/1.8 'JetBrains Mono',monospace;color:#5B6472;margin-top:8px">/settings/team → invite → /invite/[token] → role</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">Team list is a data table, so it becomes cards at 639 with role and last-seen as labelled rows. Accept screen is the same 440px auth card.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:4px 10px 10px 4px;padding:18px 20px">
+        <div style="font:600 15px/1.35 'Source Serif 4',serif">Upgrade</div>
+        <div style="font:400 11.5px/1.8 'JetBrains Mono',monospace;color:#5B6472;margin-top:8px">locked region → /settings/billing → Paddle → return</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">Locked veils keep their badge and one-line reason at 375 — the blur never hides the sentence explaining the gate. Paddle's own overlay is responsive.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:4px 10px 10px 4px;padding:18px 20px">
+        <div style="font:600 15px/1.35 'Source Serif 4',serif">White-label report</div>
+        <div style="font:400 11.5px/1.8 'JetBrains Mono',monospace;color:#5B6472;margin-top:8px">/settings/brand → /reports → /reports/[id] → PDF</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">Report reading is fine on a phone; PDF output is unaffected — print CSS loads after the responsive file, so paper geometry ignores every breakpoint.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:36px">
+    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:6px;flex-wrap:wrap">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">05</div>
+      <h2 style="font:600 22px/1.3 'Source Serif 4',serif;margin:0">Thirteen screens at actual 375px</h2>
+      <div style="font:400 12.5px/1.5 inherit;color:#5B6472;margin-left:auto">Drawn 1:1 with the 375px rules applied. Frames clip at 600px tall.</div>
+    </div>
+    <p style="font:400 12.5px/1.6 inherit;color:#8A93A1;margin:0 0 18px">These are drawings of the built CSS, not screenshots of a running server — the render pass on a real device is still the one open item at the bottom of this board.</p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:24px">
+
+      <div style="width:375px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-bottom:7px">/ &nbsp;home</div>
+        <div style="width:375px;height:600px;overflow:hidden;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7;box-sizing:border-box">
+          <div style="height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:rgba(244,245,247,.9);border-bottom:1px solid #E2E5EA;box-sizing:border-box">
+            <div style="display:flex;align-items:center;gap:9px;font:600 20px/1 'Source Serif 4',serif">
+              <div style="width:12px;height:12px;background:#0E7C66;border-radius:3px"></div>Citerate
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="font:500 12px/1 'JetBrains Mono',monospace;color:#0B6151">Sign in</div>
+              <div style="border:1px solid #C6CBD3;border-radius:6px;padding:9px 12px;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Menu</div>
+            </div>
+          </div>
+          <div style="padding:32px 14px">
+            <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">01 · the question</div>
+            <div style="font:600 28px/1.14 'Source Serif 4',serif;letter-spacing:-.02em;margin-top:10px">Does ChatGPT cite you when it answers your buyers?</div>
+            <p style="font:400 14px/1.55 inherit;color:#5B6472;margin:12px 0 0">Ranking first and never being cited are different problems. Citerate measures the second one, weekly, across four engines.</p>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:20px">
+              <div style="height:48px;border:1px solid #C6CBD3;border-radius:6px;background:#FFFFFF;display:flex;align-items:center;padding:0 12px;font:400 13px/1 'JetBrains Mono',monospace;color:#8A93A1">yourdomain.com</div>
+              <div style="height:48px;border-radius:6px;background:#0E7C66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Run a free scan</div>
+            </div>
+            <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1;margin-top:14px">12 queries · 4 engines · no account</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 16px;margin-top:24px">
+              <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">live scan</div>
+              <div style="display:flex;align-items:baseline;gap:6px;margin-top:10px">
+                <div style="font:500 36px/1 'JetBrains Mono',monospace;letter-spacing:-.02em">31<span style="font-size:.44em;color:#8A93A1">%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:375px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-bottom:7px">/ &nbsp;nav drawer open</div>
+        <div style="width:375px;height:600px;overflow:hidden;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7;box-sizing:border-box">
+          <div style="height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:#F4F5F7;border-bottom:1px solid #E2E5EA;box-sizing:border-box">
+            <div style="display:flex;align-items:center;gap:9px;font:600 20px/1 'Source Serif 4',serif">
+              <div style="width:12px;height:12px;background:#0E7C66;border-radius:3px"></div>Citerate
+            </div>
+            <div style="border:1px solid #141B26;border-radius:6px;padding:9px 12px;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Close</div>
+          </div>
+          <div style="background:#FFFFFF;border-bottom:1px solid #E2E5EA;padding:8px 14px 20px;box-shadow:0 2px 8px rgba(20,27,38,.07)">
+            <div style="display:flex;align-items:center;min-height:48px;padding:14px 0;border-bottom:1px solid #E2E5EA;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;border-left:0">How it works</div>
+            <div style="display:flex;align-items:center;min-height:48px;padding:14px 0;border-bottom:1px solid #E2E5EA;font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Pricing</div>
+            <div style="display:flex;align-items:center;min-height:48px;padding:14px 0;border-bottom:1px solid #E2E5EA;font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">For agencies</div>
+            <div style="display:flex;align-items:center;min-height:48px;padding:14px 0;border-bottom:1px solid #E2E5EA;font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Compare</div>
+            <div style="display:flex;align-items:center;gap:8px;min-height:48px;padding:14px 0;border-bottom:1px solid #E2E5EA;font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Docs
+              <span style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#9A6210;background:#FDF2E3;border-radius:999px;padding:3px 6px">soon</span>
+            </div>
+            <div style="display:flex;align-items:center;min-height:48px;padding:14px 0;font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Blog</div>
+            <div style="height:48px;border-radius:6px;background:#0E7C66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;margin-top:14px">Run a free scan</div>
+          </div>
+          <div style="padding:20px 14px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1">Panel is fixed at inset 64px 0 auto 0 — the page behind it does not scroll away. Every link is a 48px target.</div>
+        </div>
+      </div>
+
+      <div style="width:375px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-bottom:7px">/pricing</div>
+        <div style="width:375px;height:600px;overflow:hidden;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7;box-sizing:border-box">
+          <div style="padding:32px 14px">
+            <div style="display:flex;align-items:center;gap:8px;justify-content:center">
+              <div style="font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#141B26;border:1px solid #141B26;border-radius:999px;padding:8px 13px">Monthly</div>
+              <div style="font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;border:1px solid #E2E5EA;border-radius:999px;padding:8px 13px">Yearly</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:24px;margin-top:24px">
+              <div style="background:#FFFFFF;border:2px solid #0E7C66;border-radius:10px;padding:20px 18px 22px;position:relative">
+                <div style="position:absolute;top:-11px;left:18px;font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#FFFFFF;background:#0E7C66;border-radius:999px;padding:6px 11px">most picked</div>
+                <div style="font:600 20px/1.35 'Source Serif 4',serif;margin-top:6px">Team</div>
+                <div style="display:flex;align-items:flex-end;gap:6px;margin-top:12px">
+                  <div style="font:500 36px/1 'JetBrains Mono',monospace;letter-spacing:-.02em">$149</div>
+                  <div style="font:500 13px/1.4 'JetBrains Mono',monospace;color:#8A93A1;padding-bottom:6px">/mo</div>
+                </div>
+                <div style="height:1px;background:#E2E5EA;margin:14px 0"></div>
+                <div style="display:flex;flex-direction:column;gap:8px;font:400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">
+                  <div>200 tracked queries</div>
+                  <div>Weekly runs, all four engines</div>
+                  <div>Fix queue with owners</div>
+                  <div style="color:#0B6151">White-label PDF reports</div>
+                </div>
+                <div style="height:48px;border-radius:6px;background:#0E7C66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;margin-top:16px">Start on Team</div>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 18px 22px">
+                <div style="font:600 20px/1.35 'Source Serif 4',serif">Solo</div>
+                <div style="display:flex;align-items:flex-end;gap:6px;margin-top:12px">
+                  <div style="font:500 36px/1 'JetBrains Mono',monospace;letter-spacing:-.02em">$49</div>
+                  <div style="font:500 13px/1.4 'JetBrains Mono',monospace;color:#8A93A1;padding-bottom:6px">/mo</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:375px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-bottom:7px">/scan/[token] &nbsp;free result</div>
+        <div style="width:375px;height:600px;overflow:hidden;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7;box-sizing:border-box">
+          <div style="padding:32px 14px">
+            <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">scan · 12 queries · 4 engines</div>
+            <div style="font:600 25px/1.2 'Source Serif 4',serif;margin-top:10px">acme.com is cited in 31% of buyer answers</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 16px;margin-top:18px">
+              <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">why the other 69%</div>
+              <div style="display:flex;height:22px;border-radius:4px;overflow:hidden;gap:2px;margin-top:12px">
+                <div style="flex:4;background:#C43D3D"></div>
+                <div style="flex:3;background:#D98324"></div>
+                <div style="flex:2;background:#3E5C8A"></div>
+                <div style="flex:1;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></div>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px 12px;margin-top:12px;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">
+                <div style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:2px;background:#C43D3D"></span>AI overview 40%</div>
+                <div style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:2px;background:#D98324"></span>Rank 30%</div>
+                <div style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:2px;background:#3E5C8A"></span>Technical 20%</div>
+              </div>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden;margin-top:18px">
+              <div style="padding:10px 14px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472;display:flex;justify-content:space-between">
+                <div>query</div><div>verdict</div>
+              </div>
+              <div style="padding:10px 14px;border-top:1px solid #E2E5EA;display:flex;justify-content:space-between;gap:12px;font:400 12.5px/1.6 'JetBrains Mono',monospace">
+                <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">best invoicing tool for…</div>
+                <div style="flex:none;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#0B6151">cited</div>
+              </div>
+              <div style="padding:10px 14px;border-top:1px solid #E2E5EA;display:flex;justify-content:space-between;gap:12px;font:400 12.5px/1.6 'JetBrains Mono',monospace;background:#F4F5F7">
+                <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">acme vs competitor pricing</div>
+                <div style="flex:none;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#A62F2F">gap</div>
+              </div>
+              <div style="padding:10px 14px;border-top:1px solid #E2E5EA;display:flex;justify-content:space-between;gap:12px;font:400 12.5px/1.6 'JetBrains Mono',monospace">
+                <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">is acme good for agencies</div>
+                <div style="flex:none;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#A62F2F">gap</div>
+              </div>
+            </div>
+            <div style="height:48px;border-radius:6px;background:#0E7C66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;margin-top:18px">Claim this scan</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:375px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-bottom:7px">/sign-in</div>
+        <div style="width:375px;height:600px;overflow:hidden;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7;box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:24px 12px">
+          <div style="width:100%;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:16px;box-sizing:border-box">
+            <div style="font:500 20px/1.2 'JetBrains Mono',monospace;letter-spacing:-.03em">Cit<span style="color:#0E7C66">erate</span></div>
+            <div style="font:600 25px/1.2 'Source Serif 4',serif">Sign in</div>
+            <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">We email a link. No password to forget.</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">work email</div>
+              <div style="min-height:44px;border:1px solid #C6CBD3;border-radius:6px;padding:12px 14px;font:400 14px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#8A93A1;box-sizing:border-box">you@company.com</div>
+            </div>
+            <div style="height:48px;border-radius:6px;background:#0E7C66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Email me a link</div>
+            <div style="display:flex;align-items:center;gap:12px;font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">
+              <span style="flex:1;height:1px;background:#E2E5EA"></span>or<span style="flex:1;height:1px;background:#E2E5EA"></span>
+            </div>
+            <div style="min-height:44px;border:1px solid #C6CBD3;border-radius:6px;display:flex;align-items:center;justify-content:center;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Continue with Google</div>
+            <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#5B6472;text-align:center">No account yet? Sign up</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:375px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-bottom:7px">/check-email &nbsp;· the fix</div>
+        <div style="width:375px;height:600px;overflow:hidden;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7;box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:24px 12px">
+          <div style="width:100%;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:16px;box-sizing:border-box">
+            <div style="font:500 20px/1.2 'JetBrains Mono',monospace;letter-spacing:-.03em">Cit<span style="color:#0E7C66">erate</span></div>
+            <div style="font:600 25px/1.2 'Source Serif 4',serif">Check your email</div>
+            <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Link sent to you@company.com. Or type the six-digit code.</div>
+            <div style="display:flex;gap:5px">
+              <div style="flex:1;min-width:0;max-width:44px;height:50px;border:1px solid #C6CBD3;border-radius:6px;display:flex;align-items:center;justify-content:center;font:500 17px/1 'JetBrains Mono',monospace">4</div>
+              <div style="flex:1;min-width:0;max-width:44px;height:50px;border:1px solid #C6CBD3;border-radius:6px;display:flex;align-items:center;justify-content:center;font:500 17px/1 'JetBrains Mono',monospace">1</div>
+              <div style="flex:1;min-width:0;max-width:44px;height:50px;border:1px solid #3E5C8A;border-radius:6px;display:flex;align-items:center;justify-content:center;font:500 17px/1 'JetBrains Mono',monospace;box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #3E5C8A">9</div>
+              <div style="flex:1;min-width:0;max-width:44px;height:50px;border:1px solid #C6CBD3;border-radius:6px"></div>
+              <div style="flex:1;min-width:0;max-width:44px;height:50px;border:1px solid #C6CBD3;border-radius:6px"></div>
+              <div style="flex:1;min-width:0;max-width:44px;height:50px;border:1px solid #C6CBD3;border-radius:6px"></div>
+            </div>
+            <div style="font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1">Before: 6 × 48px + gaps = 328px inside a 279px card — the last two boxes were cut off on every phone. Now the boxes flex and cap at 44px.</div>
+            <div style="min-height:44px;border:1px solid #C6CBD3;border-radius:6px;display:flex;align-items:center;justify-content:center;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Resend link</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:375px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-bottom:7px">/onboarding/queries</div>
+        <div style="width:375px;height:600px;overflow:hidden;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7;box-sizing:border-box;padding:24px 12px">
+          <div style="width:100%;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:14px;box-sizing:border-box">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">
+              <span style="width:22px;height:3px;border-radius:999px;background:#0E7C66"></span>
+              <span style="width:22px;height:3px;border-radius:999px;background:#0E7C66"></span>
+              <span style="width:22px;height:3px;border-radius:999px;background:#141B26"></span>
+              <span>step 3 of 3 · review queries</span>
+            </div>
+            <div style="font:600 20px/1.3 'Source Serif 4',serif">We drafted 24 queries your buyers ask</div>
+            <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Drop the ones that are not you. You can edit these later.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <div style="display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:0 12px;background:#F4F5F7;border:1px solid #E2E5EA;border-radius:999px;font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">best invoicing tool<span style="color:#8A93A1">×</span></div>
+              <div style="display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:0 12px;background:#F4F5F7;border:1px solid #E2E5EA;border-radius:999px;font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">acme pricing<span style="color:#8A93A1">×</span></div>
+              <div style="display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:0 12px;background:#F4F5F7;border:1px solid #E2E5EA;border-radius:999px;font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;opacity:.5;text-decoration:line-through">acme jobs<span>×</span></div>
+              <div style="display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:0 12px;background:#F4F5F7;border:1px solid #E2E5EA;border-radius:999px;font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">invoicing for agencies<span style="color:#8A93A1">×</span></div>
+              <div style="display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:0 12px;background:#F4F5F7;border:1px solid #E2E5EA;border-radius:999px;font:400 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">acme vs ledger<span style="color:#8A93A1">×</span></div>
+            </div>
+            <div style="height:48px;border-radius:6px;background:#0E7C66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Start the first run</div>
+            <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1;text-align:center">23 of 200 on your plan</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:375px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-bottom:7px">/overview</div>
+        <div style="width:375px;height:600px;overflow:hidden;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7;box-sizing:border-box">
+          <div style="height:56px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 14px;background:#FFFFFF;border-bottom:1px solid #E2E5EA;box-sizing:border-box">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="width:44px;height:44px;border:1px solid #C6CBD3;border-radius:6px;display:flex;align-items:center;justify-content:center;font:500 14px/1 'JetBrains Mono',monospace">≡</div>
+              <div style="font:600 17px/1.35 'Source Serif 4',serif;letter-spacing:-.02em">Overview</div>
+            </div>
+            <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">acme.com</div>
+          </div>
+          <div style="padding:16px 14px;display:flex;flex-direction:column;gap:12px">
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px">
+              <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">citation rate · last run</div>
+              <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+                <div style="font:500 38px/1 'JetBrains Mono',monospace;letter-spacing:-.02em">34%</div>
+                <div style="display:inline-flex;align-items:center;gap:4px;font:500 13px/1.4 'JetBrains Mono',monospace;color:#0B6151;background:#E7F2EF;padding:3px 8px;border-radius:999px">+3.0</div>
+              </div>
+              <div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#5B6472">±2.4 band · 68 of 200 queries</div>
+              <div style="font:600 20px/1.3 'Source Serif 4',serif">Up, but inside the noise band — treat it as flat.</div>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px">
+              <div style="font:600 17px/1.35 'Source Serif 4',serif">Where the gaps come from</div>
+              <div style="display:flex;height:10px;border-radius:999px;overflow:hidden;gap:2px;margin-top:12px">
+                <div style="flex:5;background:#C43D3D"></div>
+                <div style="flex:3;background:#D98324"></div>
+                <div style="flex:2;background:#3E5C8A"></div>
+                <div style="flex:1;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></div>
+              </div>
+              <div style="display:grid;gap:6px;margin-top:12px;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">
+                <div style="display:flex;justify-content:space-between"><span>AI overview took the answer</span><span style="color:#141B26">46%</span></div>
+                <div style="display:flex;justify-content:space-between"><span>Not ranking top 10</span><span style="color:#141B26">28%</span></div>
+                <div style="display:flex;justify-content:space-between"><span>Technical</span><span style="color:#141B26">18%</span></div>
+              </div>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px">
+              <div style="font:600 17px/1.35 'Source Serif 4',serif">Rate by engine</div>
+              <div style="height:190px;background:#F4F5F7;border:1px solid #E2E5EA;border-radius:6px;margin-top:12px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:375px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-bottom:7px">/queries &nbsp;table → cards</div>
+        <div style="width:375px;height:600px;overflow:hidden;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7;box-sizing:border-box">
+          <div style="height:56px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 14px;background:#FFFFFF;border-bottom:1px solid #E2E5EA;box-sizing:border-box">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="width:44px;height:44px;border:1px solid #C6CBD3;border-radius:6px;display:flex;align-items:center;justify-content:center;font:500 14px/1 'JetBrains Mono',monospace">≡</div>
+              <div style="font:600 17px/1.35 'Source Serif 4',serif;letter-spacing:-.02em">Queries</div>
+            </div>
+            <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">68 gaps</div>
+          </div>
+          <div style="padding:16px 14px">
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+              <div style="display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;border-bottom:1px solid #E2E5EA">
+                <div style="font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#141B26;border-radius:999px;padding:8px 12px">Gaps</div>
+                <div style="font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;border:1px solid #E2E5EA;border-radius:999px;padding:8px 12px">All</div>
+                <div style="font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;border:1px solid #E2E5EA;border-radius:999px;padding:8px 12px">Sort: rate</div>
+              </div>
+              <div style="padding:12px;border-bottom:1px solid #E2E5EA;background:#FFFFFF;display:flex;flex-direction:column;gap:2px">
+                <div style="font:400 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">best invoicing tool for design agencies</div>
+                <div style="display:flex;justify-content:space-between;gap:12px;padding:2px 0;font:400 12.5px/1.5 'JetBrains Mono',monospace"><span style="font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">engine</span><span>ChatGPT</span></div>
+                <div style="display:flex;justify-content:space-between;gap:12px;padding:2px 0;font:400 12.5px/1.5 'JetBrains Mono',monospace"><span style="font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">rate</span><span>0%</span></div>
+                <div style="display:flex;justify-content:space-between;gap:12px;padding:2px 0;font:400 12.5px/1.5 'JetBrains Mono',monospace"><span style="font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">cause</span><span style="color:#A62F2F">AI overview</span></div>
+              </div>
+              <div style="padding:12px;border-bottom:1px solid #E2E5EA;background:#FFFFFF;display:flex;flex-direction:column;gap:2px">
+                <div style="font:400 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">acme vs ledger pricing 2026</div>
+                <div style="display:flex;justify-content:space-between;gap:12px;padding:2px 0;font:400 12.5px/1.5 'JetBrains Mono',monospace"><span style="font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">engine</span><span>Perplexity</span></div>
+                <div style="display:flex;justify-content:space-between;gap:12px;padding:2px 0;font:400 12.5px/1.5 'JetBrains Mono',monospace"><span style="font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">rate</span><span>12%</span></div>
+                <div style="display:flex;justify-content:space-between;gap:12px;padding:2px 0;font:400 12.5px/1.5 'JetBrains Mono',monospace"><span style="font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">cause</span><span style="color:#9A6210">Rank</span></div>
+              </div>
+              <div style="padding:12px;background:#FFFFFF;display:flex;flex-direction:column;gap:2px">
+                <div style="font:400 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">is acme good for freelancers</div>
+                <div style="display:flex;justify-content:space-between;gap:12px;padding:2px 0;font:400 12.5px/1.5 'JetBrains Mono',monospace"><span style="font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">rate</span><span>44%</span></div>
+              </div>
+            </div>
+            <div style="font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1;margin-top:12px">Column headers become the label on each row via data-label, so no header row is needed and nothing scrolls sideways.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:375px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-bottom:7px">/fixes</div>
+        <div style="width:375px;height:600px;overflow:hidden;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7;box-sizing:border-box">
+          <div style="height:56px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#FFFFFF;border-bottom:1px solid #E2E5EA;box-sizing:border-box">
+            <div style="width:44px;height:44px;border:1px solid #C6CBD3;border-radius:6px;display:flex;align-items:center;justify-content:center;font:500 14px/1 'JetBrains Mono',monospace">≡</div>
+            <div style="font:600 17px/1.35 'Source Serif 4',serif;letter-spacing:-.02em">Fix queue</div>
+          </div>
+          <div style="padding:16px 14px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+              <div style="font:600 17px/1.35 'Source Serif 4',serif">AI overview took the answer</div>
+              <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">31 queries</div>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:2px solid #C43D3D;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px">
+              <div style="font:600 17px/1.35 'Source Serif 4',serif">Add a direct answer block to /pricing</div>
+              <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Nine gap queries ask what it costs. The page answers in a table only — no sentence an engine can lift.</div>
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">
+                <div style="display:inline-flex;align-items:center;gap:6px"><span style="width:22px;height:22px;border-radius:999px;background:#EBEFF6;color:#34507A;display:flex;align-items:center;justify-content:center;font:500 10px/1 'JetBrains Mono',monospace">RK</span>Rida</div>
+                <div>9 queries</div>
+                <div style="color:#A62F2F">high</div>
+              </div>
+              <div style="display:flex;gap:8px;width:100%">
+                <div style="flex:1;min-height:44px;border-radius:6px;background:#0E7C66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Mark done</div>
+                <div style="flex:1;min-height:44px;border:1px solid #C6CBD3;border-radius:6px;display:flex;align-items:center;justify-content:center;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Snooze</div>
+              </div>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px">
+              <div style="font:600 17px/1.35 'Source Serif 4',serif">Answer "who is it for" on /for/agencies</div>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">
+                <div>verified</div><div style="color:#8A93A1">→</div>
+                <div style="color:#0B6151">12% → 48%</div>
+                <div style="color:#8A93A1">4 queries, 2 engines</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:375px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-bottom:7px">/reports/[id] &nbsp;locked</div>
+        <div style="width:375px;height:600px;overflow:hidden;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7;box-sizing:border-box">
+          <div style="height:56px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#FFFFFF;border-bottom:1px solid #E2E5EA;box-sizing:border-box">
+            <div style="width:44px;height:44px;border:1px solid #C6CBD3;border-radius:6px;display:flex;align-items:center;justify-content:center;font:500 14px/1 'JetBrains Mono',monospace">≡</div>
+            <div style="font:600 17px/1.35 'Source Serif 4',serif;letter-spacing:-.02em">July report</div>
+          </div>
+          <div style="padding:16px 14px;display:flex;flex-direction:column;gap:12px">
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px">
+              <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">month over month</div>
+              <div style="display:flex;align-items:baseline;gap:10px;margin-top:10px">
+                <div style="font:500 38px/1 'JetBrains Mono',monospace">34%</div>
+                <div style="font:400 12.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">from 31%</div>
+              </div>
+            </div>
+            <div style="position:relative;border:1.5px dashed #D8DCE3;border-radius:10px;overflow:hidden">
+              <div style="filter:blur(6px);padding:16px">
+                <div style="font:600 17px/1.35 'Source Serif 4',serif">Competitor share of citations</div>
+                <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+                  <div style="display:flex;align-items:center;gap:10px"><div style="width:74px;font:400 11px/1 'JetBrains Mono',monospace;color:#5B6472">ledger.io</div><div style="flex:1;height:10px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="width:70%;height:100%;background:#3E5C8A"></div></div></div>
+                  <div style="display:flex;align-items:center;gap:10px"><div style="width:74px;font:400 11px/1 'JetBrains Mono',monospace;color:#0B6151">acme.com</div><div style="flex:1;height:10px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="width:34%;height:100%;background:#0E7C66"></div></div></div>
+                  <div style="display:flex;align-items:center;gap:10px"><div style="width:74px;font:400 11px/1 'JetBrains Mono',monospace;color:#5B6472">billwise</div><div style="flex:1;height:10px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="width:22%;height:100%;background:#3E5C8A"></div></div></div>
+                </div>
+              </div>
+              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(244,245,247,.92));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px">
+                <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;background:#141B26;color:#FFFFFF;border-radius:999px;padding:5px 10px">team plan</div>
+                <div style="font:400 13px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">Competitor share needs the Team plan. Your own rate stays free.</div>
+                <div style="min-height:44px;border-radius:6px;background:#0E7C66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;padding:0 16px">See plans</div>
+              </div>
+            </div>
+            <div style="min-height:44px;border:1px solid #C6CBD3;border-radius:6px;display:flex;align-items:center;justify-content:center;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#FFFFFF">Download PDF</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:375px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-bottom:7px">/settings/billing</div>
+        <div style="width:375px;height:600px;overflow:hidden;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7;box-sizing:border-box">
+          <div style="height:56px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#FFFFFF;border-bottom:1px solid #E2E5EA;box-sizing:border-box">
+            <div style="width:44px;height:44px;border:1px solid #C6CBD3;border-radius:6px;display:flex;align-items:center;justify-content:center;font:500 14px/1 'JetBrains Mono',monospace">≡</div>
+            <div style="font:600 17px/1.35 'Source Serif 4',serif;letter-spacing:-.02em">Billing</div>
+          </div>
+          <div style="padding:16px 14px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;gap:8px;overflow:hidden">
+              <div style="font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#FFFFFF;background:#141B26;border-radius:999px;padding:8px 12px;white-space:nowrap">Billing</div>
+              <div style="font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;border:1px solid #E2E5EA;border-radius:999px;padding:8px 12px;white-space:nowrap">Team</div>
+              <div style="font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;border:1px solid #E2E5EA;border-radius:999px;padding:8px 12px;white-space:nowrap">Brand</div>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+                <div style="font:600 17px/1.35 'Source Serif 4',serif">Team · monthly</div>
+                <div style="font:500 13px/1.4 'JetBrains Mono',monospace">$149/mo</div>
+              </div>
+              <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">renews 2026-09-01 · Paddle</div>
+              <div style="height:1px;background:#E2E5EA"></div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;justify-content:space-between;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472"><span>tracked queries</span><span style="color:#141B26">168 / 200</span></div>
+                <div style="height:6px;border-radius:999px;background:#E2E5EA;overflow:hidden"><div style="width:84%;height:100%;background:#D98324;border-radius:999px"></div></div>
+                <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#9A6210">84% used — the next run will not add new queries.</div>
+              </div>
+              <div style="display:flex;gap:8px;width:100%">
+                <div style="flex:1;min-height:44px;border-radius:6px;background:#0E7C66;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Change plan</div>
+                <div style="flex:1;min-height:44px;border:1px solid #C6CBD3;border-radius:6px;display:flex;align-items:center;justify-content:center;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">Invoices</div>
+              </div>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+              <div style="padding:12px;border-bottom:1px solid #E2E5EA;display:flex;flex-direction:column;gap:2px">
+                <div style="font:400 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">2026-07-01</div>
+                <div style="display:flex;justify-content:space-between;font:400 12.5px/1.5 'JetBrains Mono',monospace"><span style="font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">amount</span><span>$149.00</span></div>
+              </div>
+              <div style="padding:12px;display:flex;flex-direction:column;gap:2px">
+                <div style="font:400 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">2026-06-01</div>
+                <div style="display:flex;justify-content:space-between;font:400 12.5px/1.5 'JetBrains Mono',monospace"><span style="font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">amount</span><span>$149.00</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:375px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1;margin-bottom:7px">/blog/[slug]</div>
+        <div style="width:375px;height:600px;overflow:hidden;border:1px solid #C6CBD3;border-radius:10px;background:#F4F5F7;box-sizing:border-box">
+          <div style="padding:28px 14px">
+            <div style="display:flex;align-items:center;gap:10px;font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">
+              <div>2026-07-16</div><div style="width:1px;height:12px;background:#C6CBD3"></div><div>9 min</div>
+            </div>
+            <div style="font:600 25px/1.2 'Source Serif 4',serif;letter-spacing:-.01em;margin-top:10px">Ranking first, cited never</div>
+            <div style="display:flex;flex-direction:column;gap:9px;border-left:1px solid #E2E5EA;padding-left:14px;margin-top:20px">
+              <div style="font:500 12px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#0B6151">The two-number problem</div>
+              <div style="font:500 12px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">What the engines actually lift</div>
+              <div style="font:500 12px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">Three runs, one conclusion</div>
+            </div>
+            <div style="font:400 16px/1.7 'Source Serif 4',serif;margin-top:20px;text-wrap:pretty">Two dashboards, same week. The rank tracker says position two. The answer engine names three competitors and not you. Both are true, and only one of them is a problem you can see.</div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px;margin-top:18px">
+              <div style="display:flex;align-items:flex-end;gap:8px;height:120px">
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;height:100%"><div style="height:64%;background:#0E7C66;border-radius:4px 4px 0 0"></div><div style="font:400 10.5px/1 'JetBrains Mono',monospace;color:#8A93A1;text-align:center">GPT</div></div>
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;height:100%"><div style="height:41%;background:#0E7C66;border-radius:4px 4px 0 0"></div><div style="font:400 10.5px/1 'JetBrains Mono',monospace;color:#8A93A1;text-align:center">PPX</div></div>
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;height:100%"><div style="height:28%;background:#3E5C8A;border-radius:4px 4px 0 0"></div><div style="font:400 10.5px/1 'JetBrains Mono',monospace;color:#8A93A1;text-align:center">AIO</div></div>
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;height:100%"><div style="height:18%;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px);border-radius:4px 4px 0 0"></div><div style="font:400 10.5px/1 'JetBrains Mono',monospace;color:#8A93A1;text-align:center">GEM</div></div>
+              </div>
+              <div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1;margin-top:12px">Citation rate by engine, 200 queries. Not a ranking.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="margin-top:36px;background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #D98324;border-radius:4px 10px 10px 4px;padding:22px 24px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#9A6210">STILL OPEN</div>
+    <div style="font:600 19px/1.3 'Source Serif 4',serif;margin-top:9px">One item, unchanged from last board</div>
+    <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:9px 0 0;max-width:88ch">Everything above is read from the built CSS and drawn to match it. What has not happened is a render pass in a real browser at 375, 768 and 1440 — the local run can do it in ten minutes once you have the repos open. Two things worth watching specifically: the nav drawer's fixed <span style="font-family:'JetBrains Mono',monospace;font-size:12px">inset: 64px</span> against iOS Safari's collapsing address bar, and the sticky table head inside the 639px card transform, which should be inert but has never been watched on a device.</p>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320},&quot;scope&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Everything&quot;,&quot;Marketing site&quot;,&quot;Dashboard&quot;],&quot;default&quot;:&quot;Everything&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Route matrix&quot;},&quot;showTreatment&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Route matrix&quot;},&quot;highlightNew&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Route matrix&quot;}}">
+const ROUTES = [
+  ["m", "/", "Home", "split 2-col", "split holds", "1-up", "1-up ↓type", "Scan field and button stack at 599. Hero 56 → 34 → 28px. Instrument card follows the copy instead of sitting beside it."],
+  ["m", "/pricing", "Plans + compare", "3-up + wide table", "3-up", "1-up", "1-up, price 36px", "Comparison table scrolls sideways below 900 rather than crushing five columns to nothing."],
+  ["m", "/how-it-works", "Method", "split figures", "split", "1-up", "1-up", "Figure captions stay mono 11.5px. Column charts drop 150 → 120px tall; bar gaps tighten to 8px."],
+  ["m", "/customers", "Proof", "3-up quotes", "3-up", "1-up", "1-up", "Logo strip wraps on gap. Quote cards lose 8px of padding at 375."],
+  ["m", "/about", "About", "prose + rail", "prose", "prose", "prose 16px", "68ch measure is already narrower than the viewport; only the type scale steps down."],
+  ["m", "/security", "Security", "2-up + table", "2-up", "1-up", "1-up", "Subprocessor table is a c-table--scroll, so it scrolls instead of wrapping cells."],
+  ["m", "/contact", "Contact", "split form", "split", "1-up", "1-up", "Inputs are 44px minimum everywhere. Intent pills wrap onto two rows."],
+  ["m", "/for/agencies", "Agency funnel", "split + 4-up", "split + 2-up", "1-up", "1-up", "Same page shell as in-house; only the copy differs, so the behaviour is identical."],
+  ["m", "/for/in-house", "In-house funnel", "split + 4-up", "split + 2-up", "1-up", "1-up", "Role pill group wraps rather than scrolling — three short labels fit two rows at 375."],
+  ["m", "/blog", "Index", "3-up cards", "2-up", "1-up", "1-up", "Category pills wrap. Post meta stays on one line down to 320px."],
+  ["m", "/blog/[slug]", "Post + TOC", "3-col w/ rail", "rail folds", "1-up", "1-up", "TOC unsticks and moves above the prose at 1199. MDX tables scroll at 599; code blocks lose padding."],
+  ["m", "/compare/[slug]", "Comparison", "3-col w/ rail", "rail folds", "1-up", "1-up", "Same article shell. The us-vs-them table is the scroll variant, never reflowed."],
+  ["m", "/changelog", "Changelog", "date + body", "date + body", "stacked", "stacked", "Date column collapses above the entry at 899 with a 12px gap."],
+  ["m", "/docs", "Docs shell", "248px rail", "rail", "rail on top", "rail on top", "Rail becomes a bordered block above the body at 991; body padding 64 → 40 → 28px."],
+  ["m", "/legal/[slug]", "Legal", "prose", "prose", "prose", "prose 15px", "Legal prose is UI sans at 15px for density; unaffected except gutter and headings."],
+  ["m", "/scan/[token]", "Free scan result", "split + table", "split", "1-up", "1-up", "Result table scrolls. Claim CTA is a full-width 48px target below the fold."],
+  ["a", "/sign-in", "Magic link", "440px card", "card", "card", "card, 16px pad", "Card padding 32 → 16px and radius tightens at 375. Google button is a 44px row."],
+  ["a", "/sign-up", "Sign up", "440px card", "card", "card", "card, 16px pad", "Identical shell to sign-in. Consent copy wraps to three lines at 375."],
+  ["a", "/check-email", "OTP + resend", "6 × 48px", "6 × 48px", "fluid boxes", "fluid, 44px cap", "The one real bug found: six fixed boxes overflowed every phone. They now flex and cap at 44px."],
+  ["a", "/claim/[token]", "Claim a scan", "440px card", "card", "card", "card", "Scan summary above the form keeps its cause bar; the bar is 10px and never wraps."],
+  ["a", "/invite/[token]", "Accept invite", "440px card", "card", "card", "card", "Role and workspace name stack under each other at 375 instead of sharing a row."],
+  ["a", "/onboarding/domain", "Step 1", "620px card", "card", "card", "full width", "Onboard max-width is released at 375 so the card uses the full gutter-to-gutter width."],
+  ["a", "/onboarding/connect", "Step 2", "620px card", "card", "card", "full width", "GSC connect row and the skip link stack. Progress dots wrap with the step label at 599."],
+  ["a", "/onboarding/queries", "Step 3 chips", "620px card", "card", "card", "full width", "Chip list is flex-wrap with 6px gaps at 375; each chip keeps a 34px hit height."],
+  ["a", "/overview", "Dashboard home", "12-col", "col → 12", "1-up", "1-up", "Score, cause bar, engine matrix and trend chart stack. Canvas 280 → 220 → 190px tall."],
+  ["a", "/queries", "Query table", "dense table", "table", "table", "labelled cards", "At 639 the table becomes cards: headers move into each row via data-label, no sideways scroll."],
+  ["a", "/competitors", "Share of citations", "12-col + bars", "col → 12", "1-up", "1-up", "Share row labels shrink 92 → 74px so the rail keeps a usable length on a phone."],
+  ["a", "/fixes", "Fix queue", "grouped cards", "cards", "cards", "cards, split CTAs", "Fix actions go full-width and split the row evenly. Proof block wraps instead of clipping."],
+  ["a", "/reports", "Report list", "table", "table", "table", "labelled cards", "Same 639 transform as queries — month, engines and status become labelled rows."],
+  ["a", "/reports/[id]", "Report detail", "12-col", "col → 12", "1-up", "1-up", "Locked veils keep badge and reason at 375; the blur never hides the sentence explaining the gate."],
+  ["a", "/settings", "Settings index", "12-col", "col → 12", "1-up", "1-up", "Settings tabs are pills that scroll horizontally rather than wrapping into three rows."],
+  ["a", "/settings/billing", "Plan + quota", "12-col", "col → 12", "1-up", "1-up", "Quota meter keeps its 6px rail. Invoice table becomes cards at 639."],
+  ["a", "/settings/brand", "White-label", "12-col + preview", "col → 12", "1-up", "1-up", "PDF preview scales on width and is never the only way to check the accent colour."],
+  ["a", "/settings/email", "Digest settings", "12-col", "col → 12", "1-up", "1-up", "Toggle rows are 44px. Send-time select stays a native control on mobile."],
+  ["a", "/settings/team", "Members", "table", "table", "table", "labelled cards", "Role and last-seen become labelled rows. Invite form stacks at 599."],
+  ["a", "/settings/workspaces", "Agency switcher", "table", "table", "table", "labelled cards", "Long client lists are the agency case; the card transform is what makes it usable on a phone."],
+  ["a", "/404", "Not found", "centred", "centred", "centred", "centred", "Auth-style centred block, no shell. Nothing to reflow."],
+  ["a", "/500", "Error", "centred", "centred", "centred", "centred", "Static, inlined critical CSS only — it must render even if the stylesheet fails."],
+];
+
+class Component extends DCLogic {
+  renderVals() {
+    const scope = this.props.scope ?? "Everything";
+    const want = scope === "Marketing site" ? "m" : scope === "Dashboard" ? "a" : null;
+    const showNote = this.props.showTreatment ?? true;
+    const rows = ROUTES.filter(r => !want || r[0] === want).map(r => ({
+      route: r[1], name: r[2], a: r[3], b: r[4], c: r[5], d: r[6],
+      note: showNote ? r[7] : "",
+    }));
+    return {
+      rows,
+      shownCount: rows.length,
+      scopeLabel: scope.toLowerCase(),
+      highlightNew: this.props.highlightNew ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>

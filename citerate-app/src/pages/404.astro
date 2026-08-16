@@ -1,0 +1,13 @@
+---
+/** 404. Phase 4 screen 31: the reassurance ("your data is fine") is the content. */
+import Auth from "../layouts/Auth.astro";
+---
+
+<Auth title="Page not found">
+  <span class="t-data-sm" style="color:var(--ink-muted)">error 404</span>
+  <h1 class="auth__title">That page isn't here.</h1>
+  <p class="auth__sub">
+    The link may be old, or the workspace it pointed at may have moved. Your scans and data are untouched.
+  </p>
+  <a class="btn-primary-c btn-primary-c--lg" href="/overview" style="text-align:center">Back to the readout</a>
+</Auth>

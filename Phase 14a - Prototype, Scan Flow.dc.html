@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./citerate-session.js"></script><script src="./citerate-seed.js"></script><script src="./citerate-breakpoints.js"></script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EDEFF2;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+@keyframes proto-pulse{0%,100%{opacity:.35}50%{opacity:1}}
+</style></helmet>
+
+<div style="display:grid;grid-template-columns:288px minmax(0,1fr);min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="background:#141B26;color:#F4F5F7;padding:22px 18px;display:flex;flex-direction:column;gap:20px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#35B394">Phase 14a · prototype</div>
+      <div style="font:600 19px/1.3 'Source Serif 4',serif;margin-top:8px">Free scan → claim</div>
+      <p style="font:400 12px/1.55 inherit;color:#8A93A1;margin:6px 0 0">Clickable. Type a domain, run the scan, read the result, claim it. Every button on the path works; anything out of scope for this phase says so when you press it.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">viewport</div>
+      <div style="display:flex;gap:6px">
+        <button type="button" onClick="{{ setPhone }}" style="flex:1;min-height:36px;border:1px solid rgba(255,255,255,.14);border-radius:6px;background:{{ phoneBg }};color:#F4F5F7;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Phone 375</button>
+        <button type="button" onClick="{{ setDesktop }}" style="flex:1;min-height:36px;border:1px solid rgba(255,255,255,.14);border-radius:6px;background:{{ deskBg }};color:#F4F5F7;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Desktop</button>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">flow · 4 steps</div>
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+        <button type="button" onClick="{{ s.go }}" style="display:flex;align-items:center;gap:10px;text-align:left;width:100%;min-height:44px;padding:8px 10px;border:0;border-radius:6px;background:{{ s.bg }};color:#F4F5F7;cursor:pointer;box-shadow:{{ s.shadow }}">
+          <span style="flex:none;width:18px;height:18px;border-radius:999px;border:1px solid {{ s.dotLine }};background:{{ s.dot }};display:flex;align-items:center;justify-content:center;font:500 9px/1 'JetBrains Mono',monospace;color:#141B26">{{ s.tick }}</span>
+          <span style="min-width:0">
+            <span style="display:block;font:400 12.5px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">{{ s.label }}</span>
+            <span style="display:block;font:400 10.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1;margin-top:2px">{{ s.route }}</span>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">also in this phase</div>
+      <button type="button" onClick="{{ goPricing }}" style="text-align:left;width:100%;min-height:40px;padding:8px 10px;border:0;border-radius:6px;background:{{ pricingBg }};color:#F4F5F7;font:400 12.5px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Pricing <span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">/pricing</span></button>
+      <button type="button" onClick="{{ goMethod }}" style="text-align:left;width:100%;min-height:40px;padding:8px 10px;border:0;border-radius:6px;background:{{ methodBg }};color:#F4F5F7;font:400 12.5px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">How it works <span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">/how-it-works</span></button>
+    </div>
+
+    <div style="margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-direction:column;gap:10px">
+      <div style="font:400 11px/1.6 'JetBrains Mono',monospace;color:#8A93A1">state<br>domain <span style="color:#F4F5F7">{{ domainState }}</span><br>scan <span style="color:#F4F5F7">{{ scanState }}</span><br>claim <span style="color:#F4F5F7">{{ claimState }}</span></div>
+      <button type="button" onClick="{{ reset }}" style="min-height:36px;border:1px solid rgba(255,255,255,.14);border-radius:6px;background:transparent;color:#F4F5F7;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Reset prototype</button>
+    </div>
+  </div>
+
+  <div style="padding:26px 30px 60px;display:flex;flex-direction:column;align-items:center;gap:14px;min-width:0">
+    <div style="width:100%;max-width:1180px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <div style="font:400 12px/1 'JetBrains Mono',monospace;color:#5B6472;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:9px 14px">{{ routeLabel }}</div>
+      <div style="font:400 12px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">{{ stageNote }}</div>
+      <sc-if value="{{ toast }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-left:auto;font:400 12px/1.4 'JetBrains Mono',monospace;color:#9A6210;background:#FDF2E3;border:1px solid #F5E3C4;border-radius:6px;padding:8px 12px">{{ toast }}</div>
+      </sc-if>
+    </div>
+
+    <div style="width:100%;max-width:{{ stageMax }};--proto-gut:{{ gut }};--proto-hero:{{ vHero }};--proto-hero-lh:{{ vHeroLh }};--proto-h1:{{ vH1 }};--proto-h1-lh:{{ vH1Lh }};--proto-num:{{ vNum }};--proto-form-dir:{{ vFormDir }};--proto-btn-w:{{ vBtnW }};background:#F4F5F7;border:1px solid #C6CBD3;border-radius:{{ stageRadius }};overflow:hidden;box-shadow:0 12px 32px rgba(20,27,38,.14);box-sizing:border-box">
+
+      <div style="height:56px;display:flex;align-items:center;gap:12px;padding:0 16px;background:#FFFFFF;border-bottom:1px solid #E2E5EA;box-sizing:border-box">
+        <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+          <span style="display:flex;gap:6px"><span style="width:10px;height:10px;border-radius:999px;background:#E2E5EA"></span><span style="width:10px;height:10px;border-radius:999px;background:#E2E5EA"></span><span style="width:10px;height:10px;border-radius:999px;background:#E2E5EA"></span></span>
+        </sc-if>
+        <div style="flex:1;min-width:0;height:32px;border-radius:999px;background:#F4F5F7;border:1px solid #E2E5EA;display:flex;align-items:center;padding:0 12px;font:400 11.5px/1 'JetBrains Mono',monospace;color:#5B6472;overflow:hidden;white-space:nowrap">citerate.com{{ route }}</div>
+      </div>
+
+      <sc-if value="{{ onHome }}" hint-placeholder-val="{{ true }}">
+        <div style="min-height:520px">
+          <div style="height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--proto-gut,24px);border-bottom:1px solid #E2E5EA;background:rgba(244,245,247,.9);box-sizing:border-box">
+            <div style="display:flex;align-items:center;gap:9px;font:600 20px/1 'Source Serif 4',serif"><span style="width:12px;height:12px;background:#0E7C66;border-radius:3px"></span>Citerate</div>
+            <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;align-items:center;gap:26px;font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">
+                <button type="button" onClick="{{ goMethod }}" style="border:0;background:none;font:inherit;color:inherit;cursor:pointer;padding:0">How it works</button>
+                <button type="button" onClick="{{ goPricing }}" style="border:0;background:none;font:inherit;color:inherit;cursor:pointer;padding:0">Pricing</button>
+                <button type="button" onClick="{{ notYet }}" style="border:0;background:none;font:inherit;color:inherit;cursor:pointer;padding:0">For agencies</button>
+                <button type="button" onClick="{{ notYet }}" style="border:0;background:none;font:inherit;color:inherit;cursor:pointer;padding:0">Blog</button>
+                <button type="button" onClick="{{ notYet }}" style="border:1px solid #C6CBD3;border-radius:6px;padding:9px 13px;background:none;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;cursor:pointer">Sign in</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ isPhone }}" hint-placeholder-val="{{ true }}">
+              <button type="button" onClick="{{ toggleDrawer }}" style="border:1px solid #C6CBD3;border-radius:6px;padding:9px 12px;background:none;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;cursor:pointer">{{ drawerLabel }}</button>
+            </sc-if>
+          </div>
+
+          <sc-if value="{{ drawerOpen }}" hint-placeholder-val="{{ true }}">
+            <div style="background:#FFFFFF;border-bottom:1px solid #E2E5EA;padding:8px 14px 20px;box-shadow:0 2px 8px rgba(20,27,38,.07)">
+              <button type="button" onClick="{{ goMethod }}" style="display:block;width:100%;text-align:left;min-height:48px;padding:14px 0;border:0;border-bottom:1px solid #E2E5EA;background:none;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;cursor:pointer">How it works</button>
+              <button type="button" onClick="{{ goPricing }}" style="display:block;width:100%;text-align:left;min-height:48px;padding:14px 0;border:0;border-bottom:1px solid #E2E5EA;background:none;font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;cursor:pointer">Pricing</button>
+              <button type="button" onClick="{{ notYet }}" style="display:block;width:100%;text-align:left;min-height:48px;padding:14px 0;border:0;border-bottom:1px solid #E2E5EA;background:none;font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;cursor:pointer">For agencies</button>
+              <button type="button" onClick="{{ notYet }}" style="display:block;width:100%;text-align:left;min-height:48px;padding:14px 0;border:0;background:none;font:400 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;cursor:pointer">Sign in</button>
+            </div>
+          </sc-if>
+
+          <div style="padding:44px var(--proto-gut,24px);display:grid;gap:34px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start">
+            <div>
+              <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">01 · the question</div>
+              <h1 style="font:600 var(--proto-hero,44px)/var(--proto-hero-lh,1.06) 'Source Serif 4',serif;letter-spacing:-.02em;margin:12px 0 0;text-wrap:pretty">Does ChatGPT cite you when it answers your buyers?</h1>
+              <p style="font:400 16px/1.55 inherit;color:#5B6472;margin:14px 0 0;max-width:56ch;text-wrap:pretty">Ranking first and being cited are different problems. Citerate measures the second one — weekly, across four engines, with the reason attached to every gap.</p>
+              <div style="display:flex;flex-direction:var(--proto-form-dir,row);flex-wrap:wrap;gap:10px;margin-top:24px">
+                <input type="text" value="{{ domain }}" onChange="{{ onDomain }}" placeholder="yourdomain.com" style="flex:1;min-width:200px;height:52px;border:1px solid #C6CBD3;border-radius:6px;padding:0 16px;background:#FFFFFF;font:400 14px/1 'JetBrains Mono',monospace;color:#141B26;box-sizing:border-box">
+                <button type="button" onClick="{{ runScan }}" style="height:52px;width:var(--proto-btn-w,auto);padding:0 22px;border:0;border-radius:6px;background:#0E7C66;color:#FFFFFF;font:500 15px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer;white-space:nowrap">{{ scanCta }}</button>
+              </div>
+              <div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1;margin-top:14px">25 queries · 2 engines · no account · one scan per domain per day</div>
+              <sc-if value="{{ formError }}" hint-placeholder-val="{{ true }}">
+                <div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#A62F2F;background:#FBEDED;border-radius:6px;padding:8px 12px;margin-top:10px">{{ formError }}</div>
+              </sc-if>
+            </div>
+
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+                <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">{{ instrumentLabel }}</div>
+                <sc-if value="{{ scanning }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;flex-direction:column;gap:6px;width:150px">
+                    <div style="height:4px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="width:{{ progressPct }};height:100%;background:#0E7C66;transition:width .42s cubic-bezier(.16,.84,.44,1)"></div></div>
+                    <div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">{{ progressLabel }}</div>
+                  </div>
+                </sc-if>
+              </div>
+              <sc-for list="{{ liveRows }}" as="row" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;font:400 12.5px/1.6 'JetBrains Mono',monospace;opacity:{{ row.opacity }}">
+                  <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#5B6472">{{ row.q }}</span>
+                  <span style="flex:none;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:{{ row.color }}">{{ row.verdict }}</span>
+                </div>
+              </sc-for>
+              <div style="height:1px;background:#E2E5EA"></div>
+              <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">{{ instrumentFoot }}</div>
+            </div>
+          </div>
+
+          <div style="padding:0 var(--proto-gut,24px) 48px">
+            <div style="background:#141B26;border-radius:10px;padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;color:#F4F5F7">
+              <div>
+                <div style="font:600 20px/1.35 'Source Serif 4',serif">Weekly, not once</div>
+                <div style="font:400 13px/1.55 inherit;color:#8A93A1;margin-top:6px;max-width:52ch">A single scan is a snapshot. The paid plans re-run every week and tell you which fix moved the number.</div>
+              </div>
+              <button type="button" onClick="{{ goPricing }}" style="border:0;border-radius:6px;background:#0E7C66;color:#FFFFFF;min-height:44px;padding:0 20px;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">See plans</button>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ onResult }}" hint-placeholder-val="{{ true }}">
+        <div style="min-height:520px;padding:36px var(--proto-gut,24px) 48px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">scan · 25 queries · 2 engines · {{ scanDate }}</div>
+          <h1 style="font:600 var(--proto-h1,34px)/var(--proto-h1-lh,1.15) 'Source Serif 4',serif;letter-spacing:-.015em;margin:12px 0 0;text-wrap:pretty">{{ resultHeadline }}</h1>
+          <p style="font:400 14px/1.55 inherit;color:#5B6472;margin:10px 0 0;max-width:66ch">This is twenty-five queries on two engines, run once. It is enough to see the shape of the problem and not enough to call a trend — the confidence band is wide on purpose.</p>
+
+          <div style="display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:26px;align-items:start">
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px">
+              <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">citation rate</div>
+              <div style="display:flex;align-items:baseline;gap:10px;margin-top:12px">
+                <div style="font:500 var(--proto-num,48px)/1 'JetBrains Mono',monospace;letter-spacing:-.02em">{{ rate }}<span style="font-size:.44em;color:#8A93A1">%</span></div>
+                <div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1">±8 band</div>
+              </div>
+              <div style="font:400 13px/1.55 inherit;color:#5B6472;margin-top:10px">Eight of twenty-five answers named {{ domainShown }}.</div>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px">
+              <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">why the other 69%</div>
+              <div style="display:flex;height:22px;border-radius:4px;overflow:hidden;gap:2px;margin-top:14px">
+                <div style="flex:4;background:#C43D3D"></div><div style="flex:3;background:#D98324"></div><div style="flex:2;background:#3E5C8A"></div><div style="flex:1;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></div>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:12px;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">
+                <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:2px;background:#C43D3D"></span>AI overview 40%</span>
+                <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:2px;background:#D98324"></span>Rank 30%</span>
+                <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:2px;background:#3E5C8A"></span>Technical 20%</span>
+                <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:2px;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></span>Other 10%</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden;margin-top:14px">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) 88px 96px;gap:12px;padding:12px 20px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472">
+              <div>query</div><div>engine</div><div>verdict</div>
+            </div>
+            <sc-for list="{{ resultRows }}" as="row" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) 88px 96px;gap:12px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 12.5px/1.5 'JetBrains Mono',monospace;background:{{ row.bg }};align-items:baseline">
+                <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#141B26">{{ row.q }}</div>
+                <div style="color:#5B6472">{{ row.engine }}</div>
+                <div style="font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:{{ row.color }}">{{ row.verdict }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <sc-if value="{{ notClaimed }}" hint-placeholder-val="{{ true }}">
+            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:2px solid #0E7C66;border-radius:10px;padding:24px 26px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+              <div>
+                <div style="font:600 20px/1.35 'Source Serif 4',serif">Keep this scan</div>
+                <div style="font:400 13px/1.55 inherit;color:#5B6472;margin-top:6px;max-width:54ch">Claiming saves the run to an account so next week's number has something to compare against. The link expires in seven days.</div>
+              </div>
+              <button type="button" onClick="{{ claim }}" style="border:0;border-radius:6px;background:#0E7C66;color:#FFFFFF;min-height:48px;padding:0 22px;font:500 15px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Claim this scan</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ claimed }}" hint-placeholder-val="{{ true }}">
+            <div style="background:#E7F2EF;border:1px solid #0E7C66;border-radius:10px;padding:22px 24px;margin-top:20px">
+              <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#0B6151">claimed</div>
+              <div style="font:600 20px/1.35 'Source Serif 4',serif;margin-top:8px">Scan saved to {{ domainShown }}</div>
+              <div style="font:400 13px/1.55 inherit;color:#5B6472;margin-top:6px;max-width:60ch">In the real build this is where the magic-link email lands and the flow continues into sign-up and onboarding. That is Phase 14b — this prototype stops here on purpose rather than faking a screen that does not exist yet.</div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ onPricing }}" hint-placeholder-val="{{ true }}">
+        <div style="min-height:520px;padding:36px var(--proto-gut,24px) 48px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">plans</div>
+          <h1 style="font:600 var(--proto-h1,34px)/var(--proto-h1-lh,1.15) 'Source Serif 4',serif;letter-spacing:-.015em;margin:12px 0 0">One number, priced by how many queries you watch</h1>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:20px">
+            <button type="button" onClick="{{ setMonthly }}" style="border:1px solid {{ monthlyLine }};background:{{ monthlyBg }};color:{{ monthlyInk }};border-radius:999px;min-height:36px;padding:0 14px;font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Monthly</button>
+            <button type="button" onClick="{{ setYearly }}" style="border:1px solid {{ yearlyLine }};background:{{ yearlyBg }};color:{{ yearlyInk }};border-radius:999px;min-height:36px;padding:0 14px;font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Yearly · 2 months free</button>
+          </div>
+          <div style="display:grid;gap:24px 14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:28px;align-items:start">
+            <sc-for list="{{ plans }}" as="p" hint-placeholder-count="3">
+              <div style="background:#FFFFFF;border:{{ p.border }};border-radius:10px;padding:26px 26px 28px;display:flex;flex-direction:column;gap:16px;position:relative">
+                <sc-if value="{{ p.flag }}" hint-placeholder-val="{{ true }}">
+                  <div style="position:absolute;top:-11px;left:26px;font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#FFFFFF;background:#0E7C66;border-radius:999px;padding:6px 11px">{{ p.flag }}</div>
+                </sc-if>
+                <div style="font:600 20px/1.35 'Source Serif 4',serif">{{ p.name }}</div>
+                <div style="display:flex;align-items:flex-end;gap:6px">
+                  <div style="font:500 var(--proto-num,48px)/1 'JetBrains Mono',monospace;letter-spacing:-.02em">{{ p.price }}</div>
+                  <div style="font:500 13px/1.4 'JetBrains Mono',monospace;color:#8A93A1;padding-bottom:8px">{{ p.per }}</div>
+                </div>
+                <div style="font:400 13px/1.5 inherit;color:#5B6472">{{ p.who }}</div>
+                <div style="height:1px;background:#E2E5EA"></div>
+                <div style="display:flex;flex-direction:column;gap:8px;font:400 13px/1.5 inherit">
+                  <div>{{ p.f1 }}</div><div>{{ p.f2 }}</div><div>{{ p.f3 }}</div>
+                  <sc-if value="{{ p.f4 }}" hint-placeholder-val="{{ true }}"><div style="color:#0B6151">{{ p.f4 }}</div></sc-if>
+                </div>
+                <button type="button" onClick="{{ notYet }}" style="margin-top:auto;border:{{ p.ctaBorder }};border-radius:6px;background:{{ p.ctaBg }};color:{{ p.ctaInk }};min-height:44px;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">{{ p.cta }}</button>
+              </div>
+            </sc-for>
+          </div>
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 24px;margin-top:24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+            <div style="flex:1;min-width:0;font:400 13px/1.5 inherit;color:#5B6472">Not ready to pick? The free scan runs twenty-five queries once, no account. It is the same engine and the same scoring as the paid runs.</div>
+            <button type="button" onClick="{{ goHome }}" style="border:1px solid #C6CBD3;border-radius:6px;background:none;min-height:44px;padding:0 18px;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;cursor:pointer">Run a free scan</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ onMethod }}" hint-placeholder-val="{{ true }}">
+        <div style="min-height:520px;padding:36px var(--proto-gut,24px) 48px">
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">method</div>
+          <h1 style="font:600 var(--proto-h1,34px)/var(--proto-h1-lh,1.15) 'Source Serif 4',serif;letter-spacing:-.015em;margin:12px 0 0">How the number is produced</h1>
+          <p style="font:400 16px/1.55 inherit;color:#5B6472;margin:12px 0 0;max-width:66ch;text-wrap:pretty">Four steps, stated plainly, because a score nobody can audit is a score nobody should act on.</p>
+          <div style="display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:26px">
+            <sc-for list="{{ methodSteps }}" as="m" hint-placeholder-count="4">
+              <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid {{ m.rule }};border-radius:10px;padding:22px 24px">
+                <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">{{ m.num }}</div>
+                <div style="font:600 20px/1.35 'Source Serif 4',serif;margin-top:9px">{{ m.title }}</div>
+                <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:9px 0 0">{{ m.body }}</p>
+              </div>
+            </sc-for>
+          </div>
+          <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:24px 26px;margin-top:20px">
+            <div style="font:600 20px/1.35 'Source Serif 4',serif">What it is not</div>
+            <div style="display:flex;flex-direction:column;gap:9px;margin-top:12px;font:400 13px/1.6 inherit;color:#5B6472">
+              <div>Not a ranking. Position and citation are measured separately and reported separately.</div>
+              <div>Not a live feed. Engines are sampled on a weekly schedule; a run is a run, dated and immutable.</div>
+              <div>Not an average of averages. Every rate is computed from raw answers, so a method change never silently rewrites history — it is flagged on the chart instead.</div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+
+    <div style="width:100%;max-width:1180px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1">Phase 14a covers the scan path, pricing and method. Auth, onboarding, dashboard, reports, settings and the remaining marketing pages arrive in 14b–14e; buttons outside this phase say so rather than dead-ending.</div>
+  </div>
+
+</div>
+<dc-import name="Session Bar" phase="14a" hint-size="620px,44px" style="position:fixed;left:16px;bottom:16px;z-index:80;max-width:calc(100vw - 32px)"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1480}}">
+const QUERIES = [
+  ["best crm for startups", "ChatGPT", "gap"],
+  ["hubspot alternatives", "Perplexity", "gap"],
+  ["crm with free tier", "ChatGPT", "cited"],
+  ["crm for a 10 person team", "AI overview", "gap"],
+  ["cheapest crm for a small team", "Gemini", "gap"],
+  ["how to migrate crm data", "ChatGPT", "cited"],
+];
+// The free scan tracks 25 queries on two engines (src/data/pricing.json); the
+// six above are the sample the readout shows while the rest run.
+const freePlan = () => (window.CiterateSeed ? window.CiterateSeed.PLANS.free : { queries: 25 });
+const VERDICT_INK = { cited: "#0B6151", gap: "#A62F2F", pending: "#8A93A1" };
+
+class Component extends DCLogic {
+  sess(p) { if (window.CiterateSession) window.CiterateSession.patch(p); }
+  componentDidMount() {
+    const boot = () => {
+      if (!window.CiterateSession) return setTimeout(boot, 40);
+      const S = window.CiterateSession.get();
+      window.CiterateSession.patch({ lastPhase: "14a" });
+      const p = {};
+      if (S.domain) p.domain = S.domain;
+      if (S.claimed) { p.claimed = true; p.scanned = true; p.done = freePlan().queries; p.screen = "result"; }
+      else if (S.scanned) { p.scanned = true; p.done = freePlan().queries; }
+      if (Object.keys(p).length) this.setState(p);
+    };
+    boot();
+  }
+  state = {
+    screen: "home", vw: "desktop", domain: "acmecrm.com", drawerOpen: false,
+    scanning: false, scanned: false, done: 0, claimed: false, period: "monthly",
+    toast: "", formError: "",
+  };
+
+  componentWillUnmount() { clearInterval(this.timer); }
+
+  flash(msg) {
+    this.setState({ toast: msg });
+    clearTimeout(this.toastTimer);
+    this.toastTimer = setTimeout(() => this.setState({ toast: "" }), 2600);
+  }
+
+  go(screen) { this.setState({ screen, drawerOpen: false }); }
+
+  startScan = () => {
+    const d = (this.state.domain || "").trim();
+    if (!/^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$/i.test(d)) {
+      this.setState({ formError: "That does not look like a domain. Try acmecrm.com." });
+      return;
+    }
+    clearInterval(this.timer);
+    this.setState({ scanning: true, scanned: false, done: 0, claimed: false, formError: "" });
+    this.sess({ domain: d, scanned: false, claimed: false });
+    this.timer = setInterval(() => {
+      this.setState(st => {
+        const total = freePlan().queries;
+        const next = st.done + 1;
+        if (next >= total) {
+          clearInterval(this.timer);
+          this.sess({ scanned: true });
+          return { done: total, scanning: false, scanned: true, screen: "result" };
+        }
+        return { done: next };
+      });
+    }, 260);
+  };
+
+  renderVals() {
+    const s = this.state;
+    const isPhone = s.vw === "phone";
+    const stepAt = { domain: "home", scan: "home", result: "result", claim: "result" };
+    const stepDone = { domain: !!s.domain, scan: s.scanned, result: s.scanned, claim: s.claimed };
+    const steps = [
+      ["domain", "Enter a domain", "/"],
+      ["scan", "Run the scan", "/api/scan"],
+      ["result", "Read the result", "/scan/[token]"],
+      ["claim", "Claim it", "/api/claim"],
+    ].map(([k, label, route]) => {
+      const active = s.screen === stepAt[k];
+      return {
+        label, route, go: () => this.go(stepAt[k]),
+        bg: active ? "rgba(255,255,255,.10)" : "transparent",
+        shadow: active ? "inset 2px 0 0 #35B394" : "none",
+        dot: stepDone[k] ? "#35B394" : "transparent",
+        dotLine: stepDone[k] ? "#35B394" : "rgba(255,255,255,.22)",
+        tick: stepDone[k] ? "✓" : "",
+      };
+    });
+
+    const liveRows = QUERIES.map((q, i) => {
+      const revealed = s.scanned || i < s.done;
+      const verdict = revealed ? q[2] : "waiting";
+      return {
+        q: q[0], verdict,
+        color: VERDICT_INK[revealed ? q[2] : "pending"],
+        opacity: revealed ? 1 : 0.45,
+      };
+    });
+
+    const resultRows = QUERIES.map((q, i) => ({
+      q: q[0], engine: q[1], verdict: q[2],
+      color: VERDICT_INK[q[2]], bg: i % 2 ? "#F4F5F7" : "#FFFFFF",
+    }));
+
+    const yearly = s.period === "yearly";
+    const CS = window.CiterateSeed;
+    const P = CS ? CS.PLANS : null;
+    const money = (id) => (CS ? CS.price(id, yearly ? "year" : "month") : "");
+    const plans = P ? [
+      { name: P.free.label, price: "$0", per: "once", who: "One domain, 25 queries, two engines, no account.",
+        f1: P.free.queries + " queries, one run", f2: "Two engines", f3: "Cause breakdown", f4: "",
+        cta: "Run a scan", flag: "", border: "1px solid #E2E5EA",
+        ctaBg: "none", ctaInk: "#141B26", ctaBorder: "1px solid #C6CBD3" },
+      { name: P.starter.label, price: money("starter"), per: yearly ? "/mo billed yearly" : "/mo",
+        who: "One brand, one person, weekly rhythm.",
+        f1: P.starter.queries + " tracked queries", f2: "2 engines, weekly refresh", f3: "90 day history, top 10 fixes",
+        f4: "Competitor names locked", cta: "Start with a free scan", flag: "",
+        border: "1px solid #E2E5EA", ctaBg: "none", ctaInk: "#141B26", ctaBorder: "1px solid #C6CBD3" },
+      { name: P.growth.label, price: money("growth"), per: yearly ? "/mo billed yearly" : "/mo",
+        who: "The first plan that names who is winning instead of only that you are losing.",
+        f1: P.growth.queries + " queries, " + P.growth.domains + " domains", f2: "4 engines, daily refresh", f3: "Fix queue with owners",
+        f4: "12 month history, PDF reports", cta: "Start with a free scan", flag: "most teams land here",
+        border: "2px solid #0E7C66", ctaBg: "#0E7C66", ctaInk: "#FFFFFF", ctaBorder: "0" },
+      { name: P.scale.label, price: money("scale"), per: yearly ? "/mo billed yearly" : "/mo",
+        who: "Several brands, several markets, and a monthly report upward.",
+        f1: "2,000 queries, 10 domains", f2: "All engines, daily plus on demand", f3: "Unlimited history and exports",
+        f4: "White label PDF, write API", cta: "Start with a free scan", flag: "",
+        border: "1px solid #E2E5EA", ctaBg: "none", ctaInk: "#141B26", ctaBorder: "1px solid #C6CBD3" },
+    ] : [];
+
+    const methodSteps = [
+      { num: "01", rule: "#3E5C8A", title: "Build the query set", body: "Your buyers' questions, drafted from the site and your own words, then edited by you. Nothing is tracked that you did not approve." },
+      { num: "02", rule: "#0E7C66", title: "Ask the engines", body: "Each query goes to four answer engines on a weekly schedule, from a clean session with no personalisation." },
+      { num: "03", rule: "#D98324", title: "Read the answer", body: "We record whether your domain is named or linked, which sources were used instead, and where you sat in the answer." },
+      { num: "04", rule: "#C43D3D", title: "Attribute the gap", body: "Every miss gets one of four causes — AI overview, rank, technical, other — so the fix queue has somewhere to send it." },
+    ];
+
+    const routes = { home: "/", result: "/scan/s_8f2a10", pricing: "/pricing", method: "/how-it-works" };
+    const notes = {
+      home: "Type a domain and press the button — the scan runs for real, on a timer.",
+      result: "Reached by finishing a scan. The claim button changes state and stops there, honestly.",
+      pricing: "The period toggle recalculates every paid plan.",
+      method: "Static page. Included because the funnel reads it before it trusts the number.",
+    };
+
+    return {
+      steps, liveRows, resultRows, plans, methodSteps,
+      route: routes[s.screen], routeLabel: routes[s.screen], stageNote: notes[s.screen],
+      toast: s.toast, formError: s.formError,
+      isPhone, isDesktop: !isPhone,
+      ...(window.CiterateBreakpoints ? window.CiterateBreakpoints.protoVars("site", isPhone) : {}),
+      phoneBg: isPhone ? "rgba(255,255,255,.14)" : "transparent",
+      deskBg: isPhone ? "transparent" : "rgba(255,255,255,.14)",
+      setPhone: () => this.setState({ vw: "phone" }),
+      setDesktop: () => this.setState({ vw: "desktop", drawerOpen: false }),
+      onHome: s.screen === "home", onResult: s.screen === "result",
+      onPricing: s.screen === "pricing", onMethod: s.screen === "method",
+      goHome: () => this.go("home"), goPricing: () => this.go("pricing"), goMethod: () => this.go("method"),
+      pricingBg: s.screen === "pricing" ? "rgba(255,255,255,.10)" : "transparent",
+      methodBg: s.screen === "method" ? "rgba(255,255,255,.10)" : "transparent",
+      drawerOpen: isPhone && s.drawerOpen,
+      drawerLabel: s.drawerOpen ? "Close" : "Menu",
+      toggleDrawer: () => this.setState({ drawerOpen: !s.drawerOpen }),
+      domain: s.domain, domainShown: s.domain || "your domain",
+      onDomain: (e) => this.setState({ domain: e.target.value, formError: "" }),
+      runScan: this.startScan,
+      scanCta: s.scanning ? "Scanning…" : s.scanned ? "Run it again" : "Run a free scan",
+      scanning: s.scanning,
+      progressPct: Math.round((s.done / freePlan().queries) * 100) + "%",
+      progressLabel: s.done + " of " + freePlan().queries + " queries",
+      instrumentLabel: s.scanning ? "live scan" : s.scanned ? "last scan" : "sample scan",
+      instrumentFoot: s.scanned
+        ? "8 of 25 answers named you. Full result on the scan page."
+        : "This is a real sample from another domain until you run your own.",
+      rate: window.CiterateSeed ? window.CiterateSeed.pct(window.CiterateSeed.SEED.rollup.rate) : 34,
+      resultHeadline: (s.domain || "your domain") + " is cited in " + (window.CiterateSeed ? window.CiterateSeed.pct(window.CiterateSeed.SEED.rollup.rate) : 34) + "% of buyer answers",
+      scanDate: "2026-08-03",
+      notClaimed: !s.claimed, claimed: s.claimed,
+      claim: () => { this.setState({ claimed: true }); this.sess({ claimed: true, domain: s.domain }); this.flash("Claimed. Phase 14b picks this domain up from the shared session."); },
+      period: s.period,
+      setMonthly: () => this.setState({ period: "monthly" }),
+      setYearly: () => this.setState({ period: "yearly" }),
+      monthlyBg: yearly ? "transparent" : "#141B26",
+      monthlyInk: yearly ? "#5B6472" : "#FFFFFF",
+      monthlyLine: yearly ? "#E2E5EA" : "#141B26",
+      yearlyBg: yearly ? "#141B26" : "transparent",
+      yearlyInk: yearly ? "#FFFFFF" : "#5B6472",
+      yearlyLine: yearly ? "#141B26" : "#E2E5EA",
+      domainState: s.domain || "—",
+      scanState: s.scanning ? "running" : s.scanned ? "complete" : "not run",
+      claimState: s.claimed ? "claimed" : "open",
+      notYet: () => this.flash("That screen arrives in a later phase (14b–14e)."),
+      reset: () => { clearInterval(this.timer); this.setState({ screen: "home", domain: "acmecrm.com", scanning: false, scanned: false, done: 0, claimed: false, drawerOpen: false, period: "monthly", formError: "", toast: "" }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

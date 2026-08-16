@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./citerate-session.js"></script><script src="./citerate-seed.js"></script><script src="./citerate-breakpoints.js"></script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EDEFF2;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="display:grid;grid-template-columns:288px minmax(0,1fr);min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="background:#141B26;color:#F4F5F7;padding:22px 18px;display:flex;flex-direction:column;gap:20px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#35B394">Phase 14c · prototype</div>
+      <div style="font:600 19px/1.3 'Source Serif 4',serif;margin-top:8px">Gap → fix → verified</div>
+      <p style="font:400 12px/1.55 inherit;color:#8A93A1;margin:6px 0 0">The working dashboard. Sort and filter the table, open a row to read the answer that beat you, send it to the queue, own it, mark it done, then prove it moved.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">viewport</div>
+      <div style="display:flex;gap:6px">
+        <button type="button" onClick="{{ setPhone }}" style="flex:1;min-height:36px;border:1px solid rgba(255,255,255,.14);border-radius:6px;background:{{ phoneBg }};color:#F4F5F7;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Phone 375</button>
+        <button type="button" onClick="{{ setDesktop }}" style="flex:1;min-height:36px;border:1px solid rgba(255,255,255,.14);border-radius:6px;background:{{ deskBg }};color:#F4F5F7;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Desktop</button>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">flow · 5 steps</div>
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+        <button type="button" onClick="{{ s.go }}" style="display:flex;align-items:center;gap:10px;text-align:left;width:100%;min-height:44px;padding:8px 10px;border:0;border-radius:6px;background:{{ s.bg }};color:#F4F5F7;cursor:pointer;box-shadow:{{ s.shadow }}">
+          <span style="flex:none;width:18px;height:18px;border-radius:999px;border:1px solid {{ s.dotLine }};background:{{ s.dot }};display:flex;align-items:center;justify-content:center;font:500 9px/1 'JetBrains Mono',monospace;color:#141B26">{{ s.tick }}</span>
+          <span style="min-width:0">
+            <span style="display:block;font:400 12.5px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">{{ s.label }}</span>
+            <span style="display:block;font:400 10.5px/1.35 'JetBrains Mono',monospace;color:#8A93A1;margin-top:2px">{{ s.hint }}</span>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-direction:column;gap:10px">
+      <div style="font:400 11px/1.6 'JetBrains Mono',monospace;color:#8A93A1">state<br>filter <span style="color:#F4F5F7">{{ filterState }}</span><br>sort <span style="color:#F4F5F7">{{ sortState }}</span><br>queue <span style="color:#F4F5F7">{{ queueState }}</span><br>proof <span style="color:#F4F5F7">{{ verifiedState }}</span></div>
+      <button type="button" onClick="{{ reset }}" style="min-height:36px;border:1px solid rgba(255,255,255,.14);border-radius:6px;background:transparent;color:#F4F5F7;font:500 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Reset prototype</button>
+    </div>
+  </div>
+
+  <div style="padding:26px 30px 60px;display:flex;flex-direction:column;align-items:center;gap:14px;min-width:0">
+    <div style="width:100%;max-width:1240px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <div style="font:400 12px/1 'JetBrains Mono',monospace;color:#5B6472;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:9px 14px">{{ route }}</div>
+      <div style="font:400 12px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472">{{ stageNote }}</div>
+      <sc-if value="{{ toast }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-left:auto;font:400 12px/1.4 'JetBrains Mono',monospace;color:#9A6210;background:#FDF2E3;border:1px solid #F5E3C4;border-radius:6px;padding:8px 12px">{{ toast }}</div>
+      </sc-if>
+    </div>
+
+    <div style="width:100%;max-width:{{ stageMax }};--proto-gut:{{ gut }};--proto-num:{{ vNum }};--proto-d3:{{ vD3 }};--proto-d4:{{ vD4 }};--proto-pad:{{ vPad }};--proto-row-dir:{{ vRowDir }};--proto-btn-w:{{ vBtnW }};--proto-row-cols:{{ rowCols }};--proto-thead:{{ theadDisplay }};--proto-label:{{ labelDisplay }};--proto-share-w:{{ shareLabelW }};background:#F4F5F7;border:1px solid #C6CBD3;border-radius:{{ stageRadius }};overflow:hidden;box-shadow:0 12px 32px rgba(20,27,38,.14);box-sizing:border-box">
+
+      <div style="display:grid;grid-template-columns:{{ shellCols }};min-height:640px">
+
+        <sc-if value="{{ showSide }}" hint-placeholder-val="{{ true }}">
+          <div style="background:#141B26;color:#F4F5F7;padding:24px 16px;display:flex;flex-direction:column;gap:24px;box-sizing:border-box">
+            <div style="display:flex;align-items:center;gap:8px;padding:0 8px;font:500 20px/1.2 'JetBrains Mono',monospace;letter-spacing:-.03em">Cit<span style="color:#35B394">erate</span></div>
+            <button type="button" onClick="{{ notYet }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:8px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:6px;color:#F4F5F7;text-align:left;cursor:pointer">
+              <span style="font:400 14px/1.3 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">acmecrm.com</span>
+              <span style="font:400 11.5px/1.3 'JetBrains Mono',monospace;color:#8A93A1">switch</span>
+            </button>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1;padding:0 8px 8px">measure</div>
+              <sc-for list="{{ navMeasure }}" as="n" hint-placeholder-count="3">
+                <button type="button" onClick="{{ n.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;padding:0 12px;border:0;border-radius:6px;background:{{ n.bg }};box-shadow:{{ n.shadow }};color:#F4F5F7;font:400 14px/1.3 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;text-align:left;cursor:pointer">
+                  <span>{{ n.label }}</span>
+                  <span style="font:400 11.5px/1.3 'JetBrains Mono',monospace;color:#8A93A1">{{ n.count }}</span>
+                </button>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1;padding:0 8px 8px">act</div>
+              <sc-for list="{{ navAct }}" as="n" hint-placeholder-count="3">
+                <button type="button" onClick="{{ n.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;padding:0 12px;border:0;border-radius:6px;background:{{ n.bg }};box-shadow:{{ n.shadow }};color:#F4F5F7;font:400 14px/1.3 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;text-align:left;cursor:pointer">
+                  <span>{{ n.label }}</span>
+                  <span style="font:400 11.5px/1.3 'JetBrains Mono',monospace;color:{{ n.ink }}">{{ n.count }}</span>
+                </button>
+              </sc-for>
+            </div>
+            <div style="margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;gap:8px;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1"><span>queries</span><span style="color:#F4F5F7">{{ queryCount }} / 200</span></div>
+              <div style="height:6px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden"><div style="width:84%;height:100%;background:#E9A44A;border-radius:999px"></div></div>
+              <div style="font:400 11px/1.4 'JetBrains Mono',monospace;color:#8A93A1">Growth plan · monthly</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="min-width:0;display:flex;flex-direction:column">
+          <div style="height:60px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 var(--proto-gut,24px);background:#FFFFFF;border-bottom:1px solid #E2E5EA;box-sizing:border-box">
+            <div style="display:flex;align-items:center;gap:10px;min-width:0">
+              <sc-if value="{{ isPhone }}" hint-placeholder-val="{{ true }}">
+                <button type="button" onClick="{{ toggleSide }}" style="flex:none;width:44px;height:44px;border:1px solid #C6CBD3;border-radius:6px;background:#FFFFFF;font:500 14px/1 'JetBrains Mono',monospace;color:#141B26;cursor:pointer">≡</button>
+              </sc-if>
+              <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ title }}</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;flex:0 1 auto;min-width:0;justify-content:flex-end">
+              <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ lastRun }}</div>
+              <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+                <button type="button" onClick="{{ rescanAll }}" style="min-height:36px;border:1px solid #C6CBD3;border-radius:6px;background:#FFFFFF;padding:0 14px;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;cursor:pointer;white-space:nowrap">{{ rescanLabel }}</button>
+              </sc-if>
+            </div>
+          </div>
+
+          <div style="flex:1;min-width:0;padding:var(--proto-pad,32px) var(--proto-gut,24px) 48px;display:flex;flex-direction:column;gap:16px;box-sizing:border-box">
+
+            <sc-if value="{{ onOverview }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:16px">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  <sc-for list="{{ periods }}" as="p" hint-placeholder-count="3">
+                    <button type="button" onClick="{{ p.go }}" style="min-height:36px;padding:0 14px;border:1px solid {{ p.line }};border-radius:999px;background:{{ p.bg }};color:{{ p.ink }};font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">{{ p.label }}</button>
+                  </sc-for>
+                </div>
+
+                <div style="display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));align-items:start">
+                  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+                    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">citation rate · {{ periodLabel }}</div>
+                    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+                      <div style="font:500 var(--proto-num,48px)/1 'JetBrains Mono',monospace;letter-spacing:-.02em">{{ rate }}%</div>
+                      <div style="display:inline-flex;align-items:center;gap:4px;font:500 13px/1.4 'JetBrains Mono',monospace;color:{{ deltaInk }};background:{{ deltaBg }};padding:3px 8px;border-radius:999px">{{ delta }}</div>
+                    </div>
+                    <div style="font:400 11.5px/1.35 'JetBrains Mono',monospace;color:#5B6472">±{{ band }} band · {{ queryCount }} of {{ quotaCount }} queries</div>
+                    <div style="font:600 var(--proto-d3,26px)/1.28 'Source Serif 4',serif;text-wrap:pretty">{{ verdict }}</div>
+                  </div>
+
+                  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+                    <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">Where the gaps come from</div>
+                    <div style="display:flex;height:10px;border-radius:999px;overflow:hidden;gap:2px">
+                      <sc-for list="{{ causeSegs }}" as="c" hint-placeholder-count="4">
+                        <div style="flex:{{ c.flex }};background:{{ c.bg }}"></div>
+                      </sc-for>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:2px">
+                      <sc-for list="{{ causeRows }}" as="c" hint-placeholder-count="4">
+                        <button type="button" onClick="{{ c.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:36px;border:0;background:none;padding:4px 0;font:400 12.5px/1.4 'JetBrains Mono',monospace;color:#5B6472;text-align:left;cursor:pointer">
+                          <span style="display:flex;align-items:center;gap:8px;min-width:0"><span style="flex:none;width:8px;height:8px;border-radius:2px;background:{{ c.bg }}"></span>{{ c.label }}</span>
+                          <span style="color:#141B26">{{ c.pct }}</span>
+                        </button>
+                      </sc-for>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px">
+                  <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                    <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">Rate by engine</div>
+                    <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">same queries, four engines</div>
+                  </div>
+                  <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+                    <sc-for list="{{ engineCards }}" as="e" hint-placeholder-count="4">
+                      <div style="background:#F4F5F7;border:1px solid #E2E5EA;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+                        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">{{ e.name }}</div>
+                        <div style="font:500 20px/1.2 'JetBrains Mono',monospace">{{ e.rate }}%</div>
+                        <div style="height:6px;border-radius:999px;background:#E2E5EA;overflow:hidden"><div style="width:{{ e.rate }}%;height:100%;background:{{ e.bar }}"></div></div>
+                        <div style="font:400 11px/1.4 'JetBrains Mono',monospace;color:#8A93A1">{{ e.note }}</div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+
+                <div style="background:#141B26;border-radius:14px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;color:#F4F5F7">
+                  <div style="min-width:0">
+                    <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">Eight queries are gaps you can act on</div>
+                    <div style="font:400 13px/1.55 inherit;color:#8A93A1;margin-top:6px">Each one carries its cause, so the queue knows where to send it.</div>
+                  </div>
+                  <button type="button" onClick="{{ goQueries }}" style="min-height:44px;width:var(--proto-btn-w,auto);border:0;border-radius:6px;background:#0E7C66;color:#FFFFFF;padding:0 20px;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">Open the table</button>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ onQueries }}" hint-placeholder-val="{{ true }}">
+              <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid #E2E5EA;flex-wrap:wrap">
+                  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                    <sc-for list="{{ filters }}" as="f" hint-placeholder-count="3">
+                      <button type="button" onClick="{{ f.go }}" style="min-height:36px;padding:0 14px;border:1px solid {{ f.line }};border-radius:999px;background:{{ f.bg }};color:{{ f.ink }};font:500 12.5px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">{{ f.label }}</button>
+                    </sc-for>
+                  </div>
+                  <input type="text" value="{{ search }}" onChange="{{ onSearch }}" placeholder="search queries" style="width:{{ searchW }};min-height:36px;border:1px solid #C6CBD3;border-radius:6px;padding:0 12px;font:400 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;background:#FFFFFF;box-sizing:border-box">
+                </div>
+
+                <div style="display:var(--proto-thead,grid);grid-template-columns:var(--proto-row-cols,minmax(0,1fr) 96px 64px 76px 104px 28px);gap:12px;padding:11px 20px;background:#EDEFF2">
+                  <sc-for list="{{ headers }}" as="h" hint-placeholder-count="6">
+                    <button type="button" onClick="{{ h.go }}" style="border:0;background:none;padding:0;text-align:{{ h.align }};font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:{{ h.ink }};cursor:{{ h.cursor }}">{{ h.label }}{{ h.arrow }}</button>
+                  </sc-for>
+                </div>
+
+                <sc-for list="{{ rows }}" as="r" hint-placeholder-count="8">
+                  <div style="border-top:1px solid #E2E5EA;background:{{ r.bg }}">
+                    <button type="button" onClick="{{ r.toggle }}" style="display:grid;grid-template-columns:var(--proto-row-cols,minmax(0,1fr) 96px 64px 76px 104px 28px);gap:12px;width:100%;padding:12px 20px;border:0;background:none;text-align:left;cursor:pointer;align-items:center;box-sizing:border-box">
+                      <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:400 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">{{ r.q }}</span>
+                      <span style="display:flex;justify-content:space-between;gap:8px;font:400 12.5px/1.5 'JetBrains Mono',monospace;color:#5B6472"><span style="display:var(--proto-label,none);font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">engine</span>{{ r.engine }}</span>
+                      <span style="display:flex;justify-content:space-between;gap:8px;font:500 13px/1.4 'JetBrains Mono',monospace;color:#141B26"><span style="display:var(--proto-label,none);font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">rate</span>{{ r.rate }}%</span>
+                      <span style="display:flex;align-items:flex-end;gap:2px;height:18px">
+                        <sc-for list="{{ r.spark }}" as="b" hint-placeholder-count="6">
+                          <span style="width:6px;height:{{ b.h }};background:{{ b.bg }};border-radius:1px"></span>
+                        </sc-for>
+                      </span>
+                      <span style="display:flex;justify-content:space-between;gap:8px;font:400 12.5px/1.5 'JetBrains Mono',monospace;color:{{ r.causeInk }}"><span style="display:var(--proto-label,none);font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">cause</span>{{ r.cause }}</span>
+                      <span style="font:400 12px/1.4 'JetBrains Mono',monospace;color:#8A93A1;text-align:right">{{ r.chev }}</span>
+                    </button>
+
+                    <sc-if value="{{ r.open }}" hint-placeholder-val="{{ true }}">
+                      <div style="background:#EDEFF2;padding:16px 20px 20px;display:flex;flex-direction:column;gap:12px;border-top:1px solid #E2E5EA">
+                        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">what the engine answered</div>
+                        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #3E5C8A;border-radius:6px;padding:12px 16px;font:400 12.5px/1.6 'JetBrains Mono',monospace;color:#5B6472;white-space:pre-wrap">{{ r.answer }}</div>
+                        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">what it cited instead</div>
+                        <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+                          <sc-for list="{{ r.sources }}" as="src" hint-placeholder-count="3">
+                            <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:6px;padding:12px 16px;display:flex;flex-direction:column;gap:4px">
+                              <div style="font:500 13px/1.4 'JetBrains Mono',monospace;color:#141B26">{{ src.host }}</div>
+                              <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">{{ src.what }}</div>
+                            </div>
+                          </sc-for>
+                        </div>
+                        <button type="button" onClick="{{ r.send }}" style="align-self:flex-start;min-height:44px;width:var(--proto-btn-w,auto);border:0;border-radius:6px;background:#0E7C66;color:#FFFFFF;padding:0 18px;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">{{ r.sendLabel }}</button>
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1">{{ rowSummary }}</div>
+            </sc-if>
+
+            <sc-if value="{{ onCompetitors }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:16px">
+                <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px">
+                  <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">Share of citations</div>
+                  <div style="font:400 13px/1.55 inherit;color:#5B6472">Across the same {{ queryCount }} queries. This is who the engines name when they do not name you.</div>
+                  <div style="display:flex;flex-direction:column;gap:12px;margin-top:4px">
+                    <sc-for list="{{ shareRows }}" as="row" hint-placeholder-count="4">
+                      <div style="display:flex;align-items:center;gap:10px">
+                        <div style="width:var(--proto-share-w,92px);flex:none;font:400 11px/1.3 'JetBrains Mono',monospace;color:{{ row.ink }};font-weight:{{ row.weight }};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ row.host }}</div>
+                        <div style="flex:1;min-width:0;height:10px;background:#E2E5EA;border-radius:999px;overflow:hidden"><div style="width:{{ row.pct }};height:100%;background:{{ row.bar }}"></div></div>
+                        <div style="width:38px;flex:none;text-align:right;font:400 11px/1.3 'JetBrains Mono',monospace;color:#5B6472">{{ row.pct }}</div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+                  <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">Track another domain</div>
+                  <div style="display:flex;flex-direction:var(--proto-row-dir,row);gap:8px">
+                    <input type="text" value="{{ newCompetitor }}" onChange="{{ onNewCompetitor }}" placeholder="competitor.com" style="flex:1;min-width:0;min-height:44px;border:1px solid #C6CBD3;border-radius:6px;padding:0 14px;font:400 14px/1 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;box-sizing:border-box">
+                    <button type="button" onClick="{{ addCompetitor }}" style="min-height:44px;width:var(--proto-btn-w,auto);border:1px solid #C6CBD3;border-radius:6px;background:#FFFFFF;padding:0 18px;font:500 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;cursor:pointer">Add</button>
+                  </div>
+                  <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#8A93A1">Competitors are watched on your queries only — we never invent queries for them.</div>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ onFixes }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:20px">
+                <sc-for list="{{ fixGroups }}" as="g" hint-placeholder-count="2">
+                  <div style="display:flex;flex-direction:column;gap:12px">
+                    <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+                      <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif">{{ g.cause }}</div>
+                      <div style="font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#8A93A1">{{ g.meta }}</div>
+                    </div>
+                    <sc-for list="{{ g.items }}" as="f" hint-placeholder-count="2">
+                      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:2px solid {{ f.rule }};border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:12px;opacity:{{ f.opacity }}">
+                        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                          <div style="font:600 var(--proto-d4,20px)/1.35 'Source Serif 4',serif;min-width:0">{{ f.title }}</div>
+                          <div style="flex:none;font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:{{ f.stateInk }};background:{{ f.stateBg }};border-radius:999px;padding:5px 9px">{{ f.state }}</div>
+                        </div>
+                        <div style="font:400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#5B6472;text-wrap:pretty">{{ f.detail }}</div>
+                        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font:400 11.5px/1.4 'JetBrains Mono',monospace;color:#5B6472">
+                          <button type="button" onClick="{{ f.cycleOwner }}" style="display:inline-flex;align-items:center;gap:7px;min-height:34px;border:1px solid #E2E5EA;border-radius:999px;background:#FFFFFF;padding:0 12px 0 6px;font:inherit;color:#5B6472;cursor:pointer">
+                            <span style="width:22px;height:22px;border-radius:999px;background:{{ f.ownerBg }};color:{{ f.ownerInk }};display:flex;align-items:center;justify-content:center;font:500 10px/1 'JetBrains Mono',monospace">{{ f.ownerInitials }}</span>
+                            {{ f.owner }}
+                          </button>
+                          <span>{{ f.queries }} queries</span>
+                          <span style="color:{{ f.effortInk }}">{{ f.effort }}</span>
+                        </div>
+                        <sc-if value="{{ f.proof }}" hint-placeholder-val="{{ true }}">
+                          <div style="background:#E7F2EF;border:1px solid #0E7C66;border-radius:6px;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:400 12.5px/1.5 'JetBrains Mono',monospace;color:#0B6151">
+                            <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase">verified</span>
+                            <span style="color:#5B6472">{{ f.proofBefore }}</span>
+                            <span style="color:#8A93A1">→</span>
+                            <span style="font-weight:500">{{ f.proofAfter }}</span>
+                            <span style="color:#5B6472">on this fix's own queries</span>
+                          </div>
+                        </sc-if>
+                        <div style="display:flex;flex-direction:var(--proto-row-dir,row);gap:8px">
+                          <button type="button" onClick="{{ f.primary }}" style="flex:1;min-height:44px;border:0;border-radius:6px;background:{{ f.primaryBg }};color:#FFFFFF;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;cursor:pointer">{{ f.primaryLabel }}</button>
+                          <button type="button" onClick="{{ f.secondary }}" style="flex:1;min-height:44px;border:1px solid #C6CBD3;border-radius:6px;background:#FFFFFF;font:500 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26;cursor:pointer">{{ f.secondaryLabel }}</button>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-for>
+                <div style="font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1">A fix is only closed when a rescan of its own queries moves. Nothing here is marked complete on someone's word.</div>
+              </div>
+            </sc-if>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="width:100%;max-width:1240px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#8A93A1">Phase 14c covers overview, queries, competitors and the fix queue. Reports and the six settings panes are 14d; remaining marketing pages and full flow playback are 14e.</div>
+  </div>
+
+</div>
+<dc-import name="Session Bar" phase="14c" hint-size="620px,44px" style="position:fixed;left:16px;bottom:16px;z-index:80;max-width:calc(100vw - 32px)"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1560}}">
+const CAUSES = {
+  aio:   { label: "AI overview took the answer", short: "AI overview", bg: "#C43D3D", ink: "#A62F2F" },
+  rank:  { label: "Not ranking top 10",          short: "Rank",        bg: "#D98324", ink: "#9A6210" },
+  tech:  { label: "Technical",                   short: "Technical",   bg: "#3E5C8A", ink: "#34507A" },
+  other: { label: "Other",                       short: "Other",       bg: "repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)", ink: "#5B6472" },
+};
+const OWNERS = [
+  ["Unassigned", "?", "#EDEFF2", "#5B6472"],
+  ["Rida", "RK", "#EBEFF6", "#34507A"],
+  ["Omer", "OM", "#E7F2EF", "#0B6151"],
+  ["Sara", "SB", "#FDF2E3", "#9A6210"],
+];
+// The first five rows are the seeded queries in infra/seeds/dev.sql; the last
+// three are extra fixtures, in the same vocabulary, so the table has body.
+const Q = [
+  ["best crm for startups", "ChatGPT", 0, "aio", "Three CRMs come up most often for startups: Competitor A, Competitor B and HubSpot — each has a free or low-cost entry tier.", [["competitor-a.com", "pricing page, lifted verbatim"], ["competitor-b.com", "comparison table"], ["reddit.com", "r/startups thread"]]],
+  ["hubspot alternatives", "Perplexity", 0, "rank", "Commonly named alternatives are Competitor A and Competitor B. Acme CRM was not found in the sources reviewed.", [["competitor-a.com", "alternatives page"], ["g2.com", "category page"]]],
+  ["crm with free tier", "ChatGPT", 33, "aio", "Several CRMs offer a free tier. Acme CRM includes one, though the limits are not stated on the page.", [["acmecrm.com", "cited — /pricing"], ["competitor-b.com", "pricing"]]],
+  ["crm for a 10 person team", "AI overview", 0, "aio", "Most mid-market CRMs fit a team of ten. Popular options include Competitor A and HubSpot.", [["competitor-a.com", "feature page"], ["capterra.com", "listicle"]]],
+  ["how to migrate crm data", "ChatGPT", 33, "tech", "Migration usually means exporting to CSV and mapping fields. Acme CRM documents the process, though three pages did not load.", [["acmecrm.com", "cited — /docs/migrate"]]],
+  ["acme crm reviews from founders", "Perplexity", 61, "other", "Reviews describe Acme CRM as strong on pipeline hygiene and weaker on reporting.", [["acmecrm.com", "cited — /customers"], ["g2.com", "reviews"]]],
+  ["cheapest crm for a small team", "Gemini", 8, "rank", "Competitor A and Competitor B both offer entry tiers under $20 per seat. Acme CRM's entry tier is higher.", [["competitor-b.com", "pricing"], ["competitor-a.com", "pricing"]]],
+  ["crm that syncs with google workspace", "AI overview", 0, "tech", "Several CRMs sync with Google Workspace, including Competitor A and HubSpot.", [["workspace.google.com", "marketplace listing"], ["competitor-a.com", "integrations"]]],
+];
+// The three findings the seed writes, with the fix states it sets.
+const FIXES = [
+  { id: "f1", cause: "aio", title: "Publish a comparison page answering \"hubspot alternatives\" directly", rule: "#C43D3D",
+    detail: "Engines cite pages that name alternatives and state numbers. Nothing on the site answers the question in those terms.",
+    queries: 1, effort: "high", effortInk: "#A62F2F", before: "0%", after: "34%" },
+  { id: "f2", cause: "aio", title: "Add per-plan pricing detail", rule: "#C43D3D",
+    detail: "Answers citing pricing prefer pages with explicit figures. The free tier is mentioned without its limits.",
+    queries: 1, effort: "medium", effortInk: "#9A6210", before: "33%", after: "58%" },
+  { id: "f3", cause: "tech", title: "Fix soft-404s on 3 documentation URLs", rule: "#3E5C8A",
+    detail: "Engines could not fetch these pages, so the migration answer was assembled from other sources.",
+    queries: 1, effort: "low", effortInk: "#0B6151", before: "33%", after: "52%" },
+];
+
+class Component extends DCLogic {
+  componentDidMount() {
+    const boot = () => {
+      if (!window.CiterateSession) return setTimeout(boot, 40);
+      window.CiterateSession.patch({ lastPhase: "14c" });
+    };
+    boot();
+  }
+  state = {
+    screen: "overview", vw: "desktop", sideOpen: false,
+    filter: "gaps", search: "", sortKey: "rate", sortDir: "asc",
+    open: {}, sent: {}, period: "30d",
+    owners: { f1: 0, f2: 0, f3: 0 }, ownerTouched: false, done: {}, verified: {},
+    competitors: ["competitor-a.com", "competitor-b.com", "hubspot.com"], newCompetitor: "",
+    rescanning: false, toast: "",
+  };
+
+  componentWillUnmount() { clearTimeout(this.toastTimer); clearTimeout(this.rescanTimer); }
+
+  flash(msg) {
+    this.setState({ toast: msg });
+    clearTimeout(this.toastTimer);
+    this.toastTimer = setTimeout(() => this.setState({ toast: "" }), 2600);
+  }
+
+  go(screen) { this.setState({ screen, sideOpen: false }); }
+
+  sortBy = (key) => {
+    this.setState(st => ({
+      sortKey: key,
+      sortDir: st.sortKey === key ? (st.sortDir === "asc" ? "desc" : "asc") : "asc",
+    }));
+  };
+
+  verify = (id) => {
+    clearTimeout(this.rescanTimer);
+    this.setState({ rescanning: true });
+    this.flash("Rescanning the queries this fix touches…");
+    this.rescanTimer = setTimeout(() => {
+      this.setState(st => ({
+        rescanning: false,
+        verified: Object.assign({}, st.verified, { [id]: true }),
+      }));
+    }, 1600);
+  };
+
+  renderVals() {
+    const s = this.state;
+    const isPhone = s.vw === "phone";
+
+    let rows = Q.filter(q => {
+      if (s.filter === "gaps" && q[2] > 20) return false;
+      if (s.filter === "cited" && q[2] <= 20) return false;
+      if (s.search && !q[0].toLowerCase().includes(s.search.toLowerCase())) return false;
+      return true;
+    });
+    const dir = s.sortDir === "asc" ? 1 : -1;
+    rows = rows.slice().sort((a, b) => {
+      if (s.sortKey === "query") return a[0].localeCompare(b[0]) * dir;
+      if (s.sortKey === "engine") return a[1].localeCompare(b[1]) * dir;
+      if (s.sortKey === "cause") return a[3].localeCompare(b[3]) * dir;
+      return (a[2] - b[2]) * dir;
+    });
+
+    const rowVals = rows.map((q, i) => {
+      const c = CAUSES[q[3]];
+      const isOpen = !!s.open[q[0]];
+      const wasSent = !!s.sent[q[0]];
+      return {
+        q: q[0], engine: q[1], rate: q[2], cause: c.short, causeInk: c.ink,
+        bg: i % 2 ? "#F4F5F7" : "#FFFFFF",
+        chev: isOpen ? "▴" : "▾", open: isOpen,
+        answer: q[4],
+        sources: q[5].map(([host, what]) => ({ host, what })),
+        spark: [0, 1, 2, 3, 4, 5].map(n => ({
+          h: Math.max(2, Math.round((q[2] * (0.55 + n * 0.09)) / 100 * 18)) + "px",
+          bg: q[2] > 20 ? "#0E7C66" : "#C6CBD3",
+        })),
+        toggle: () => this.setState(st => ({ open: Object.assign({}, st.open, { [q[0]]: !st.open[q[0]] }) })),
+        sendLabel: wasSent ? "In the queue" : "Send to fix queue",
+        send: () => {
+          if (wasSent) { this.go("fixes"); return; }
+          this.setState(st => ({ sent: Object.assign({}, st.sent, { [q[0]]: true }) }));
+          this.flash("Added to the queue under " + c.short + ".");
+        },
+      };
+    });
+
+    const headers = [
+      ["query", "query", "left"], ["engine", "engine", "left"], ["rate", "rate", "left"],
+      [null, "trend", "left"], ["cause", "cause", "left"], [null, "", "right"],
+    ].map(([key, label, align]) => ({
+      label, align,
+      ink: key && s.sortKey === key ? "#141B26" : "#5B6472",
+      cursor: key ? "pointer" : "default",
+      arrow: key && s.sortKey === key ? (s.sortDir === "asc" ? " ↑" : " ↓") : "",
+      go: key ? () => this.sortBy(key) : () => {},
+    }));
+
+    const filters = [["gaps", "Gaps"], ["cited", "Cited"], ["all", "All"]].map(([k, label]) => ({
+      label, go: () => this.setState({ filter: k }),
+      bg: s.filter === k ? "#141B26" : "transparent",
+      ink: s.filter === k ? "#FFFFFF" : "#5B6472",
+      line: s.filter === k ? "#141B26" : "#E2E5EA",
+    }));
+
+    const periodData = { "7d": [31, "+0.4", "flat"], "30d": [34, "+3.0", "up"], "90d": [29, "-1.2", "down"] };
+    const rate = periodData[s.period][0];
+    const delta = periodData[s.period][1];
+    const trend = periodData[s.period][2];
+    const periods = [["7d", "7 days"], ["30d", "30 days"], ["90d", "90 days"]].map(([k, label]) => ({
+      label, go: () => this.setState({ period: k }),
+      bg: s.period === k ? "#141B26" : "transparent",
+      ink: s.period === k ? "#FFFFFF" : "#5B6472",
+      line: s.period === k ? "#141B26" : "#E2E5EA",
+    }));
+
+    const causeMix = [["aio", 46], ["rank", 27], ["tech", 17], ["other", 10]];
+    const causeSegs = causeMix.map(([k, v]) => ({ flex: v, bg: CAUSES[k].bg }));
+    const causeRows = causeMix.map(([k, v]) => ({
+      label: CAUSES[k].label, pct: v + "%", bg: CAUSES[k].bg,
+      go: () => { this.setState({ screen: "queries", filter: "gaps", sideOpen: false }); this.flash("Filtered to gaps — sort by cause to group " + CAUSES[k].short + "."); },
+    }));
+
+    const engineCards = [
+      { name: "ChatGPT", rate: 41, bar: "#0E7C66", note: "best coverage" },
+      { name: "Perplexity", rate: 36, bar: "#0E7C66", note: "cites sources" },
+      { name: "AI overview", rate: 18, bar: "#3E5C8A", note: "answers itself" },
+      { name: "Gemini", rate: 24, bar: "#3E5C8A", note: "format changed Jul 24" },
+    ];
+
+    // Queries sent from the table become real queue items, including for causes
+    // with no seeded fix — otherwise "added to the queue" would be a lie.
+    const sentItems = Object.keys(s.sent).map(text => {
+      const q = Q.find(row => row[0] === text) || [text, "", 0, "other"];
+      const c = CAUSES[q[3]];
+      return {
+        id: "q:" + text, cause: q[3], rule: c.ink,
+        title: "Answer \u201c" + text + "\u201d",
+        detail: "Sent from the query table. " + q[1] + " answered it without naming you, and the cause was read as " + c.short.toLowerCase() + ".",
+        queries: 1, effort: "unsized", effortInk: "#5B6472",
+        before: q[2] + "%", after: Math.min(100, q[2] + 18) + "%",
+      };
+    });
+
+    const fixVals = FIXES.concat(sentItems).map(f => {
+      const ownerIdx = s.owners[f.id] || 0;
+      const owner = OWNERS[ownerIdx];
+      const isDone = !!s.done[f.id];
+      const isVerified = !!s.verified[f.id];
+      return {
+        cause: f.cause, title: f.title, detail: f.detail, rule: f.rule, queries: f.queries,
+        effort: f.effort + " effort", effortInk: f.effortInk,
+        owner: owner[0], ownerInitials: owner[1], ownerBg: owner[2], ownerInk: owner[3],
+        opacity: isVerified ? "0.9" : "1",
+        state: isVerified ? "verified" : isDone ? "awaiting proof" : "open",
+        stateBg: isVerified ? "#E7F2EF" : isDone ? "#FDF2E3" : "#EDEFF2",
+        stateInk: isVerified ? "#0B6151" : isDone ? "#9A6210" : "#5B6472",
+        proof: isVerified, proofBefore: f.before, proofAfter: f.after,
+        cycleOwner: () => this.setState(st => ({
+          ownerTouched: true,
+          owners: Object.assign({}, st.owners, { [f.id]: ((st.owners[f.id] || 0) + 1) % OWNERS.length }),
+        })),
+        primaryLabel: isVerified ? "Close it out" : isDone ? (s.rescanning ? "Rescanning…" : "Verify with a rescan") : "Mark done",
+        primaryBg: isVerified ? "#8A93A1" : "#0E7C66",
+        primary: () => {
+          if (isVerified) { this.flash("Closed. It stays in history with its proof attached."); return; }
+          if (isDone) { this.verify(f.id); return; }
+          this.setState(st => ({ done: Object.assign({}, st.done, { [f.id]: true }) }));
+          this.flash("Marked done. Verify it with a rescan once the change is live.");
+        },
+        secondaryLabel: isDone ? "Reopen" : "Snooze a week",
+        secondary: () => {
+          if (isDone) {
+            this.setState(st => {
+              const done = Object.assign({}, st.done); delete done[f.id];
+              const verified = Object.assign({}, st.verified); delete verified[f.id];
+              return { done, verified };
+            });
+            return;
+          }
+          this.flash("Snoozed. It returns after the next run.");
+        },
+      };
+    });
+
+    const fixGroups = [];
+    ["aio", "rank", "tech", "other"].forEach(k => {
+      const items = fixVals.filter(f => f.cause === k);
+      if (items.length) {
+        fixGroups.push({
+          cause: CAUSES[k].label,
+          meta: items.length + (items.length === 1 ? " fix" : " fixes") + " · " + items.reduce((n, f) => n + f.queries, 0) + " queries",
+          items,
+        });
+      }
+    });
+
+    const shareTotals = { "competitor-a.com": 41, "competitor-b.com": 26, "hubspot.com": 12 };
+    const shareRows = [{ host: "acmecrm.com", pct: rate + "%", bar: "#0E7C66", ink: "#0B6151", weight: "500" }]
+      .concat(s.competitors.map(host => ({
+        host, pct: (shareTotals[host] || 6) + "%", bar: "#3E5C8A", ink: "#5B6472", weight: "400",
+      })));
+
+    const navMeasure = [["overview", "Overview", ""], ["queries", "Queries", "8"], ["competitors", "Competitors", String(s.competitors.length)]]
+      .map(([k, label, count]) => ({
+        label, count, go: () => this.go(k),
+        bg: s.screen === k ? "rgba(255,255,255,.10)" : "transparent",
+        shadow: s.screen === k ? "inset 2px 0 0 #35B394" : "none",
+      }));
+    const openCount = fixVals.filter(f => f.state === "open").length;
+    const navAct = [
+      ["fixes", "Fix queue", String(openCount), "#F4F5F7"],
+      ["reports", "Reports", "14d", "#8A93A1"],
+      ["settings", "Settings", "14d", "#8A93A1"],
+    ].map(([k, label, count, ink]) => ({
+      label, count, ink,
+      go: k === "fixes" ? () => this.go("fixes") : () => this.flash("Reports and settings arrive in Phase 14d."),
+      bg: s.screen === k ? "rgba(255,255,255,.10)" : "transparent",
+      shadow: s.screen === k ? "inset 2px 0 0 #35B394" : "none",
+    }));
+
+    const openedAny = Object.keys(s.open).length > 0;
+    const steps = [
+      ["See the number", "/overview", "overview", true],
+      ["Find the gaps", "/queries", "queries", s.screen === "queries" || openedAny],
+      ["Read one answer", "row detail", "queries", openedAny],
+      ["Own a fix", "/fixes", "fixes", s.ownerTouched],
+      ["Verify it moved", "rescan", "fixes", Object.keys(s.verified).length > 0],
+    ].map(([label, hint, screen, done]) => {
+      const active = s.screen === screen;
+      return {
+        label, hint, go: () => this.go(screen),
+        bg: active ? "rgba(255,255,255,.10)" : "transparent",
+        shadow: active ? "inset 2px 0 0 #35B394" : "none",
+        dot: done ? "#35B394" : "transparent",
+        dotLine: done ? "#35B394" : "rgba(255,255,255,.22)",
+        tick: done ? "✓" : "",
+      };
+    });
+
+    const titles = { overview: "Overview", queries: "Queries", competitors: "Competitors", fixes: "Fix queue" };
+    const notes = {
+      overview: "Period pills recompute the rate, delta and verdict. Causes link into the table.",
+      queries: "Sortable headers, three filters, live search, expandable rows — all real.",
+      competitors: "Add a domain and it joins the share list immediately.",
+      fixes: "Click the owner chip to assign, mark done, then verify — proof appears after the rescan.",
+    };
+
+    return {
+      steps, navMeasure, navAct, headers, filters, periods, causeSegs, causeRows, engineCards,
+      rows: rowVals, shareRows, fixGroups,
+      route: "/" + s.screen, title: titles[s.screen], stageNote: notes[s.screen], toast: s.toast,
+      isPhone, isDesktop: !isPhone,
+      showSide: !isPhone || s.sideOpen,
+      shellCols: isPhone ? (s.sideOpen ? "180px minmax(0,1fr)" : "minmax(0,1fr)") : "248px minmax(0,1fr)",
+      toggleSide: () => this.setState({ sideOpen: !s.sideOpen }),
+      ...(window.CiterateBreakpoints ? window.CiterateBreakpoints.protoVars("app", isPhone) : {}),
+      rowCols: isPhone ? "minmax(0,1fr)" : "minmax(0,1fr) 96px 64px 76px 104px 28px",
+      theadDisplay: isPhone ? "none" : "grid",
+      labelDisplay: isPhone ? "inline" : "none",
+      shareLabelW: isPhone ? "74px" : "92px",
+      phoneBg: isPhone ? "rgba(255,255,255,.14)" : "transparent",
+      deskBg: isPhone ? "transparent" : "rgba(255,255,255,.14)",
+      searchW: isPhone ? "100%" : "200px",
+      setPhone: () => this.setState({ vw: "phone", sideOpen: false }),
+      setDesktop: () => this.setState({ vw: "desktop", sideOpen: false }),
+
+      onOverview: s.screen === "overview", onQueries: s.screen === "queries",
+      onCompetitors: s.screen === "competitors", onFixes: s.screen === "fixes",
+      goQueries: () => this.go("queries"),
+
+      rate, delta,
+      deltaInk: trend === "up" ? "#0B6151" : trend === "down" ? "#A62F2F" : "#5B6472",
+      deltaBg: trend === "up" ? "#E7F2EF" : trend === "down" ? "#FBEDED" : "#F0F2F5",
+      verdict: trend === "up"
+        ? "Up, but inside the noise band — treat it as flat."
+        : trend === "down"
+          ? "Down over the quarter. The AI overview share is the cause."
+          : "Flat. Two fixes are waiting on proof.",
+      periodLabel: s.period === "7d" ? "last 7 days" : s.period === "30d" ? "last 30 days" : "last 90 days",
+      queryCount: window.CiterateSeed ? window.CiterateSeed.SEED.usage.used : 412,
+      quotaCount: window.CiterateSeed ? window.CiterateSeed.SEED.usage.included : 500,
+      band: window.CiterateSeed
+        ? (window.CiterateSeed.pct(window.CiterateSeed.SEED.rollup.bandHigh - window.CiterateSeed.SEED.rollup.bandLow) / 2).toFixed(1)
+        : "5.0",
+
+      search: s.search,
+      onSearch: (e) => this.setState({ search: e.target.value }),
+      rowSummary: rowVals.length + " of " + Q.length + " queries shown · sorted by " + s.sortKey + " " + s.sortDir
+        + (Object.keys(s.sent).length ? " · " + Object.keys(s.sent).length + " sent to the queue this session" : ""),
+
+      newCompetitor: s.newCompetitor,
+      onNewCompetitor: (e) => this.setState({ newCompetitor: e.target.value }),
+      addCompetitor: () => {
+        const d = (s.newCompetitor || "").trim();
+        if (!/^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$/i.test(d)) { this.flash("Needs a domain, like competitor-a.com."); return; }
+        if (s.competitors.includes(d)) { this.flash("Already tracked."); return; }
+        this.setState({ competitors: s.competitors.concat([d]), newCompetitor: "" });
+      },
+
+      lastRun: s.rescanning ? "rescanning…" : "last run 2026-08-03",
+      rescanLabel: s.rescanning ? "Running" : "Rescan now",
+      rescanAll: () => this.flash("A full rescan takes four to nine minutes; the email lands when it finishes."),
+
+      filterState: s.filter, sortState: s.sortKey + " " + s.sortDir,
+      queueState: openCount + " open",
+      verifiedState: Object.keys(s.verified).length + " verified",
+      notYet: () => this.flash("Workspace switching is Phase 14d."),
+      reset: () => { clearTimeout(this.rescanTimer); this.setState({ screen: "overview", filter: "gaps", search: "", sortKey: "rate", sortDir: "asc", open: {}, sent: {}, period: "30d", owners: { f1: 0, f2: 0, f3: 0 }, ownerTouched: false, done: {}, verified: {}, competitors: ["competitor-a.com", "competitor-b.com", "hubspot.com"], newCompetitor: "", rescanning: false, sideOpen: false, toast: "" }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

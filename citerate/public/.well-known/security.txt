@@ -1,0 +1,6 @@
+Contact: mailto:security@citerate.com
+Expires: 2027-07-28T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://citerate.com/.well-known/security.txt
+Policy: https://citerate.com/security
+Acknowledgments: https://citerate.com/security#acknowledgments

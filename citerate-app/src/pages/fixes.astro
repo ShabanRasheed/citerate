@@ -1,0 +1,120 @@
+---
+/**
+ * Fix Queue. Grouped by cause, ranked by impact inside each group, and the
+ * verified section sits at the top once anything has been proven — that section
+ * is the renewal argument, so it is not buried under open work.
+ */
+import App from "../layouts/App.astro";
+import FixCard from "../components/FixCard.astro";
+import Locked from "../components/Locked.astro";
+import { activeDomain, fixQueue, members, usage, latestScan } from "../lib/data";
+import { can } from "../lib/rbac";
+import { PLANS, type PlanId } from "../lib/plans";
+import { causeLabel } from "../lib/format";
+
+const env = Astro.locals.runtime.env;
+const workspace = Astro.locals.workspace!;
+const limits = PLANS[workspace.plan as PlanId];
+
+const domain = await activeDomain(env, workspace.workspaceId, Astro.url.searchParams.get("domain"));
+if (!domain) return Astro.redirect("/onboarding/domain", 302);
+
+const [fixes, team, counters, scan] = await Promise.all([
+  fixQueue(env, domain.id),
+  members(env, workspace.workspaceId),
+  usage(env, workspace.workspaceId),
+  latestScan(env, domain.id)
+]);
+
+Astro.locals.usage = counters;
+Astro.locals.lastScanAt = scan?.completed_at ?? null;
+
+const canEdit = can(workspace.role, "edit_fixes");
+const verified = fixes.filter((f) => f.state === "verified");
+const groups = (["aio_displacement", "ranking_decline", "technical_decay", "unexplained"] as const)
+  .map((cause) => ({ cause, items: fixes.filter((f) => f.cause === cause && f.state !== "verified" && f.state !== "dismissed") }))
+  .filter((g) => g.items.length);
+const dismissed = fixes.filter((f) => f.state === "dismissed");
+---
+
+<App title="Fix Queue" current="fixes" crumb={`${fixes.length - verified.length - dismissed.length} open`}>
+  {
+    !limits.fixQueue ? (
+      <Locked
+        badge="Growth"
+        headline="The Fix Queue is where a diagnosis becomes a sprint"
+        detail="Ranked by impact on your own queries, each fix carrying an owner and its own before/after measurement."
+      >
+        <div class="stack stack--4">
+          <div class="fix fix--aio">
+            <div class="fix__top">
+              <h3 class="fix__title">01 · Add a comparison table to your highest-intent page</h3>
+              <span class="pill pill--gap">high impact</span>
+            </div>
+            <p class="fix__detail">Affects 14 queries in the alternatives cluster.</p>
+          </div>
+          <div class="fix fix--rank">
+            <div class="fix__top">
+              <h3 class="fix__title">02 · Answer the question in the first 60 words on 4 pages</h3>
+              <span class="pill pill--warn">medium impact</span>
+            </div>
+          </div>
+        </div>
+      </Locked>
+    ) : (
+      <>
+        {verified.length > 0 && (
+          <section class="queue-group">
+            <div class="queue-group__head">
+              <span>Verified by measurement</span>
+              <span>{verified.length}</span>
+            </div>
+            {verified.map((f, i) => (
+              <FixCard fix={f} canEdit={canEdit} index={i + 1} members={team} />
+            ))}
+          </section>
+        )}
+
+        {groups.length === 0 && verified.length === 0 && (
+          <div class="empty">
+            <span class="t-d4">No open findings</span>
+            <span class="chart__note">
+              Either everything measurable is fixed, or the last scan found nothing above the confidence floor. The next
+              scheduled scan opens findings on its own — we do not invent work to fill this pane.
+            </span>
+          </div>
+        )}
+
+        {groups.map((group) => (
+          <section class="queue-group" id={group.cause}>
+            <div class="queue-group__head">
+              <span>{causeLabel(group.cause)}</span>
+              <span>{group.items.length} open</span>
+            </div>
+            {group.items.map((f, i) => (
+              <FixCard fix={f} canEdit={canEdit} index={i + 1} members={team} />
+            ))}
+          </section>
+        ))}
+
+        {dismissed.length > 0 && (
+          <details>
+            <summary class="queue-group__head" style="cursor:pointer">
+              <span>Dismissed ({dismissed.length})</span>
+            </summary>
+            <div class="stack stack--3" style="margin-top:12px">
+              {dismissed.map((f, i) => (
+                <FixCard fix={f} canEdit={canEdit} index={i + 1} members={team} />
+              ))}
+            </div>
+          </details>
+        )}
+
+        <p class="chart__note">
+          A fix moves to verified only when the next scan measures its own queries — never when someone marks it done.
+          If the delta lands inside the confidence band we say so instead of claiming a win.
+        </p>
+      </>
+    )
+  }
+</App>

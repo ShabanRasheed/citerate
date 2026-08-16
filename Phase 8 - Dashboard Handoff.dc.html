@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EBE9E4;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+code{font:400 12px/1.6 'JetBrains Mono',monospace;background:#FFFFFF;border:1px solid #E2E5EA;padding:1px 5px;border-radius:4px}
+</style></helmet>
+
+<section style="padding:40px 44px 80px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+<div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:14px">
+  <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Citerate · Phase 8</span>
+    <span style="width:1px;height:12px;background:#C6CBD3"></span>
+    <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Dashboard handoff · runs locally</span>
+  </div>
+  <h1 style="margin:0;font:600 44px/1.1 'Source Serif 4',Georgia,serif;letter-spacing:-0.02em;max-width:28ch">The other half: the app people log into</h1>
+  <p style="margin:0;font:400 16px/1.55 inherit;color:#5B6472;max-width:80ch">Around 120 files in <code>/citerate-app</code> — a separate Pages project on the same D1 database, with the opposite JS balance the Phase 6a decision called for: Bootstrap's JS, Alpine, and ECharts here; forty-line modules on marketing. Every screen from phases 3b, 4, and 5 is built except 2FA enrolment: passwordless auth, three-step onboarding, the readout, the dense query table, the Fix Queue, immutable reports, team and billing. Seeded dev data ships with two scans, so the delta, the confidence band, the method flag, and a verified fix are all visible on first run.</p>
+</div>
+
+<div style="max-width:1240px;margin:24px auto 0;background:#141B26;border-radius:10px;padding:26px 28px;display:grid;grid-template-columns:1fr 1fr;gap:26px">
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Run it now</div>
+    <pre style="margin:0;font:400 12.5px/1.85 'JetBrains Mono',monospace;color:#C6CBD3;white-space:pre-wrap">pnpm install
+cp .env.example .env
+pnpm db:migrate:local    # 0002 on top of the site's 0001
+pnpm db:seed:local       # agency + client workspace
+pnpm dev                 → localhost:4322</pre>
+    <div style="font:400 12.5px/1.6 inherit;color:#8A93A1">Sign in as <span style="color:#F4F5F7">founder@northline.co</span>. With no Resend key the link and the six-digit code print to the console — no mail, no spend.</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Ship it</div>
+    <pre style="margin:0;font:400 12.5px/1.85 'JetBrains Mono',monospace;color:#C6CBD3;white-space:pre-wrap">wrangler pages project create citerate-app
+# paste the SAME d1/kv/r2 ids as the site
+pnpm db:migrate:remote &amp;&amp; pnpm deploy
+wrangler pages secret put SESSION_SECRET ...</pre>
+    <div style="font:400 12.5px/1.6 inherit;color:#8A93A1">One database, two front ends. Agency white-label domains are extra custom domains on this same project.</div>
+  </div>
+</div>
+
+<!-- 01 -->
+<div style="max-width:1240px;margin:52px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">01</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">What's in the repo</h2>
+</div>
+<div style="max-width:1240px;margin:18px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:9px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#34507A">Screens</div>
+    <div style="font:400 12.5px/1.9 'JetBrains Mono',monospace;color:#141B26">26 page routes<br>2 layouts<br>10 components</div>
+    <div style="font:400 13px/1.55 inherit;color:#5B6472">Overview, Queries, Fix Queue, Competitors, Reports, five Settings panes, six auth screens, three onboarding steps, 404/500.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:9px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#34507A">Server</div>
+    <div style="font:400 12.5px/1.9 'JetBrains Mono',monospace;color:#141B26">27 API routes<br>middleware.ts<br>0002_app.sql</div>
+    <div style="font:400 13px/1.55 inherit;color:#5B6472">Six new tables: join requests, invites, notification prefs, saved views, API keys, report snapshots.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:9px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#34507A">Styles</div>
+    <div style="font:400 12.5px/1.9 'JetBrains Mono',monospace;color:#141B26">Same 01→06 pipeline<br>_shell · _score · _table<br>_fix · _chart · _badge · _auth</div>
+    <div style="font:400 13px/1.55 inherit;color:#5B6472">Tokens and four partials copied verbatim from the site. New partials reference custom properties only.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:9px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#34507A">Dev data</div>
+    <div style="font:400 12.5px/1.9 'JetBrains Mono',monospace;color:#141B26">app-dev.sql<br>2 scans · 12 queries<br>5 findings · 16 observations</div>
+    <div style="font:400 13px/1.55 inherit;color:#5B6472">Quota sits at 4,380/5,000 on purpose — the near-limit and overage states are the ones dev data usually skips.</div>
+  </div>
+</div>
+
+<!-- 02 -->
+<div style="max-width:1240px;margin:52px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">02</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">Auth, as built</h2>
+</div>
+<div style="max-width:1240px;margin:18px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;border-left:3px solid #0E7C66;display:flex;flex-direction:column;gap:10px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">One token, two doors</div>
+    <div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">The link and the code are the same row</div>
+    <div style="font:400 13px/1.6 inherit;color:#5B6472">Stored as <code>hash(secret:code)</code>; the secret half lives in KV for the token's 15-minute life so the typed-code path can verify. Clicking the link after typing the code gives "already used", not two sessions.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;border-left:3px solid #3E5C8A;display:flex;flex-direction:column;gap:10px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Sessions</div>
+    <div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">The database can't replay your cookie</div>
+    <div style="font:400 13px/1.6 inherit;color:#5B6472">D1 keeps only SHA-256 of the cookie value. "Trust this device" is off by default: one day, not thirty. Devices are listed with labels, and "sign out everywhere else" is on the account pane, not buried.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;border-left:3px solid #D98324;display:flex;flex-direction:column;gap:10px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">No dead ends</div>
+    <div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">A taken domain becomes a request</div>
+    <div style="font:400 13px/1.6 inherit;color:#5B6472">Someone else verified <code>northline.co</code>? We file a join request that expires in 7 days and tell them it was sent. Two workspaces measuring one domain would double-count the same runs.</div>
+  </div>
+</div>
+<div style="max-width:1240px;margin:14px auto 0;background:#F4F5F7;border:1px solid #E2E5EA;border-radius:10px;padding:18px 22px;font:400 13px/1.65 inherit;color:#5B6472">Enumeration is closed on purpose: the response to a sign-in request is identical for known emails, unknown emails, and rate-limited requests. Same for the email-change form — an address already in use gets the same "confirmation sent" as a free one.</div>
+
+<!-- 03 -->
+<div style="max-width:1240px;margin:52px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">03</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">Five roles, and why <code>client</code> matters</h2>
+</div>
+<div style="max-width:1240px;margin:18px auto 0;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;overflow:hidden">
+  <div style="display:grid;grid-template-columns:1.1fr 2.4fr .9fr;gap:0;background:#EDEFF2;padding:12px 20px;font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#5B6472">
+    <span>Role</span><span>What it can do</span><span style="text-align:right">Costs a seat</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1.1fr 2.4fr .9fr;padding:14px 20px;border-top:1px solid #E2E5EA;align-items:center">
+    <span style="font:500 13px/1.4 'JetBrains Mono',monospace">owner</span>
+    <span style="font:400 13px/1.55 inherit;color:#5B6472">Everything, including billing, branding, and deleting the workspace</span>
+    <span style="font:500 13px/1.4 'JetBrains Mono',monospace;text-align:right">yes</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1.1fr 2.4fr .9fr;padding:14px 20px;border-top:1px solid #E2E5EA;background:#F4F5F7;align-items:center">
+    <span style="font:500 13px/1.4 'JetBrains Mono',monospace">admin</span>
+    <span style="font:400 13px/1.55 inherit;color:#5B6472">Everything except billing and deletion — invites, tracking, branding</span>
+    <span style="font:500 13px/1.4 'JetBrains Mono',monospace;text-align:right">yes</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1.1fr 2.4fr .9fr;padding:14px 20px;border-top:1px solid #E2E5EA;align-items:center">
+    <span style="font:500 13px/1.4 'JetBrains Mono',monospace">editor</span>
+    <span style="font:400 13px/1.55 inherit;color:#5B6472">Queries, fixes, rescans. No invites, no money</span>
+    <span style="font:500 13px/1.4 'JetBrains Mono',monospace;text-align:right">yes</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1.1fr 2.4fr .9fr;padding:14px 20px;border-top:1px solid #E2E5EA;background:#F4F5F7;align-items:center">
+    <span style="font:500 13px/1.4 'JetBrains Mono',monospace">viewer</span>
+    <span style="font:400 13px/1.55 inherit;color:#5B6472">Read and export. Cannot change what is measured</span>
+    <span style="font:500 13px/1.4 'JetBrains Mono',monospace;text-align:right">yes</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1.1fr 2.4fr .9fr;padding:14px 20px;border-top:1px solid #E2E5EA;border-left:3px solid #0E7C66;align-items:center">
+    <span style="font:500 13px/1.4 'JetBrains Mono',monospace;color:#0B6151">client</span>
+    <span style="font:400 13px/1.55 inherit;color:#5B6472">Read only, no exports, no settings — the agency's client seat</span>
+    <span style="font:500 13px/1.4 'JetBrains Mono',monospace;text-align:right;color:#0B6151">free · unlimited</span>
+  </div>
+</div>
+<div style="max-width:1240px;margin:14px auto 0;font:400 13px/1.65 inherit;color:#5B6472;max-width:88ch">Capabilities live in <code>lib/rbac.ts</code> and are checked in the route, not just hidden in the UI — every write endpoint returns 403 on its own. That is what makes "share the dashboard with your client" safe to advertise: sharing never costs a seat, and a client seat cannot spend money or change tracking.</div>
+
+<!-- 04 -->
+<div style="max-width:1240px;margin:52px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">04</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">The method rules, enforced in code</h2>
+</div>
+<div style="max-width:1240px;margin:18px auto 0;display:grid;grid-template-columns:repeat(2,1fr);gap:14px">
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:10px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Charts read one table</div>
+    <div style="font:400 13px/1.65 inherit;color:#5B6472"><code>lib/data.ts</code> reads <code>daily_rollups</code> for every chart — never a live aggregate over observations. The Wilson band ships from the rollup row, and the trend chart draws it as a ribbon so movement inside it looks like what it is.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:10px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">"Within noise" is a state</div>
+    <div style="font:400 13px/1.65 inherit;color:#5B6472">The score unit prints <span style="font:400 12.5px 'JetBrains Mono',monospace">within noise</span> instead of an arrow when the two bands overlap. There is no code path that shows a delta we cannot defend.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:10px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Verified is measured</div>
+    <div style="font:400 13px/1.65 inherit;color:#5B6472">The state select disables <span style="font:400 12.5px 'JetBrains Mono',monospace">verified</span> and <code>api/fixes/[id]</code> rejects it with <span style="font:400 12.5px 'JetBrains Mono',monospace">422 verified_is_measured_not_set</span>. Marking shipped queues nothing but the next scan; the card says so.</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:10px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Reports don't move</div>
+    <div style="font:400 13px/1.65 inherit;color:#5B6472">A snapshot stores the payload and the method version. A rule change flags affected history instead of rewriting an issued PDF — and white label cannot remove the methodology note.</div>
+  </div>
+</div>
+
+<!-- 05 -->
+<div style="max-width:1240px;margin:52px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">05</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">Two repos, opposite budgets</h2>
+</div>
+<div style="max-width:1240px;margin:18px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">citerate · marketing</div>
+    <div style="font:400 13px/1.9 'JetBrains Mono',monospace;color:#141B26">static HTML on the CDN<br>no Bootstrap JS<br>7 modules, ~40 lines each<br>GSAP on 2 pages, ≥900px<br>hand-built SVG charts</div>
+    <div style="font:400 13px/1.55 inherit;color:#5B6472">Pages that must load fast for strangers, and print correctly with JS off.</div>
+  </div>
+  <div style="background:#141B26;border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">citerate-app · dashboard</div>
+    <div style="font:400 13px/1.9 'JetBrains Mono',monospace;color:#F4F5F7">server-rendered, no prerender<br>Bootstrap JS: 5 components<br>Alpine for local state<br>ECharts in its own chunk<br>auth screens load neither</div>
+    <div style="font:400 13px/1.55 inherit;color:#8A93A1">Screens people keep open all day, where a filter that costs a round trip stops being used.</div>
+  </div>
+</div>
+
+<!-- 06 -->
+<div style="max-width:1240px;margin:52px auto 0;border-top:1px solid #C6CBD3;padding-top:20px;display:flex;align-items:baseline;gap:14px">
+  <span style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">06</span>
+  <h2 style="margin:0;font:600 26px/1.28 'Source Serif 4',Georgia,serif">Deliberately unfinished — and labelled in code</h2>
+</div>
+<div style="max-width:1240px;margin:18px auto 0;display:flex;flex-direction:column;gap:10px">
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #D98324;border-radius:10px;padding:16px 20px;display:grid;grid-template-columns:1.3fr 2.7fr;gap:20px;align-items:baseline">
+    <span style="font:500 13px/1.5 'JetBrains Mono',monospace">Paddle price ids</span>
+    <span style="font:400 13px/1.6 inherit;color:#5B6472"><code>api/billing/checkout.ts</code> has the map commented out and returns <span style="font:400 12.5px 'JetBrains Mono',monospace">501 billing_not_configured</span> until it's filled. The webhook — the half that must be right before money moves — is already HMAC-verified in the marketing repo.</span>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #D98324;border-radius:10px;padding:16px 20px;display:grid;grid-template-columns:1.3fr 2.7fr;gap:20px;align-items:baseline">
+    <span style="font:500 13px/1.5 'JetBrains Mono',monospace">Search Console callback</span>
+    <span style="font:400 13px/1.6 inherit;color:#5B6472">The consent hop is written; the callback and token storage are not. Ranking-decline findings publish without it at lower confidence, and onboarding says that out loud rather than hiding it.</span>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #D98324;border-radius:10px;padding:16px 20px;display:grid;grid-template-columns:1.3fr 2.7fr;gap:20px;align-items:baseline">
+    <span style="font:500 13px/1.5 'JetBrains Mono',monospace">Seeded 25 queries</span>
+    <span style="font:400 13px/1.6 inherit;color:#5B6472">Same placeholder as the site's <code>api/scan.ts</code>: <code>lib/seed-queries.ts</code> is a category template, written to the database as <span style="font:400 12.5px 'JetBrains Mono',monospace">source: 'category'</span> so nothing claims to be crawl-derived.</span>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #D98324;border-radius:10px;padding:16px 20px;display:grid;grid-template-columns:1.3fr 2.7fr;gap:20px;align-items:baseline">
+    <span style="font:500 13px/1.5 'JetBrains Mono',monospace">PDF renderer · 2FA · fonts</span>
+    <span style="font:400 13px/1.6 inherit;color:#5B6472"><code>artifact_key</code> stays null until a renderer writes to R2 — <code>/reports/[id]</code> is already the print source and prints correctly. <code>totp_secret</code> exists and is read; enrolment screens aren't built. Copy the four woff2 files into <code>public/fonts/</code>.</span>
+  </div>
+</div>
+
+<div style="max-width:1240px;margin:44px auto 0;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:24px 26px;display:flex;flex-direction:column;gap:10px">
+  <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">One rule to keep the halves honest</div>
+  <div style="font:600 20px/1.35 'Source Serif 4',Georgia,serif">Six lib files are byte-identical copies, on purpose</div>
+  <div style="font:400 13px/1.65 inherit;color:#5B6472;max-width:92ch"><code>env.ts</code> · <code>db.ts</code> · <code>plans.ts</code> · <code>scoring.ts</code> · <code>email.ts</code> · <code>domain.ts</code> are duplicated because two Pages projects share no package. Edit them in <code>citerate/</code> first and copy across — if they drift, the site and the app will disagree about what counts as a citation, which is the one disagreement this product cannot survive.</div>
+</div>
+
+</section>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,28 @@
+---
+title: "Subprocessors"
+description: "Every third party that processes Citerate customer data, what it is used for, and where it runs."
+updated: "Jul 12, 2026"
+version: "1.4"
+draft: true
+history: ["1.3 (Jun 2026)", "1.2 (Apr 2026)", "1.1 (Feb 2026)", "1.0 (Jan 2026)"]
+summary: "The complete list, kept current. Material additions are announced 30 days in advance so DPA customers can object before they take effect."
+---
+
+### Current subprocessors
+
+| Subprocessor | Purpose | Data | Location |
+| --- | --- | --- | --- |
+| Cloudflare | Hosting, CDN, database (D1), object storage (R2), bot protection | All product data | Global edge |
+| Resend | Transactional email | Name, email, message content | US / EU |
+| Paddle | Merchant of record, payments, tax | Billing contact, transaction data | UK / US |
+| OpenAI | Engine queried on your behalf | Query text only | US |
+| Google | AI Overviews and Gemini answers | Query text only | US |
+| Perplexity | Engine queried on your behalf | Query text only | US |
+
+### What engines receive
+
+Engines receive the prompt text of your tracked queries and nothing else — no account identifiers, no customer names, no domain list. Prompts are sent unpersonalized and are not associated with your account at the engine.
+
+### Notification
+
+Material additions to this list are announced by email to account owners at least 30 days before they take effect, and this page's version number increments. DPA customers may object in that window per section 4 of the [DPA](/legal/dpa).

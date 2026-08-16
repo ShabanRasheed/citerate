@@ -1,0 +1,77 @@
+---
+/**
+ * App shell. Sidebar + topbar + content well, one stylesheet, one script.
+ * Every route that renders this is already authenticated by middleware.ts.
+ */
+import "../styles/main.scss";
+import Sidebar from "../components/Sidebar.astro";
+import Topbar from "../components/Topbar.astro";
+import Toasts from "../components/Toasts.astro";
+
+interface Props {
+  title: string;
+  current: "overview" | "queries" | "fixes" | "competitors" | "reports" | "settings";
+  crumb?: string;
+  /** loads the ECharts chunk only where a chart exists */
+  charts?: boolean;
+  actions?: boolean;
+}
+
+const { title, current, crumb, charts = false } = Astro.props;
+const { workspace, user, domains } = Astro.locals;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · Citerate</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#141B26" />
+    <link rel="preload" href="/fonts/jetbrains-mono-500.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/source-serif-4-600.woff2" as="font" type="font/woff2" crossorigin />
+    <script src="../scripts/app.js"></script>
+  </head>
+
+  <body data-charts={charts ? "true" : "false"}>
+    <a class="visually-hidden-focusable" href="#main">Skip to content</a>
+
+    <div class="shell">
+      <Sidebar current={current} />
+
+      <div class="main">
+        <Topbar title={title} crumb={crumb}>
+          <slot name="actions" />
+        </Topbar>
+
+        <main id="main" class="well">
+          <slot />
+        </main>
+      </div>
+    </div>
+
+    <!-- Mobile sidebar: same markup, Bootstrap offcanvas instead of a column. -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="side-offcanvas" aria-label="Navigation">
+      <div class="offcanvas-body p-0">
+        <Sidebar current={current} mobile={true} />
+      </div>
+    </div>
+
+    <Toasts />
+
+    <script
+      is:inline
+      type="application/json"
+      id="app-context"
+      set:html={JSON.stringify({
+        workspaceId: workspace?.workspaceId ?? null,
+        plan: workspace?.plan ?? "free",
+        role: workspace?.role ?? "viewer",
+        userId: user?.id ?? null,
+        domainId: domains?.[0]?.id ?? null
+      })}
+    />
+  </body>
+</html>

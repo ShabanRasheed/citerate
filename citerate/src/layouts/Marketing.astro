@@ -1,0 +1,29 @@
+---
+/** Marketing chrome: header, footer, consent notice. */
+import Base from "./Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ConsentBar from "../components/ConsentBar.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  noindex?: boolean;
+  scrollNarrative?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** highlights the matching nav item */
+  nav?: "how-it-works" | "pricing" | "agencies" | "blog" | "docs" | null;
+}
+
+const { nav = null, ...rest } = Astro.props;
+---
+
+<Base {...rest}>
+  <Header current={nav} />
+  <main id="main">
+    <slot />
+  </main>
+  <Footer />
+  <ConsentBar />
+</Base>

@@ -1,0 +1,139 @@
+---
+/**
+ * A single report snapshot, rendered from its stored payload — never recomputed.
+ * This page is also the print source for the PDF, so 06-utilities/_print.scss
+ * owns its geometry and the methodology block is never hidden.
+ */
+import App from "../../layouts/App.astro";
+import { one } from "../../lib/db";
+import { pct, day, engineLabel, causeLabel } from "../../lib/format";
+
+const env = Astro.locals.runtime.env;
+const workspace = Astro.locals.workspace!;
+const { id } = Astro.params;
+
+const report = await one<{
+  id: string; period: string; kind: string; method_version: string; payload: string;
+  created_at: number; hostname: string; artifact_key: string | null;
+}>(
+  env.DB,
+  `SELECT r.id, r.period, r.kind, r.method_version, r.payload, r.created_at, r.artifact_key, d.hostname
+     FROM report_snapshots r JOIN domains d ON d.id = r.domain_id
+    WHERE r.id = ? AND r.workspace_id = ?`,
+  id,
+  workspace.workspaceId
+);
+
+if (!report) return Astro.redirect("/reports", 302);
+
+interface Payload {
+  rate: number;
+  previousRate: number | null;
+  withinNoise: boolean;
+  runs: number;
+  causes: { aio: number; rank: number; tech: number; other: number };
+  engines: { engine: string; citation_rate: number; runs: number }[];
+  fixes: { title: string; state: string; baseline_rate: number | null; verified_rate: number | null }[];
+  coverage: string | null;
+}
+const data = JSON.parse(report.payload) as Payload;
+const accent = workspace.brandAccent ?? "var(--cited)";
+const pdfUnavailable = Astro.url.searchParams.get("pdf") === "unavailable";
+---
+
+<App title={`Report · ${report.period}`} current="reports" crumb={report.hostname}>
+  <section class="c-card c-card--lg" style={`border-top:3px solid ${accent}`}>
+    <div class="pane-head">
+      <div class="stack stack--2">
+        <span class="t-label t-label--ink">{report.kind.replace("_", " ")} readout · {report.period}</span>
+        <h2 class="score__verdict">{report.hostname} was cited in {pct(data.rate)} of measured runs.</h2>
+      </div>
+      <div class="pane-head__meta">
+        <span>generated {day(report.created_at)}</span>
+        <span>method {report.method_version}</span>
+        <a class="btn-ghost" href={`/api/reports/${report.id}/pdf`}>Download PDF</a>
+      </div>
+    </div>
+
+    {pdfUnavailable && (
+      <p class="chart__note" style="margin-top:8px">
+        PDF rendering is not enabled in this environment (no Browser binding). This page is the print source — your
+        browser's print dialog produces the same document.
+      </p>
+    )}
+
+    <div class="grid-app" style="margin-top:24px">
+      <div class="col-4">
+        <div class="score">
+          <span class="score__label">Citation rate</span>
+          <div class="score__row">
+            <span class="score__value">{pct(data.rate)}</span>
+            {data.withinNoise && <span class="noise">within noise</span>}
+          </div>
+          <span class="score__band">{data.runs} runs</span>
+        </div>
+      </div>
+
+      <div class="col-8">
+        <div class="chart">
+          <div class="chart__head"><h3 class="chart__title">Cause mix</h3></div>
+          <div class="cause-bar">
+            {(["aio", "rank", "tech", "other"] as const).map((k) =>
+              data.causes[k] > 0 ? (
+                <span class="cause-bar__seg" data-cause={k} style={`width:${data.causes[k] * 100}%`}></span>
+              ) : null
+            )}
+          </div>
+          <div class="chart__legend">
+            {(["aio", "rank", "tech", "other"] as const).map((k) =>
+              data.causes[k] > 0 ? (
+                <span class="chart__key" data-cause={k}>
+                  {causeLabel(
+                    k === "aio" ? "aio_displacement" : k === "rank" ? "ranking_decline" : k === "tech" ? "technical_decay" : "unexplained"
+                  )} {Math.round(data.causes[k] * 100)}%
+                </span>
+              ) : null
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="engines" style="margin-top:16px">
+      {data.engines.map((e) => (
+        <div class="engine">
+          <span class="engine__name">{engineLabel(e.engine)}</span>
+          <span class="engine__rate">{pct(e.citation_rate)}</span>
+          <span class="chart__note">{e.runs} runs</span>
+        </div>
+      ))}
+    </div>
+
+    {data.fixes.length > 0 && (
+      <div class="stack stack--3" style="margin-top:24px">
+        <span class="t-label t-label--ink">What changed</span>
+        {data.fixes.map((f) => (
+          <div class="row-between" style="gap:16px;padding:12px 14px;background:var(--paper);border-radius:var(--r-sm)">
+            <span style="color:var(--ink)">{f.title}</span>
+            {f.state === "verified" && f.baseline_rate !== null && f.verified_rate !== null ? (
+              <span class="proof">{pct(f.baseline_rate)} <span class="proof__arrow">→</span> {pct(f.verified_rate)}</span>
+            ) : (
+              <span class="pill">{f.state.replace("_", " ")}</span>
+            )}
+          </div>
+        ))}
+      </div>
+    )}
+
+    <div class="c-card c-card--accent-tech methodology" style="margin-top:24px">
+      <span class="t-label" style="color:var(--tech-ink)">How this was measured</span>
+      <span class="t-body tx-soft" style="line-height:1.65">
+        {data.runs} runs across {data.engines.length} engines, 3 runs per engine per refresh. A citation requires a
+        linked URL that resolves to {report.hostname}; unlinked brand mentions are reported separately and never counted
+        in the rate. Cause attribution below 0.6 confidence is reported as unexplained. Method version
+        {" "}{report.method_version} — this snapshot is not recomputed when the method changes.
+        {data.coverage && ` Coverage note: ${data.coverage}`}
+      </span>
+    </div>
+  </section>
+</App>

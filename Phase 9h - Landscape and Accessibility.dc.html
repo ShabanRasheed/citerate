@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#F4F5F7;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="max-width:1240px;margin:0 auto;padding:48px 40px 120px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:20px;border-bottom:2px solid #141B26">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Phase 9h · UX package 8 of 8 · 2026-07-29</div>
+      <h1 style="font:600 34px/1.15 'Source Serif 4',serif;letter-spacing:-.015em;margin:10px 0 0">Competitive landscape &amp; accessibility specification</h1>
+      <p style="font:400 14px/1.55 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0;text-wrap:pretty">Two things that usually get left out of a UX package and shouldn't. The landscape is written as <em>categories</em> rather than named vendors — category behaviour is stable and checkable, while a specific product's feature list is stale within a quarter. The accessibility section is a build spec, not a promise: every line is testable.</p>
+    </div>
+    <div style="flex:none;text-align:right;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+      <div>categories &nbsp;5</div>
+      <div>risks &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7</div>
+      <div>a11y target WCAG 2.2 AA</div>
+      <div style="color:#8A93A1">checks &nbsp;&nbsp;&nbsp;&nbsp;24</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0">
+    <a href="#map" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">01 positioning map</a>
+    <a href="#cats" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">02 the five categories</a>
+    <a href="#moat" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">03 what is defensible</a>
+    <a href="#risk" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">04 risks</a>
+    <a href="#a11y" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">05 accessibility spec</a>
+    <a href="#tests" style="font:500 11.5px 'JetBrains Mono',monospace;color:#141B26;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:999px;padding:5px 12px">06 test checklist</a>
+  </div>
+
+  <section id="map" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">01 · Positioning</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Two axes that actually separate the field</h2>
+    <p style="font:400 13.5px/1.6 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0">Horizontal: what gets counted — soft signals like mentions and sentiment, versus a citation a user could click. Vertical: what is delivered — a number to look at, versus a named cause with a remedy attached. The top-right quadrant is almost empty, and that is the entire commercial thesis.</p>
+    <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:26px 28px;margin-top:18px">
+      <div style="overflow-x:auto">
+      <div style="display:flex;gap:14px;align-items:stretch;min-width:1040px">
+        <div style="flex:none;width:26px;display:flex;align-items:center;justify-content:center">
+          <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1;writing-mode:vertical-rl;transform:rotate(180deg)">names a cause &amp; a fix &nbsp;←→&nbsp; reports a number</div>
+        </div>
+        <div style="flex:1">
+          <div style="position:relative;height:460px;background:#F4F5F7;border-radius:8px;overflow:hidden">
+            <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:#C6CBD3"></div>
+            <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:#C6CBD3"></div>
+            <div style="position:absolute;left:52%;top:2%;right:2%;bottom:52%;border:1px dashed #0E7C66;border-radius:8px;background:rgba(231,242,239,.45)"></div>
+            <div style="position:absolute;left:54%;top:4%;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#0B6151">the empty quadrant</div>
+
+            <div style="position:absolute;left:70%;top:20%;transform:translate(-50%,-50%);background:#141B26;color:#F4F5F7;border-radius:10px;padding:12px 16px;max-width:210px;box-shadow:0 12px 32px rgba(20,27,38,.14)">
+              <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#35B394">US</div>
+              <div style="font:600 17px/1.25 'Source Serif 4',serif;margin-top:5px">cite/rate</div>
+              <div style="font:400 11.5px/1.45 inherit;color:#8A93A1;margin-top:5px">Counts citations over runs, names one of three causes, hands over a fix, then proves it moved.</div>
+            </div>
+
+            <div style="position:absolute;left:78%;top:72%;transform:translate(-50%,-50%);background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:11px 14px;max-width:180px">
+              <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">CAT B</div>
+              <div style="font:600 14.5px/1.25 'Source Serif 4',serif;margin-top:4px">AI-visibility dashboards</div>
+              <div style="font:400 11px/1.4 inherit;color:#5B6472;margin-top:4px">Right unit, no diagnosis. A score that goes up and down.</div>
+            </div>
+
+            <div style="position:absolute;left:20%;top:76%;transform:translate(-50%,-50%);background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:11px 14px;max-width:180px">
+              <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">CAT C</div>
+              <div style="font:600 14.5px/1.25 'Source Serif 4',serif;margin-top:4px">Brand-mention monitors</div>
+              <div style="font:400 11px/1.4 inherit;color:#5B6472;margin-top:4px">Counts being talked about. Adjacent problem, adjacent buyer.</div>
+            </div>
+
+            <div style="position:absolute;left:20%;top:30%;transform:translate(-50%,-50%);background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:11px 14px;max-width:190px">
+              <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">CAT A</div>
+              <div style="font:600 14.5px/1.25 'Source Serif 4',serif;margin-top:4px">Rank trackers &amp; SEO suites</div>
+              <div style="font:400 11px/1.4 inherit;color:#5B6472;margin-top:4px">Excellent remediation advice, aimed at the wrong surface.</div>
+            </div>
+
+            <div style="position:absolute;left:44%;top:14%;transform:translate(-50%,-50%);background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:11px 14px;max-width:170px">
+              <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">CAT D</div>
+              <div style="font:600 14.5px/1.25 'Source Serif 4',serif;margin-top:4px">Consultants &amp; audits</div>
+              <div style="font:400 11px/1.4 inherit;color:#5B6472;margin-top:4px">Names causes brilliantly. Once. For five figures.</div>
+            </div>
+
+            <div style="position:absolute;left:52%;top:85%;transform:translate(-50%,-50%);background:#EDEFF2;border:1px dashed #C6CBD3;border-radius:10px;padding:10px 13px;max-width:190px">
+              <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8A93A1">CAT E · THE REAL RIVAL</div>
+              <div style="font:600 14.5px/1.25 'Source Serif 4',serif;margin-top:4px">Typing prompts by hand</div>
+              <div style="font:400 11px/1.4 inherit;color:#5B6472;margin-top:4px">Free, immediate, n=1, and what almost everyone does today.</div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:10px;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">
+            <span>counts mentions, rankings, sentiment</span>
+            <span>counts citations a user could click</span>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cats" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">02 · The five categories</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Who the buyer is comparing us to, and what each does well</h2>
+    <p style="font:400 13.5px/1.6 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0">Written as behaviour, not brands. If a sales conversation stalls, it stalls on one of these five — and the "does well" column is not diplomacy, it is the part we must not pretend away.</p>
+    <div style="display:flex;flex-direction:column;gap:2px;margin-top:18px">
+      <div style="display:grid;grid-template-columns:190px 1fr 1fr 200px;gap:16px;padding:11px 18px;background:#141B26;border-radius:10px 10px 2px 2px;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1">
+        <div>Category</div><div>Does genuinely well</div><div>Structural gap</div><div>Our line in the room</div>
+      </div>
+      <div style="display:grid;grid-template-columns:190px 1fr 1fr 200px;gap:16px;padding:14px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.55 inherit">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">CAT A</span><div style="font:600 15px/1.3 'Source Serif 4',serif;margin-top:4px">Rank trackers &amp; enterprise SEO suites</div></div>
+        <div style="color:#5B6472">Deep crawl diagnostics, keyword universes, mature reporting, and remediation advice built over a decade. Already in the stack and already trusted.</div>
+        <div style="color:#5B6472">They measure position on a results page. When the answer replaces the results page, position is intact and the traffic is gone — which is exactly the situation P1 cannot explain with these tools.</div>
+        <div style="color:#0B6151">"Keep them. We answer the question their charts can't: was the click taken by an answer, and by whom."</div>
+      </div>
+      <div style="display:grid;grid-template-columns:190px 1fr 1fr 200px;gap:16px;padding:14px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.55 inherit">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">CAT B</span><div style="font:600 15px/1.3 'Source Serif 4',serif;margin-top:4px">AI-visibility dashboards</div></div>
+        <div style="color:#5B6472">Correct instinct and the right unit. Fast to market, often good at breadth of engines.</div>
+        <div style="color:#5B6472">A score with no denominator, no interval, and no cause. The user learns they moved from 58 to 54 and cannot tell whether that is a problem, let alone what to do — so the tool becomes a screenshot in a slide and then a cancelled subscription.</div>
+        <div style="color:#0B6151">"Ask them two things: over how many runs, and what is the confidence interval. Then ask what you should change on Monday."</div>
+      </div>
+      <div style="display:grid;grid-template-columns:190px 1fr 1fr 200px;gap:16px;padding:14px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.55 inherit">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">CAT C</span><div style="font:600 15px/1.3 'Source Serif 4',serif;margin-top:4px">Brand-mention &amp; share-of-voice monitors</div></div>
+        <div style="color:#5B6472">Genuinely useful for a comms or PR team. Broad source coverage, sentiment, alerting maturity.</div>
+        <div style="color:#5B6472">Being named is not being linked. A mention with no citation recovers no traffic, and the buyer is a communications lead rather than an organic-growth owner.</div>
+        <div style="color:#0B6151">"Different job, different buyer. We measure the link, not the conversation."</div>
+      </div>
+      <div style="display:grid;grid-template-columns:190px 1fr 1fr 200px;gap:16px;padding:14px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.55 inherit">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#8A93A1">CAT D</span><div style="font:600 15px/1.3 'Source Serif 4',serif;margin-top:4px">Consultants &amp; one-off audits</div></div>
+        <div style="color:#5B6472">The best cause attribution available, because a human reads the pages. Highly persuasive deliverable.</div>
+        <div style="color:#5B6472">A photograph, not a series. It cannot verify the fix it recommended, and repeating it monthly is unaffordable — which is why P3 wants to <em>become</em> this category with our instrument underneath.</div>
+        <div style="color:#0B6151">"An audit tells you what was true in March. We tell you what is true this week, and whether your fix worked."</div>
+      </div>
+      <div style="display:grid;grid-template-columns:190px 1fr 1fr 200px;gap:16px;padding:14px 18px;background:#FDF2E3;border:1px solid #F2E0C4;border-radius:2px 2px 10px 10px;font:400 12.5px/1.55 inherit">
+        <div><span style="font:500 11px 'JetBrains Mono',monospace;color:#9A6210">CAT E</span><div style="font:600 15px/1.3 'Source Serif 4',serif;margin-top:4px">Typing prompts in by hand</div></div>
+        <div style="color:#5B6472">Free, instant, requires no procurement, and the answer feels completely convincing. This is what the overwhelming majority actually do.</div>
+        <div style="color:#5B6472">n = 1. Ask the same engine the same question five times and get five different answers — so a hand check produces a confident belief with no evidential value, in either direction.</div>
+        <div style="color:#0B6151">"You already did this once and it scared you. We did it 1 200 times and can tell you whether it was real."</div>
+      </div>
+    </div>
+    <div style="background:#EDEFF2;border:1px solid #E2E5EA;border-radius:10px;padding:16px 20px;margin-top:14px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">THE UNCOMFORTABLE ONE</div>
+      <p style="font:400 13px/1.6 inherit;color:#5B6472;margin:7px 0 0;max-width:100ch">Category E is the real competitor and the free scan exists entirely to beat it. It meets the hand-check on its own terms — no signup, an answer in twenty seconds — and then does the one thing a hand check structurally cannot: repeat itself enough times to say whether the result was signal. Every second of latency in F01 is a point of market share against Category E, not against Category B.</p>
+    </div>
+  </section>
+
+  <section id="moat" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">03 · Defensibility</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Five things that get harder to copy over time</h2>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:18px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #0E7C66;border-radius:4px 4px 10px 10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0B6151">01 · ACCUMULATING</div>
+        <div style="font:600 16px/1.3 'Source Serif 4',serif;margin-top:7px">The fix-outcome corpus</div>
+        <p style="font:400 12px/1.55 inherit;color:#5B6472;margin:8px 0 0">Every verified fix and every "no measurable change" re-weights the templates. After a year of shipped changes and their measured outcomes, the prioritisation is trained on evidence nobody else holds. This is the only compounding asset in the product.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #3E5C8A;border-radius:4px 4px 10px 10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#34507A">02 · SWITCHING COST</div>
+        <div style="font:600 16px/1.3 'Source Serif 4',serif;margin-top:7px">The unbroken series</div>
+        <p style="font:400 12px/1.55 inherit;color:#5B6472;margin:8px 0 0">A time series cannot be backfilled. Eighteen months of runs on the same query set, under versioned methods, is not portable — which is also precisely why we must never let a billing event punch a hole in it.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #D98324;border-radius:4px 4px 10px 10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#9A6210">03 · REPUTATIONAL</div>
+        <div style="font:600 16px/1.3 'Source Serif 4',serif;margin-top:7px">Published, versioned method</div>
+        <p style="font:400 12px/1.55 inherit;color:#5B6472;margin:8px 0 0">A public method page, immutable snapshots and flagged discontinuities are cheap to build and expensive to <em>start</em> doing — a competitor who has quietly restated numbers cannot retroactively become trustworthy.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #8A93A1;border-radius:4px 4px 10px 10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#5B6472">04 · DISTRIBUTION</div>
+        <div style="font:600 16px/1.3 'Source Serif 4',serif;margin-top:7px">Agencies as the channel</div>
+        <p style="font:400 12px/1.55 inherit;color:#5B6472;margin:8px 0 0">One Agency seat carries the instrument into fourteen companies under someone else's brand. White-label makes P3 a reseller with no commission structure to negotiate — and she will not re-onboard fourteen clients onto a rival for a marginal feature.</p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #141B26;border-radius:4px 4px 10px 10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#141B26">05 · CULTURAL</div>
+        <div style="font:600 16px/1.3 'Source Serif 4',serif;margin-top:7px">Willingness to say "we don't know"</div>
+        <p style="font:400 12px/1.55 inherit;color:#5B6472;margin:8px 0 0">The weakest-looking feature is the hardest to copy, because copying it means a competitor's own dashboard starts admitting uncertainty. Most organisations cannot bring themselves to ship that.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="risk" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">04 · Risks</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Seven things that could break this, and the early warning for each</h2>
+    <div style="display:flex;flex-direction:column;gap:2px;margin-top:18px">
+      <div style="display:grid;grid-template-columns:230px 1fr 1fr 96px;gap:16px;padding:11px 18px;background:#141B26;border-radius:10px 10px 2px 2px;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1">
+        <div>Risk</div><div>What it would do to us</div><div>Mitigation / early signal</div><div>Severity</div>
+      </div>
+      <div style="display:grid;grid-template-columns:230px 1fr 1fr 96px;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:600 14px/1.3 'Source Serif 4',serif">An engine blocks or rate-limits measurement</div>
+        <div style="color:#5B6472">A SURFACE engine degrades to PROXY, or disappears. Denominators change mid-series.</div>
+        <div style="color:#5B6472">The SURFACE / PROXY label already exists precisely so this is a visible, explainable event rather than a silent corruption. Bump the method version; flag the discontinuity; never re-average across it.</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#A62F2F">HIGH</div>
+      </div>
+      <div style="display:grid;grid-template-columns:230px 1fr 1fr 96px;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:600 14px/1.3 'Source Serif 4',serif">An SEO suite ships "AI citations" as a checkbox feature</div>
+        <div style="color:#5B6472">Compresses the category into a line item on an invoice the buyer already pays.</div>
+        <div style="color:#5B6472">A bundled feature will report a score, not a verified cause — the same gap as Category B, now with distribution. Compete on the fix-outcome corpus and the agency channel, never on breadth.</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#A62F2F">HIGH</div>
+      </div>
+      <div style="display:grid;grid-template-columns:230px 1fr 1fr 96px;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:600 14px/1.3 'Source Serif 4',serif">Answer engines stop citing sources at all</div>
+        <div style="color:#5B6472">Terminal for the unit of measurement.</div>
+        <div style="color:#5B6472">Currently moving the other way — citation is the trust mechanism these products rely on. Watch citation density per answer as a leading indicator; it is already worth tracking as an internal metric.</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#9A6210">MED</div>
+      </div>
+      <div style="display:grid;grid-template-columns:230px 1fr 1fr 96px;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:600 14px/1.3 'Source Serif 4',serif">Fixes stop moving the number</div>
+        <div style="color:#5B6472">If verified fixes are rare, stage 5 never closes and the loop is a dashboard after all.</div>
+        <div style="color:#5B6472">The single metric to instrument from day one: <em>verified-fix rate</em>. If it is under ~30%, the fix templates are the problem to solve, not the UI.</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#A62F2F">HIGH</div>
+      </div>
+      <div style="display:grid;grid-template-columns:230px 1fr 1fr 96px;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:600 14px/1.3 'Source Serif 4',serif">Honesty reads as weakness in sales</div>
+        <div style="color:#5B6472">A rival's confident 0–100 score out-demos an interval and a striped unknown segment.</div>
+        <div style="color:#5B6472">Sell the interval as the feature: it is what lets a buyer present the number without risk. If it keeps losing demos, fix the <em>framing</em>, never the statistics.</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#9A6210">MED</div>
+      </div>
+      <div style="display:grid;grid-template-columns:230px 1fr 1fr 96px;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:600 14px/1.3 'Source Serif 4',serif">Scan cost per run outruns the price ladder</div>
+        <div style="color:#5B6472">2 000 queries × several engines × several runs is the whole unit economic. Daily refresh multiplies it.</div>
+        <div style="color:#5B6472">Runs per query are a tunable, not a constant. Report the denominator honestly and reduce runs on stable queries rather than raising prices or quietly narrowing the sample.</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#A62F2F">HIGH</div>
+      </div>
+      <div style="display:grid;grid-template-columns:230px 1fr 1fr 96px;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;border-radius:2px 2px 10px 10px;font:400 12.5px/1.5 inherit">
+        <div style="font:600 14px/1.3 'Source Serif 4',serif">Enterprise deals stall on SSO and residency</div>
+        <div style="color:#5B6472">P4's requirements are knowingly deferred; two lost deals in a row makes that a mistake rather than a decision.</div>
+        <div style="color:#5B6472">Track the stall reason on every Enterprise conversation. Build SSO on the second stall, not the first request — and never before a signed logo.</div>
+        <div style="font:500 11px 'JetBrains Mono',monospace;color:#5B6472">LOW</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="a11y" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">05 · Accessibility specification</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">WCAG 2.2 AA, written as build rules</h2>
+    <p style="font:400 13.5px/1.6 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0">This product's whole value is a finding being legible. A chart that only works in colour, or a drawer that traps a keyboard user, is not an accessibility oversight here — it is a failure of the core proposition.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">CONTRAST · TOKEN BY TOKEN</div>
+        <div style="display:flex;flex-direction:column;gap:2px;margin-top:12px">
+          <div style="display:grid;grid-template-columns:1fr 74px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #F0F1F3;font:400 12px/1.4 inherit"><span style="font:500 11.5px 'JetBrains Mono',monospace">--ink on --card</span><span style="font:500 11.5px 'JetBrains Mono',monospace;color:#0B6151">14.9:1</span><span style="color:#5B6472">body, all sizes</span></div>
+          <div style="display:grid;grid-template-columns:1fr 74px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #F0F1F3;font:400 12px/1.4 inherit"><span style="font:500 11.5px 'JetBrains Mono',monospace">--ink-soft on --card</span><span style="font:500 11.5px 'JetBrains Mono',monospace;color:#0B6151">6.4:1</span><span style="color:#5B6472">secondary text, all sizes</span></div>
+          <div style="display:grid;grid-template-columns:1fr 74px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #F0F1F3;font:400 12px/1.4 inherit"><span style="font:500 11.5px 'JetBrains Mono',monospace">--cited-ink on --card</span><span style="font:500 11.5px 'JetBrains Mono',monospace;color:#0B6151">AA</span><span style="color:#5B6472">positive figures at 12px+</span></div>
+          <div style="display:grid;grid-template-columns:1fr 74px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #F0F1F3;font:400 12px/1.4 inherit"><span style="font:500 11.5px 'JetBrains Mono',monospace">--gap-ink on --card</span><span style="font:500 11.5px 'JetBrains Mono',monospace;color:#0B6151">AA</span><span style="color:#5B6472">negative figures at 12px+</span></div>
+          <div style="display:grid;grid-template-columns:1fr 74px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #F0F1F3;font:400 12px/1.4 inherit"><span style="font:500 11.5px 'JetBrains Mono',monospace">--warn</span><span style="font:500 11.5px 'JetBrains Mono',monospace;color:#A62F2F">2.6:1</span><span style="color:#A62F2F">never for text — fills only. Use --warn-ink.</span></div>
+          <div style="display:grid;grid-template-columns:1fr 74px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #F0F1F3;font:400 12px/1.4 inherit"><span style="font:500 11.5px 'JetBrains Mono',monospace">--ink-muted</span><span style="font:500 11.5px 'JetBrains Mono',monospace;color:#9A6210">≥3:1</span><span style="color:#5B6472">non-text only: rules, icons, marks</span></div>
+          <div style="display:grid;grid-template-columns:1fr 74px 1fr;gap:10px;padding:8px 0;font:400 12px/1.4 inherit"><span style="font:500 11.5px 'JetBrains Mono',monospace">--side-ink-muted on --side-bg</span><span style="font:500 11.5px 'JetBrains Mono',monospace;color:#0B6151">5.5:1</span><span style="color:#5B6472">sidebar secondary labels</span></div>
+        </div>
+        <p style="font:400 12px/1.55 inherit;color:#5B6472;margin:12px 0 0">The lifted dark-surface set (<span style="font:400 11px 'JetBrains Mono',monospace">--side-cited</span>, <span style="font:400 11px 'JetBrains Mono',monospace">--side-gap</span>…) exists because the light semantics fail on ink. Never reuse the light values on the sidebar.</p>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:18px 20px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">NON-COLOUR ENCODING · 1.4.1</div>
+        <p style="font:400 12.5px/1.55 inherit;color:#5B6472;margin:10px 0 0">Every data mark carries a second channel. This is enforced in the design system, not left to the implementer.</p>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:12px">
+          <div style="display:flex;align-items:center;gap:11px"><span style="flex:none;width:56px;height:13px;border-radius:2px;background:#C43D3D"></span><span style="font:400 12px/1.4 inherit;color:#5B6472">Cause 1 — solid + always labelled in the legend</span></div>
+          <div style="display:flex;align-items:center;gap:11px"><span style="flex:none;width:56px;height:13px;border-radius:2px;background:#D98324"></span><span style="font:400 12px/1.4 inherit;color:#5B6472">Cause 2 — solid + label</span></div>
+          <div style="display:flex;align-items:center;gap:11px"><span style="flex:none;width:56px;height:13px;border-radius:2px;background:#3E5C8A"></span><span style="font:400 12px/1.4 inherit;color:#5B6472">Cause 3 — solid + label</span></div>
+          <div style="display:flex;align-items:center;gap:11px"><span style="flex:none;width:56px;height:13px;border-radius:2px;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></span><span style="font:400 12px/1.4 inherit;color:#5B6472">Cause 4 — <strong>always striped</strong>, in every medium, at every size</span></div>
+          <div style="display:flex;align-items:center;gap:11px"><span style="flex:none;width:56px;height:13px;border-radius:999px;background:#141B26;color:#F4F5F7;font:500 8px/13px 'JetBrains Mono',monospace;text-align:center;letter-spacing:.06em">SURFACE</span><span style="font:400 12px/1.4 inherit;color:#5B6472">Filled pill</span></div>
+          <div style="display:flex;align-items:center;gap:11px"><span style="flex:none;width:56px;height:13px;border-radius:999px;border:1px dashed #8A93A1;color:#5B6472;font:500 8px/11px 'JetBrains Mono',monospace;text-align:center;letter-spacing:.06em">PROXY</span><span style="font:400 12px/1.4 inherit;color:#5B6472">Dashed outline — distinguishable with no colour at all</span></div>
+        </div>
+        <p style="font:400 12px/1.55 inherit;color:#5B6472;margin:12px 0 0">Deltas pair the colour with a sign and an arrow glyph. Fix statuses pair colour with a word: <em>open · shipped · verified · no measurable change</em>.</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">KEYBOARD · 2.1.1 · 2.4.3 · 2.4.7</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:10px 0 0;padding-left:16px">
+          <li>Skip link to main, first in tab order on every route.</li>
+          <li>Query rows are focusable; <span style="font:400 11px 'JetBrains Mono',monospace">Enter</span> opens the evidence drawer, <span style="font:400 11px 'JetBrains Mono',monospace">Esc</span> closes it and returns focus to that row.</li>
+          <li>The drawer is <span style="font:400 11px 'JetBrains Mono',monospace">role="dialog"</span> with focus trapped while open.</li>
+          <li>Workspace switcher is a real combobox: type-ahead, arrow keys, <span style="font:400 11px 'JetBrains Mono',monospace">Esc</span> to cancel.</li>
+          <li>Focus ring is the two-tone token (<span style="font:400 11px 'JetBrains Mono',monospace">--focus-ring</span>) so it survives on both paper and ink. Never <span style="font:400 11px 'JetBrains Mono',monospace">outline:none</span> without a replacement.</li>
+          <li>No keyboard trap in the PDF preview iframe.</li>
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">SCREEN READER · 1.3.1 · 4.1.2 · 4.1.3</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:10px 0 0;padding-left:16px">
+          <li>Every chart has a text equivalent that states the same finding — the verdict sentence usually <em>is</em> it, so associate them rather than writing a second description.</li>
+          <li>Rates are announced as "11 of 60 runs, 18 percent", not "11/60".</li>
+          <li>The cause bar is a list of four labelled items, not an unlabelled group of divs.</li>
+          <li>Scan progress and toast messages go through one polite live region; a completed scan announces once.</li>
+          <li>Table headers are real <span style="font:400 11px 'JetBrains Mono',monospace">th</span> with <span style="font:400 11px 'JetBrains Mono',monospace">scope</span>; sort state uses <span style="font:400 11px 'JetBrains Mono',monospace">aria-sort</span>.</li>
+          <li>Locked regions announce "locked — upgrade to see competitor names", never just visual blur.</li>
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">MOTION, TARGETS &amp; INPUT · 2.3.3 · 2.5.8</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:10px 0 0;padding-left:16px">
+          <li><span style="font:400 11px 'JetBrains Mono',monospace">prefers-reduced-motion</span> zeroes all five duration tokens; state still changes instantly, so nothing feels disabled.</li>
+          <li>The count-up on the score is decoration — the final value is in the DOM from the first frame.</li>
+          <li>Nothing flashes, nothing auto-scrolls, nothing moves on hover except a 1px border.</li>
+          <li>Hit targets ≥ 24 × 24 px everywhere, ≥ 44 × 44 px on any touch layout.</li>
+          <li>Chart segments are clickable at ≥ 24px in their smaller dimension, or paired with a legend row that is.</li>
+          <li>No drag-only interaction: the threshold slider accepts arrow keys and a typed number.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">FORMS &amp; ERRORS · 3.3.1 · 3.3.2 · 3.3.7</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:10px 0 0;padding-left:16px">
+          <li>Every field has a visible persistent label. Placeholders are never the label.</li>
+          <li>Errors are text next to the field, programmatically associated, and they name the remedy — not just the fault.</li>
+          <li>The 6-digit code field is one input with <span style="font:400 11px 'JetBrains Mono',monospace">autocomplete="one-time-code"</span>, not six separate boxes that fight paste and screen readers. <em>The wireframe draws six boxes; the build must not.</em></li>
+          <li>Nothing already provided is re-asked: the claim flow carries the email and the domain forward (3.3.7).</li>
+          <li>Destructive actions — revoke a session, remove the last admin, downgrade — state the consequence in the confirmation, in the user's own numbers.</li>
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:16px 18px">
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8A93A1">PRINT, EMAIL &amp; ZOOM · 1.4.4 · 1.4.10</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:10px 0 0;padding-left:16px">
+          <li>PDF reports must be readable in greyscale: this is the real reason segment four is striped, and it is checked on every report change.</li>
+          <li>The digest email works with images off and in a text-only client — the verdict sentence is text, never an image.</li>
+          <li>Reflows to 320px with no horizontal scrolling; wide tables scroll within their own container, not the page.</li>
+          <li>Legible at 200% zoom with no loss of function; the sidebar collapses to the 64px rail rather than overlapping content.</li>
+          <li>Minimum on-screen data size is 11.5px mono (<span style="font:400 11px 'JetBrains Mono',monospace">--t-data-sm</span>) and 12pt in print.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="tests" style="scroll-margin-top:16px;margin-top:56px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">06 · Pre-launch checklist</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Twenty-four checks, run on every route before Phase 10 closes</h2>
+    <div style="background:#141B26;border-radius:14px;padding:24px 28px;margin-top:16px;color:#F4F5F7">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+        <div>
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">AUTOMATED · EVERY BUILD</div>
+          <ol style="font:400 12.5px/1.7 inherit;color:#8A93A1;margin:9px 0 0;padding-left:18px">
+            <li>axe-core clean on all 26 app + 22 marketing routes</li>
+            <li>Contrast assertion over every token pair actually used</li>
+            <li>No <span style="font:400 11px 'JetBrains Mono',monospace">outline:none</span> without a replacement ring</li>
+            <li>Every <span style="font:400 11px 'JetBrains Mono',monospace">img</span> and <span style="font:400 11px 'JetBrains Mono',monospace">svg</span> has alt text or <span style="font:400 11px 'JetBrains Mono',monospace">aria-hidden</span></li>
+            <li>Heading order has no skipped level</li>
+            <li>Every form control resolves to a label</li>
+            <li>Lang attribute present; page title unique per route</li>
+            <li>No rate rendered without its run count <span style="color:#F4F5F7">(product invariant, tested)</span></li>
+          </ol>
+        </div>
+        <div>
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">MANUAL · EVERY RELEASE</div>
+          <ol start="9" style="font:400 12.5px/1.7 inherit;color:#8A93A1;margin:9px 0 0;padding-left:18px">
+            <li>Complete F02 claim flow by keyboard only</li>
+            <li>Complete F10 fix lifecycle by keyboard only</li>
+            <li>Open and close six evidence drawers; focus returns correctly each time</li>
+            <li>Switch workspace with the keyboard; verify full re-scope</li>
+            <li>VoiceOver pass on /overview and /queries</li>
+            <li>NVDA pass on /fixes and /reports/[id]</li>
+            <li>Reduced-motion on: nothing animates, everything still changes</li>
+            <li>320px width: no horizontal page scroll on any route</li>
+          </ol>
+        </div>
+        <div>
+          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">PRODUCT-SPECIFIC · THE ONES THAT MATTER MOST</div>
+          <ol start="17" style="font:400 12.5px/1.7 inherit;color:#8A93A1;margin:9px 0 0;padding-left:18px">
+            <li>Print every report kind in greyscale; all four cause segments still distinguishable</li>
+            <li>Digest email with images disabled still states the finding</li>
+            <li>Locked regions announce their lock, not just blur it</li>
+            <li>200% zoom on /queries: table scrolls in its container, sidebar rails</li>
+            <li>Colour-blindness simulation (deuteranopia + achromatopsia) on the cause bar and every delta</li>
+            <li>Within-noise state announces "within noise", not a bare number</li>
+            <li>Partial-scan state exposes the reduced denominator to assistive tech</li>
+            <li>All six settings panes reachable and saveable with no pointer</li>
+          </ol>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.14);margin-top:20px;padding-top:16px">
+        <div style="font:600 17px/1.4 'Source Serif 4',serif;max-width:96ch">Check 21 is the one to run first. If the cause bar fails a colour-blindness simulation, the product's central diagnostic is unreadable to roughly one in twelve men — and no amount of copy repairs a chart that cannot be seen.</div>
+      </div>
+    </div>
+  </section>
+
+  <div style="margin-top:64px;padding-top:20px;border-top:2px solid #141B26;display:flex;justify-content:space-between;align-items:baseline;font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1">
+    <span>Phase 9h · landscape, defensibility, risks &amp; accessibility spec</span>
+    <span><a href="./Phase 9g - Brand 3D Object.html">← 9g</a> &nbsp;·&nbsp; <a href="./Phase 9 - UX Package Index.dc.html">index →</a></span>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

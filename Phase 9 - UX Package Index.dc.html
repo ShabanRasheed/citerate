@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#F4F5F7;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="max-width:1240px;margin:0 auto;padding:48px 40px 120px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:20px;border-bottom:2px solid #141B26">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Phase 9 · index · 2026-07-29</div>
+      <h1 style="font:600 34px/1.15 'Source Serif 4',serif;letter-spacing:-.015em;margin:10px 0 0">Phase 9 — UX documentation package</h1>
+      <p style="font:400 14px/1.55 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0;text-wrap:pretty">Eight boards covering how the product works, who it is for, every path through it, what to build, how it was thought up, what it looks like stripped of style, how it looks as an object, and where it sits in the market. Start anywhere — but if you only read one, read <a href="./Phase 9a - Product Model and IA.dc.html">9a</a>.</p>
+    </div>
+    <div style="flex:none;text-align:right;font:400 11.5px/1.7 'JetBrains Mono',monospace;color:#5B6472">
+      <div>boards &nbsp;&nbsp;&nbsp;&nbsp;8</div>
+      <div>flows &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18</div>
+      <div>stories &nbsp;&nbsp;41</div>
+      <div style="color:#8A93A1">personas &nbsp;4 + 1 anti</div>
+    </div>
+  </div>
+
+  <div style="background:#141B26;border-radius:14px;padding:26px 30px;margin-top:22px;color:#F4F5F7">
+    <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:34px">
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">HOW THIS PACKAGE FITS THE PROJECT</div>
+        <p style="font:400 13.5px/1.7 inherit;color:#8A93A1;margin:12px 0 0">Phases 1–6 designed the product. Phase 7 built the marketing site, Phase 8 built the dashboard. Phase 9 is the layer that was missing between them: the documentation that lets somebody who wasn't in the room understand <em>why</em> the built thing is shaped this way — and lets you defend it to an investor, hand it to a developer, or put it in a portfolio.</p>
+        <p style="font:400 13.5px/1.7 inherit;color:#8A93A1;margin:10px 0 0">Nothing here is invented after the fact to look tidy. Every route name, plan limit, scoring rule and database table referenced across these boards is read from the two repos, so the documentation and the code cannot drift apart silently.</p>
+      </div>
+      <div>
+        <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#35B394">READING ORDER BY AUDIENCE</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;font:400 12.5px/1.55 inherit">
+          <div><span style="color:#F4F5F7">Investor —</span> <span style="color:#8A93A1">9a thesis → 9b personas → 9h landscape → 9g object</span></div>
+          <div><span style="color:#F4F5F7">Developer —</span> <span style="color:#8A93A1">9a model → 9c flows → 9d stories → 9h a11y spec</span></div>
+          <div><span style="color:#F4F5F7">Portfolio / case study —</span> <span style="color:#8A93A1">9e sketches → 9f wireframes → 9b journeys → 9g object</span></div>
+          <div><span style="color:#F4F5F7">Client presentation —</span> <span style="color:#8A93A1">9a loop → 9b scenarios → 9f wireframes → 9h risks</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section style="margin-top:44px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">The eight boards</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">What is on each, and what to use it for</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px">
+
+      <a href="./Phase 9a - Product Model and IA.dc.html" style="display:block;background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:4px 10px 10px 4px;padding:20px 22px;color:inherit;text-decoration:none">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0B6151">9a · START HERE</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">8 sections</div></div>
+        <div style="font:600 20px/1.3 'Source Serif 4',serif;margin-top:8px">Product model, mechanics &amp; IA</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">The thesis in one sentence and its four consequences. The five-stage loop and the screen that owns each. The seven-step measurement pipeline from "scan" to a number. Nine nouns the whole product is built from. What runs on a schedule. Full sitemap for both properties. Six jobs-to-be-done with the honest competing solution. The plan gating matrix.</p>
+        <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:10px">answers → "how does my product actually work"</div>
+      </a>
+
+      <a href="./Phase 9b - Personas and Journeys.dc.html" style="display:block;background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #3E5C8A;border-radius:4px 10px 10px 4px;padding:20px 22px;color:inherit;text-decoration:none">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#34507A">9b</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">4 personas · 3 journey maps</div></div>
+        <div style="font:600 20px/1.3 'Source Serif 4',serif;margin-top:8px">Personas, scenarios &amp; journey maps</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">Dana (in-house SEO), Marco (founder), Priya (agency) as primaries; Elena (enterprise) as the persona who shapes v2 by her absence; and an anti-persona we refuse to serve. Each primary has a dated hour-by-hour scenario and a six-stage journey map with the emotional curve plotted, plus the design response at every low point.</p>
+        <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:10px">answers → personas + interaction scenarios + journey maps</div>
+      </a>
+
+      <a href="./Phase 9c - User Flow Diagrams.dc.html" style="display:block;background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #141B26;border-radius:4px 10px 10px 4px;padding:20px 22px;color:inherit;text-decoration:none">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#141B26">9c · THE BIG ONE</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">18 flows · 41 decisions</div></div>
+        <div style="font:600 20px/1.3 'Source Serif 4',serif;margin-top:8px">User flow diagrams — every path</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">A master map of five bands, then eighteen zoomed flows: free scan, claim, cold signup, returning sign-in, invite acceptance, domain verification and its collision, query set, GSC connect, the weekly diagnostic session, the fix lifecycle, competitors, rescan, reporting, billing, team and roles, agency switching, settings, and a nine-row matrix of every dead end with its recovery edge.</p>
+        <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:10px">answers → complete user flow diagrams, dashboard included</div>
+      </a>
+
+      <a href="./Phase 9d - User Stories.dc.html" style="display:block;background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #3E5C8A;border-radius:4px 10px 10px 4px;padding:20px 22px;color:inherit;text-decoration:none">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#34507A">9d</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">9 epics · 41 stories</div></div>
+        <div style="font:600 20px/1.3 'Source Serif 4',serif;margin-top:8px">User stories &amp; acceptance criteria</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">A story map with a v1 line, then nine epics of classic <em>as a / I want / so that</em> stories with Given–When–Then criteria written to be lifted straight into tickets. Each carries a MoSCoW priority, its persona, its flow id and its route. Closes with a nine-gate definition of done every story must pass beyond its own criteria.</p>
+        <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:10px">answers → advanced user stories, start to end</div>
+      </a>
+
+      <a href="./Phase 9e - Whiteboard Sketches.dc.html" style="display:block;background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #D98324;border-radius:4px 10px 10px 4px;padding:20px 22px;color:inherit;text-decoration:none">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#9A6210">9e</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">8 boards · 14 ideas killed</div></div>
+        <div style="font:600 20px/1.3 'Source Serif 4',serif;margin-top:8px">Whiteboard sketches</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">The earliest thinking, wrong turns included: what are we even measuring, dashboard versus loop, whether "we don't know" belongs on the chart, three tries at Overview, how few onboarding steps we can get away with, how to prove a fix, the agency problem, and the gating napkin maths. Ends with a ledger of fourteen killed ideas and the reason each stays dead.</p>
+        <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:10px">answers → hand-drawn brainstorm &amp; thought process</div>
+      </a>
+
+      <a href="./Phase 9f - Wireframes.dc.html" style="display:block;background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #8A93A1;border-radius:4px 10px 10px 4px;padding:20px 22px;color:inherit;text-decoration:none">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#5B6472">9f</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">12 frames · 0 colours</div></div>
+        <div style="font:600 20px/1.3 'Source Serif 4',serif;margin-top:8px">Low-fidelity wireframes</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">Greyscale only, so every conversation is about hierarchy rather than taste. Home, free readout, code entry, both onboarding steps, Overview, Queries with the drawer open, the fix queue, the locked competitor pane, a fix-proof report, settings, and the Monday digest on a phone — each annotated back to its story and flow.</p>
+        <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:10px">answers → wireframes</div>
+      </a>
+
+      <a href="./Phase 9g - Brand 3D Object.html" style="display:block;background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:4px 10px 10px 4px;padding:20px 22px;color:inherit;text-decoration:none">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0B6151">9g · INTERACTIVE</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">4 variations · downloadable</div></div>
+        <div style="font:600 20px/1.3 'Source Serif 4',serif;margin-top:8px">The brand mark as a physical object</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">Four orbitable, downloadable 3D variations, each encoding one idea rather than being a logo with a bevel: the mark tile (app icon made solid), the slash monolith (brand sculpture), the citation network (the diagnosis as a sculpture) and the instrument (the cause bar as a bench device). Exports as OBJ + MTL or GLB with every part named.</p>
+        <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:10px">answers → a unique, presentable 3D brand asset</div>
+      </a>
+
+      <a href="./Phase 9h - Landscape and Accessibility.dc.html" style="display:block;background:#FFFFFF;border:1px solid #E2E5EA;border-left:3px solid #C43D3D;border-radius:4px 10px 10px 4px;padding:20px 22px;color:inherit;text-decoration:none">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#A62F2F">9h</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">5 categories · 24 a11y checks</div></div>
+        <div style="font:600 20px/1.3 'Source Serif 4',serif;margin-top:8px">Landscape &amp; accessibility specification</div>
+        <p style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:8px 0 0">A positioning map on the two axes that actually separate the field, five competitor categories written as behaviour rather than brands (including the real rival: typing prompts by hand), five defensible advantages, seven risks with early-warning signals, and a WCAG 2.2 AA specification written as build rules with a 24-check pre-launch list.</p>
+        <div style="font:400 11.5px/1.5 'JetBrains Mono',monospace;color:#3E5C8A;margin-top:10px">answers → "whatever I missed" — landscape, risk, accessibility</div>
+      </a>
+
+    </div>
+  </section>
+
+  <section style="margin-top:52px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Request coverage</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Your nine asks, and where each one is answered</h2>
+    <div style="display:flex;flex-direction:column;gap:2px;margin-top:18px">
+      <div style="display:grid;grid-template-columns:44px 1fr 150px 1fr;gap:16px;padding:11px 18px;background:#141B26;border-radius:10px 10px 2px 2px;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A93A1">
+        <div>#</div><div>You asked for</div><div>Delivered on</div><div>How far it goes</div>
+      </div>
+      <div style="display:grid;grid-template-columns:44px 1fr 150px 1fr;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#8A93A1">01</div><div>Complete user flow diagram, especially the complex dashboard flows</div><div><a href="./Phase 9c - User Flow Diagrams.dc.html" style="font:500 11.5px 'JetBrains Mono',monospace">9c</a></div>
+        <div style="color:#5B6472">Exhaustive as requested: 18 flows, 41 named decisions, every plan gate and role branch, and a matrix of 9 dead ends each with a recovery edge.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:44px 1fr 150px 1fr;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#8A93A1">02</div><div>Personas with scenarios showing how they interact</div><div><a href="./Phase 9b - Personas and Journeys.dc.html" style="font:500 11.5px 'JetBrains Mono',monospace">9b</a></div>
+        <div style="color:#5B6472">You asked for three; you have three primaries plus a secondary that justifies the deferred enterprise scope and an anti-persona to test feature requests against.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:44px 1fr 150px 1fr;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#8A93A1">03</div><div>Advanced user stories, the journey start to end</div><div><a href="./Phase 9d - User Stories.dc.html" style="font:500 11.5px 'JetBrains Mono',monospace">9d</a></div>
+        <div style="color:#5B6472">Classic agile format with Given–When–Then criteria, plus a story map, MoSCoW priorities, route traces and a definition of done.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:44px 1fr 150px 1fr;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#8A93A1">04</div><div>Wireframes</div><div><a href="./Phase 9f - Wireframes.dc.html" style="font:500 11.5px 'JetBrains Mono',monospace">9f</a></div>
+        <div style="color:#5B6472">Low-fi greyscale as chosen, 12 frames with 48 annotations. States are annotated on the frames they affect rather than drawn separately.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:44px 1fr 150px 1fr;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#8A93A1">05</div><div>Hand-drawn sketches for the earliest brainstorming</div><div><a href="./Phase 9e - Whiteboard Sketches.dc.html" style="font:500 11.5px 'JetBrains Mono',monospace">9e</a></div>
+        <div style="color:#5B6472">Annotated whiteboard style as chosen. Crucially it keeps the rejected ideas and the reasons — that ledger is the part reviewers find most convincing.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:44px 1fr 150px 1fr;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#8A93A1">06</div><div>Whatever I missed</div><div><a href="./Phase 9h - Landscape and Accessibility.dc.html" style="font:500 11.5px 'JetBrains Mono',monospace">9h</a> · <a href="./Phase 9a - Product Model and IA.dc.html" style="font:500 11.5px 'JetBrains Mono',monospace">9a</a> · <a href="./Phase 9b - Personas and Journeys.dc.html" style="font:500 11.5px 'JetBrains Mono',monospace">9b</a></div>
+        <div style="color:#5B6472">Added: sitemap / IA, jobs-to-be-done, customer journey maps with emotion, competitive landscape, defensibility, a risk register, a WCAG 2.2 AA spec, an anti-persona, and a killed-ideas ledger.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:44px 1fr 150px 1fr;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#8A93A1">07</div><div>Honestly, how will my product work</div><div><a href="./Phase 9a - Product Model and IA.dc.html" style="font:500 11.5px 'JetBrains Mono',monospace">9a</a></div>
+        <div style="color:#5B6472">Sections 02–05: the five-stage loop, the seven-step pipeline, the nine-noun object model, and what the product does on a schedule while nobody is looking.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:44px 1fr 150px 1fr;gap:16px;padding:13px 18px;background:#FFFFFF;border:1px solid #E2E5EA;font:400 12.5px/1.5 inherit">
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#8A93A1">08</div><div>A 3D model — presentable, attractive, unique, part of the branding</div><div><a href="./Phase 9g - Brand 3D Object.html" style="font:500 11.5px 'JetBrains Mono',monospace">9g</a></div>
+        <div style="color:#5B6472">All four variations built rather than proposed, so you can pick by looking. Orbitable in the browser and downloadable as OBJ + MTL or GLB for renders.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:44px 1fr 150px 1fr;gap:16px;padding:13px 18px;background:#EDEFF2;border:1px solid #E2E5EA;border-radius:2px 2px 10px 10px;font:400 12.5px/1.5 inherit">
+        <div style="font:500 12px 'JetBrains Mono',monospace;color:#8A93A1">09</div><div>Then continue with the rest of the phases</div><div style="font:500 11.5px 'JetBrains Mono',monospace;color:#5B6472">below ↓</div>
+        <div style="color:#5B6472">Phases 10–12 proposed. Say the word and I start on Phase 10 — the four placeholders are the critical path to launch.</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:52px">
+    <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">What comes next</div>
+    <h2 style="font:600 26px/1.28 'Source Serif 4',serif;margin:8px 0 0">Phases 10 to 12, in the order that gets you launched</h2>
+    <p style="font:400 13.5px/1.6 inherit;color:#5B6472;max-width:84ch;margin:8px 0 0">Phase 10 is not optional and not parallelisable — four placeholders currently stand between a complete codebase and a product that can take money. Everything else waits behind them.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px">
+
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #C43D3D;border-radius:4px 4px 10px 10px;padding:20px 22px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#A62F2F">PHASE 10 · CRITICAL PATH</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">blocks launch</div></div>
+        <div style="font:600 20px/1.3 'Source Serif 4',serif;margin-top:8px">Close the four placeholders</div>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px">
+          <div style="background:#FBEDED;border:1px solid #F0D6D6;border-radius:8px;padding:10px 12px"><div style="font:500 11px 'JetBrains Mono',monospace;color:#A62F2F">01 · the 25-query generator</div><p style="font:400 12px/1.5 inherit;color:#5B6472;margin:5px 0 0">The highest-leverage of the four: it determines whether every number in the product feels real. Bad seed queries make a correct measurement worthless.</p></div>
+          <div style="background:#FBEDED;border:1px solid #F0D6D6;border-radius:8px;padding:10px 12px"><div style="font:500 11px 'JetBrains Mono',monospace;color:#A62F2F">02 · Paddle price IDs</div><p style="font:400 12px/1.5 inherit;color:#5B6472;margin:5px 0 0">Currently returning 501. Six plans, six add-ons, monthly and yearly — plus the webhook that flips the plan and the meter that bills overage.</p></div>
+          <div style="background:#FBEDED;border:1px solid #F0D6D6;border-radius:8px;padding:10px 12px"><div style="font:500 11px 'JetBrains Mono',monospace;color:#A62F2F">03 · the PDF renderer</div><p style="font:400 12px/1.5 inherit;color:#5B6472;margin:5px 0 0">Without it there is no white-label deliverable, and without that there is no Agency tier — which is the whole distribution strategy in 9h.</p></div>
+          <div style="background:#FBEDED;border:1px solid #F0D6D6;border-radius:8px;padding:10px 12px"><div style="font:500 11px 'JetBrains Mono',monospace;color:#A62F2F">04 · Search Console OAuth callback</div><p style="font:400 12px/1.5 inherit;color:#5B6472;margin:5px 0 0">The smallest job, and it unblocks cause separation — without GSC more queries fall into "unexplained" than they should.</p></div>
+        </div>
+        <p style="font:400 12px/1.55 inherit;color:#5B6472;margin:14px 0 0;padding-top:12px;border-top:1px solid #E2E5EA">Also in scope: the six lib files duplicated across the two repos should become one shared package, so citation formats and the token system stop being maintained twice.</p>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #D98324;border-radius:4px 4px 10px 10px;padding:20px 22px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#9A6210">PHASE 11</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">before first paying user</div></div>
+        <div style="font:600 20px/1.3 'Source Serif 4',serif;margin-top:8px">Hardening &amp; launch readiness</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:14px 0 0;padding-left:16px">
+          <li>The 24-check accessibility list in 9h, run on all 48 routes — check 21 first.</li>
+          <li>Every state in the definition of done actually built: loading, empty, partial, error, locked, over-quota, within-noise, zero-cited.</li>
+          <li>Email deliverability: SPF, DKIM, DMARC, and a seed test of the digest with images off.</li>
+          <li>Seed the first ten fix templates and instrument <em>verified-fix rate</em> from day one — 9h names it as the metric that decides whether the loop closes.</li>
+          <li>Load and cost modelling for a 2 000-query workspace on daily refresh, since runs-per-query is the whole unit economic.</li>
+          <li>Legal pages real, not placeholder: terms, privacy, DPA, sub-processor list.</li>
+          <li>Onboarding instrumentation on the F02 email round trip — the largest drop-off in the funnel.</li>
+        </ul>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-top:3px solid #0E7C66;border-radius:4px 4px 10px 10px;padding:20px 22px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0B6151">PHASE 12</div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8A93A1">first 90 days</div></div>
+        <div style="font:600 20px/1.3 'Source Serif 4',serif;margin-top:8px">Go to market &amp; learn</div>
+        <ul style="font:400 12.5px/1.6 inherit;color:#5B6472;margin:14px 0 0;padding-left:16px">
+          <li>Launch assets from this package: the 9g object as the pitch cover, 9a's loop as the explainer, 9b's scenarios as the sales narrative.</li>
+          <li>Ten design-partner agencies before any paid acquisition — 9h's distribution argument is that one Priya carries the product into fourteen companies.</li>
+          <li>Watch three numbers: free-scan completion, F02 claim conversion, and verified-fix rate. Everything else is vanity at this stage.</li>
+          <li>Revisit the deferred list only on evidence: SSO on the second stalled enterprise deal, scheduled report delivery once domain authentication is solved, CMS auto-fixes never before the fix corpus is trustworthy.</li>
+          <li>Publish the first method-version change transparently, with a flagged discontinuity. Doing it once, well, is worth more than any trust page.</li>
+        </ul>
+        <div style="background:#E7F2EF;border:1px solid #CFE5DF;border-radius:8px;padding:11px 13px;margin-top:14px">
+          <p style="font:400 12px/1.55 inherit;color:#5B6472;margin:0">Optional, and cheap given what exists: a Phase 13 investor deck assembled almost entirely from these eight boards — the thesis, the loop, the personas, the landscape and the 3D object are already the five slides that matter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="margin-top:56px;padding-top:20px;border-top:2px solid #141B26;display:flex;justify-content:space-between;align-items:baseline;font:400 11.5px 'JetBrains Mono',monospace;color:#8A93A1;flex-wrap:wrap;gap:12px">
+    <span>Phase 9 · 8 boards · 18 flows · 41 stories · 4 personas · 12 wireframes · 4 3D variations</span>
+    <span>start → <a href="./Phase 9a - Product Model and IA.dc.html">9a product model</a></span>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

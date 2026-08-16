@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EDEFF2;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<div style="display:grid;grid-template-columns:300px minmax(0,1fr);min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+
+  <div style="background:#141B26;color:#F4F5F7;padding:24px 20px;display:flex;flex-direction:column;gap:22px;position:sticky;top:0;height:100vh;overflow-y:auto;box-sizing:border-box">
+    <div>
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#35B394">Phase 20 · windows</div>
+      <div style="font:600 21px/1.3 'Source Serif 4',serif;margin-top:8px">Get it running on your machine</div>
+      <p style="font:400 12.5px/1.6 inherit;color:#8A93A1;margin:8px 0 0">Ten steps, in order, in PowerShell. Every step says what you should see. If you see something else, the step below it will not work.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">steps</div>
+      <a href="#s1" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">1 · Install Node and pnpm</a>
+      <a href="#s2" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">2 · Get the code onto disk</a>
+      <a href="#s3" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">3 · Check the folder shape</a>
+      <a href="#s4" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">4 · Install the site</a>
+      <a href="#s5" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">5 · Make the .env file</a>
+      <a href="#s6" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">6 · Create the database</a>
+      <a href="#s7" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">7 · Start the site</a>
+      <a href="#s8" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">8 · Start the scanner</a>
+      <a href="#s9" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">9 · Install and start the app</a>
+      <a href="#s10" style="color:#F4F5F7;font:400 12.5px/1.6 inherit">10 · Walk the whole flow</a>
+      <a href="#stuck" style="color:#35B394;font:500 12.5px/1.6 inherit">When it breaks</a>
+    </div>
+
+    <div style="margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-direction:column;gap:8px">
+      <a href="Phase 19 - Handover Index.dc.html" style="color:#35B394;font:400 12px/1 inherit">← Handover index</a>
+      <a href="Phase 21 - Git and Cloudflare Setup.dc.html" style="color:#35B394;font:400 12px/1 inherit">Phase 21 · Git and Cloudflare</a>
+      <a href="Phase 22 - Turn On Real Scans.dc.html" style="color:#35B394;font:400 12px/1 inherit">Phase 22 · real scans</a>
+    </div>
+  </div>
+
+  <div style="padding:34px 40px 72px;display:flex;flex-direction:column;gap:28px;min-width:0">
+
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:78ch">
+      <h1 style="font:600 30px/1.25 'Source Serif 4',serif;margin:0;text-wrap:pretty">Both halves of Citerate, running on Windows in about fifteen minutes</h1>
+      <p style="font:400 14.5px/1.65 inherit;color:#5B6472;margin:0;text-wrap:pretty">You end up with three terminals open: the marketing site on port 4321, the scanner ticking once a minute, and the dashboard on port 4322. All three read one local database file. Scans run the real pipeline with fake engine answers, which costs nothing — Phase 22 turns the real engines on.</p>
+      <p style="font:400 14.5px/1.65 inherit;color:#5B6472;margin:0;text-wrap:pretty">Use <span style="font-family:'JetBrains Mono',monospace;font-size:13px">PowerShell</span>, not Command Prompt. Run each block from the folder the step names.</p>
+    </div>
+
+    <div style="background:#FFF9E8;border:1px solid #C99A2E;border-radius:12px;padding:18px 20px;font:400 13.5px/1.65 inherit;color:#141B26;max-width:80ch;text-wrap:pretty">
+      One thing matters more than any command here: the two folders must sit side by side, named <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px">citerate</span> and <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px">citerate-app</span>. The dashboard finds the shared database at <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px">../citerate/.wrangler/state</span>. Rename or nest either folder and the dashboard reads an empty database while the site reads a full one.
+    </div>
+
+    <div id="s1" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">1 · Install Node and pnpm</h2>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">Node 20.11 or newer, pnpm 9 or newer. Node 22 LTS is a safe pick. Install Node from nodejs.org, then let Node install pnpm for you.</p>
+      <pre style="margin:0;background:#141B26;color:#F4F5F7;border-radius:10px;padding:16px 18px;overflow-x:auto;font:400 12.5px/1.7 'JetBrains Mono',monospace">corepack enable
+corepack prepare pnpm@9 --activate
+node -v
+pnpm -v</pre>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;font:400 13px/1.6 inherit;color:#5B6472"><span style="color:#0B6151;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase">expect</span><br>Two version numbers, the first <span style="font-family:'JetBrains Mono',monospace;font-size:12px">v20.11.0</span> or higher, the second <span style="font-family:'JetBrains Mono',monospace;font-size:12px">9.x</span> or higher. If <span style="font-family:'JetBrains Mono',monospace;font-size:12px">corepack</span> is not recognised, your Node is too old — reinstall it.</div>
+    </div>
+
+    <div id="s2" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">2 · Get the code onto disk</h2>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">Download the project from this workspace and unzip it somewhere short, like <span style="font-family:'JetBrains Mono',monospace;font-size:13px">C:\citerate</span>. Deep paths under Documents plus long dependency names can hit the Windows path limit. Avoid OneDrive folders — its file syncing fights the database file.</p>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;font:400 13px/1.6 inherit;color:#5B6472"><span style="color:#0B6151;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase">expect</span><br>A folder holding <span style="font-family:'JetBrains Mono',monospace;font-size:12px">citerate\</span> and <span style="font-family:'JetBrains Mono',monospace;font-size:12px">citerate-app\</span> next to each other.</div>
+    </div>
+
+    <div id="s3" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">3 · Check the folder shape</h2>
+      <pre style="margin:0;background:#141B26;color:#F4F5F7;border-radius:10px;padding:16px 18px;overflow-x:auto;font:400 12.5px/1.7 'JetBrains Mono',monospace">cd C:\citerate
+dir</pre>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;font:400 13px/1.6 inherit;color:#5B6472"><span style="color:#0B6151;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase">expect</span><br>Both folder names listed. If you see one folder containing the other, move them so they are siblings before going on.</div>
+    </div>
+
+    <div id="s4" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">4 · Install the site</h2>
+      <pre style="margin:0;background:#141B26;color:#F4F5F7;border-radius:10px;padding:16px 18px;overflow-x:auto;font:400 12.5px/1.7 'JetBrains Mono',monospace">cd C:\citerate\citerate
+pnpm install</pre>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;font:400 13px/1.6 inherit;color:#5B6472"><span style="color:#0B6151;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase">expect</span><br>A package count and <span style="font-family:'JetBrains Mono',monospace;font-size:12px">Done</span>. It will ask to build <span style="font-family:'JetBrains Mono',monospace;font-size:12px">esbuild</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:12px">sharp</span> and <span style="font-family:'JetBrains Mono',monospace;font-size:12px">workerd</span> — say yes; they are already allowed in package.json. Two to three minutes on a first run.</div>
+    </div>
+
+    <div id="s5" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">5 · Make the .env file</h2>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">Copy the example. The defaults are deliberately safe: Cloudflare's always-passes Turnstile test key, mock engines on, no billing.</p>
+      <pre style="margin:0;background:#141B26;color:#F4F5F7;border-radius:10px;padding:16px 18px;overflow-x:auto;font:400 12.5px/1.7 'JetBrains Mono',monospace">Copy-Item .env.example .env
+notepad .env</pre>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">Change one line only — <span style="font-family:'JetBrains Mono',monospace;font-size:13px">SESSION_SECRET</span>. Any 32 or more random characters will do locally. Leave <span style="font-family:'JetBrains Mono',monospace;font-size:13px">USE_ENGINE_MOCKS=true</span>.</p>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;font:400 13px/1.6 inherit;color:#5B6472"><span style="color:#0B6151;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase">expect</span><br>A <span style="font-family:'JetBrains Mono',monospace;font-size:12px">.env</span> file sitting next to <span style="font-family:'JetBrains Mono',monospace;font-size:12px">package.json</span>. It is gitignored, so it never leaves your machine.</div>
+    </div>
+
+    <div id="s6" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">6 · Create the database and fill it</h2>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">The first command creates the local database file and builds every table. The second drops in a demo workspace, a domain, a finished scan and its findings, so the dashboard has something to show before you run anything.</p>
+      <pre style="margin:0;background:#141B26;color:#F4F5F7;border-radius:10px;padding:16px 18px;overflow-x:auto;font:400 12.5px/1.7 'JetBrains Mono',monospace">pnpm db:migrate:local
+pnpm db:seed:local</pre>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;font:400 13px/1.6 inherit;color:#5B6472"><span style="color:#0B6151;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase">expect</span><br>Wrangler reports the migration applied, then a row count from the seed. A new <span style="font-family:'JetBrains Mono',monospace;font-size:12px">.wrangler\state</span> folder appears — that folder <em>is</em> your local database. Delete it any time you want a clean slate, then re-run these two commands.</div>
+    </div>
+
+    <div id="s7" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">7 · Start the site — terminal 1</h2>
+      <pre style="margin:0;background:#141B26;color:#F4F5F7;border-radius:10px;padding:16px 18px;overflow-x:auto;font:400 12.5px/1.7 'JetBrains Mono',monospace">pnpm dev</pre>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;font:400 13px/1.6 inherit;color:#5B6472"><span style="color:#0B6151;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase">expect</span><br><span style="font-family:'JetBrains Mono',monospace;font-size:12px">localhost:4321</span> in the output. Open it. You should get the home page with the scan form. Leave this terminal running.</div>
+    </div>
+
+    <div id="s8" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">8 · Start the scanner — terminal 2</h2>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">Submitting the scan form writes a job row. This worker is what picks the job up. Without it, scans queue and never finish.</p>
+      <pre style="margin:0;background:#141B26;color:#F4F5F7;border-radius:10px;padding:16px 18px;overflow-x:auto;font:400 12.5px/1.7 'JetBrains Mono',monospace">cd C:\citerate\citerate
+pnpm scanner:dev</pre>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;font:400 13px/1.6 inherit;color:#5B6472"><span style="color:#0B6151;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase">expect</span><br>A worker URL and a note about the cron trigger. It ticks every minute, so a scan can sit for up to sixty seconds before it moves. That is normal, not a hang.</div>
+    </div>
+
+    <div id="s9" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">9 · Install and start the dashboard — terminal 3</h2>
+      <pre style="margin:0;background:#141B26;color:#F4F5F7;border-radius:10px;padding:16px 18px;overflow-x:auto;font:400 12.5px/1.7 'JetBrains Mono',monospace">cd C:\citerate\citerate-app
+pnpm install
+Copy-Item .env.example .env
+pnpm db:migrate:local
+pnpm db:seed:local
+pnpm verify:local
+pnpm dev</pre>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">The migrate and seed here point at the same database file as the site — that is what the <span style="font-family:'JetBrains Mono',monospace;font-size:13px">--persist-to ../citerate/.wrangler/state</span> flag inside those scripts does. <span style="font-family:'JetBrains Mono',monospace;font-size:13px">verify:local</span> is a doctor script that checks the wiring before you open a browser.</p>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:10px;padding:14px 18px;font:400 13px/1.6 inherit;color:#5B6472"><span style="color:#0B6151;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase">expect</span><br>The doctor passes, then <span style="font-family:'JetBrains Mono',monospace;font-size:12px">localhost:4322</span>. Sign in with the seeded account the doctor prints. If the overview is empty, the shared-database path is wrong — go back to step 3.</div>
+    </div>
+
+    <div id="s10" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">10 · Walk the whole flow</h2>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:34px minmax(0,1fr) minmax(0,1.1fr);gap:14px;padding:11px 20px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472"><span></span><span>do this</span><span>you should see</span></div>
+        <div style="display:grid;grid-template-columns:34px minmax(0,1fr) minmax(0,1.1fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">a</span><span>On 4321, enter <span style="font-family:'JetBrains Mono',monospace;font-size:12px">shabanrasheed.com</span> and submit.</span><span style="color:#5B6472">A scan page with a progress state and a token in the URL.</span></div>
+        <div style="display:grid;grid-template-columns:34px minmax(0,1fr) minmax(0,1.1fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">b</span><span>Wait up to a minute, watching terminal 2.</span><span style="color:#5B6472">Scanner log lines, then the page fills in with a citation rate and per-query rows.</span></div>
+        <div style="display:grid;grid-template-columns:34px minmax(0,1fr) minmax(0,1.1fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">c</span><span>Claim the result with your email.</span><span style="color:#5B6472">A check-email page. No mail is sent locally — the verify link prints in terminal 1.</span></div>
+        <div style="display:grid;grid-template-columns:34px minmax(0,1fr) minmax(0,1.1fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">d</span><span>Paste that link into the browser.</span><span style="color:#5B6472">Onboarding on 4322: confirm the domain, pick queries, first run.</span></div>
+        <div style="display:grid;grid-template-columns:34px minmax(0,1fr) minmax(0,1.1fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">e</span><span>Finish onboarding.</span><span style="color:#5B6472">The overview, with your scan in it. From here: queries, fixes, competitors, reports.</span></div>
+        <div style="display:grid;grid-template-columns:34px minmax(0,1fr) minmax(0,1.1fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span style="font:500 12px/1.5 'JetBrains Mono',monospace;color:#8A93A1">f</span><span>Build a report and export the PDF.</span><span style="color:#5B6472">A rendered report; the PDF lands in local R2 storage under <span style="font-family:'JetBrains Mono',monospace;font-size:12px">.wrangler\state</span>.</span></div>
+      </div>
+      <p style="font:400 13.5px/1.65 inherit;color:#5B6472;margin:0;max-width:78ch">That is the full experience. The only unreal part is what the engines said — every number is computed from those mock answers by the same code that will compute it from real ones.</p>
+    </div>
+
+    <div id="stuck" style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="font:600 20px/1.3 'Source Serif 4',serif;margin:0">When it breaks</h2>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:14px;padding:11px 20px;background:#EDEFF2;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5B6472"><span>symptom</span><span>cause and fix</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span>Dashboard overview is empty, site works fine</span><span style="color:#5B6472">The two folders are not siblings, or you renamed one. The dashboard made its own empty database. Fix the folders, delete <span style="font-family:'JetBrains Mono',monospace;font-size:12px">citerate-app\.wrangler</span>, re-run its migrate and seed.</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span>Scan sits at "queued" forever</span><span style="color:#5B6472">Terminal 2 is not running, or it crashed. The cron ticks once a minute; give it that long before worrying.</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span>Port already in use</span><span style="color:#5B6472">Something else holds 4321 or 4322. Close it, or run <span style="font-family:'JetBrains Mono',monospace;font-size:12px">pnpm dev -- --port 4331</span> and update <span style="font-family:'JetBrains Mono',monospace;font-size:12px">PUBLIC_SITE_URL</span> to match.</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span>Install fails on a long path</span><span style="color:#5B6472">Move the project to <span style="font-family:'JetBrains Mono',monospace;font-size:12px">C:\citerate</span> and out of OneDrive. Then <span style="font-family:'JetBrains Mono',monospace;font-size:12px">git config --system core.longpaths true</span> if you cloned.</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:14px;padding:12px 20px;border-top:1px solid #E2E5EA;font:400 13px/1.55 inherit;align-items:baseline"><span>Something else</span><span style="color:#5B6472">Run <span style="font-family:'JetBrains Mono',monospace;font-size:12px">pnpm preflight:local</span> in either repo. It names what is missing rather than guessing.</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}"></script>
+</body>
+</html>

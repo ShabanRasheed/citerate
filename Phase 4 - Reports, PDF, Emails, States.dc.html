@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet"><style>
+body{margin:0;background:#EBE9E4;-webkit-font-smoothing:antialiased}
+a{color:#0B6151;text-decoration:none}a:hover{color:#0E7C66;text-decoration:underline}
+</style></helmet>
+
+<section style="padding:40px 44px 48px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#141B26">
+  <div style="display:flex;align-items:baseline;gap:10px"><span style="font:500 10px ui-monospace,Menlo,monospace;background:#141B26;color:#fff;border-radius:4px;padding:3px 7px">4b</span><span style="font:600 13px inherit">Phase 4b · Reports setup + white-label PDF template · emails · system states</span></div>
+  <p style="font:400 12px/1.6 inherit;color:rgba(0,0,0,.55);max-width:94ch;margin:8px 0 0">PDF pages are drawn at US Letter, 816 × 1056 px (96 dpi), 48px margins, body text 16px ≈ 12pt — the print minimum. The agency controls the logo and one accent colour; the surface/proxy tags, confidence bands and the methodology appendix are structural and cannot be switched off. Emails are drawn at 600px with system-font fallbacks, since webfonts don't survive most mail clients.</p>
+
+  <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.45);margin:30px 0 10px">27a · Reports — white-label setup (content pane 1032)</div>
+  <div style="width:1032px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:26px 32px 32px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px">
+      <div>
+        <h1 style="font:600 26px/1.28 'Source Serif 4',serif;margin:0">Your report, under your client's brand.</h1>
+        <p style="font:400 14px/1.6 inherit;color:#5B6472;margin:6px 0 0;max-width:76ch">Upload a logo and pick one accent. Everything else stays as designed — the numbers, the bands, and the methodology appendix travel with the document.</p>
+      </div>
+      <div style="display:flex;gap:8px;flex:none"><span style="flex:none;white-space:nowrap;font:500 14px inherit;border:1px solid #C6CBD3;border-radius:999px;padding:9px 17px">Preview PDF</span><span style="flex:none;white-space:nowrap;font:500 14px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:10px 18px">Generate report</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px;align-items:start">
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:20px 22px">
+        <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Brand</div>
+        <div style="display:flex;gap:14px;align-items:center;margin-top:12px">
+          <div style="width:96px;height:96px;border:1px dashed #C6CBD3;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:#F4F5F7">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A93A1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M8 8l4-4 4 4"></path><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"></path></svg>
+            <span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8A93A1">drop logo</span>
+          </div>
+          <div style="font:400 12.5px/1.7 inherit;color:#5B6472">SVG or PNG, at least 240px wide.<br>We place it at 28px high on the cover and 14px in the footer, so a wordmark works better than a square icon.<br><span style="color:#8A93A1">Dark and light versions optional — we pick by contrast.</span></div>
+        </div>
+        <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1;margin-top:18px">Accent colour</div>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:10px">
+          <span style="width:34px;height:34px;border-radius:8px;background:#3E5C8A;box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #141B26"></span>
+          <span style="width:34px;height:34px;border-radius:8px;background:#0E7C66"></span>
+          <span style="width:34px;height:34px;border-radius:8px;background:#7A3E8A"></span>
+          <span style="width:34px;height:34px;border-radius:8px;background:#141B26"></span>
+          <div style="border:1px solid #C6CBD3;border-radius:6px;padding:8px 10px;font:400 12.5px 'JetBrains Mono',monospace">#3E5C8A</div>
+        </div>
+        <div style="margin-top:12px;padding:12px 14px;background:#FDF2E3;border:1px solid rgba(217,131,36,.4);border-radius:8px;font:400 12.5px/1.6 inherit;color:#141B26">The accent is used for headings and the client's own bars only. Cited-green, gap-red and the striped "unexplained" segment are data colours and stay fixed — a report where red means "good" would be unreadable across clients.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:20px 22px">
+        <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Contents</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+          <div style="display:flex;align-items:center;gap:10px;font:400 13.5px inherit"><span style="width:34px;height:20px;border-radius:999px;background:#0E7C66;position:relative;flex:none"><span style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:999px;background:#FFFFFF"></span></span>Cover + verdict</div>
+          <div style="display:flex;align-items:center;gap:10px;font:400 13.5px inherit"><span style="width:34px;height:20px;border-radius:999px;background:#0E7C66;position:relative;flex:none"><span style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:999px;background:#FFFFFF"></span></span>Query table — all 20</div>
+          <div style="display:flex;align-items:center;gap:10px;font:400 13.5px inherit"><span style="width:34px;height:20px;border-radius:999px;background:#0E7C66;position:relative;flex:none"><span style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:999px;background:#FFFFFF"></span></span>Fix list with implementation notes</div>
+          <div style="display:flex;align-items:center;gap:10px;font:400 13.5px inherit"><span style="width:34px;height:20px;border-radius:999px;background:#E2E5EA;position:relative;flex:none"><span style="position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:999px;background:#FFFFFF"></span></span>Competitor share <span style="font:500 10.5px 'JetBrains Mono',monospace;color:#9A6210;background:#FDF2E3;border-radius:999px;padding:2px 8px">growth</span></div>
+          <div style="display:flex;align-items:center;gap:10px;font:400 13.5px inherit;color:#5B6472"><span style="width:34px;height:20px;border-radius:999px;background:#8A93A1;position:relative;flex:none"><span style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:999px;background:#FFFFFF"></span></span>Methodology appendix <span style="font:500 10.5px 'JetBrains Mono',monospace;color:#5B6472;border:1px solid #E2E5EA;border-radius:999px;padding:2px 8px">always on</span></div>
+        </div>
+        <div style="font:400 12.5px/1.6 inherit;color:#8A93A1;margin-top:14px;padding-top:12px;border-top:1px solid #E2E5EA">The appendix is what makes the report defensible in a client meeting: it states the run count, which engines were surfaces and which were proxies, and how the click-loss estimate was derived. That's why it isn't optional.</div>
+        <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1;margin-top:18px">Recent</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:9px;font:400 12.5px 'JetBrains Mono',monospace;color:#5B6472">
+          <div style="display:flex;justify-content:space-between"><span>northline-2026-07-24.pdf</span><span style="color:#0B6151">download</span></div>
+          <div style="display:flex;justify-content:space-between"><span>northline-2026-07-17.pdf</span><span style="color:#0B6151">download</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.45);margin:34px 0 10px">27b · The PDF template — 5 pages, US Letter 816×1056, agency accent #3E5C8A</div>
+  <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">
+
+    <div style="width:816px;height:1056px;background:#FFFFFF;border:1px solid rgba(0,0,0,.14);box-shadow:0 2px 10px rgba(0,0,0,.1);padding:48px;box-sizing:border-box;display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:28px;height:28px;border-radius:6px;background:#3E5C8A;color:#fff;display:flex;align-items:center;justify-content:center;font:500 12px 'JetBrains Mono',monospace">RM</span><span style="font:600 17px 'Source Serif 4',serif">Ridgeway Media</span></div>
+        <div style="text-align:right;font:400 12px/1.7 'JetBrains Mono',monospace;color:#5B6472">Prepared for northline.co<br>2026-07-24</div>
+      </div>
+      <div style="margin-top:120px">
+        <div style="font:500 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#3E5C8A">AI visibility report</div>
+        <h1 style="font:600 46px/1.12 'Source Serif 4',serif;letter-spacing:-.02em;margin:16px 0 0;max-width:22ch">Impressions held. Clicks fell by a quarter. Here is why.</h1>
+        <p style="font:400 17px/1.6 inherit;color:#5B6472;margin:20px 0 0;max-width:56ch">Twenty queries, tested nine times each across four AI engines between 2026-07-24 09:00 and 09:31 UTC. 720 measurements.</p>
+      </div>
+      <div style="display:flex;gap:20px;margin-top:56px">
+        <div style="flex:1;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px">
+          <div style="font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">AI visibility score</div>
+          <div style="display:flex;align-items:baseline;gap:8px;margin-top:8px"><span style="font:500 52px/1 'JetBrains Mono',monospace">62</span><span style="font:400 15px 'JetBrains Mono',monospace;color:#5B6472">/100 ±6</span></div>
+          <div style="position:relative;height:16px;margin-top:14px">
+            <div style="position:absolute;left:0;right:0;top:5px;height:8px;background:#E2E5EA;border-radius:4px"></div>
+            <div style="position:absolute;left:56%;width:12%;top:5px;height:8px;background:rgba(14,124,102,.25)"></div>
+            <div style="position:absolute;left:62%;top:0;width:2px;height:18px;background:#141B26"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font:400 11px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:4px"><span>0</span><span>median 71</span><span>100</span></div>
+          <div style="font:400 13px/1.6 inherit;color:#5B6472;margin-top:10px">Ruled bar, not an arc — arcs lose legibility in print and distort under a client accent.</div>
+        </div>
+        <div style="flex:1;border:1px solid #E2E5EA;border-radius:10px;padding:20px 22px">
+          <div style="font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Estimated click loss</div>
+          <div style="font:500 34px/1 'JetBrains Mono',monospace;margin-top:10px">−41.2k<span style="font:400 15px 'JetBrains Mono',monospace;color:#5B6472"> /mo ±5.3k</span></div>
+          <div style="display:flex;height:22px;margin-top:16px;border-radius:5px;overflow:hidden;gap:2px">
+            <div style="width:46%;background:#C43D3D"></div><div style="width:22%;background:#D98324"></div><div style="width:14%;background:#3E5C8A"></div><div style="width:18%;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></div>
+          </div>
+          <div style="font:400 13px/1.6 inherit;color:#5B6472;margin-top:10px">46% of the loss is AI answers taking the click. Full breakdown on page 2.</div>
+        </div>
+      </div>
+      <div style="margin-top:auto;padding-top:16px;border-top:1px solid #E2E5EA;display:flex;justify-content:space-between;font:400 12px 'JetBrains Mono',monospace;color:#5B6472"><span>Ridgeway Media · confidential</span><span>measured by cite/rate · methodology p.5</span></div>
+    </div>
+
+    <div style="width:816px;height:1056px;background:#FFFFFF;border:1px solid rgba(0,0,0,.14);box-shadow:0 2px 10px rgba(0,0,0,.1);padding:48px;box-sizing:border-box;display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid #E2E5EA">
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:18px;border-radius:4px;background:#3E5C8A;color:#fff;display:flex;align-items:center;justify-content:center;font:500 9px 'JetBrains Mono',monospace">RM</span><span style="font:400 12px 'JetBrains Mono',monospace;color:#5B6472">northline.co · AI visibility report</span></div>
+        <span style="font:400 12px 'JetBrains Mono',monospace;color:#8A93A1">2 / 5</span>
+      </div>
+      <div style="margin-top:32px">
+        <div style="font:500 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#3E5C8A">The diagnosis</div>
+        <h2 style="font:600 30px/1.25 'Source Serif 4',serif;margin:12px 0 0;max-width:34ch">You rank top-5 for 14 of 20 queries, but you're cited in only 22% of AI answer runs.</h2>
+        <p style="font:400 16px/1.65 inherit;color:#5B6472;margin:16px 0 0;max-width:70ch">Your ranking held over the last 90 days: impressions moved −1.2%, while clicks fell 24.3%. On 11 of your 20 queries an AI Overview now appears above the results, and in most runs it answers the question naming other sources before yours.</p>
+      </div>
+      <div style="margin-top:30px;border:1px solid #E2E5EA;border-radius:10px;padding:22px 24px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Cause separation · estimated monthly clicks</span><span style="font:500 15px 'JetBrains Mono',monospace">−41.2k ±5.3k</span></div>
+        <div style="display:flex;height:34px;margin-top:14px;border-radius:5px;overflow:hidden;gap:2px">
+          <div style="width:46%;background:#C43D3D;display:flex;align-items:center;justify-content:center;font:500 13px 'JetBrains Mono',monospace;color:#FFFFFF">46%</div>
+          <div style="width:22%;background:#D98324;display:flex;align-items:center;justify-content:center;font:500 13px 'JetBrains Mono',monospace;color:#FFFFFF">22%</div>
+          <div style="width:14%;background:#3E5C8A;display:flex;align-items:center;justify-content:center;font:500 13px 'JetBrains Mono',monospace;color:#FFFFFF">14%</div>
+          <div style="width:18%;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px);display:flex;align-items:center;justify-content:center;font:500 13px 'JetBrains Mono',monospace;color:#141B26">18%</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;font:400 15px/1.5 inherit;color:#141B26">
+          <div style="display:flex;gap:9px"><span style="width:11px;height:11px;border-radius:2px;background:#C43D3D;flex:none;margin-top:5px"></span><div>AI answer displacement — <span style="font:500 14px 'JetBrains Mono',monospace">−19.0k</span><div style="font:400 13px inherit;color:#5B6472">an answer resolved the query without a click to you</div></div></div>
+          <div style="display:flex;gap:9px"><span style="width:11px;height:11px;border-radius:2px;background:#D98324;flex:none;margin-top:5px"></span><div>Ranking decline — <span style="font:500 14px 'JetBrains Mono',monospace">−9.1k</span><div style="font:400 13px inherit;color:#5B6472">position losses on 4 queries</div></div></div>
+          <div style="display:flex;gap:9px"><span style="width:11px;height:11px;border-radius:2px;background:#3E5C8A;flex:none;margin-top:5px"></span><div>Technical decay — <span style="font:500 14px 'JetBrains Mono',monospace">−5.8k</span><div style="font:400 13px inherit;color:#5B6472">slower pages, 2 broken canonical tags</div></div></div>
+          <div style="display:flex;gap:9px"><span style="width:11px;height:11px;border-radius:2px;background:repeating-linear-gradient(45deg,#8A93A1 0 3px,#A8AFBA 3px 6px);flex:none;margin-top:5px"></span><div>Other / unexplained — <span style="font:500 14px 'JetBrains Mono',monospace">−7.3k</span><div style="font:400 13px inherit;color:#5B6472">seasonality and factors we cannot attribute</div></div></div>
+        </div>
+      </div>
+      <div style="margin-top:20px;border:1px solid #E2E5EA;border-radius:10px;padding:20px 24px">
+        <div style="font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Citation rate by engine</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 26px;margin-top:14px">
+          <div><div style="display:flex;justify-content:space-between;font:400 15px inherit"><span>Google AI Overviews <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#FFFFFF;background:#141B26;border-radius:999px;padding:2px 7px">SURFACE</span></span><span style="font:500 14px 'JetBrains Mono',monospace">4/9 — 44%</span></div><div style="height:8px;border-radius:4px;background:#E2E5EA;margin-top:6px"><div style="width:44%;height:8px;border-radius:4px;background:#D98324"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font:400 15px inherit"><span>Perplexity <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#FFFFFF;background:#141B26;border-radius:999px;padding:2px 7px">SURFACE</span></span><span style="font:500 14px 'JetBrains Mono',monospace">6/9 — 67%</span></div><div style="height:8px;border-radius:4px;background:#E2E5EA;margin-top:6px"><div style="width:67%;height:8px;border-radius:4px;background:#0E7C66"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font:400 15px inherit"><span>ChatGPT <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#5B6472;border:1px dashed #8A93A1;border-radius:999px;padding:1px 7px">PROXY</span></span><span style="font:500 14px 'JetBrains Mono',monospace">2/9 — 22%</span></div><div style="height:8px;border-radius:4px;background:#E2E5EA;margin-top:6px"><div style="width:22%;height:8px;border-radius:4px;background:#C43D3D"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font:400 15px inherit"><span>Gemini <span style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#5B6472;border:1px dashed #8A93A1;border-radius:999px;padding:1px 7px">PROXY</span></span><span style="font:500 14px 'JetBrains Mono',monospace">1/9 — 11%</span></div><div style="height:8px;border-radius:4px;background:#E2E5EA;margin-top:6px"><div style="width:11%;height:8px;border-radius:4px;background:#C43D3D"></div></div></div>
+        </div>
+      </div>
+      <div style="margin-top:auto;padding-top:16px;border-top:1px solid #E2E5EA;display:flex;justify-content:space-between;font:400 12px 'JetBrains Mono',monospace;color:#5B6472"><span>Ridgeway Media · confidential</span><span>measured by cite/rate · methodology p.5</span></div>
+    </div>
+
+    <div style="width:816px;height:1056px;background:#FFFFFF;border:1px solid rgba(0,0,0,.14);box-shadow:0 2px 10px rgba(0,0,0,.1);padding:48px;box-sizing:border-box;display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid #E2E5EA">
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:18px;border-radius:4px;background:#3E5C8A;color:#fff;display:flex;align-items:center;justify-content:center;font:500 9px 'JetBrains Mono',monospace">RM</span><span style="font:400 12px 'JetBrains Mono',monospace;color:#5B6472">northline.co · AI visibility report</span></div>
+        <span style="font:400 12px 'JetBrains Mono',monospace;color:#8A93A1">3 / 5</span>
+      </div>
+      <div style="margin-top:28px">
+        <div style="font:500 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#3E5C8A">Query detail</div>
+        <h2 style="font:600 26px/1.25 'Source Serif 4',serif;margin:10px 0 0">All 20 queries, ranked by clicks exposed</h2>
+        <p style="font:400 15px/1.6 inherit;color:#5B6472;margin:8px 0 0;max-width:74ch">Citation rate is the share of 9 runs in which the engine named this domain. "AIO" marks queries where an AI Overview appeared at least once.</p>
+      </div>
+      <div style="margin-top:20px;border:1px solid #E2E5EA;border-radius:8px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:2.6fr .6fr .6fr 1.2fr 1fr;gap:10px;padding:10px 16px;background:#F4F5F7;border-bottom:1px solid #E2E5EA;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#5B6472"><span>query</span><span>rank</span><span>aio</span><span>citation rate</span><span>exposed</span></div>
+        <div style="display:grid;grid-template-columns:2.6fr .6fr .6fr 1.2fr 1fr;gap:10px;padding:11px 16px;border-bottom:1px solid #E2E5EA;font:400 15px inherit;align-items:center"><span>best high-yield savings accounts</span><span style="font:500 14px 'JetBrains Mono',monospace">3</span><span style="font:500 13px 'JetBrains Mono',monospace">yes</span><span style="font:500 14px 'JetBrains Mono',monospace">1/9 — 11%</span><span style="font:500 14px 'JetBrains Mono',monospace">−8.4k</span></div>
+        <div style="display:grid;grid-template-columns:2.6fr .6fr .6fr 1.2fr 1fr;gap:10px;padding:11px 16px;border-bottom:1px solid #E2E5EA;font:400 15px inherit;align-items:center"><span>savings account interest rates 2026</span><span style="font:500 14px 'JetBrains Mono',monospace">5</span><span style="font:500 13px 'JetBrains Mono',monospace">yes</span><span style="font:500 14px 'JetBrains Mono',monospace">4/9 — 44%</span><span style="font:500 14px 'JetBrains Mono',monospace">−5.1k</span></div>
+        <div style="display:grid;grid-template-columns:2.6fr .6fr .6fr 1.2fr 1fr;gap:10px;padding:11px 16px;border-bottom:1px solid #E2E5EA;font:400 15px inherit;align-items:center"><span>highest APY accounts</span><span style="font:500 14px 'JetBrains Mono',monospace">7</span><span style="font:500 13px 'JetBrains Mono',monospace">yes</span><span style="font:500 14px 'JetBrains Mono',monospace">0/9 — 0%</span><span style="font:500 14px 'JetBrains Mono',monospace">−3.7k</span></div>
+        <div style="display:grid;grid-template-columns:2.6fr .6fr .6fr 1.2fr 1fr;gap:10px;padding:11px 16px;border-bottom:1px solid #E2E5EA;font:400 15px inherit;align-items:center"><span>emergency fund calculator</span><span style="font:500 14px 'JetBrains Mono',monospace">11</span><span style="font:500 13px 'JetBrains Mono',monospace">yes</span><span style="font:500 14px 'JetBrains Mono',monospace">0/9 — 0%</span><span style="font:500 14px 'JetBrains Mono',monospace">−2.9k</span></div>
+        <div style="display:grid;grid-template-columns:2.6fr .6fr .6fr 1.2fr 1fr;gap:10px;padding:11px 16px;border-bottom:1px solid #E2E5EA;font:400 15px inherit;align-items:center"><span>savings vs money market account</span><span style="font:500 14px 'JetBrains Mono',monospace">4</span><span style="font:500 13px 'JetBrains Mono',monospace">yes</span><span style="font:500 14px 'JetBrains Mono',monospace">3/9 — 33%</span><span style="font:500 14px 'JetBrains Mono',monospace">−2.4k</span></div>
+        <div style="display:grid;grid-template-columns:2.6fr .6fr .6fr 1.2fr 1fr;gap:10px;padding:11px 16px;border-bottom:1px solid #E2E5EA;font:400 15px inherit;align-items:center"><span>how to open a savings account</span><span style="font:500 14px 'JetBrains Mono',monospace">2</span><span style="font:500 13px 'JetBrains Mono',monospace;color:#5B6472">no</span><span style="font:500 14px 'JetBrains Mono',monospace">7/9 — 78%</span><span style="font:500 14px 'JetBrains Mono',monospace">−0.3k</span></div>
+        <div style="display:grid;grid-template-columns:2.6fr .6fr .6fr 1.2fr 1fr;gap:10px;padding:11px 16px;border-bottom:1px solid #E2E5EA;font:400 15px inherit;align-items:center"><span>compound interest explained</span><span style="font:500 14px 'JetBrains Mono',monospace">6</span><span style="font:500 13px 'JetBrains Mono',monospace;color:#5B6472">no</span><span style="font:500 14px 'JetBrains Mono',monospace">5/9 — 56%</span><span style="font:500 14px 'JetBrains Mono',monospace">−0.2k</span></div>
+        <div style="display:grid;grid-template-columns:2.6fr .6fr .6fr 1.2fr 1fr;gap:10px;padding:11px 16px;font:400 15px inherit;align-items:center;color:#5B6472"><span>+ 13 more queries</span><span></span><span></span><span style="font:500 14px 'JetBrains Mono',monospace">avg 31%</span><span style="font:500 14px 'JetBrains Mono',monospace">−18.2k</span></div>
+      </div>
+      <div style="margin-top:20px;border:1px solid #E2E5EA;border-radius:8px;padding:18px 20px">
+        <div style="font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">Example framing · Perplexity, run 4</div>
+        <blockquote style="margin:10px 0 0;font:600 17px/1.6 'Source Serif 4',serif">"For a budget option, Northline offers basic rates, while Bankrate and NerdWallet list higher APYs for the same minimum deposit."</blockquote>
+        <div style="font:400 13px inherit;color:#5B6472;margin-top:8px">Cited, but framed as the cheap option and listed third. Snapshots of all 720 measurements are retained for 12 months and available on request.</div>
+      </div>
+      <div style="margin-top:auto;padding-top:16px;border-top:1px solid #E2E5EA;display:flex;justify-content:space-between;font:400 12px 'JetBrains Mono',monospace;color:#5B6472"><span>Ridgeway Media · confidential</span><span>measured by cite/rate · methodology p.5</span></div>
+    </div>
+
+    <div style="width:816px;height:1056px;background:#FFFFFF;border:1px solid rgba(0,0,0,.14);box-shadow:0 2px 10px rgba(0,0,0,.1);padding:48px;box-sizing:border-box;display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid #E2E5EA">
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:18px;border-radius:4px;background:#3E5C8A;color:#fff;display:flex;align-items:center;justify-content:center;font:500 9px 'JetBrains Mono',monospace">RM</span><span style="font:400 12px 'JetBrains Mono',monospace;color:#5B6472">northline.co · AI visibility report</span></div>
+        <span style="font:400 12px 'JetBrains Mono',monospace;color:#8A93A1">4 / 5</span>
+      </div>
+      <div style="margin-top:28px">
+        <div style="font:500 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#3E5C8A">The prescription</div>
+        <h2 style="font:600 26px/1.25 'Source Serif 4',serif;margin:10px 0 0">Seven changes, in the order that matters</h2>
+        <p style="font:400 15px/1.6 inherit;color:#5B6472;margin:8px 0 0;max-width:74ch">Ranked by estimated citation gain per hour of work. Two are already verified — their measured effect is shown.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px">
+        <div style="border:1px solid #E2E5EA;border-radius:8px;padding:18px 20px">
+          <div style="display:flex;justify-content:space-between;gap:14px;align-items:flex-start">
+            <div style="font:600 19px/1.3 'Source Serif 4',serif">01 · Add a comparison table to /best-savings-accounts</div>
+            <span style="flex:none;white-space:nowrap;font:500 12px 'JetBrains Mono',monospace;color:#A62F2F;background:#FBEDED;border:1px solid rgba(196,61,61,.35);border-radius:999px;padding:3px 10px">high impact</span>
+          </div>
+          <p style="font:400 15px/1.6 inherit;color:#5B6472;margin:7px 0 0">AI answers quote tables. This page uses prose, so on 6 queries the engine paraphrases a competitor's table instead of citing these numbers. Put the rates in a real table with a caption and keep units in the cells.</p>
+          <div style="display:flex;gap:20px;margin-top:9px;font:500 13px 'JetBrains Mono',monospace;color:#5B6472"><span>effort 2h</span><span>6 queries</span><span>est. +18 pts citation rate</span></div>
+        </div>
+        <div style="border:1px solid #E2E5EA;border-radius:8px;padding:18px 20px">
+          <div style="display:flex;justify-content:space-between;gap:14px;align-items:flex-start">
+            <div style="font:600 19px/1.3 'Source Serif 4',serif">02 · Answer the question in the first 60 words on 4 pages</div>
+            <span style="flex:none;white-space:nowrap;font:500 12px 'JetBrains Mono',monospace;color:#9A6210;background:#FDF2E3;border:1px solid rgba(217,131,36,.4);border-radius:999px;padding:3px 10px">medium impact</span>
+          </div>
+          <p style="font:400 15px/1.6 inherit;color:#5B6472;margin:7px 0 0">Intros set up context before answering. Engines lift the first direct answer they find — currently on another domain.</p>
+          <div style="display:flex;gap:20px;margin-top:9px;font:500 13px 'JetBrains Mono',monospace;color:#5B6472"><span>effort 3h</span><span>4 queries</span><span>est. +9 pts</span></div>
+        </div>
+        <div style="border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:8px;padding:18px 20px">
+          <div style="display:flex;justify-content:space-between;gap:14px;align-items:flex-start">
+            <div style="font:600 19px/1.3 'Source Serif 4',serif">03 · Restore the reviewer byline on /savings-guide</div>
+            <span style="flex:none;white-space:nowrap;font:500 12px 'JetBrains Mono',monospace;color:#FFFFFF;background:#0E7C66;border-radius:999px;padding:4px 11px">verified ✓</span>
+          </div>
+          <p style="font:400 15px/1.6 inherit;color:#5B6472;margin:7px 0 0">Done 2026-07-11, re-scanned 2026-07-13. Citation rate on the two affected queries moved <span style="font:500 14px 'JetBrains Mono',monospace;color:#0B6151">1/9 → 5/9</span>; score <span style="font:500 14px 'JetBrains Mono',monospace;color:#0B6151">+3</span>.</p>
+        </div>
+        <div style="border:1px solid #E2E5EA;border-radius:8px;padding:16px 20px">
+          <div style="font:400 15px/1.6 inherit;color:#5B6472">04 — 07 · Reviewer credentials on 9 money pages · structured data for rate tables · fix 2 broken canonicals · consolidate 3 thin pages. Full implementation notes in the dashboard.</div>
+        </div>
+      </div>
+      <div style="margin-top:auto;padding-top:16px;border-top:1px solid #E2E5EA;display:flex;justify-content:space-between;font:400 12px 'JetBrains Mono',monospace;color:#5B6472"><span>Ridgeway Media · confidential</span><span>measured by cite/rate · methodology p.5</span></div>
+    </div>
+
+    <div style="width:816px;height:1056px;background:#FFFFFF;border:1px solid rgba(0,0,0,.14);box-shadow:0 2px 10px rgba(0,0,0,.1);padding:48px;box-sizing:border-box;display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid #E2E5EA">
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:18px;border-radius:4px;background:#3E5C8A;color:#fff;display:flex;align-items:center;justify-content:center;font:500 9px 'JetBrains Mono',monospace">RM</span><span style="font:400 12px 'JetBrains Mono',monospace;color:#5B6472">northline.co · AI visibility report</span></div>
+        <span style="font:400 12px 'JetBrains Mono',monospace;color:#8A93A1">5 / 5</span>
+      </div>
+      <div style="margin-top:28px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font:500 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#8A93A1">Appendix · methodology</span>
+          <span style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#5B6472;border:1px solid #E2E5EA;border-radius:999px;padding:2px 9px">NOT REMOVABLE</span>
+        </div>
+        <h2 style="font:600 26px/1.25 'Source Serif 4',serif;margin:10px 0 0">How these numbers were produced</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px">
+        <div>
+          <div style="font:600 18px/1.3 'Source Serif 4',serif">Rates, not snapshots</div>
+          <p style="font:400 15px/1.65 inherit;color:#5B6472;margin:6px 0 0">Each query was submitted to each engine 9 times in a randomised order over 31 minutes, with no personalisation, no login, and a fixed locale (en-GB). A citation counts when the answer names the domain or links to it. The reported rate is citations ÷ runs, always printed with both numbers.</p>
+          <div style="font:600 18px/1.3 'Source Serif 4',serif;margin-top:20px">Confidence bands</div>
+          <p style="font:400 15px/1.65 inherit;color:#5B6472;margin:6px 0 0">A 9-run rate is an estimate. Bands are Wilson score intervals at 90%; the score band combines those across engines and queries. A band of ±6 means a repeat scan today would very likely land between 56 and 68.</p>
+        </div>
+        <div>
+          <div style="font:600 18px/1.3 'Source Serif 4',serif">Surface vs proxy</div>
+          <p style="font:400 15px/1.65 inherit;color:#5B6472;margin:6px 0 0">Google AI Overviews and Perplexity were measured on the consumer surface. ChatGPT and Gemini were measured through their APIs (<span style="font:400 13px 'JetBrains Mono',monospace">gpt-4.1, web tool on; gemini-2.5, grounding on</span>) because their consumer apps cannot be measured reliably at volume. Proxy numbers are labelled everywhere they appear and are never averaged with surface numbers.</p>
+          <div style="font:600 18px/1.3 'Source Serif 4',serif;margin-top:20px">Click-loss estimate</div>
+          <p style="font:400 15px/1.65 inherit;color:#5B6472;margin:6px 0 0">Search Console impressions and clicks for the same 90 days are compared against expected click-through at the observed positions. The residual is apportioned across the four causes; whatever cannot be attributed stays in "other / unexplained" rather than being distributed.</p>
+        </div>
+      </div>
+      <div style="margin-top:22px;border:1px solid #E2E5EA;border-radius:8px;padding:18px 20px">
+        <div style="font:600 18px/1.3 'Source Serif 4',serif">What this report cannot tell you</div>
+        <div style="font:400 15px/1.7 inherit;color:#5B6472;margin-top:7px">Whether a citation produced a visit — engines do not report that. What any engine will do next week. Whether a competitor's advantage comes from something we cannot observe, such as a licensing agreement. 18% of the measured click loss is unexplained, and that figure is printed rather than absorbed.</div>
+      </div>
+      <div style="margin-top:auto;padding-top:16px;border-top:1px solid #E2E5EA;display:flex;justify-content:space-between;font:400 12px 'JetBrains Mono',monospace;color:#5B6472"><span>Scan 2026-07-24 09:00–09:31 UTC · 720 measurements · retained 12 months</span><span>measured by cite/rate</span></div>
+    </div>
+  </div>
+
+  <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.45);margin:34px 0 10px">34 · Email templates — 600px, system-font stack (Georgia serif / Menlo mono fallbacks)</div>
+  <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">
+    <div style="width:600px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">34a · magic link</div>
+      <div style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472;margin-top:6px">subject: Your sign-in link (15 minutes)</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:28px;margin-top:8px">
+        <span style="font:500 16px Menlo,monospace;letter-spacing:-.03em">cite<span style="color:#0E7C66">/</span>rate</span>
+        <div style="font:600 22px/1.3 Georgia,serif;margin-top:18px">Sign in to CiteRate</div>
+        <p style="font:400 15px/1.6 inherit;color:#5B6472;margin:8px 0 0">This link works for 15 minutes and once only.</p>
+        <div style="display:inline-block;font:500 15px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:13px 26px;margin-top:16px">Open my dashboard</div>
+        <p style="font:400 13px/1.6 inherit;color:#8A93A1;margin:16px 0 0">If you didn't ask for this, ignore it — nothing happens without the link. Trouble opening it? Paste this into your browser:<br><span style="font:400 12px Menlo,monospace;color:#5B6472;word-break:break-all">https://citerate.com/l/8f3c1a7e94b2d05f</span></p>
+      </div>
+    </div>
+
+    <div style="width:600px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">34b · report ready</div>
+      <div style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472;margin-top:6px">subject: northline.co — cited in 22% of AI answer runs</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:28px;margin-top:8px">
+        <span style="font:500 16px Menlo,monospace;letter-spacing:-.03em">cite<span style="color:#0E7C66">/</span>rate</span>
+        <div style="font:600 22px/1.35 Georgia,serif;margin-top:18px">You rank top-5 for 14 of 20 queries, but you're cited in only 22% of AI answer runs.</div>
+        <div style="display:flex;gap:18px;align-items:center;margin-top:18px;padding:16px 18px;border:1px solid #E2E5EA;border-radius:8px">
+          <div><div style="font:500 11px Menlo,monospace;letter-spacing:.1em;color:#8A93A1">SCORE</div><div style="font:500 34px/1 Menlo,monospace;margin-top:4px">62</div><div style="font:400 12px Menlo,monospace;color:#8A93A1;margin-top:3px">/100 ±6</div></div>
+          <div style="flex:1">
+            <div style="font:500 11px Menlo,monospace;letter-spacing:.1em;color:#8A93A1">CAUSE OF −41.2k CLICKS/MO</div>
+            <div style="display:flex;height:22px;margin-top:8px;border-radius:5px;overflow:hidden;gap:2px"><div style="width:46%;background:#C43D3D"></div><div style="width:22%;background:#D98324"></div><div style="width:14%;background:#3E5C8A"></div><div style="width:18%;background:repeating-linear-gradient(45deg,#8A93A1 0 4px,#A8AFBA 4px 8px)"></div></div>
+            <div style="font:400 12px/1.6 Menlo,monospace;color:#5B6472;margin-top:7px">46% AI displacement · 22% ranking · 14% technical · 18% unexplained</div>
+          </div>
+        </div>
+        <div style="display:inline-block;font:500 15px inherit;color:#FFFFFF;background:#0E7C66;border-radius:999px;padding:13px 26px;margin-top:16px">Open the full report</div>
+        <p style="font:400 13px/1.6 inherit;color:#8A93A1;margin:16px 0 0">Three fixes are ready in your queue; the first covers 6 of the 11 affected queries.</p>
+      </div>
+    </div>
+
+    <div style="width:600px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#0B6151">34c · fix verified — the retention email</div>
+      <div style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472;margin-top:6px">subject: Verified: +3 points on northline.co</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:28px;margin-top:8px">
+        <span style="font:500 16px Menlo,monospace;letter-spacing:-.03em">cite<span style="color:#0E7C66">/</span>rate</span>
+        <div style="font:600 22px/1.35 Georgia,serif;margin-top:18px">The byline fix worked. You're now cited in 5 of 9 runs, up from 1.</div>
+        <div style="margin-top:18px;padding:16px 18px;border:1px solid #E2E5EA;border-left:3px solid #0E7C66;border-radius:8px">
+          <div style="font:400 15px/1.6 inherit;color:#5B6472">Restore the reviewer byline on /savings-guide</div>
+          <div style="display:flex;align-items:baseline;gap:14px;margin-top:10px;font:500 20px Menlo,monospace"><span style="color:#8A93A1">1/9</span><span style="font:400 16px inherit;color:#8A93A1">→</span><span style="color:#0B6151">5/9</span><span style="font:500 15px Menlo,monospace;color:#0B6151">score +3</span></div>
+          <div style="font:400 12.5px Menlo,monospace;color:#8A93A1;margin-top:8px">re-scanned 2026-07-13 · 2 queries affected</div>
+        </div>
+        <div style="display:inline-block;font:500 15px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:13px 26px;margin-top:16px">Next fix in the queue →</div>
+        <p style="font:400 13px/1.6 inherit;color:#8A93A1;margin:16px 0 0">Six fixes left. The next one is estimated at +18 points on 6 queries, about two hours of work.</p>
+      </div>
+    </div>
+
+    <div style="width:600px;display:flex;flex-direction:column;gap:20px">
+      <div style="background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">34d · weekly digest</div>
+        <div style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472;margin-top:6px">subject: northline.co this week: 62 (+2)</div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:24px;margin-top:8px">
+          <span style="font:500 15px Menlo,monospace;letter-spacing:-.03em">cite<span style="color:#0E7C66">/</span>rate</span>
+          <div style="font:600 20px/1.35 Georgia,serif;margin-top:14px">Score 62, up 2. One query improved, one slipped.</div>
+          <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px;font:400 14px inherit">
+            <div style="display:flex;justify-content:space-between;padding-bottom:9px;border-bottom:1px solid #E2E5EA"><span>savings account interest rates 2026</span><span style="font:500 13px Menlo,monospace;color:#0B6151">3/9 → 4/9</span></div>
+            <div style="display:flex;justify-content:space-between;padding-bottom:9px;border-bottom:1px solid #E2E5EA"><span>highest APY accounts</span><span style="font:500 13px Menlo,monospace;color:#A62F2F">1/9 → 0/9</span></div>
+            <div style="display:flex;justify-content:space-between"><span>7 fixes open · 2 verified</span><span style="font:500 13px Menlo,monospace;color:#5B6472">−41.2k/mo ±5.3k</span></div>
+          </div>
+          <div style="display:inline-block;font:500 14px inherit;color:#141B26;border:1px solid #C6CBD3;border-radius:999px;padding:11px 20px;margin-top:14px">Open dashboard</div>
+          <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:14px">Weekly, Mondays 08:00. <span style="color:#5B6472;text-decoration:underline">Send monthly instead</span> · <span style="color:#5B6472;text-decoration:underline">unsubscribe</span></div>
+        </div>
+      </div>
+      <div style="background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#9A6210">34e · alert</div>
+        <div style="font:400 11.5px 'JetBrains Mono',monospace;color:#5B6472;margin-top:6px">subject: You lost citations on 3 queries this week</div>
+        <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:8px;padding:24px;margin-top:8px">
+          <span style="font:500 15px Menlo,monospace;letter-spacing:-.03em">cite<span style="color:#0E7C66">/</span>rate</span>
+          <div style="font:600 20px/1.35 Georgia,serif;margin-top:14px">Three queries stopped citing you. All three now show an AI Overview that didn't appear last week.</div>
+          <div style="margin-top:14px;padding:14px 16px;border:1px solid #E2E5EA;border-left:3px solid #D98324;border-radius:8px;font:400 14px/1.7 inherit;color:#5B6472">
+            emergency fund calculator · <span style="font:500 13px Menlo,monospace">2/9 → 0/9</span><br>
+            savings vs money market · <span style="font:500 13px Menlo,monospace">3/9 → 1/9</span><br>
+            best savings apps 2026 · <span style="font:500 13px Menlo,monospace">4/9 → 1/9</span>
+          </div>
+          <div style="display:inline-block;font:500 14px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:12px 22px;margin-top:14px">See what changed</div>
+          <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:14px">Alerts fire when a query's rate drops by 2 runs or more, at most once a week — never for single-run noise.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.45);margin:34px 0 10px">31–33 · System states</div>
+  <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+    <div style="width:660px;background:#F4F5F7;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8A93A1">31 · global error (500 / 404)</div>
+      <div style="background:#FFFFFF;border:1px solid #E2E5EA;border-radius:14px;padding:44px 40px;margin-top:10px;text-align:center">
+        <span style="font:500 17px 'JetBrains Mono',monospace;letter-spacing:-.03em">cite<span style="color:#0E7C66">/</span>rate</span>
+        <div style="font:500 13px 'JetBrains Mono',monospace;color:#8A93A1;margin-top:20px">error 500 · req 8f3c1a7e</div>
+        <div style="font:600 30px/1.25 'Source Serif 4',serif;margin-top:10px;max-width:32ch;margin-left:auto;margin-right:auto">This page didn't load. Your scans and data are fine.</div>
+        <p style="font:400 15px/1.6 inherit;color:#5B6472;margin:10px auto 0;max-width:52ch">Something broke on our side, not yours. We've logged it with the reference above. Reloading usually works; if it doesn't, send us that reference and we'll tell you exactly what happened.</p>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:18px"><span style="flex:none;white-space:nowrap;font:500 14px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:11px 20px">Reload</span><span style="flex:none;white-space:nowrap;font:500 14px inherit;border:1px solid #C6CBD3;border-radius:999px;padding:10px 19px">Open dashboard</span><span style="flex:none;white-space:nowrap;font:500 14px inherit;border:1px solid #C6CBD3;border-radius:999px;padding:10px 19px">Email support</span></div>
+      </div>
+      <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:10px">No cartoon, no "oops". The first line answers the only question the user actually has: did I lose anything?</div>
+    </div>
+
+    <div style="width:508px;display:flex;flex-direction:column;gap:12px">
+      <div style="background:#FFFFFF;border:1px solid rgba(0,0,0,.1);border-radius:8px;padding:18px 20px">
+        <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#A62F2F">32 · scan failed</div>
+        <div style="margin-top:12px;border:1px solid #E2E5EA;border-left:3px solid #C43D3D;border-radius:10px;padding:16px 18px">
+          <div style="font:600 20px/1.3 'Source Serif 4',serif">The scan stopped at run 6 of 9</div>
+          <p style="font:400 13.5px/1.6 inherit;color:#5B6472;margin:7px 0 0">Perplexity rate-limited us at 09:24. We kept the 6 runs we have — your score is <span style="font:500 13.5px 'JetBrains Mono',monospace">62 ±11</span>, with a wider band because there's less data behind it.</p>
+          <div style="font:400 13.5px/1.6 inherit;color:#5B6472;margin-top:10px">We'll finish the remaining runs tonight and email the updated report. This doesn't count against your scan quota.</div>
+          <div style="display:flex;gap:8px;margin-top:14px"><span style="flex:none;white-space:nowrap;font:500 13px inherit;color:#FFFFFF;background:#141B26;border-radius:999px;padding:9px 16px">See partial results</span><span style="flex:none;white-space:nowrap;font:500 13px inherit;border:1px solid #C6CBD3;border-radius:999px;padding:8px 15px">Notify me when done</span></div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid rgba(0,0,0,.1);border-radius:8px;padding:18px 20px">
+        <div style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#9A6210">33 · maintenance / status banner</div>
+        <div style="margin-top:12px;background:#141B26;border-radius:8px;padding:12px 16px;display:flex;gap:12px;align-items:center">
+          <span style="color:#E9A44A">⚠</span>
+          <div style="flex:1;font:400 13px/1.5 inherit;color:#F4F5F7">Gemini measurements are paused while their API is degraded. Everything else is scanning normally.</div>
+          <span style="flex:none;white-space:nowrap;font:500 12px inherit;color:#35B394">Status page</span>
+        </div>
+        <div style="margin-top:10px;background:#F4F5F7;border:1px solid #E2E5EA;border-radius:8px;padding:12px 16px;display:flex;gap:12px;align-items:center">
+          <span style="width:8px;height:8px;border-radius:999px;background:#0E7C66;flex:none"></span>
+          <div style="flex:1;font:400 13px/1.5 inherit;color:#5B6472">Scheduled maintenance Sunday 02:00–02:30 UTC. Scans queued during the window run afterwards.</div>
+        </div>
+        <div style="font:400 12px/1.6 inherit;color:#8A93A1;margin-top:10px">Sits above the top bar, pushes content down rather than covering it, and any engine paused here is marked "not tested — API degraded" in that scan's engine strip rather than silently scoring 0.</div>
+      </div>
+    </div>
+  </div>
+</section>
+</x-dc>
+</body>
+</html>

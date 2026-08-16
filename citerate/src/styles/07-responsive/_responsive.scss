@@ -1,0 +1,182 @@
+// ---------------------------------------------------------------------------
+// RESPONSIVE — marketing site
+//
+// Every width-based media query in this repo lives in this file and nowhere
+// else. Component partials carry desktop-first rules only; if you need a
+// breakpoint rule, it goes here, in descending order, under the right heading.
+//
+// Ladder (largest → smallest, matches the app repo one-for-one):
+//   1279   desktop gutter step-down
+//   1199   article TOC rail folds under the prose column
+//   1099   four-up grids become two-up
+//    991   nav becomes a drawer, footer halves, docs rail unstacks
+//    899   tablet portrait: sections tighten, every grid single-column
+//    599   phone: forms, strips and wide prose tables stack or scroll
+//    375   small phone (iPhone SE, 12/13 mini): type and padding step down
+//
+// Preference queries (reduced motion) sit at the very bottom, after the
+// widths. Print lives in 06-utilities/_print.scss, which loads after this.
+// ---------------------------------------------------------------------------
+
+// === 1279px ================================================================
+@media (max-width: 1279px) {
+  :root { --gutter: var(--gutter-md); }
+}
+
+// === 1199px ================================================================
+@media (max-width: 1199px) {
+  .article { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .article__rail { position: static; }
+}
+
+// === 1099px ================================================================
+@media (max-width: 1099px) {
+  .grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+// === 991px =================================================================
+@media (max-width: 991px) {
+  .nav,
+  .site-header__actions .btn-ghost { display: none; }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-sm);
+    padding: 9px 12px;
+    font: var(--t-ui-xs);
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  // Mobile panel, toggled by scripts/modules/nav.js — no details/summary.
+  .nav--open {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    position: fixed;
+    inset: 64px 0 auto 0;
+    background: var(--card);
+    border-bottom: 1px solid var(--line);
+    padding: 8px var(--gutter) 20px;
+    box-shadow: var(--shadow-md);
+  }
+  .nav--open .nav__link {
+    width: 100%;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    min-height: 48px;
+  }
+
+  .site-footer__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+
+  .docs { grid-template-columns: minmax(0, 1fr); }
+  .docs__side { border-right: 0; border-bottom: 1px solid var(--line); }
+  .docs__body { padding: 40px var(--gutter); }
+}
+
+// === 899px =================================================================
+@media (max-width: 899px) {
+  :root { --gutter: var(--gutter-sm); --side-w: 0px; }
+
+  .t-hero { font-size: 34px; line-height: 1.12; }
+
+  .section { padding: 48px 0; }
+  .section--loose { padding: 56px 0; }
+
+  .grid--2, .grid--3, .grid--4,
+  .grid--split, .grid--split-r { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+
+  .faq { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .changelog__entry { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+
+  // Wide comparison grids scroll rather than crush.
+  .c-table--scroll { overflow-x: auto; }
+  .c-table--scroll .c-table__row { min-width: 720px; }
+}
+
+// === 599px =================================================================
+@media (max-width: 599px) {
+  .scan-form { flex-direction: column; }
+  .scan-form__btn { width: 100%; }
+
+  // The 320px copy floor would push the strip past a phone viewport.
+  .free-strip__body { min-width: 0; }
+
+  // Authored MDX tables are wider than a phone; scroll them, don't reflow.
+  .prose table { display: block; overflow-x: auto; white-space: nowrap; }
+  .prose pre { padding: 16px; }
+
+  // At 34–40px these are comfortable dense controls on a pointer; on a phone
+  // they become primary targets and want the full 44px.
+  .pill, .seg__btn, button.chip, a.chip { min-height: 44px; }
+
+  .sec-head__aside { margin-left: 0; }
+  .cta-band { align-items: flex-start; }
+}
+
+// === 375px =================================================================
+@media (max-width: 375px) {
+  :root {
+    --gutter: 14px;
+    --t-d1: 600 30px/1.14 var(--font-display);
+    --t-d2: 600 25px/1.2  var(--font-display);
+    --t-d3: 600 21px/1.3  var(--font-display);
+    --t-data-xl: 500 36px/1 var(--font-mono);
+  }
+
+  .t-hero { font-size: 28px; line-height: 1.14; }
+
+  .section { padding: 32px 0; }
+  .section--tight { padding: 28px 0; }
+  .section--loose { padding: 40px 0; }
+
+  .c-card { padding: 18px 16px; }
+  .c-card--lg { padding: 20px 18px; border-radius: var(--r-md); }
+  .c-placeholder { padding: 18px 16px; }
+
+  .c-table__row { padding: 10px 14px; }
+  .c-table--scroll .c-table__row { min-width: 560px; }
+
+  .plan { padding: 20px 18px 22px; }
+  .plan__flag { left: 18px; }
+  .free-strip { padding: 16px 18px; gap: 14px; }
+  .cta-band { padding: 18px 16px; }
+
+  .scan-form__field { height: 48px; padding: 0 12px; font-size: 13px; }
+  .scan-form__btn { height: 48px; }
+  .btn-primary-c--lg { min-height: 48px; padding: 14px 18px; font-size: 14px; }
+
+  .docs__side { padding: 20px var(--gutter); }
+  .docs__body { padding: 28px var(--gutter); }
+  .article { gap: 24px; }
+
+  .prose { font-size: 16px; line-height: 1.7; }
+  .prose pre { padding: 14px; border-radius: var(--r-sm); }
+
+  .sec-head { gap: 8px; margin-bottom: 18px; }
+  .site-footer__cols { gap: 20px; }
+
+  .score__value--hero { font-size: 52px; }
+  .col-chart { height: 120px; gap: 8px; }
+  .share-row__label { width: 74px; }
+  .legend { gap: 8px 12px; }
+}
+
+// === Preference queries ====================================================
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-1: 0ms; --dur-2: 0ms; --dur-3: 0ms; --dur-4: 0ms; --dur-count: 0ms;
+  }
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+  .js [data-reveal] { opacity: 1; transform: none; }
+}

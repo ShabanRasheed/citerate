@@ -1,0 +1,125 @@
+---
+import Marketing from "../../layouts/Marketing.astro";
+import CtaBand from "../../components/CtaBand.astro";
+---
+
+<Marketing
+  title="Citerate for in-house teams"
+  description="Rankings held, traffic didn't, and the meeting wants to know why. Citerate adds the missing row to your traffic report: AI citation rate, with causes, fixes, and a delta after each fix ships."
+>
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid--split-r">
+        <div class="stack stack--4">
+          <span class="t-label">For in-house SEO and content teams</span>
+          <h1 class="t-hero u-mw-20">The traffic report got harder to explain. This is the missing row.</h1>
+          <p class="t-lead" style="max-width:54ch">
+            Rankings held, traffic didn't, and the meeting wants to know why. Citerate gives you the row your
+            report is missing — AI citation rate — plus the causes, the fixes, and the delta after each fix
+            ships.
+          </p>
+          <div style="display:flex;gap:12px;margin-top:6px;flex-wrap:wrap">
+            <a class="btn-primary-c btn-primary-c--lg" href="/#scan" data-cta="inhouse-hero">Run free scan</a>
+            <a class="btn-ghost" href="/how-it-works">See the method</a>
+          </div>
+        </div>
+
+        <div class="c-card c-card--lg">
+          <span class="t-label t-label--ink">The Monday row, before and after</span>
+          <div class="c-table__row" style="grid-template-columns:minmax(0,1fr) 90px 90px 90px;padding:9px 0;border-bottom:1px solid var(--line)">
+            <span class="t-label">Metric</span><span class="t-label">May</span>
+            <span class="t-label">Jun</span><span class="t-label">Jul</span>
+          </div>
+          <div class="c-table__row" style="grid-template-columns:minmax(0,1fr) 90px 90px 90px;padding:6px 0;border:0">
+            <span class="t-sm">Avg. position</span><span class="t-data" style="font-weight:400">4.2</span>
+            <span class="t-data" style="font-weight:400">4.1</span><span class="t-data" style="font-weight:400">4.3</span>
+          </div>
+          <div class="c-table__row" style="grid-template-columns:minmax(0,1fr) 90px 90px 90px;padding:6px 0;border:0">
+            <span class="t-sm">Organic clicks</span><span class="t-data" style="font-weight:400">18.4k</span>
+            <span class="t-data tx-gap" style="font-weight:400">15.1k</span><span class="t-data tx-gap" style="font-weight:400">12.9k</span>
+          </div>
+          <div
+            class="c-table__row"
+            style="grid-template-columns:minmax(0,1fr) 90px 90px 90px;background:var(--cited-wash);border-radius:var(--r-sm);padding:9px 10px;border:0"
+          >
+            <span class="t-sm tx-cited" style="font-weight:500">AI citation rate — the missing row</span>
+            <span class="t-data tx-cited">—</span><span class="t-data tx-cited">—</span>
+            <span class="t-data tx-cited">34%</span>
+          </div>
+          <span class="figcap">
+            Demo data. The row that turns "traffic is down and we don't know why" into a diagnosis.
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--card" id="reporting">
+    <div class="wrap">
+      <h2 class="t-d2 u-mw-26" style="margin-bottom:26px">The weekly loop: diagnose, fix, prove.</h2>
+      <div class="grid grid--3">
+        <div class="c-card c-card--sunk">
+          <span class="t-label">01 · Monday</span>
+          <span class="t-d4">The scan lands with causes attached</span>
+          <span class="t-sm">
+            Citation rate per query cluster, split by cause. You know before standup whether the drop is
+            displacement, ranking, or a broken page.
+          </span>
+        </div>
+        <div class="c-card c-card--sunk">
+          <span class="t-label">02 · During the week</span>
+          <span class="t-d4">The Fix Queue is the sprint list</span>
+          <span class="t-sm">
+            Ranked by impact on your queries, each with an owner. Slack pings when a fix's queries start moving.
+            No new ritual — it fits the one you have.
+          </span>
+        </div>
+        <div class="c-card c-card--sunk">
+          <span class="t-label">03 · Reporting day</span>
+          <span class="t-d4">Every fix carries its own delta</span>
+          <span class="t-sm">
+            Before/after citation rate on the fix's own queries, per engine. "The comparison page worked"
+            becomes a chart, not a claim.
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid--split">
+        <div class="stack stack--4">
+          <span class="t-label">Plays well with your stack</span>
+          <h2 class="t-d2">Search Console in, Slack out, CSV always.</h2>
+          <p class="t-body tx-soft" style="font-size:15px;line-height:1.6">
+            Connect Search Console and the prompt set gets proposed from queries you already win — plus
+            rank-held evidence for cause attribution. Alerts go where your team already looks. Every table
+            exports.
+          </p>
+          <a class="btn-quiet" href="/pricing">Growth plan details →</a>
+        </div>
+        <div class="grid grid--3">
+          <div class="c-card">
+            <span class="t-data">Search Console</span>
+            <span class="t-data-sm" style="color:var(--ink-soft)">prompt sourcing + rank evidence</span>
+          </div>
+          <div class="c-card">
+            <span class="t-data">Slack</span>
+            <span class="t-data-sm" style="color:var(--ink-soft)">movement alerts, fix pings</span>
+          </div>
+          <div class="c-card">
+            <span class="t-data">CSV / read API</span>
+            <span class="t-data-sm" style="color:var(--ink-soft)">into your BI, your way</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink section--flush">
+    <div class="wrap">
+      <CtaBand headline="Bring a number to the next traffic meeting." event="inhouse_foot" />
+    </div>
+  </section>
+</Marketing>

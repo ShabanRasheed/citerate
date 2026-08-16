@@ -1,0 +1,37 @@
+// Print / PDF. White-label PDFs remap --cited as the accent only; structural
+// ink, lines, paper, and the methodology block are locked by design.
+@media print {
+  :root {
+    --paper: #FFFFFF;
+    --card: #FFFFFF;
+    --line: #D5D9DF;
+    --shadow-sm: none; --shadow-md: none; --shadow-lg: none;
+  }
+
+  @page { margin: 14mm; }
+
+  .site-header,
+  .site-footer,
+  .nav-toggle,
+  .scan-form,
+  .cta-band,
+  .article__rail,
+  [data-print-hide] { display: none !important; }
+
+  body { background: #FFFFFF; font-size: 11pt; }
+
+  .section { padding: 18pt 0; border-bottom: 0; break-inside: avoid; }
+  .wrap { max-width: none; padding: 0; }
+
+  .c-card, .c-table, .plan { break-inside: avoid; box-shadow: none; }
+  .article { grid-template-columns: minmax(0, 1fr); }
+
+  h1, h2, h3 { break-after: avoid; }
+  .figcap { break-before: avoid; }
+
+  // Links print their destination — this is a document, not a screen.
+  .prose a::after { content: " (" attr(href) ")"; font: var(--t-data-sm); color: var(--ink-muted); }
+
+  // Every printed report ends with the methodology note. Never hide it.
+  .methodology { break-inside: avoid; border: 1px solid #D5D9DF; padding: 10pt; }
+}

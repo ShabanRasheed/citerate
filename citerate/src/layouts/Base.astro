@@ -1,0 +1,93 @@
+---
+/**
+ * Base document. Every page goes through here. Loads one stylesheet and one
+ * script, self-hosts fonts, and nothing else.
+ */
+import "../styles/main.scss";
+
+interface Props {
+  title: string;
+  description: string;
+  /** absolute or root-relative; defaults to the OG image route */
+  ogImage?: string;
+  noindex?: boolean;
+  /** enables the GSAP scroll narrative on this page only */
+  scrollNarrative?: boolean;
+  bodyClass?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  ogImage = "/og/default.png",
+  noindex = false,
+  scrollNarrative = false,
+  bodyClass = "",
+  jsonLd
+} = Astro.props;
+
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://citerate.com";
+const canonical = new URL(Astro.url.pathname, site).toString().replace(/\/$/, "") || site;
+const ogAbsolute = ogImage.startsWith("http") ? ogImage : `${site}${ogImage}`;
+const fullTitle = title.includes("Citerate") ? title : `${title} · Citerate`;
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#F4F5F7" />
+
+    <!-- Self-hosted fonts: 4 files, preloaded, no third-party request. -->
+    <link rel="preload" href="/fonts/source-serif-4-600.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Citerate" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogAbsolute} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogAbsolute} />
+
+    <link rel="alternate" type="application/rss+xml" title="Citerate field notes" href="/rss.xml" />
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+    <script src="../scripts/main.js"></script>
+    {
+      turnstileKey && (
+        <script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+          async
+          defer
+        />
+      )
+    }
+  </head>
+
+  <body class={bodyClass} data-scroll-narrative={scrollNarrative ? "true" : "false"}>
+    <a class="visually-hidden-focusable" href="#main">Skip to content</a>
+    <slot />
+
+    <!-- Cookieless analytics. No consent wall, just a one-time notice. -->
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "REPLACE_WITH_CF_ANALYTICS_TOKEN"}'
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+---
+/**
+ * Compare template. One layout, three entries at launch; content lives in the
+ * `compare` collection so a new entry is one MDX file.
+ */
+import { getCollection, getEntry } from "astro:content";
+import Marketing from "../../layouts/Marketing.astro";
+import CtaBand from "../../components/CtaBand.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("compare");
+  return entries.map((entry) => ({ params: { slug: entry.id.replace(/\.mdx?$/, "") }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await entry.render();
+
+const others = (await getCollection("compare")).filter((e) => e.id !== entry.id);
+---
+
+<Marketing title={data.title} description={data.description}>
+  <section class="section">
+    <div class="wrap" style="max-width:920px">
+      <div class="stack stack--4">
+        <span class="t-label">Compare · {data.kicker}</span>
+        <h1 class="t-hero u-mw-26">{data.headline}</h1>
+        <p class="t-lead">{data.dek}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--card">
+    <div class="wrap">
+      <div class="c-table c-table--scroll">
+        <div class="c-table__row c-table__row--head" style="grid-template-columns:260px 1fr 1fr">
+          <span></span>
+          <span class="t-label">{data.alternativeLabel}</span>
+          <span class="t-label" style="color:var(--cited-ink)">Citerate</span>
+        </div>
+        {
+          data.rows.map((row, i) => (
+            <div
+              class:list={["c-table__row", i % 2 === 1 && "c-table__row--zebra"]}
+              style="grid-template-columns:260px 1fr 1fr;padding:14px 24px"
+            >
+              <span class="t-sm" style="color:var(--ink)">{row.label}</span>
+              <span class="t-sm">{row.them}</span>
+              <span class="t-sm" style="color:var(--ink)">{row.us}</span>
+            </div>
+          ))
+        }
+      </div>
+      {data.tableNote && <p class="figcap">{data.tableNote}</p>}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap" style="max-width:920px">
+      <div class="prose">
+        <Content />
+      </div>
+
+      <div style="margin-top:24px">
+        <CtaBand
+          variant="card"
+          headline={data.ctaHeadline}
+          body="25 queries · two engines · three runs each · about 90 seconds"
+          event={`compare_${entry.id}`}
+        />
+      </div>
+
+      {
+        others.length > 0 && (
+          <div style="display:flex;gap:20px;margin-top:24px;flex-wrap:wrap">
+            {others.map((o) => (
+              <a class="btn-quiet" href={`/compare/${o.id.replace(/\.mdx?$/, "")}`}>
+                {o.data.kicker} →
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Marketing>

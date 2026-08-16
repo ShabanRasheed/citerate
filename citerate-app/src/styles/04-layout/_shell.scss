@@ -1,0 +1,220 @@
+// ---------------------------------------------------------------------------
+// App shell: 248px ink sidebar + 60px topbar + content well.
+// Below 900px --side-w collapses to 0 (tokens do that) and the sidebar becomes
+// a Bootstrap offcanvas; the markup is identical, only the class changes.
+// ---------------------------------------------------------------------------
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: var(--side-w) minmax(0, 1fr);
+  background: var(--paper);
+}
+
+// --- Sidebar ---------------------------------------------------------------
+.side {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  padding: var(--s-5) var(--s-4);
+  background: var(--side-bg);
+  color: var(--side-ink);
+  border-right: var(--bw) solid var(--side-line);
+  overflow-y: auto;
+}
+
+.side__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0 var(--s-2);
+  font: var(--t-data-lg);
+  letter-spacing: -0.03em;
+  color: var(--side-ink);
+  text-decoration: none;
+
+  em { font-style: normal; color: var(--side-cited); }
+}
+
+.side__group { display: flex; flex-direction: column; gap: 2px; }
+
+.side__label {
+  font: var(--t-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--side-ink-muted);
+  padding: 0 var(--s-2) var(--s-2);
+}
+
+.side__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  min-height: 44px;
+  padding: 0 var(--s-3);
+  border-radius: var(--r-sm);
+  font: var(--t-ui);
+  color: var(--side-ink);
+  text-decoration: none;
+  transition: background-color var(--dur-1) var(--ease-out);
+
+  &:hover { background: var(--side-bg-hover); text-decoration: none; }
+  &:focus-visible { outline: none; box-shadow: var(--focus-ring-dark); }
+
+  &[aria-current="page"] {
+    background: var(--side-bg-active);
+    box-shadow: inset 2px 0 0 var(--side-cited);
+  }
+
+  &--muted { color: var(--side-ink-muted); }
+}
+
+.side__count {
+  font: var(--t-data-sm);
+  color: var(--side-ink-muted);
+}
+
+.side__foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding-top: var(--s-4);
+  border-top: var(--bw) solid var(--side-line);
+}
+
+// Workspace switcher sits in the sidebar head; agency accounts get a long list.
+.wsw {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding: var(--s-2) var(--s-3);
+  background: var(--side-bg-hover);
+  border: var(--bw) solid var(--side-line);
+  border-radius: var(--r-sm);
+  color: var(--side-ink);
+  text-align: left;
+
+  &:focus-visible { outline: none; box-shadow: var(--focus-ring-dark); }
+}
+
+.wsw__name { font: var(--t-ui); }
+.wsw__meta { font: var(--t-data-sm); color: var(--side-ink-muted); }
+
+// --- Topbar ----------------------------------------------------------------
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: 0 var(--gutter);
+  background: var(--card);
+  border-bottom: var(--bw) solid var(--line);
+}
+
+.topbar__left,
+.topbar__right { display: flex; align-items: center; gap: var(--s-3); }
+
+.topbar__title {
+  font: var(--t-d4);
+  letter-spacing: var(--tracking-tight);
+}
+
+.topbar__crumb {
+  font: var(--t-data-sm);
+  color: var(--ink-soft);
+}
+
+.side-toggle {
+  display: none;
+  min-height: 44px;
+  min-width: 44px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: var(--bw) solid var(--line-strong);
+  border-radius: var(--r-sm);
+}
+
+// --- Content ---------------------------------------------------------------
+.main { min-width: 0; }
+
+.well {
+  max-width: var(--max-app);
+  margin: 0 auto;
+  padding: var(--s-6) var(--gutter) var(--s-9);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+}
+
+.well--tight { gap: var(--s-5); }
+
+.pane-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-5);
+  flex-wrap: wrap;
+}
+
+.pane-head__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font: var(--t-data-sm);
+  color: var(--ink-soft);
+}
+
+.grid-app {
+  display: grid;
+  gap: var(--s-4);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+
+  > .col-4 { grid-column: span 4; }
+  > .col-5 { grid-column: span 5; }
+  > .col-6 { grid-column: span 6; }
+  > .col-7 { grid-column: span 7; }
+  > .col-8 { grid-column: span 8; }
+  > .col-12 { grid-column: span 12; }
+}
+
+// Quota meter lives in the sidebar foot and the billing pane.
+.quota {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.quota__rail {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--chart-track);
+  overflow: hidden;
+}
+
+.quota__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--cited);
+  transition: width var(--dur-4) var(--ease-settle);
+
+  &[data-state="near"] { background: var(--warn); }
+  &[data-state="over"] { background: var(--gap); }
+}
+
+.side .quota__rail { background: rgba(255, 255, 255, 0.12); }
+.side .quota__fill { background: var(--side-cited); }
+.side .quota__fill[data-state="near"] { background: var(--side-warn); }
+.side .quota__fill[data-state="over"] { background: var(--side-gap); }

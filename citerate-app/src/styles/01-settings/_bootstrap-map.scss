@@ -1,0 +1,127 @@
+// ---------------------------------------------------------------------------
+// Bootstrap variable overrides. Loaded BEFORE Bootstrap compiles, so Bootstrap
+// outputs Citerate's brand instead of its own. Nothing is overridden after the
+// fact and there is no !important anywhere in this file.
+// ---------------------------------------------------------------------------
+@use "sass:map";
+@use "../01-settings/tokens" as t;
+
+// --- Colour -----------------------------------------------------------------
+$primary:   t.$c-cited;
+$secondary: t.$c-ink-soft;
+$success:   t.$c-cited;
+$danger:    t.$c-gap;
+$warning:   t.$c-warn;
+$info:      t.$c-tech;
+$light:     t.$c-paper;
+$dark:      t.$c-ink;
+
+$body-bg:        t.$c-paper;
+$body-color:     t.$c-ink;
+$body-secondary-color: t.$c-ink-soft;
+$border-color:   t.$c-line;
+$link-color:     t.$c-cited-ink;
+$link-hover-color: t.$c-cited;
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+// --- Type -------------------------------------------------------------------
+$font-family-sans-serif: t.$f-ui;
+$font-family-monospace:  t.$f-mono;
+$headings-font-family:   t.$f-display;
+$headings-font-weight:   600;
+$headings-line-height:   1.15;
+$font-size-base:         0.875rem;  // 14px UI base
+$line-height-base:       1.55;
+$body-text-align:        left;
+
+$h1-font-size: 2.75rem;  // 44px, --t-d1
+$h2-font-size: 2.125rem; // 34px, --t-d2
+$h3-font-size: 1.625rem; // 26px, --t-d3
+$h4-font-size: 1.25rem;  // 20px, --t-d4
+$h5-font-size: 1rem;
+$h6-font-size: 0.875rem;
+
+// --- Spacing: the 4px scale, not Bootstrap's 8px one ------------------------
+$spacer: 4px;
+$spacers: (
+  0: 0,
+  1: map.get(t.$s, 1),
+  2: map.get(t.$s, 2),
+  3: map.get(t.$s, 3),
+  4: map.get(t.$s, 4),
+  5: map.get(t.$s, 5),
+  6: map.get(t.$s, 6),
+  7: map.get(t.$s, 7),
+  8: map.get(t.$s, 8),
+  9: map.get(t.$s, 9)
+);
+
+// --- Radii ------------------------------------------------------------------
+$border-radius:    t.$r-md;
+$border-radius-sm: t.$r-sm;
+$border-radius-lg: t.$r-lg;
+$border-radius-xl: t.$r-lg;
+$border-radius-pill: 999px;
+
+// --- Elevation: hairlines, not shadows -------------------------------------
+$box-shadow-sm: 0 1px 2px rgba(20, 27, 38, 0.05);
+$box-shadow:    0 2px 8px rgba(20, 27, 38, 0.07);
+$box-shadow-lg: 0 12px 32px rgba(20, 27, 38, 0.14);
+
+// --- Components -------------------------------------------------------------
+$btn-font-weight: 500;
+$btn-padding-y: 12px;
+$btn-padding-x: 18px;
+$btn-border-radius: t.$r-sm;
+$btn-focus-box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px t.$c-tech;
+$btn-transition: background-color 90ms cubic-bezier(0.22, 0.61, 0.36, 1),
+                 border-color 90ms cubic-bezier(0.22, 0.61, 0.36, 1);
+
+$input-bg: #FFFFFF;
+$input-border-color: t.$c-line-strong;
+$input-border-radius: t.$r-sm;
+$input-padding-y: 12px;
+$input-padding-x: 14px;
+$input-focus-border-color: t.$c-tech;
+$input-focus-box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px t.$c-tech;
+$input-placeholder-color: t.$c-ink-muted;
+
+$card-bg: t.$c-card;
+$card-border-color: t.$c-line;
+$card-border-radius: t.$r-md;
+$card-spacer-y: 24px;
+$card-spacer-x: 26px;
+$card-cap-bg: t.$c-paper-sunk;
+
+$table-border-color: t.$c-line;
+$table-striped-bg: t.$c-paper;
+$table-cell-padding-y: 12px;
+$table-cell-padding-x: 16px;
+
+$accordion-button-active-bg: t.$c-cited-wash;
+$accordion-button-active-color: t.$c-cited-ink;
+$accordion-border-radius: t.$r-md;
+$accordion-padding-y: 16px;
+
+$modal-content-border-radius: t.$r-lg;
+$modal-backdrop-bg: t.$c-ink;
+$modal-backdrop-opacity: 0.42;
+
+$offcanvas-bg-color: t.$c-card;
+$offcanvas-border-color: t.$c-line;
+
+$dropdown-border-color: t.$c-line;
+$dropdown-border-radius: t.$r-md;
+$dropdown-link-hover-bg: t.$c-paper-sunk;
+
+// --- Grid -------------------------------------------------------------------
+$grid-gutter-width: 32px;
+$container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1120px, xxl: 1120px);
+
+// Turn off what we never use, so it never ships.
+$enable-shadows: false;
+$enable-gradients: false;
+$enable-smooth-scroll: false;
+$enable-dark-mode: true;      // rides [data-bs-theme]; v1 only uses the ink sidebar
+$enable-rfs: false;

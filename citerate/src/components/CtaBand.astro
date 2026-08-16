@@ -1,0 +1,32 @@
+---
+/** CTA band. Two variants: ink (loud) and card (quiet, accent rule). */
+interface Props {
+  kicker?: string;
+  headline: string;
+  body?: string;
+  cta?: string;
+  href?: string;
+  variant?: "ink" | "card";
+  event?: string;
+}
+const {
+  kicker,
+  headline,
+  body,
+  cta = "Run free scan",
+  href = "/#scan",
+  variant = "ink",
+  event = "cta_band"
+} = Astro.props;
+---
+
+<div class:list={["cta-band", variant === "ink" ? "cta-band--ink" : "cta-band--card"]}>
+  <div class="stack stack--2">
+    {kicker && <span class="t-label">{kicker}</span>}
+    <span class="t-d4" style={variant === "ink" ? "color:var(--side-ink);max-width:34ch" : "max-width:40ch"}>
+      {headline}
+    </span>
+    {body && <span class="t-data-sm">{body}</span>}
+  </div>
+  <a class="btn-primary-c u-nowrap" href={href} data-cta={event}>{cta}</a>
+</div>

@@ -1,0 +1,78 @@
+---
+/**
+ * Claim a free readout. The scan already exists and already has a share token;
+ * claiming attaches it to a workspace. If someone else at the same domain got
+ * there first we show the join-request state instead of an error.
+ */
+import Auth from "../../layouts/Auth.astro";
+import { one } from "../../lib/db";
+import { claimScan, requestJoin, audit } from "../../lib/auth";
+import { pct } from "../../lib/format";
+
+const env = Astro.locals.runtime.env;
+const { token } = Astro.params;
+const session = Astro.locals.session;
+
+const scan = await one<{ id: string; hostname: string; citation_rate: number | null; workspace_id: string | null; domain_id: string }>(
+  env.DB,
+  `SELECT s.id, d.hostname, s.citation_rate, s.workspace_id, s.domain_id
+     FROM scans s JOIN domains d ON d.id = s.domain_id
+    WHERE s.share_token = ?`,
+  token
+);
+
+// Not signed in: send them to sign-up carrying the claim.
+if (!session) {
+  return Astro.redirect(`/sign-up?claim=${token}&domain=${scan?.hostname ?? ""}`, 302);
+}
+
+let state: "claimed" | "taken" | "missing" = "missing";
+let requested = false;
+
+if (scan) {
+  const workspace = Astro.locals.workspace;
+  if (!workspace) {
+    return Astro.redirect(`/onboarding/domain?claim=${token}`, 302);
+  }
+  if (scan.workspace_id && scan.workspace_id !== workspace.workspaceId) {
+    state = "taken";
+    const join = await requestJoin(env, scan.hostname, session.user.id);
+    requested = join.sent;
+  } else {
+    const result = await claimScan(env, token!, session.user.id, workspace.workspaceId);
+    if (result.ok) {
+      await audit(env, workspace.workspaceId, session.user.id, "scan.claimed", scan.hostname);
+      return Astro.redirect(`/overview?domain=${scan.domain_id}&claimed=1`, 302);
+    }
+    state = "taken";
+  }
+}
+---
+
+<Auth title="Claim your readout">
+  {
+    state === "missing" ? (
+      <>
+        <h1 class="auth__title">That readout has expired</h1>
+        <p class="auth__sub">
+          Free readouts are kept for 30 days. Running a new scan takes about ninety seconds and measures the same 25
+          queries.
+        </p>
+        <a class="btn-primary-c btn-primary-c--lg" href={`${import.meta.env.PUBLIC_SITE_URL ?? ""}/#scan`}>Run a new scan</a>
+      </>
+    ) : (
+      <>
+        <h1 class="auth__title">{scan!.hostname} is already being tracked</h1>
+        <p class="auth__sub">
+          Someone at your domain verified it first
+          {scan!.citation_rate !== null && ` — their readout currently sits at ${pct(scan!.citation_rate)}`}.
+          {requested
+            ? " We've emailed them your request to join; they can add you as a viewer or editor. Nothing was created twice."
+            : " Ask them for an invite — two workspaces measuring the same domain would double-count the same runs."}
+        </p>
+        {requested && <span class="t-data-sm" style="color:var(--ink-soft)">request sent · they have 7 days</span>}
+        <a class="btn-ghost" href="/overview">Go to my workspace</a>
+      </>
+    )
+  }
+</Auth>

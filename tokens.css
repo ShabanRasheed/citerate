@@ -1,0 +1,183 @@
+/* ==========================================================================
+   CiteRate — design tokens  v1.0  (2026-07-26)
+   Direction: "Clinical Readout" type voice on the Lab Report palette.
+   Ship this file verbatim. Nothing below depends on a framework.
+   Dark mode is out of scope for v1; the ink sidebar set is the only dark
+   surface. Token names are already namespaced so a [data-theme="dark"]
+   block can override --surface-*/--ink-* later without renaming anything.
+   ========================================================================== */
+
+:root {
+  /* ---- Font families -----------------------------------------------------
+     2 families total, 4 webfont weights total (perf budget §6):
+       Source Serif 4  600            → display / verdict sentences
+       JetBrains Mono  400, 500       → all data, labels, code
+     UI text runs on the system stack: 0 bytes, instant first paint.        */
+  --font-display: "Source Serif 4", ui-serif, Georgia, "Times New Roman", serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* ---- Surfaces & ink ---------------------------------------------------- */
+  --paper:            #F4F5F7;  /* app + marketing page ground              */
+  --paper-sunk:       #EDEFF2;  /* wells, table zebra, inset areas          */
+  --card:             #FFFFFF;  /* every card, table, modal                 */
+  --card-raised:      #FFFFFF;
+  --ink:              #141B26;  /* primary text, sidebar ground             */
+  --ink-soft:         #5B6472;  /* secondary text — 6.4:1 on card           */
+  --ink-muted:        #8A93A1;  /* non-text only: rules, icons ≥3:1, marks  */
+  --line:             #E2E5EA;  /* 1px hairline                             */
+  --line-strong:      #C6CBD3;  /* input borders, ghost buttons             */
+  --overlay:          rgba(20, 27, 38, 0.42); /* modal scrim                */
+
+  /* ---- Semantic ---------------------------------------------------------- */
+  --cited:            #0E7C66;  /* cited / verified / positive delta        */
+  --cited-ink:        #0B6151;  /* same hue, AA for small text on card      */
+  --cited-wash:       #E7F2EF;
+  --gap:              #C43D3D;  /* citation gap, invisible, negative delta  */
+  --gap-ink:          #A62F2F;
+  --gap-wash:         #FBEDED;
+  --warn:             #D98324;  /* partial, attention, quota near limit     */
+  --warn-ink:         #9A6210;  /* NEVER use --warn for text (2.6:1)       */
+  --warn-wash:        #FDF2E3;
+  --tech:             #3E5C8A;  /* technical decay, competitors, neutral hi */
+  --tech-ink:         #34507A;
+  --tech-wash:        #EBEFF6;
+  --neutral:          #8A93A1;  /* "other / unexplained", disabled          */
+  --neutral-wash:     #F0F2F5;
+
+  /* ---- Chart palette ----------------------------------------------------
+     Ordered for the cause-separation bar. Distinguishable at 8px heights;
+     each is also assigned a texture so hue is never the only signal.       */
+  --chart-1: var(--gap);      /* AIO displacement — solid                   */
+  --chart-2: var(--warn);     /* ranking decline — solid                    */
+  --chart-3: var(--tech);     /* technical decay — solid                    */
+  --chart-4: var(--neutral);  /* other / unexplained — ALWAYS striped       */
+  --chart-stripe: repeating-linear-gradient(45deg, #8A93A1 0 4px, #A8AFBA 4px 8px);
+  --chart-track: #E2E5EA;     /* empty rail behind any bar                  */
+  --chart-band:  rgba(14, 124, 102, 0.22); /* confidence band fill          */
+  --chart-select: var(--ink); /* 2px ring on the selected segment           */
+
+  /* ---- Locked / freemium blur ------------------------------------------- */
+  --lock-blur:        6px;
+  --lock-veil:        linear-gradient(180deg, rgba(255,255,255,0.55), rgba(244,245,247,0.92));
+  --lock-line:        #D8DCE3;      /* dashed border of a locked region     */
+  --lock-badge-bg:    var(--ink);
+  --lock-badge-ink:   #FFFFFF;
+  --upsell-bg:        linear-gradient(180deg, #FFFFFF, #F4F5F7);
+
+  /* ---- Dark sidebar set ------------------------------------------------- */
+  --side-bg:          #141B26;
+  --side-bg-hover:    rgba(255, 255, 255, 0.06);
+  --side-bg-active:   rgba(255, 255, 255, 0.10);
+  --side-ink:         #F4F5F7;
+  --side-ink-muted:   #8A93A1;      /* 5.5:1 on --side-bg                   */
+  --side-line:        rgba(255, 255, 255, 0.10);
+  --side-cited:       #35B394;      /* lifted semantics for dark ground     */
+  --side-gap:         #F07A6A;
+  --side-warn:        #E9A44A;
+  --side-tech:        #7FA0D4;
+
+  /* ---- Focus ------------------------------------------------------------- */
+  --focus-ring:       0 0 0 2px #FFFFFF, 0 0 0 4px #3E5C8A;
+  --focus-ring-dark:  0 0 0 2px #141B26, 0 0 0 4px #7FA0D4;
+
+  /* ---- Elevation (restrained: cards sit on hairlines, not shadows) ------ */
+  --shadow-sm: 0 1px 2px rgba(20, 27, 38, 0.05);
+  --shadow-md: 0 2px 8px rgba(20, 27, 38, 0.07);
+  --shadow-lg: 0 12px 32px rgba(20, 27, 38, 0.14);
+
+  /* ---- Spacing (4px base) ----------------------------------------------- */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+
+  /* ---- Radii & borders --------------------------------------------------- */
+  --r-sm: 6px;    /* chips, inputs, code blocks                             */
+  --r-md: 10px;   /* cards, table shells                                    */
+  --r-lg: 14px;   /* modals, hero panels, score unit                        */
+  --r-pill: 999px;
+  --bw: 1px;
+  --bw-strong: 2px;
+
+  /* ---- Layout ----------------------------------------------------------- */
+  --side-w: 248px;
+  --side-w-rail: 64px;
+  --topbar-h: 60px;
+  --gutter: 32px;
+  --gutter-md: 20px;
+  --gutter-sm: 16px;
+  --max-app: 1280px;
+  --max-marketing: 1120px;
+  --max-prose: 68ch;
+
+  /* ---- Type scale -------------------------------------------------------
+     token          font-size / line-height / weight / tracking             */
+  --t-d1: 600 44px/1.1  var(--font-display);   /* marketing hero            */
+  --t-d2: 600 34px/1.15 var(--font-display);   /* page hero, teaser verdict */
+  --t-d3: 600 26px/1.28 var(--font-display);   /* in-app verdict sentence   */
+  --t-d4: 600 20px/1.35 var(--font-display);   /* card titles, fix titles   */
+  --t-ui-lg: 400 16px/1.55 var(--font-ui);
+  --t-ui:    400 14px/1.55 var(--font-ui);     /* UI base                   */
+  --t-ui-sm: 400 13px/1.5  var(--font-ui);
+  --t-ui-xs: 500 12px/1.45 var(--font-ui);
+  --t-label: 500 10.5px/1 var(--font-mono);    /* + uppercase, .12em        */
+  --t-data-xl: 500 48px/1  var(--font-mono);   /* the score                 */
+  --t-data-lg: 500 20px/1.2 var(--font-mono);
+  --t-data:    500 13px/1.4 var(--font-mono);
+  --t-data-sm: 400 11.5px/1.35 var(--font-mono);
+  --t-code:    400 12.5px/1.6 var(--font-mono);
+  --tracking-tight: -0.02em;
+  --tracking-label: 0.12em;
+
+  /* ---- Motion ----------------------------------------------------------- */
+  --dur-1: 90ms;    /* state feedback: hover, press                         */
+  --dur-2: 160ms;   /* chip/segment select, toast in                        */
+  --dur-3: 240ms;   /* row expand, drawer, modal                            */
+  --dur-4: 420ms;   /* verdict settle, bar draw                             */
+  --dur-count: 700ms; /* number count-up                                    */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-settle: cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+
+/* Reduced motion: nothing animates longer than a frame, but state changes
+   still land instantly — no "disabled" feeling. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-1: 0ms; --dur-2: 0ms; --dur-3: 0ms; --dur-4: 0ms; --dur-count: 0ms;
+  }
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+/* Responsive token overrides ------------------------------------------------
+   Mirrors the shipped SCSS. Both repos hold every width query in one file,
+   src/styles/07-responsive/_responsive.scss, in descending order — these are
+   the token-level steps from it, the only part that belongs in this file. */
+@media (max-width: 1279px) { :root { --gutter: var(--gutter-md); } }
+@media (max-width: 899px)  { :root { --gutter: var(--gutter-sm); --side-w: 0px; } }
+@media (max-width: 375px) {
+  :root {
+    --gutter: 14px;
+    --topbar-h: 56px;
+    --t-d1: 600 30px/1.14 var(--font-display);
+    --t-d2: 600 25px/1.2  var(--font-display);
+    --t-d3: 600 21px/1.3  var(--font-display);
+    --t-d4: 600 17px/1.35 var(--font-display);
+    --t-data-xl: 500 36px/1 var(--font-mono);
+  }
+}
+
+/* White-label PDF: the agency's colour replaces --cited as the accent only.
+   Structural ink/line/paper and the surface|proxy + methodology elements are
+   locked by design and must not be re-mapped. */
+@media print {
+  :root {
+    --paper: #FFFFFF;
+    --card: #FFFFFF;
+    --line: #D5D9DF;
+    --shadow-sm: none; --shadow-md: none; --shadow-lg: none;
+  }
+}

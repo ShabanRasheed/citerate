@@ -1,0 +1,97 @@
+// The card shell everything sits in: hairline border, no shadow by default.
+.c-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 24px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.c-card--lg { border-radius: var(--r-lg); padding: 32px 36px; }
+.c-card--sunk { background: var(--paper-sunk); }
+.c-card--ink { background: var(--ink); color: var(--side-ink); border-color: transparent; }
+.c-card--flush { padding: 0; overflow: hidden; }
+
+// Left accent rules carry meaning, never decoration.
+.c-card--accent-cited { border-left: 2px solid var(--cited); }
+.c-card--accent-tech  { border-left: 2px solid var(--tech); }
+.c-card--accent-warn  { border-left: 2px solid var(--warn); }
+
+// Top rules on the four cause cards.
+.c-card--cause-aio  { border-top: 3px solid var(--gap); }
+.c-card--cause-rank { border-top: 3px solid var(--warn); }
+.c-card--cause-tech { border-top: 3px solid var(--tech); }
+.c-card--cause-other{ border-top: 3px solid var(--neutral); }
+
+// Placeholder card — visibly marked so nothing fake ships by accident.
+.c-placeholder {
+  border: 1.5px dashed var(--lock-line);
+  border-radius: var(--r-md);
+  padding: 24px 26px;
+  background: var(--upsell-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--ink-muted);
+}
+.c-placeholder__flag {
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--warn-ink);
+  background: var(--warn-wash);
+  border-radius: 999px;
+  padding: 5px 9px;
+  align-self: flex-start;
+}
+
+// Data table shell — used by pricing comparison, method figures, docs.
+.c-table {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.c-table__row {
+  display: grid;
+  gap: 12px;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+.c-table__row:last-child { border-bottom: 0; }
+.c-table__row--head { background: var(--paper-sunk); }
+.c-table__row--zebra { background: var(--paper); }
+.c-table__row--marked { border-left: 3px solid var(--cited); }
+
+
+// Locked / freemium region.
+.locked {
+  position: relative;
+  border: 1px dashed var(--lock-line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.locked__content { filter: blur(var(--lock-blur)); user-select: none; pointer-events: none; }
+.locked__veil {
+  position: absolute;
+  inset: 0;
+  background: var(--lock-veil);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 20px;
+}
+.locked__badge {
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--lock-badge-bg);
+  color: var(--lock-badge-ink);
+  border-radius: 999px;
+  padding: 5px 9px;
+}

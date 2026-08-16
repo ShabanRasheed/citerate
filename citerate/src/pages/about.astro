@@ -1,0 +1,89 @@
+---
+import Marketing from "../layouts/Marketing.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+const commitments = [
+  "Every number on every screen can show its raw evidence. If we can't show the receipt, we don't show the number.",
+  "Uncertainty is labeled, not smoothed. \"Unexplained\" stays on the chart, striped, with its real share.",
+  "Your query sets and results are never used to train anything, and never shown to anyone else.",
+  "When our method changes, your history is recomputed and the change is flagged on your chart — not corrected quietly."
+];
+---
+
+<Marketing
+  title="About"
+  description="Why Citerate exists, what we commit to, and who is accountable for the number. A measurement product is only worth the trust you place in the people making the measurement."
+>
+  <section class="section section--flush" style="padding-top:72px;padding-bottom:72px">
+    <div class="wrap wrap--prose">
+      <div class="stack stack--4">
+        <span class="t-label">About</span>
+        <h1 class="t-d1">We built the instrument we wanted to be handed.</h1>
+        <p style="font:400 19px/1.65 var(--font-display);color:var(--ink-soft);margin:0">
+          A measurement product is only worth the trust you place in the people making the measurement. So
+          here's who we are and what we've committed to.
+        </p>
+      </div>
+
+      <div class="prose" style="margin-top:28px">
+        <p>
+          In 2025, the reports stopped making sense. Impressions held, positions held, clicks fell. Every tool
+          on the market drew the same falling line and none of them could say why — because the cause wasn't in
+          the data any of them collected. The answer above the links had started citing three sources, and you
+          were either one of them or you weren't.
+        </p>
+        <p>
+          Citerate exists to measure that one thing carefully, and to say plainly when it can't. It is
+          deliberately not an AI content generator, not a rank tracker with a new label, and not a dashboard
+          that reframes uncertainty as insight.
+        </p>
+      </div>
+
+      <div class="stack stack--3" style="margin-top:32px">
+        <span class="t-label t-label--ink">What we commit to</span>
+        <div class="stack stack--3">
+          {
+            commitments.map((c, i) => (
+              <div style="display:flex;gap:12px;align-items:baseline">
+                <span class="t-data tx-cited">{String(i + 1).padStart(2, "0")}</span>
+                <span style="font:400 16px/1.7 var(--font-display)">{c}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="stack stack--3" style="margin-top:36px">
+        <span class="t-label t-label--ink">Who's accountable</span>
+        <div class="grid grid--2">
+          <div class="c-placeholder">
+            <span class="c-placeholder__flag">Placeholder</span>
+            <span style="width:44px;height:44px;border-radius:999px;background:var(--paper-sunk);border:1px solid var(--line)"></span>
+            <span class="t-d4" style="color:var(--ink-muted)">Founder name, role</span>
+            <span class="t-sm">
+              Two lines of background — what you did before and why this problem. Photo, name, and a real link.
+            </span>
+          </div>
+          <div class="c-placeholder">
+            <span class="c-placeholder__flag">Placeholder</span>
+            <span style="width:44px;height:44px;border-radius:999px;background:var(--paper-sunk);border:1px solid var(--line)"></span>
+            <span class="t-d4" style="color:var(--ink-muted)">Method owner, role</span>
+            <span class="t-sm">
+              The person who signs off on attribution rules. Buyers of measurement tools ask this; answer it by
+              name.
+            </span>
+          </div>
+        </div>
+        <span class="figcap">Fill these before launch. An anonymous measurement company is a contradiction.</span>
+      </div>
+
+      <div style="margin-top:44px">
+        <CtaBand
+          variant="card"
+          headline="The fastest way to judge us is to make us produce a number about you."
+          event="about_foot"
+        />
+      </div>
+    </div>
+  </section>
+</Marketing>
